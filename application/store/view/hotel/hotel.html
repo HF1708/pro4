@@ -5,18 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Menu</title>
-    <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <link href="__STATIC__/css/bootstrap.css" rel='stylesheet' type='text/css' />
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="js/jquery.min.js"></script>
+    <script src="__STATIC__/js/jquery.min.js"></script>
     <!-- Custom Theme files -->
-    <link href="css/style.css" rel='stylesheet' type='text/css' />
+    <link href="__STATIC__/css/style.css" rel='stylesheet' type='text/css' />
     <!-- Custom Theme files -->
     <!---- start-smoth-scrolling---->
-    <script type="text/javascript" src="js/move-top.js"></script>
-    <script type="text/javascript" src="js/easing.js"></script>
-    <script type="text/javascript" src="js/vue.min.js"></script>
-    <script type="text/javascript" src="js/vue-resource.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="__STATIC__/js/move-top.js"></script>
+    <script type="text/javascript" src="__STATIC__/js/easing.js"></script>
+    <script type="text/javascript" src="__STATIC__/js/vue.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/js/vue-resource.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/js/bootstrap.js"></script>
     <style type="text/css">
         .searchbox{
             height: 45px;
@@ -249,13 +249,30 @@
             </div>
         </div>
     </div>
-    <!--hotel-content-->
+    <!--Hotel-content-->
     <div class="container">
         <div class="row">
             <div class="col-lg-3 item">
                 <div class="item-grid">
                     <div class="item-pic">
-                        <img src="images/d1.jpg" title="dish-name" />
+                        <img src="__STATIC__/images/d1.jpg" title="dish-name" />
+                    </div>
+                    <div class="item-info">
+                        <div class="item-info-left">
+                            <h4><a href="{:url('store/HotelDetail/hotelDetail')}">威尼斯酒店</a></h4>
+                            <span class="item-rate"> </span>
+                        </div>
+                        <div class="item-info-right">
+                            <label>$130</label>
+                        </div>
+                        <div class="clearfix"> </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 item">
+                <div class="item-grid">
+                    <div class="item-pic">
+                        <img src="__STATIC__/images/d1.jpg" title="dish-name" />
                     </div>
                     <div class="item-info">
                         <div class="item-info-left">
@@ -272,7 +289,7 @@
             <div class="col-lg-3 item">
                 <div class="item-grid">
                     <div class="item-pic">
-                        <img src="images/d1.jpg" title="dish-name" />
+                        <img src="__STATIC__/images/d1.jpg" title="dish-name" />
                     </div>
                     <div class="item-info">
                         <div class="item-info-left">
@@ -289,24 +306,7 @@
             <div class="col-lg-3 item">
                 <div class="item-grid">
                     <div class="item-pic">
-                        <img src="images/d1.jpg" title="dish-name" />
-                    </div>
-                    <div class="item-info">
-                        <div class="item-info-left">
-                            <h4>Fugiat nulla sint</h4>
-                            <span class="item-rate"> </span>
-                        </div>
-                        <div class="item-info-right">
-                            <label>$130</label>
-                        </div>
-                        <div class="clearfix"> </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 item">
-                <div class="item-grid">
-                    <div class="item-pic">
-                        <img src="images/d1.jpg" title="dish-name" />
+                        <img src="__STATIC__/images/d1.jpg" title="dish-name" />
                     </div>
                     <div class="item-info">
                         <div class="item-info-left">
@@ -352,8 +352,8 @@
             <!----sreen-gallery-cursual---->
             <div class="sreen-gallery-cursual">
                 <!-- requried-jsfiles-for owl -->
-                <link href="css/owl.carousel.css" rel="stylesheet">
-                <script src="js/owl.carousel.js"></script>
+                <link href="__STATIC__/css/owl.carousel.css" rel="stylesheet">
+                <script src="__STATIC__/js/owl.carousel.js"></script>
                 <script>
                     $(document).ready(function() {
                         $("#owl-demo").owlCarousel({
@@ -372,7 +372,7 @@
                     <div class="item">
                         <div class="item-grid">
                             <div class="item-pic">
-                                <img src="images/d1.jpg" title="dish-name" />
+                                <img src="__STATIC__/images/d1.jpg" title="dish-name" />
                             </div>
                             <div class="item-info">
                                 <div class="item-info-left">
@@ -390,7 +390,7 @@
                     <div class="item">
                         <div class="item-grid">
                             <div class="item-pic">
-                                <img src="images/d2.jpg" title="dish-name" />
+                                <img src="__STATIC__/images/d2.jpg" title="dish-name" />
                             </div>
                             <div class="item-info">
                                 <div class="item-info-left">
@@ -408,7 +408,7 @@
                     <div class="item">
                         <div class="item-grid">
                             <div class="item-pic">
-                                <img src="images/d3.jpg" title="dish-name" />
+                                <img src="__STATIC__/images/d3.jpg" title="dish-name" />
                             </div>
                             <div class="item-info">
                                 <div class="item-info-left">
@@ -426,7 +426,7 @@
                     <div class="item">
                         <div class="item-grid">
                             <div class="item-pic">
-                                <img src="images/d4.jpg" title="dish-name" />
+                                <img src="__STATIC__/images/d4.jpg" title="dish-name" />
                             </div>
                             <div class="item-info">
                                 <div class="item-info-left">
@@ -444,7 +444,7 @@
                     <div class="item">
                         <div class="item-grid">
                             <div class="item-pic">
-                                <img src="images/d1.jpg" title="dish-name" />
+                                <img src="__STATIC__/images/d1.jpg" title="dish-name" />
                             </div>
                             <div class="item-info">
                                 <div class="item-info-left">
@@ -462,7 +462,7 @@
                     <div class="item">
                         <div class="item-grid">
                             <div class="item-pic">
-                                <img src="images/d2.jpg" title="dish-name" />
+                                <img src="__STATIC__/images/d2.jpg" title="dish-name" />
                             </div>
                             <div class="item-info">
                                 <div class="item-info-left">
@@ -480,7 +480,7 @@
                     <div class="item">
                         <div class="item-grid">
                             <div class="item-pic">
-                                <img src="images/d3.jpg" title="dish-name" />
+                                <img src="__STATIC__/images/d3.jpg" title="dish-name" />
                             </div>
                             <div class="item-info">
                                 <div class="item-info-left">
@@ -498,7 +498,7 @@
                     <div class="item">
                         <div class="item-grid">
                             <div class="item-pic">
-                                <img src="images/d4.jpg" title="dish-name" />
+                                <img src="__STATIC__/images/d4.jpg" title="dish-name" />
                             </div>
                             <div class="item-info">
                                 <div class="item-info-left">
