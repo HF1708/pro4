@@ -1,6 +1,7 @@
 <?php
 namespace app\store\controller;
 use \think\Controller;
+use \think\db;
 class Application extends Controller
 {
     /**
@@ -12,6 +13,11 @@ class Application extends Controller
      **/
     public function storeEnter()
     {
-        return $this->fetch();
+//        查询省
+        $where=["pid"=>0];
+        $re=db("hy_area")->where($where)->select();
+        var_dump($re);
+//        $this->assign("province",$re);
+//        return $this->fetch();
     }
 }
