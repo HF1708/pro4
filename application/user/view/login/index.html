@@ -149,7 +149,6 @@
 													<div class="i-name">
 														<div class="i-name-left">
 															<span>验证码</span>
-															<input type="text" placeholder="请输入验证码" id="login_code" />
 															<input type="text" placeholder="请输入验证码" id="login_code" maxlength="4" />
 														</div>
 													</div>
@@ -376,7 +375,6 @@
 				$.ajax({
 					url:"{:url('user/Login/phoneGetMsg')}",
 					type:'post' ,
-					data:'' ,
 					data:$dataTel ,
 					dataType:'json' ,
 					success:function(res){
