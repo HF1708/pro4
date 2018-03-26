@@ -5,7 +5,6 @@ class Index
 {
     public function index()
     {
-        echo "凌永锦测试" ;
 
     }
 }
