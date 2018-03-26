@@ -16,8 +16,18 @@ class Application extends Controller
 //        查询省
         $where=["pid"=>0];
         $re=db("hy_area")->where($where)->select();
-        var_dump($re);
-//        $this->assign("province",$re);
-//        return $this->fetch();
+        $re=json_encode($re);
+        $this->assign("province",$re);
+        $where=["pid"=>1];
+        $re=db("hy_area")->where($where)->select();
+        $re=json_encode($re);
+        $this->assign("city",$re);
+        return $this->fetch();
+    }
+    public function getCity(){
+        $id=input('?post.id')?input('id'):1;
+        $where=["pid"=>$id];
+        $re=db("hy_area")->where($where)->select();
+        echo json_encode($re);
     }
 }
