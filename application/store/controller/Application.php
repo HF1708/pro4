@@ -1,5 +1,5 @@
 <?php
-namespace app\stor\controller;
+namespace app\store\controller;
 use \think\Controller;
 class Application extends Controller
 {

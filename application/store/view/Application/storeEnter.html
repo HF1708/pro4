@@ -1,8 +1,9 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Reservation</title>
+		<title>商家申请入驻</title>
 		<link href="__CSS__/bootstrap.css" rel='stylesheet' type='text/css' />
+		<link href="__CSS__/custom.css" rel='stylesheet' type='text/css' />
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="__JS__/jquery.min.js"></script>
 		 <!-- Custom Theme files -->
@@ -45,27 +46,27 @@
 	</head>
 	<body>
 		<!----- start-header---->
-			<div id="home" class="header">
-					<div class="top-header">
-						<div class="container">
-						<div class="logo">
-							<a href="index.html"><span>T</span>ourister<span>...</span></a>
-						</div>
-						<!----start-top-nav---->
-						 <nav class="top-nav">
-							<ul class="top-nav">
-								<li><a href="index.html">Our Story</a></li>
-								<li><a href="menu.html">Menu</a></li>
-								<li class="active"><a href="reservation.html">Reservations</a></li>
-								<li><a href="news.html"> News</a></li>
-								<li><a href="reviews.html">Reviews</a></li>
-							</ul>
-							<a href="#" id="pull"><img src="images/nav-icon.png" title="menu" /></a>
-						</nav>
-						<div class="clearfix"> </div>
+		<div id="home" class="header">
+			<div class="top-header">
+				<div class="container">
+					<div class="logo">
+						<a href="index.html"><span>去野</span>Journey<span>...</span></a>
 					</div>
+					<!----start-top-nav---->
+					<nav class="top-nav">
+						<ul class="top-nav">
+							<li class="active"><a href="index.html">首页home</a></li>
+							<li><a href="menu.html">目的地locations</a></li>
+							<li><a href="reservation.html">故事story</a></li>
+							<li><a href="news.html"> 登录</a></li>
+							<li><a href="reviews.html">注册</a></li>
+						</ul>
+						<a href="#" id="pull"><img src="__STATIC__/images/nav-icon.png" title="menu" /></a>
+					</nav>
+					<div class="clearfix"> </div>
 				</div>
 			</div>
+		</div>
 			<!----- //End-header---->
 			<!----- menu-page ----->
 			<div class="reservation">
@@ -80,79 +81,63 @@
 			<!----- reservation ---->
 			<div class="reservation-form">
 				<div class="container">
-					<h2><span> </span>&nbsp;&nbsp;&nbsp;&nbsp; Reservation &nbsp;<span> </span></h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in vehicula neque, et aliquam lacus. Lorem ipsum dolor sit amet, consectetur adipiscing eli</p>
+					<h2><span> </span>&nbsp;&nbsp;&nbsp;&nbsp; 商家申请入驻 &nbsp;<span> </span></h2>
+					<p>请完整填写您的信息并保证所填内容真实有效，我们将在您提交申请的三个工作日内审核，请耐心等待。</p>
 				</div>
 				<!----- make-Reserver ------>
 				<div class="make-reserve">
 					<div class="container">
-						<h3>Make a Reservation</h3>
-						<p>Please fill out this form and we will get in touch with you shortly.</p>
+						<h3> </h3>
+						<p> </p>
 					
 					<!------ reserv-form ----->
 					<div class="reserv-form">
 						<form>
 						<div class="item-setion">
-							<span>Location-Seletion</span>
+							<span>入驻类型</span>
 							<select>
-								<option>Item-name</option>
-								<option>Item-name</option>
-								<option>Item-name</option>
-								<option>Item-name</option>
-								<option>Item-name</option>
+								<option>景点入驻</option>
+								<option>酒店入驻</option>
 							</select>
 						</div>
 						<!----->
-						<div class="i-date">
-							<span>Time</span>
-							<div class="i-date-grids">
-								<div class="i-date-left">
-									<input type="text">
-									<label>HH</label>
-								</div>
-								<div class="i-date-right">
-									<input type="text">
-									<label>MM</label>
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-						</div>
-						<div class="clearfix"> </div>
 						<!----->
-						<div class="i-qty">
-							<span>No.people</span>
-							<select>
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
-								<option>5</option>
-							</select>
-						</div>
 						<!----->
 						<div class="i-name">
-							<div class="i-name-left">
-								<span>Name</span>
-								<input type="text">
-							</div>
-							<div class="i-name-left">
-								<span>Last-Name</span>
+							<div>
+								<span>公司名称</span>
 								<input type="text">
 							</div>
 							<div class="clearfix"> </div>
 						</div>
 						<div class="clearfix"> </div>
+						<div class="i-name block">
+							<div>
+								<span>公司地址</span>
+								<input type="text">
+							</div>
+						</div>
+						<div class="clearfix"> </div>
 						<!----->
 						<div class="i-email">
-							<span>Email</span>
+							<span>邮箱</span>
 							<input type="text">
 						</div>
 						<!----->
-						<div class="i-textarea">
-							<span>Notes</span>
-							<textarea> </textarea>
+						<div class="i-name block">
+							<div>
+								<span>手机号码</span>
+								<input type="text">
+							</div>
 						</div>
-						<input type="submit" value="Book Now" />
+						<div class="clearfix"> </div>
+
+						<div class="clearfix"> </div>
+						<div class="i-textarea">
+							<span>备注</span>
+							<textarea></textarea>
+						</div>
+						<input type="submit" value="提交" />
 						</form>
 					</div>
 					<!------ reserv-form ----->
@@ -223,7 +208,7 @@
 					                <div class="item">
 					                	<div class="item-grid">
 					                		<div class="item-pic">
-					                			<img src="__STATIC__images/d3.jpg" title="dish-name" />
+					                			<img src="__STATIC__/images/d3.jpg" title="dish-name" />
 					                		</div>
 					                		<div class="item-info">
 					                			<div class="item-info-left">
@@ -241,7 +226,7 @@
 					                <div class="item">
 					                	<div class="item-grid">
 					                		<div class="item-pic">
-					                			<img src="__STATIC__images/d4.jpg" title="dish-name" />
+					                			<img src="__STATIC__/images/d4.jpg" title="dish-name" />
 					                		</div>
 					                		<div class="item-info">
 					                			<div class="item-info-left">
@@ -259,7 +244,7 @@
 					                <div class="item">
 					                	<div class="item-grid">
 					                		<div class="item-pic">
-					                			<img src="__STATIC__images/d1.jpg" title="dish-name" />
+					                			<img src="__STATIC__/images/d1.jpg" title="dish-name" />
 					                		</div>
 					                		<div class="item-info">
 					                			<div class="item-info-left">
