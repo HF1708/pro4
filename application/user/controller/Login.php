@@ -142,8 +142,8 @@ class Login extends Controller
             // 登录成功 存储数据到redis
             $redis = new \Redis() ;
             $redis->connect('127.0.0.1',6379) ;
-            $redis->hSet('userStore', $res['store_id'], serialize($res));
-            $res = unserialize($redis->hGet('userStore', $res['store_id']));
+            $redis->hSet('userStore', $res['store_id'], serialize($res)) ;
+            $res = unserialize($redis->hGet('userStore', $res['store_id'])) ;
             $returnJson = [
                 'code' => 10001 ,
                 'msg' => config('loginMsg')['SUCCESS'] ,
