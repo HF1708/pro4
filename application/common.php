@@ -80,15 +80,14 @@ class user{
             exit ;
         }
     }
-
-
-
 }
 
+
+// curl请求的公共方法
 class curl{
     /**
      * 功能描述：发送curl请求
-     * 参数：
+     * 参数：$url 路径，$type 请求类型, $data 发过去的数据
      * QQUser：
      * 返回：
      * 作者：yonjin L
