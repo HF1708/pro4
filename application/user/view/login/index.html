@@ -187,8 +187,8 @@
 															<input type="text" placeholder="请输入手机号码" id="register_name" onkeypress="return event.keyCode>=48&&event.keyCode<=57" ng-pattern="/[^a-zA-Z]/" maxlength="11" />
 														</div>
 														<div class="i-name-left" style="margin-left:10px ;position:relative ;" >
-															<button type="button" class="btn btn-default pull-left" v-show="shortShow"  @click="getPhoneMsg()" >{{shortMsg}}</button>
-															<div class="btn-modal btn btn-default" v-show="!shortShow" >{{shortMsg}}</div>
+															<button type="button" class="btn btn-default" v-show="shortShow"  @click="getPhoneMsg()" >{{shortMsg}}</button>
+															<div class=" btn btn-default btn-modal" v-show="!shortShow" >{{shortMsg}}</div>
 														</div>
 													</div>
 
@@ -333,7 +333,7 @@
 		/*
 		 发送短信验证码给用户的url
 		 */
-		var $code_user_url_1 = "{:url('user/Login/phoneGetMsg')}" ;
+		var $code_user_url_1 = "{:url('user/Login/getPhoneMsgUser')}" ;
 		/*
 		 用户登录的url
 		 */
@@ -390,16 +390,16 @@
 				$dataTel = {
 					tel : $name
 				} ;
-				$.ajax({
-					url:$code_user_url_1 ,
-					type:'post' ,
-					data:$dataTel ,
-					dataType:'json' ,
-					success:function(res){
-						// 验证码成功发送，则提示
-						if( res.code == 10000 )
-						{
-							if( that.shortJudge == 'T' )
+				if( that.shortJudge == 'T' )
+				{
+					$.ajax({
+						url:$code_user_url_1 ,
+						type:'post' ,
+						data:$dataTel ,
+						dataType:'json' ,
+						success:function(res){
+							// 验证码成功发送，则提示
+							if( res.code == 10000 )
 							{
 								that.shortTimeMsg = 60 ;
 								that.shortMsg = "60秒后重发" ;
@@ -420,38 +420,12 @@
 							}
 							else
 							{
-								console.log('届不到') ;
+								alert(res.msg) ;
 							}
 						}
-						else
-						{
-							alert(res.msg) ;
-						}
-					}
-				}) ;
+					})
+				}
 
-				if( that.shortJudge == 'T' )
-				{
-					that.shortTimeMsg = 60 ;
-					that.shortMsg = "60秒后重发" ;
-					that.shortJudge = 'F' ;
-					var setTimeInterval = setInterval(function () {
-						that.shortTimeMsg-- ;
-						that.shortMsg = that.shortTimeMsg+"秒后重发" ;
-						if(that.shortTimeMsg <= 0)
-						{
-							that.shortTimeMsg = '秒后重发' ;
-							that.shortMsg = "获取验证码" ;
-							that.shortJudge = 'T' ;
-							that.shortShow = true ;
-							clearInterval(setTimeInterval) ;
-						}
-					}, 1000) ;
-				}
-				else
-				{
-					console.log('届不到') ;
-				}
 			} ,
 			/**
 			 * 功能描述：用户登录

@@ -24,11 +24,12 @@ create table if not exists user_user
 (
 	user_id int primary key auto_increment ,
 	user_uid char(20) ,
-	user_name char(12) ,
+	user_name char(12) default'用户',
 	user_password char(32) ,
 	user_email VARCHAR(40) ,
 	user_phone char(11) ,
 	user_image varchar(100) ,
+	user_time int ,
 	user_msg varchar(100) 
 ) ;
 -- 添加账号的唯一索引
@@ -38,8 +39,8 @@ ALTER TABLE `user_user` ADD INDEX `sad` (`user_uid`,`user_password`) USING BTREE
 -- 添加账号密码的符合索引(查询索引)/手机邮箱
 -- ALTER TABLE `user_user` ADD INDEX `sad1` (`user_email`) USING BTREE ;
 -- ALTER TABLE `user_user` ADD INDEX `sad2` (`user_phone`) USING BTREE ;
-insert into user_user( user_uid ,user_name ,user_password ,user_email ,user_phone ,user_image ,user_msg )values
-( 'test' , '测试用', md5('123456'), '', '', '', '' ) ;
+insert into user_user( user_uid ,user_name ,user_password ,user_email ,user_phone ,user_image ,user_msg ,user_time )values
+( 'test' , '测试用', md5('123456'), '', '', '', '',(unix_timestamp(now())) ) ;
 
 -- 商家信息表
 
@@ -49,13 +50,18 @@ create table if not exists store_info
 (
 	store_id int primary key auto_increment,-- 自增ID
 	store_name char(12) , -- 商家名字
-	store_state enum('F','T','S') default 'F' , -- 商家状态 F 未审核； T审核通过； S 被锁定； 
+	store_state enum('F','T','S') default 'F' , -- 商家状态 F 未审核； T审核通过； S 被锁定 
 	store_phone char(11),-- 商家绑定手机
 	store_apply_time  datetime -- 申请时间
 	
 	-- foreign key() references table() 
 ) ;
-
+-- 添加商店名字的唯一索引
+ALTER TABLE `store_info` ADD UNIQUE INDEX `sda` (`store_name`) USING BTREE ;
+-- 添加商店手机id的唯一索引
+ALTER TABLE `store_info` ADD UNIQUE INDEX `sda` (`store_phone`) USING BTREE ;
+-- 添加商店名字的符合索引(查询索引)/手机邮箱
+ALTER TABLE `store_info` ADD INDEX `sad1` (`store_name`) USING BTREE ;
 -- 商家 广告
 -- id 自增id
 -- name 广告名
@@ -76,14 +82,6 @@ create table if not exists store_advert
 ALTER TABLE `store_advert` ADD UNIQUE INDEX `sdaa` (`store_adv_name`) USING BTREE ;
 
 -- 店家聊天记录
--- id 自增id
--- 用户id
--- 店家id
--- 聊天对象 店家-》用户(F) / 用户-》店家(T)
--- 聊天内容
--- 时间
-
-
 -- （店家/用户）A/（店家/客服）B/（客服/用户）C/（店家/店家）D/（用户/用户）E/（客服/客服）F 聊天记录
 -- id 自增id
 -- 用户id

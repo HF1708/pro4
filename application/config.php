@@ -43,7 +43,7 @@ return [
     // 是否开启多语言
     'lang_switch_on'         => false,
     // 默认全局过滤方法 用逗号分隔多个
-    'default_filter'         => '',
+    'default_filter'         => 'htmlspecialchars,addslashes',
     // 默认语言
     'default_lang'           => 'zh-cn',
     // 应用类库后缀
@@ -250,9 +250,20 @@ return [
         'UPDATA_SUCCESS' => '数据更新成功' ,
         'UPDATA_ERROR' => '数据更新失败' ,
         'PHONE_NO_EXISTS' => '手机号码不存在,请确认后输入' ,
-        'PHONE_EMPTY' => '手机号码为空,请重新输入' ,
-        'REGISTER_SUCCESS' => '恭喜你，注册成功' ,
-
+        'PHONE_EMPTY' => '手机号码为空,请重新输入'
+    ] ,
+    // 注册返回消息配置
+    "registerMsg" => [
+        'SUCCESS' => '恭喜你，注册成功' ,
+        'PHONE_EMPTY' => '手机号码不能为空，请重新输入',
+        'PHONE_ERROR' => '手机号码有误，请重新输入',
+        'PASSWORD_TWO_ERROR' => '两次输入的密码不同，请重新输入' ,
+        'REGISTER_STORE_NAME_EMPTY' => '店名不能为空，请重新输入' ,
+        'STORE_EXISTS' => '店名已存在，请重新输入' ,
+        'PHONE_EXISTS' => '手机号码已被绑定，请重新输入' ,
+        'PHONE_ALIKE' => '手机号码不同，请重新输入' ,
+        'LOSE' => '注册失败' ,
+        'REGISTER_DATA_EXISTS' => '用户已存在'
     ] ,
     // 验证码
     'Captcha' => [
