@@ -4,19 +4,21 @@
 -- 
 
 
+
 -- 普通用户表
 -- id 自增id
--- 用户id
+-- 用户id   
 -- name 用户昵称
 -- password 用户密码
--- email 邮箱
--- phone 手机
--- image 头像
--- msg 简介
--- 收货地址id
+-- email 邮箱 
+-- phone 手机 
+-- image 头像 
+-- msg 简介 
+
 drop table if exists user_char_store ;
 drop table if exists user_char_service ;
 drop table if exists user_char_store_service ;
+drop table if exists user_chat ;
 drop table if exists user_user ;
 create table if not exists user_user
 (
@@ -27,7 +29,7 @@ create table if not exists user_user
 	user_email VARCHAR(40) ,
 	user_phone char(11) ,
 	user_image varchar(100) ,
-	user_msg varchar(100)
+	user_msg varchar(100) 
 ) ;
 -- 添加账号的唯一索引
 ALTER TABLE `user_user` ADD UNIQUE INDEX `sda` (`user_uid`) USING BTREE ;
@@ -39,10 +41,9 @@ ALTER TABLE `user_user` ADD INDEX `sad` (`user_uid`,`user_password`) USING BTREE
 insert into user_user( user_uid ,user_name ,user_password ,user_email ,user_phone ,user_image ,user_msg )values
 ( 'test' , '测试用', md5('123456'), '', '', '', '' ) ;
 
-
 -- 商家信息表
 
-
+drop table if exists store_advert ;
 drop table if exists store_info ;
 create table if not exists store_info
 (
@@ -81,57 +82,29 @@ ALTER TABLE `store_advert` ADD UNIQUE INDEX `sdaa` (`store_adv_name`) USING BTRE
 -- 聊天对象 店家-》用户(F) / 用户-》店家(T)
 -- 聊天内容
 -- 时间
-drop table if exists user_char_store ;
-create table if not exists user_char_store
-(
-	user_char_id int primary key auto_increment ,
-	user_uid int ,
-	user_char_char_two_id int ,
-	user_char_Obj char(1) default 'F' ,
-	user_char_content varchar(100),
-	user_char_time datetime ,
-	foreign key(user_uid) references user_user(user_id) 
-	-- foreign key() references table() 
-) ;
--- 平台客服聊天记录
+
+
+-- （店家/用户）A/（店家/客服）B/（客服/用户）C/（店家/店家）D/（用户/用户）E/（客服/客服）F 聊天记录
 -- id 自增id
 -- 用户id
--- 客服id
--- 聊天对象  客服-》用户(F) / 用户-》客服(T)
+-- 店家id类型（店家/用户）A/（店家/客服）B/（客服/用户）C/（店家/店家）D/（用户/用户）E/（客服/客服）F 
+-- 聊天
+-- 聊天对象 F(店家->用户) T (用户->店家)
 -- 聊天内容
 -- 时间
-drop table if exists user_char_service ;
-create table if not exists user_char_service
+drop table if exists user_chat ;
+create table if not exists user_chat
 (
-	user_char_id int  primary key  ,
-	user_uid int ,
-	user_char_char_two_id int ,
-	user_char_Obj char(1) default 'F' ,
-	user_char_content varchar(100) ,
-	user_char_time datetime ,
-	foreign key(user_uid) references user_user(user_id) 
+	user_chat_id int primary key auto_increment ,
+	user_uid char(20) ,
+	user_chat_char_two_id int ,
+	user_chat_type enum('A','B','C','D','E','F') default 'A' ,
+	user_chat_obj enum('F','T') default 'F' ,
+	user_chat_content varchar(100) ,
+	user_chat_time datetime ,
+	foreign key(user_uid) references user_user(user_uid) 
 	-- foreign key() references table() 
 ) ;
-
--- 店家客服聊天记录
--- id 自增id
--- 店家者id
--- 客服id
--- 聊天对象  店家-》客服(F) / 客服-》店家(T)
--- 聊天内容
--- 时间
-create table if not exists  user_char_store_service
-(
-	user_char_id int primary key auto_increment ,
-	user_id int,
-	user_char_char_two_id int ,
-	user_char_Obj char(1) default 'F',
-	user_char_content varchar(100) ,
-	user_char_time datetime,
-	foreign key(user_id) references user_user(user_id) 
-	-- foreign key() references table() 
-) ;
-
 
 
 
@@ -152,7 +125,7 @@ create table if not exists store_shotel(
 	hPrice int, -- 价格
 	store_id int,
 	foreign key(store_id) references store_info(store_id)  -- 酒店属于的商家ID
-);
+) ;
 
 -- 酒店图片表
 create table if not exists store_shotel_img(
