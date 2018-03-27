@@ -1,0 +1,363 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>酒店详情</title>
+    <link href="__STATIC__/css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="__STATIC__/js/jquery.min.js"></script>
+    <!-- Custom Theme files -->
+    <link href="__STATIC__/css/style.css" rel='stylesheet' type='text/css' />
+    <!-- Custom Theme files -->
+    <!---- start-smoth-scrolling---->
+    <script type="text/javascript" src="__STATIC__/js/move-top.js"></script>
+    <script type="text/javascript" src="__STATIC__/js/easing.js"></script>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<script type="text/javascript">
+    jQuery(document).ready(function($) {
+        $(".scroll").click(function(event){
+            event.preventDefault();
+            $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+        });
+    });
+</script>
+<!---- start-smoth-scrolling---->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+</script>
+<!----start-top-nav-script---->
+<script>
+$(function() {
+    var pull 		= $('#pull');
+    menu 		= $('nav ul');
+    menuHeight	= menu.height();
+    $(pull).on('click', function(e) {
+        e.preventDefault();
+        menu.slideToggle();
+    });
+    $(window).resize(function(){
+        var w = $(window).width();
+        if(w > 320 && menu.is(':hidden')) {
+            menu.removeAttr('style');
+        }
+    });
+});
+</script>
+<!----//End-top-nav-script---->
+<style type="text/css">
+    .topHotel{
+        height: 15px;
+        margin-top: 20px;
+    }
+    .searchbox{
+        height: 50px;
+        background: #eff4fa;
+        border-top: 2px solid #b5cbe6;
+        padding: 5px;
+    }
+</style>
+</head>
+<body>
+<!-----头部导航栏---->
+<div id="home" class="header">
+    <div class="top-header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html"><span>酒店</span>详情<span>...</span></a>
+            </div>
+            <!----start-top-nav---->
+            <nav class="top-nav">
+                <ul class="top-nav">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="menu.html">酒店</a></li>
+                    <li><a href="reservation.html">Reservations</a></li>
+                    <li class="active"><a href="news.html">酒店详情</a></li>
+                    <li><a href="reviews.html">Reviews</a></li>
+                </ul>
+                <a href="#" id="pull"><img src="__STATIC__/images/nav-icon.png" title="menu" /></a>
+            </nav>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
+<!----- 酒店详情内容区---->
+<div class="news">
+    <!------ logo图片 ----->
+    <div class="news-header">
+        <div class="container">
+            <h1><span>Tourister</span> News</h1>
+        </div>
+    </div>
+    <!------ 酒店面包屑导航 ----->
+    <div class="container topHotel">首页>酒店>酒店详情>威尼斯酒店</div>
+    <!----- 酒店详情内容 ---->
+    <div class="container hdAll">
+        <div style="background-color: #eee; width: 1153px;  height: 75px;">
+            <h2><span> </span>&nbsp;&nbsp;&nbsp;&威尼斯  酒店 &nbsp;<span> </span></h2>
+            <h4><span>酒店地址：福建省福州市鼓楼区湖前路97路</span></h4>
+        </div>
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="item" style="height: 400px">
+                    <div class="item-grid">
+                        <div class="item-pic" style="width: 850px;height: 400px">
+                            <img src="__STATIC__/images/d1.jpg" title="dish-name" style="height: 400px"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3" style="background-color: #8c8c8c;height: 400px">
+                <div class="item-info">
+                    <div class="item-info-left">
+                        <h4>Fugiat nulla sint</h4>
+                        <span class="item-rate"> </span>
+                    </div>
+                    <div class="item-info-right">
+                        <label>$130</label>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+        </div>
+
+        <div><img src="" alt=""></div>
+    </div>
+    <!----- 酒店小图片轮播 ----->
+    <div class="fearuted-diesh">
+        <div class="container">
+            <h4>更多酒店图片详情<span></span></h4>
+            <!----sreen-gallery-cursual---->
+            <div class="sreen-gallery-cursual" style="padding: 0px 0px 0px 0px;">
+                <!-- requried-jsfiles-for owl -->
+                <link href="__STATIC__/css/owl.carousel.css" rel="stylesheet">
+                <script src="__STATIC__/js/owl.carousel.js"></script>
+                <script>
+                    $(document).ready(function() {
+                        $("#owl-demo").owlCarousel({
+                            items :4,
+                            lazyLoad : true,
+                            autoPlay : true,
+                            navigation : false,
+                            navigationText :  false,
+                            pagination : true,
+                        });
+                    });
+                </script>
+                <!-- //requried-jsfiles-for owl -->
+                <!-- start content_slider -->
+                <div id="owl-demo" class="owl-carousel">
+                    <div class="item">
+                        <div class="item-grid">
+                            <div class="item-pic">
+                                <img src="__STATIC__/images/d1.jpg" title="dish-name" style="height: 100px" />
+                            </div>
+                            <div class="item-info">
+                                <div class="item-info-left">
+                                    <h4>Fugiat nulla sint</h4>
+                                    <span class="item-rate"> </span>
+                                </div>
+                                <div class="item-info-right">
+                                    <label>$130</label>
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!----->
+                    <div class="item">
+                        <div class="item-grid">
+                            <div class="item-pic">
+                                <img src="__STATIC__/images/d2.jpg" title="dish-name" style="height: 100px"/>
+                            </div>
+                            <div class="item-info">
+                                <div class="item-info-left">
+                                    <h4>Daute irure dolor</h4>
+                                    <span class="item-rate"> </span>
+                                </div>
+                                <div class="item-info-right">
+                                    <label>$124</label>
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!----->
+                    <div class="item">
+                        <div class="item-grid">
+                            <div class="item-pic">
+                                <img src="__STATIC__/images/d3.jpg" title="dish-name" style="height: 100px"/>
+                            </div>
+                            <div class="item-info">
+                                <div class="item-info-left">
+                                    <h4>Officia deserunt mollit</h4>
+                                    <span class="item-rate"> </span>
+                                </div>
+                                <div class="item-info-right">
+                                    <label>$160</label>
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!----->
+                    <div class="item">
+                        <div class="item-grid">
+                            <div class="item-pic">
+                                <img src="__STATIC__/images/d4.jpg" title="dish-name" style="height: 100px"/>
+                            </div>
+                            <div class="item-info">
+                                <div class="item-info-left">
+                                    <h4>Pim minim veniam</h4>
+                                    <span class="item-rate"> </span>
+                                </div>
+                                <div class="item-info-right">
+                                    <label>$117</label>
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!----->
+                    <div class="item">
+                        <div class="item-grid">
+                            <div class="item-pic">
+                                <img src="__STATIC__/images/d1.jpg" title="dish-name" style="height: 100px"/>
+                            </div>
+                            <div class="item-info">
+                                <div class="item-info-left">
+                                    <h4>Fugiat nulla sint</h4>
+                                    <span class="item-rate"> </span>
+                                </div>
+                                <div class="item-info-right">
+                                    <label>$130</label>
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!----->
+                    <div class="item">
+                        <div class="item-grid">
+                            <div class="item-pic">
+                                <img src="__STATIC__/images/d2.jpg" title="dish-name" style="height: 100px"/>
+                            </div>
+                            <div class="item-info">
+                                <div class="item-info-left">
+                                    <h4>Daute irure dolor</h4>
+                                    <span class="item-rate"> </span>
+                                </div>
+                                <div class="item-info-right">
+                                    <label>$124</label>
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!----->
+                    <div class="item" >
+                        <div class="item-grid">
+                            <div class="item-pic">
+                                <img src="__STATIC__/images/d3.jpg" title="dish-name" style="height: 100px"/>
+                            </div>
+                            <div class="item-info">
+                                <div class="item-info-left">
+                                    <h4>Officia deserunt mollit</h4>
+                                    <span class="item-rate"> </span>
+                                </div>
+                                <div class="item-info-right">
+                                    <label>$160</label>
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!----->
+                    <div class="item">
+                        <div class="item-grid">
+                            <div class="item-pic">
+                                <img src="__STATIC__/images/d4.jpg" title="dish-name" style="height: 100px"/>
+                            </div>
+                            <div class="item-info">
+                                <div class="item-info-left">
+                                    <h4>Pim minim veniam</h4>
+                                    <span class="item-rate"> </span>
+                                </div>
+                                <div class="item-info-right">
+                                    <label>$117</label>
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!----->
+                </div>
+                <!--//sreen-gallery-cursual---->
+            </div>
+        </div>
+    </div>
+    <!--酒店介绍和评论标签页切换-->
+    <div class="container" style="height: 1000px;border: 2px solid #eee;">
+        <div class="row text-center searchbox">
+            <ul id="myTab" class="nav nav-tabs">
+                <li class="active">
+                    <a href="#home1" data-toggle="tab">
+                        酒店介绍
+                    </a>
+                </li>
+                <li><a href="#ios" data-toggle="tab">用户评论</a></li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade in active" id="home1">
+                    <p>菜鸟教程是一个提供最新的web技术站点，本站免费提供了建站相关的技术文档，帮助广大web技术爱好者快速入门并建立自己的网站。菜鸟先飞早入行——学的不仅是技术，更是梦想。</p>
+                </div>
+                <div class="tab-pane fade" id="ios">
+                    <p>iOS 是一个由苹果公司开发和发布的手机操作系统。最初是于 2007 年首次发布 iPhone、iPod Touch 和 Apple
+                        TV。iOS 派生自 OS X，它们共享 Darwin 基础。OS X 操作系统是用在苹果电脑上，iOS 是苹果的移动版本。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!----- 页脚 ----->
+<div class="footer">
+    <div class="container">
+        <div class="footer-grids">
+            <div class="col-md-3 footer-grid">
+                <p>
+                    <span>New York tourister</span>
+                    <span>3926 Anmoore Road</span>
+                    <span>New York, NY 10014</span>
+                    <span>718-749-1714</span>
+                </p>
+            </div>
+            <div class="col-md-3 footer-grid">
+                <p>
+                    <span>France tourister</span>
+                    <span>68, rue  de la Couronne</span>
+                    <span>75002 PARIS</span>
+                    <span>02.94.23.69.56</span>
+                </p>
+            </div>
+            <div class="col-md-3 footer-grid">
+                <ul>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 footer-grid copy-right">
+                <p>Copyright &copy; 2014.Company name All rights reserved.<a target="_blank" href="http://h2design.taobao.com/">氢设计</a></p>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
