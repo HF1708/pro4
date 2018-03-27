@@ -4,19 +4,29 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Menu</title>
+    <title>酒店预览</title>
     <link href="__STATIC__/css/bootstrap.css" rel='stylesheet' type='text/css' />
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="__STATIC__/js/jquery.min.js"></script>
     <!-- Custom Theme files -->
     <link href="__STATIC__/css/style.css" rel='stylesheet' type='text/css' />
-    <!-- Custom Theme files -->
     <!---- start-smoth-scrolling---->
     <script type="text/javascript" src="__STATIC__/js/move-top.js"></script>
     <script type="text/javascript" src="__STATIC__/js/easing.js"></script>
     <script type="text/javascript" src="__STATIC__/js/vue.min.js"></script>
     <script type="text/javascript" src="__STATIC__/js/vue-resource.min.js"></script>
     <script type="text/javascript" src="__STATIC__/js/bootstrap.js"></script>
+
+    <link href="__STATIC__/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__STATIC__/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="all" href="__STATIC__/css/daterangepicker-bs3.css" />
+    <script type="text/javascript" src="__STATIC__/js/moment.js"></script>
+    <script type="text/javascript" src="__STATIC__/js/daterangepicker.js"></script>
+    <script type="text/javascript" src="__STATIC__/js/cityData.js"></script>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/cityPicker.css">
+    <script type="text/javascript" src="__STATIC__/js/cityPicker.js"></script>
+
+
     <style type="text/css">
         .searchbox{
             height: 45px;
@@ -65,7 +75,7 @@
             padding-left: 0px;
         }
         .searchForm{
-            width: 80px;
+            width: 150px;
             height: 30px;
             float: left;
         }
@@ -111,9 +121,9 @@
     </script>
     <!---- start-smoth-scrolling---->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <script type="application/x-javascript">
+        addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
     </script>
-    <!----start-top-nav-script---->
     <script>
     $(function() {
         var pull 		= $('#pull');
@@ -134,14 +144,14 @@
     <!----//End-top-nav-script---->
 </head>
 <body>
-<!----- start-header---->
-<div id="home" class="header">
+    <!----- 酒店导航栏---->
+    <div id="home" class="header">
     <div class="top-header">
         <div class="container">
             <div class="logo">
                 <a href="index.html"><span>酒店</span>预订<span>...</span></a>
             </div>
-            <!----start-top-nav---->
+            <!----nav导航栏---->
             <nav class="top-nav">
                 <ul class="top-nav">
                     <li><a href="index.html">首页</a></li>
@@ -150,52 +160,53 @@
                     <li><a href="news.html"> News</a></li>
                     <li><a href="reviews.html">Reviews</a></li>
                 </ul>
-                <a href="#" id="pull"><img src="images/nav-icon.png" title="menu" /></a>
+                <a href="#" id="pull"><img src="__STATIC__/images/nav-icon.png" title="menu" /></a>
             </nav>
             <div class="clearfix"> </div>
         </div>
     </div>
 </div>
-<!----- //End-header---->
-
-<!----- menu-page ----->
-<div class="menu-page">
-    <!------ menu-header ----->
+    <!-----酒店内容区域 ----->
+    <div class="menu-page">
+    <!------ 酒店logo图片 ----->
     <div class="menu-header">
         <div class="container">
             <h1><span>hotel</span>  reservation</h1>
         </div>
     </div>
-    <!------ menusearch ----->
+    <!------ 搜索栏 ----->
     <div class="container">
         <div class="row text-center searchbox">
-            <div class="col-lg-2" style="display: inline-block"><span class="searchForm">目的地：</span><input type="text" class="form-control searchForm" id="name" placeholder=""></div>
-            <div class="col-lg-2"><span class="searchForm">入住：</span><input type="text" class="form-control searchForm" id="startTime" placeholder=""></div>
-            <div class="col-lg-2"><span class="searchForm">退房：</span><input type="text" class="form-control searchForm" id="endTime" placeholder=""></div>
-            <div class="col-lg-2">
-                <span class="searchForm">入住人数：</span>
-                <button type="button" class="form-control searchForm" id="peopleNum">
-                    <span class="caret" style="float: right"></span>
-                </button>
+            <!--城市选择器插件-->
+            <div class="col-lg-4" style="display: inline-block">
+                <span class="searchForm">目的地：</span>
+                <input type="text" PLACEHOLDER="选择地址" class="form-control searchForm" id="cityChoice" style="background-color: white">
+                <input type="hidden" id="province" value="">
+                <input type="hidden" id="city" value="">
             </div>
-            <div class="col-lg-2">
-                <span class="searchForm">房间数：</span>
-                <button type="button" class="form-control searchForm" id="roomNum">
-                    <span class="caret" style="float: right"></span>
-                </button>
-                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                    <li role="presentation">
-                        <a role="menuitem" tabindex="-1" href="#">1</a>
-                    </li>
-
-                </ul>
+            <div class="col-lg-4">
+                <span class="searchForm">入住~退房：</span>
+                <!--日历插件-->
+                <form class="form-horizontal">
+                    <fieldset>
+                        <div class="control-group">
+                            <div class="controls">
+                                <div class="input-prepend input-group">
+                                    <span class="add-on input-group-addon" style="background-color: white;">
+                                        <i class="glyphicon glyphicon-calendar" aria-hidden='true'></i>
+                                    </span>
+                                    <input type="text" readonly style="background-color:white; width: 200px" name="reservation" id="reservation" class="form-control" value="2014-5-21 - 2014-6-21" />
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
             </div>
-            <div class="col-lg-2">
-                <span class="glyphicon glyphicon-search"></span>
+            <div class="col-lg-4">
+                <span class="glyphicon glyphicon-search" aria-hidden='true' style="position: absolute; left: 150px; top: 8px;"></span>
                 <input type="button" value="搜索" style="width: 100px;height:30px;border: 1px solid #ccc;border-radius: 4px;">
             </div>
         </div>
-
     </div>
     <div class="container searchBox">
         <div class="row " style="width: 1000px">
@@ -249,7 +260,7 @@
             </div>
         </div>
     </div>
-    <!--Hotel-content-->
+    <!--酒店展示区域-->
     <div class="container">
         <div class="row">
             <div class="col-lg-3 item">
@@ -259,7 +270,7 @@
                     </div>
                     <div class="item-info">
                         <div class="item-info-left">
-                            <h4><a href="{:url('store/HotelDetail/hotelDetail')}">威尼斯酒店</a></h4>
+                            <h4><a href="{:url('store/Hoteldetail/hoteldetail')}">威尼斯酒店</a></h4>
                             <span class="item-rate"> </span>
                         </div>
                         <div class="item-info-right">
@@ -322,8 +333,7 @@
             </div>
         </div>
     </div>
-
-    <!----- menu ---->
+    <!----- 加载更多 ---->
     <div class="menu">
         <!----- main-menus ----->
         <div class="main-menus menu-menu">
@@ -344,14 +354,11 @@
         <!----- main-menus ----->
     </div>
     <div class="clearfix"> </div>
-    <!----- menu ---->
-    <!----- fearuted-diesh ----->
+    <!-----酒店轮播区域 ----->
     <div class="fearuted-diesh">
         <div class="container">
             <h3>近期热门酒店预览<span> </span></h3>
-            <!----sreen-gallery-cursual---->
             <div class="sreen-gallery-cursual">
-                <!-- requried-jsfiles-for owl -->
                 <link href="__STATIC__/css/owl.carousel.css" rel="stylesheet">
                 <script src="__STATIC__/js/owl.carousel.js"></script>
                 <script>
@@ -519,10 +526,8 @@
         </div>
     </div>
 </div>
-<!----- fearuted-diesh ----->
-<!----- End-Menu-page ----->
-<!----- footer ----->
-<div class="footer">
+    <!----- 页脚区域 ----->
+    <div class="footer">
     <div class="container">
         <div class="footer-grids">
             <div class="col-md-3 footer-grid">
@@ -556,8 +561,28 @@
         </div>
     </div>
 </div>
-<!----- footer ----->
-
 </body>
+<script type="text/javascript">
+    // 日历插件
+    $(document).ready(function() {
+        $('#reservation').daterangepicker(null, function(start, end, label) {
+            console.log(start.toISOString(), end.toISOString(), label);
+        });
+    });
+
+    // 城市选择器插件
+    var cityPicker = new IIInsomniaCityPicker({
+        data: cityData,
+        target: '#cityChoice',
+        valType: 'k-v',
+        hideCityInput: '#city',
+        hideProvinceInput: '#province',
+        callback: function(city_id){
+            alert(city_id);
+        }
+    });
+    cityPicker.init();
+
+</script>
 </html>
 
