@@ -325,6 +325,24 @@
 </body>
 	<script type="text/javascript" src="__JS__/bootstrap.min.js"></script>
 	<script type="text/javascript" src="__JS__/vue.min.js"></script>
+	<script>
+		/*
+		修改验证码的url
+		 */
+		var $code_url_1 = "{:captcha_src()}?="+Math.random() ;
+		/*
+		 发送短信验证码给用户的url
+		 */
+		var $code_user_url_1 = "{:url('user/Login/phoneGetMsg')}" ;
+		/*
+		 用户登录的url
+		 */
+		var $user_login_url_1 = "{:url('user/Login/login')}" ;
+		/*
+		 店家手机登录的url
+		 */
+		var $user_login_phone_url_1 = "{:url('user/Login/phoneLogin')}" ;
+	</script>
 <script>
 	$('.carousel').carousel({
 		interval: 5000 // in milliseconds
@@ -356,7 +374,7 @@
 			 */
 			setCaptcha:function(event)
 			{
-				$(event.target).attr('src',"{:captcha_src()}?"+Math.random()) ;
+				$(event.target).attr('src',$code_url_1) ;
 			} ,
 			/**
 			 * 功能描述：发送短信验证码给用户
@@ -373,7 +391,7 @@
 					tel : $name
 				} ;
 				$.ajax({
-					url:"{:url('user/Login/phoneGetMsg')}",
+					url:$code_user_url_1 ,
 					type:'post' ,
 					data:$dataTel ,
 					dataType:'json' ,
@@ -453,14 +471,13 @@
 					code : $code
 				} ;
 				$.ajax({
-					url:"{:url('user/Login/login')}",
+					url:$user_login_url_1,
 					type:'post' ,
 					data:$data ,
 					dataType:'json' ,
 					success:function(res){
 						if( res['code'] == 10000 )
 						{
-
 							$("#loginMsgModel").modal('show') ;
 							console.log('登录成功') ;
 						}
@@ -472,7 +489,6 @@
 				}) ;
 			} ,
 			/**
-			 * 功能描述：店家注册（只能手机号码注册）
 			 * 功能描述：店家登录（用手机号码登录）
 			 * 参数：
 			 * QQUser：
@@ -489,7 +505,7 @@
 				} ;
 				console.log($data) ;
 				$.ajax({
-					url:"{:url('user/Login/phoneLogin')}",
+					url:$user_login_phone_url_1,
 					type:'post' ,
 					data:$data ,
 					dataType:'json' ,
@@ -505,7 +521,7 @@
 						}
 					}
 				}) ;
-			} ,
+			}
 
 		}
 	}) ;
