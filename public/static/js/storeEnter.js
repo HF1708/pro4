@@ -18,7 +18,12 @@ var vue=new Vue({
             $.post($getCityUrl,{"id":e.target.value},function (res) {
                 var cityArr=JSON.parse(res);
                 this.city=cityArr;
-                this.cityShow=true;
+                if(cityArr.length!=1){
+                    this.cityShow=true;
+                }else {
+                    this.cityShow=false;
+                }
+
                 var pid=cityArr[0].id;
                 $.post($getCityUrl,{"id":pid},function (res) {
                     var townArr=JSON.parse(res);
