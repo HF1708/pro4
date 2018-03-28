@@ -471,6 +471,7 @@
 			 * 时间：18-3-25
 			 */
 			phoneLogin:function(){
+				var that = this ;
 				var $name = $("#register_name").val() ;
 				var $code = $("#register_code").val() ;
 				var $data = {
@@ -479,7 +480,7 @@
 				} ;
 				console.log($data) ;
 				$.ajax({
-					url:$user_login_phone_url_1,
+					url:$user_login_phone_url_1 ,
 					type:'post' ,
 					data:$data ,
 					dataType:'json' ,
@@ -488,6 +489,7 @@
 						{
 							$("#loginMsgModel").modal('show') ;
 							console.log('手机登录成功') ;
+							that.Msg_footer_link = "{:url('storemanage/index/index')}" ;
 						}
 						else
 						{

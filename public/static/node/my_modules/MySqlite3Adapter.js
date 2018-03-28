@@ -4,17 +4,17 @@ function MySqlite3Adapter( mydbname )
 	var dbname = mydbname;
 	if( mydbname == undefined )
 	{
-		dbname = "./旅游电商数据库1.0.sql";
+		dbname = "../../../extend/旅游电商数据库1.0.sql";
 	}
 	var sqlite3 = require( 'sqlite3' ) ;
 	this.db = new sqlite3.Database( dbname ,function( err ){
 		if( !err )
 		{
-			console.log( '数据库连接成功' );
+			console.log( '数据库连接成功' ) ;
 		}
 		else
 		{
-			console.log( '数据库连接失败' ,err );
+			console.log( '数据库连接失败' ,err ) ;
 		}
 	});
 }

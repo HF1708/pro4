@@ -49,7 +49,9 @@ create table if not exists user_user
 	user_email VARCHAR(40) ,
 	user_phone char(11) ,
 	user_image varchar(100) ,
-	user_time int ,
+	user_sex enum("男",'女') default'男' ,
+	user_birthday datetime ,
+	user_time datetime ,
 	user_msg varchar(100) 
 ) ;
 -- 添加账号的唯一索引
@@ -60,7 +62,7 @@ ALTER TABLE `user_user` ADD INDEX `sad` (`user_uid`,`user_password`) USING BTREE
 -- ALTER TABLE `user_user` ADD INDEX `sad1` (`user_email`) USING BTREE ;
 -- ALTER TABLE `user_user` ADD INDEX `sad2` (`user_phone`) USING BTREE ;
 insert into user_user( user_uid ,user_name ,user_password ,user_email ,user_phone ,user_image ,user_msg ,user_time )values
-( 'test' , '测试用', md5('123456'), '', '', '', '',(unix_timestamp(now())) ) ;
+( 'test' , '测试用', md5('123456'), '', '15324488756', '', 'test',now()  ) ;
 
 -- 商家信息表
 
@@ -107,7 +109,7 @@ create table if not exists store_advert
 -- 添加账号的唯一索引/ 广告名
 ALTER TABLE `store_advert` ADD UNIQUE INDEX `sdaa` (`store_adv_name`) USING BTREE ;
 
--- 店家聊天记录
+-- 聊天记录表
 -- （店家/用户）A/（店家/客服）B/（客服/用户）C/（店家/店家）D/（用户/用户）E/（客服/客服）F 聊天记录
 -- id 自增id
 -- 用户id

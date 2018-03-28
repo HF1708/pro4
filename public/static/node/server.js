@@ -4,12 +4,12 @@ var wsModule = require( "ws" );
 var Server = wsModule.Server;
 var server = new Server( {port:8888} );
 
-var socketList = [];
-var useList = [];
-// 连接数据库
-var adapter = require( './my_modules/MySqlite3Adapter' );
-
-
+var socketList = [] ;
+var useList = [] ;
+// 引入redis模块
+var redis = require("./my_modules/redisDao.js") ;
+// 引入mysql模块
+var mysql = require("./my_modules/Mysql.js") ;
 
 server.on( "connection" ,function( socket ){
 	socketList.push( socket );
@@ -19,7 +19,7 @@ server.on( "connection" ,function( socket ){
 		switch( msgObj.type )
 		{
 			case 'ss':
-				console.log( "服务器发送的消息");
+				console.log( "服务器发送的消息") ;
 				socket.send( sendData(
 					msgObj.rever ,
 					msgObj.sender ,
@@ -27,6 +27,16 @@ server.on( "connection" ,function( socket ){
 					{msg:'没有内容'}
 				)) ;
 			break;
+			// 对话
+			case 'message' :
+				socket.send( sendData(
+					msgObj.rever ,
+					msgObj.sender ,
+					'message' ,
+					msgObj.content
+				)) ;
+				break ;
+
 		}
 	});
 	socket.on( "error" ,function( err ){
