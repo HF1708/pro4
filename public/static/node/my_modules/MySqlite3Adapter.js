@@ -10,11 +10,11 @@ function MySqlite3Adapter( mydbname )
 	this.db = new sqlite3.Database( dbname ,function( err ){
 		if( !err )
 		{
-			console.log( '数据库连接成功' );
+			console.log( '数据库连接成功' ) ;
 		}
 		else
 		{
-			console.log( '数据库连接失败' ,err );
+			console.log( '数据库连接失败' ,err ) ;
 		}
 	});
 }
