@@ -1,5 +1,5 @@
 <?php
-namespace app\user\controller;
+namespace app\chat\controller;
 use think\Controller;
 use think\captcha ;
 use \think\Session ;

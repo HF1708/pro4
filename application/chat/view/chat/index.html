@@ -1,38 +1,24 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>登录</title>
+		<title>聊天</title>
 		<link href="__CSS__/bootstrap.css" rel='stylesheet' type='text/css' />
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="__JS__/jquery.min.js"></script>
 		 <!-- Custom Theme files -->
 		<link href="__CSS__/style.css" rel='stylesheet' type='text/css' />
 		<style type="text/css">
-			.flex-center{
-				display:flex ;
+			.img_header{
+				width:40px ;
+				height:40px ;
 			}
-			.empty{
-				height: 20px ;
+			.img_header_2{
+				width:45px ;
+				height:45px ;
 			}
-			.btn-modal{
-				background-color:rgba(0,0,0,0.5) !important;
-				width:30% !important;
-				color:#ffffff !important;
-			}
-			.make-reserve input[type="button"] {
-				background: #3b3b3b;
-				color: #FFF;
-				padding: 1em 1.5em;
-				display: inline-block;
-				border: none;
-				transition: 0.5s all;
-				-webkit-transition: 0.5s all;
-				-moz-transition: 0.5s all;
-				-ms-transition: 0.5s all;
-				margin-top: 1.5em;
-			}
-			.make-reserve input[type="button"]:hover{
-				background:#DDD177;
+			.clearMarginPadding{
+				margin:0 ;
+				padding:0 ;
 			}
 		</style>
    		 <!-- Custom Theme files -->
@@ -79,16 +65,16 @@
 				<div class="top-header">
 					<div class="container">
 						<div class="logo">
-							<a href="index.html"><span>T</span>ourister<span>...</span></a>
+							<a href="index.html"><span>去野</span>Journey<span>...</span></a>
 						</div>
 						<!----start-top-nav---->
 						<nav class="top-nav">
 							<ul class="top-nav">
-								<li><a href="index.html">Our Story</a></li>
-								<li><a href="menu.html">Menu</a></li>
-								<li class="active"><a href="reservation.html">Reservations</a></li>
-								<li><a href="news.html"> News</a></li>
-								<li><a href="reviews.html">Reviews</a></li>
+								<li class="active"><a href="index.html">首页home</a></li>
+								<li><a href="menu.html">目的地locations</a></li>
+								<li><a href="reservation.html">故事story</a></li>
+								<li><a href="news.html"> 登录</a></li>
+								<li><a href="reviews.html">注册</a></li>
 							</ul>
 							<a href="#" id="pull"><img src="__STATIC__/images/nav-icon.png" title="menu" /></a>
 						</nav>
@@ -100,157 +86,47 @@
 			<!----- menu-page ----->
 			<div class="reservation">
 				<!------ menu-header ----->
-				<div class="reservation-header">
-					<div class="container">
-						<h1><span>Tourister</span> Reservation</h1>
-					</div>
-				</div>
 				<!------ menuheader ----->
 				<div class="clearfix"> </div>
 				<div class="empty"></div>
 				<!----- reservation ---->
-				<div class="container">
-					<div class="col-sm-1"></div>
-					<div class="col-sm-5">
-						<div class="reservation-form">
-							<!----- make-Reserver ------>
-							<div class="make-reserve">
-								<ul id="myTab" class="nav nav-tabs" >
-									<li class="active" >
-										<a href="#user" data-toggle="tab">用户</a>
-									</li>
-									<li>
-										<a href="#stroe" data-toggle="tab" >店家</a>
-									</li>
-								</ul>
-								<div id="myTabContent" class="tab-content" >
-
-									<div class="tab-pane fade in active" id="user">
-										<div class="container">
-											<!------ reserv-form ----->
-											<div class="reserv-form">
-												<form>
-													<div class="clearfix"> </div>
-													<div class="i-name">
-														<div class="i-name-left">
-															<span>用户名</span>
-															<input type="text" placeholder="请输入用户名" id="login_user" maxlength="20" value="test"  />
-														</div>
-													</div>
-													<div class="clearfix"> </div>
-													<div class="i-name">
-														<div class="i-name-left">
-															<span>密码</span>
-															<input type="password"  placeholder="请输入密码" id="login_pwd" maxlength="32" value="123456" />
-														</div>
-													</div>
-													<div class="clearfix"> </div>
-													<!----->
-													<div class="i-name">
-														<div class="i-name-left">
-															<span>验证码</span>
-															<input type="text" placeholder="请输入验证码" id="login_code" maxlength="4" />
-														</div>
-													</div>
-													<div class="clearfix"> </div>
-													<div class="empty"></div>
-													<div class="i-name">
-														<div class="i-name-left">
-															<img src="{:captcha_src()}" alt="captcha" @click="setCaptcha(event)" />
-														</div>
-													</div>
-													<div class="clearfix"> </div>
-													<!----->
-													<div class="i-textarea">
-													</div>
-													<input type="button"  @click="login()" value="登录" />
-												</form>
-											</div>
-											<!------ reserv-form ----->
+				<div class="container" >
+					<div class="col-sm-2">
+						<button class="btn btn-primary">聊天对象</button>
+					</div>
+					<div class="col-sm-8">
+						<div class="row" style="min-height: 350px ;border:1px solid #999;" >
+							<div class="row"></div>
+							<div class="row clearMarginPadding">
+								<div class="col-sm-3 hidden-sm hidden-xs reviews-people" style="" >
+									<img class="img_header_2" src="__STATIC__/images/g1.jpg" />用户名字
+								</div>
+								<div class="col-sm-9  hidden-sm hidden-xs ">
+									<div class="media">
+										<div class="media-left">
+											<a href="#">
+												<img class="media-object" src="..." alt="...">
+											</a>
+										</div>
+										<div class="media-body">
+											<h4 class="media-heading">Media heading</h4>
 										</div>
 									</div>
-									<div class="tab-pane fade" id="stroe">
-										<div class="container">
-											<!------ reserv-form ----->
-
-											<div class="reserv-form">
-												<form>
-													<div class="clearfix"> </div>
-													<div class="i-name">
-														<div class="i-name-left">
-															<span>手机号码</span>
-														</div>
-													</div>
-													<div class="clearfix"> </div>
-													<div class="i-name">
-														<div class="i-name-left" style="margin-right:0 ;" >
-															<input type="text" placeholder="请输入手机号码" id="register_name" onkeypress="return event.keyCode>=48&&event.keyCode<=57" ng-pattern="/[^a-zA-Z]/" maxlength="11" />
-														</div>
-														<div class="i-name-left" style="margin-left:10px ;position:relative ;" >
-															<button type="button" class="btn btn-default" v-show="shortShow"  @click="getPhoneMsg()" >{{shortMsg}}</button>
-															<div class=" btn btn-default btn-modal" v-show="!shortShow" >{{shortMsg}}</div>
-														</div>
-													</div>
-
-													<!--<div class="i-name-left">-->
-														<!--<button type="button" class="btn btn-default" @click="getPhone()" >{{shortMsg}}</button>-->
-													<!--</div>-->
-
-													<div class="clearfix"> </div>
-													<!----->
-													<div class="empty"></div>
-													<div class="i-name">
-														<div class="i-name-left">
-															<input type="text" placeholder="请输入短信验证码" id="register_code"  />
-														</div>
-													</div>
-													<div class="i-name">
-														<div class="i-name-left">
-
-														</div>
-													</div>
-													<!----->
-													<div class="clearfix"> </div>
-													<div class="i-textarea">
-													</div>
-													<input type="button" @click="phoneLogin()" value="登录" />
-												</form>
-											</div>
-											<!------ reserv-form ----->
+									<div class="media">
+										<div class="media-left">
+											<a href="#">
+												<img class="media-object" src="..." alt="...">
+											</a>
+										</div>
+										<div class="media-body ">
+											<h4 class="media-heading">Media heading</h4>
 										</div>
 									</div>
 								</div>
 							</div>
-							<!----- make-Reserver ------>
 						</div>
 					</div>
-					<div class="col-sm-1"></div>
-					<div class="col-sm-5">
-						<!--<a href="#" title="携程旅游" >-->
-						<!--<img class="img-responsive" src="./images/g1.jpg" />-->
-						<!--</a>-->
-						<div id="myCarousel" class="carousel slide">
-							<!-- Carousel items -->
-							<div class="carousel-inner">
-								<div class="active item">
-									<a href="#" >
-										<img src="__STATIC__/images/g1.jpg" title="携程旅游" />
-									</a>
-								</div>
-								<div class=" item">
-									<a href="#" >
-										<img src="__STATIC__/images/g2.jpg" title="携程旅游" />
-									</a>
-								</div>
-								<div class=" item">
-									<a href="#" >
-										<img src="__STATIC__/images/g3.jpg" title="携程旅游" />
-									</a>
-								</div>
-							</div>
-
-						</div>
-					</div>
+					<div class="col-sm-2"></div>
 				</div>
 
 			</div>
@@ -326,22 +202,7 @@
 	<script type="text/javascript" src="__JS__/bootstrap.min.js"></script>
 	<script type="text/javascript" src="__JS__/vue.min.js"></script>
 	<script>
-		/*
-		修改验证码的url
-		 */
-		var $code_url_1 = "{:captcha_src()}?="+Math.random() ;
-		/*
-		 发送短信验证码给用户的url
-		 */
-		var $code_user_url_1 = "{:url('user/Login/getPhoneMsgUser')}" ;
-		/*
-		 用户登录的url
-		 */
-		var $user_login_url_1 = "{:url('user/Login/login')}" ;
-		/*
-		 店家手机登录的url
-		 */
-		var $user_login_phone_url_1 = "{:url('user/Login/phoneLogin')}" ;
+
 	</script>
 <script>
 	$('.carousel').carousel({
@@ -352,10 +213,6 @@
 	var app = new Vue({
 		el:"#myApp" ,
 		data: {
-			shortMsg:"获取验证码" ,
-			shortShow:true ,
-			shortTimeMsg:'秒后重发' ,
-			shortJudge:'T' ,
 			Msg_head:'登录' ,
 			Msg_body:'登录成功' ,
 			Msg_footer:'确认' ,
@@ -364,138 +221,6 @@
 
 		} ,
 		methods: {
-			/**
-			 * 功能描述：修改验证码
-			 * 参数：
-			 * QQUser：
-			 * 返回：
-			 * 作者：yonjin L
-			 * 时间：18-3-25
-			 */
-			setCaptcha:function(event)
-			{
-				$(event.target).attr('src',$code_url_1) ;
-			} ,
-			/**
-			 * 功能描述：发送短信验证码给用户
-			 * 参数：
-			 * QQUser：
-			 * 返回：
-			 * 作者：yonjin L
-			 * 时间：18-3-24
-			 */
-			getPhoneMsg: function(){
-				var that = this ;
-				var $name = $("#register_name").val() ;
-				$dataTel = {
-					tel : $name
-				} ;
-				if( that.shortJudge == 'T' )
-				{
-					$.ajax({
-						url:$code_user_url_1 ,
-						type:'post' ,
-						data:$dataTel ,
-						dataType:'json' ,
-						success:function(res){
-							// 验证码成功发送，则提示
-							if( res.code == 10000 )
-							{
-								that.shortTimeMsg = 60 ;
-								that.shortMsg = "60秒后重发" ;
-								that.shortJudge = 'F' ;
-								that.shortShow = false ;
-								var setTimeInterval = setInterval(function () {
-									that.shortTimeMsg-- ;
-									that.shortMsg = that.shortTimeMsg+"秒后重发" ;
-									if(that.shortTimeMsg <= 0)
-									{
-										that.shortTimeMsg = '秒后重发' ;
-										that.shortMsg = "获取验证码" ;
-										that.shortJudge = 'T' ;
-										that.shortShow = true ;
-										clearInterval(setTimeInterval) ;
-									}
-								}, 10) ;
-							}
-							else
-							{
-								alert(res.msg) ;
-							}
-						}
-					})
-				}
-
-			} ,
-			/**
-			 * 功能描述：用户登录
-			 * 参数：
-			 * QQUser：
-			 * 返回：
-			 * 作者：yonjin L
-			 * 时间：18-3-24
-			 */
-			login:function(){
-				var $name = $("#login_user").val() ;
-				var $pwd = $("#login_pwd").val() ;
-				var $code = $("#login_code").val() ;
-				var $data = {
-					name : $name ,
-					pwd : $pwd ,
-					code : $code
-				} ;
-				$.ajax({
-					url:$user_login_url_1,
-					type:'post' ,
-					data:$data ,
-					dataType:'json' ,
-					success:function(res){
-						if( res['code'] == 10000 )
-						{
-							$("#loginMsgModel").modal('show') ;
-							console.log('登录成功') ;
-						}
-						else
-						{
-							alert(res['msg']) ;
-						}
-					}
-				}) ;
-			} ,
-			/**
-			 * 功能描述：店家登录（用手机号码登录）
-			 * 参数：
-			 * QQUser：
-			 * 返回：
-			 * 作者：yonjin L
-			 * 时间：18-3-25
-			 */
-			phoneLogin:function(){
-				var $name = $("#register_name").val() ;
-				var $code = $("#register_code").val() ;
-				var $data = {
-					name : $name ,
-					code : $code
-				} ;
-				console.log($data) ;
-				$.ajax({
-					url:$user_login_phone_url_1,
-					type:'post' ,
-					data:$data ,
-					dataType:'json' ,
-					success:function(res){
-						if( res['code'] == 10000 )
-						{
-							$("#loginMsgModel").modal('show') ;
-							console.log('手机登录成功') ;
-						}
-						else
-						{
-							alert(res['msg']) ;
-						}
-					}
-				}) ;
-			}
 
 		}
 	}) ;
