@@ -13,6 +13,7 @@
 		<script type="text/javascript" src="__JS__/move-top.js"></script>
 		<script type="text/javascript" src="__JS__/easing.js"></script>
 		<script type="text/javascript" src="__JS__/vue.min.js"></script>
+		<script type="text/javascript" src="__JS__/bootstrap.js"></script>
 		<script type="text/javascript">
 			jQuery(document).ready(function($) {
 				$(".scroll").click(function(event){		
@@ -94,12 +95,12 @@
 
 						<!------ reserv-form ----->
 						<div class="reserv-form">
-							<form>
+							<form method ="post" action="{:url('store/Application/submitForm')}" >
 							<div class="item-setion">
 								<span>入驻类型</span>
-								<select>
-									<option>景点入驻</option>
-									<option>酒店入驻</option>
+								<select name="settledType">
+									<option value="景点入驻">景点入驻</option>
+									<option value="酒店入驻">酒店入驻</option>
 								</select>
 							</div>
 							<!----->
@@ -108,7 +109,7 @@
 							<div class="i-name">
 								<div>
 									<span>公司名称</span>
-									<input type="text">
+									<input type="text" name="corporation" oninvalid="setCustomValidity('公司名称不能为空'); " required="" oninput="setCustomValidity('')"  maxlength='50'>
 								</div>
 								<div class="clearfix"> </div>
 							</div>
@@ -116,16 +117,15 @@
 							<div class="i-name">
 								<div class="item-setion">
 									<span>公司地址</span>
-
-									<select @change="getCity($event)" @click="selectShowNoneFun()" >
+									<select    @change="getCity($event)" @click="selectShowNoneFun()" name="corporation_province" pattern="^(?!.*请选择)" oninvalid="setCustomValidity('公司地址必须选择');">
 										<option v-show="selectShowNone">请选择</option>
-										<option  name="province" :value="value.id" v-model="value.id"  v-for="(value,key) in province">{{value.shortname}}</option>
+										<option   :value="value.id" v-model="value.id"  v-for="(value,key) in province">{{value.shortname}}</option>
 									</select>
-									<select @change="getTown($event)" v-show="cityShow">
-										<option  name="city" :value="value.id" v-model="value.id"  v-for="(value,key) in city">{{value.shortname}}</option>
+									<select @change="getTown($event)" v-show="cityShow" name="corporation_city">
+										<option   :value="value.id" v-model="value.id"  v-for="(value,key) in city">{{value.shortname}}</option>
 									</select>
-									<select v-show="townShow">
-										<option  name="town" :value="value.id" v-model="value.id"  v-for="(value,key) in town">{{value.shortname}}</option>
+									<select v-show="townShow" name="corporation_town">
+										<option   :value="value.id" v-model="value.id"  v-for="(value,key) in town">{{value.shortname}}</option>
 									</select>
 								</div>
 							</div>
@@ -133,7 +133,7 @@
 							<div class="i-name">
 								<div>
 									<span>详细地址</span>
-									<input type="text">
+									<input type="text" name="corporation_detail" oninvalid="setCustomValidity('详细地址不能为空');" required="" oninput="setCustomValidity('')" maxlength="50">
 								</div>
 								<div class="clearfix"> </div>
 							</div>
@@ -141,13 +141,21 @@
 							<!----->
 							<div class="i-email">
 								<span>邮箱</span>
-								<input type="text">
+								<input type="text" name="email" pattern="^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$" required="" oninput="setCustomValidity('')" oninvalid="setCustomValidity('请正确填写邮箱');">
 							</div>
 							<!----->
 							<div class="i-name block">
 								<div>
 									<span>手机号码</span>
-									<input type="text" maxlength="11">
+									<input required='' type="text" maxlength="11" name="mobile" v-model="mobile" pattern="^(0|86|17951)?1[0-9]{10}" oninvalid="setCustomValidity('请输入11位手机号');" oninput="setCustomValidity('')">
+								</div>
+								<div>
+									<span>获取手机验证码</span>
+									<input type="button" class="btn btn-warning" value="点击获取" id="zphone" @click="getCode()">
+								</div>
+								<div style="max-width: 100px">
+									<span>输入验证码</span>
+									<input type="text" maxlength="6" required="" oninvalid="setCustomValidity('请正确填写验证码');" oninput="setCustomValidity('')" name="code">
 								</div>
 							</div>
 							<div class="clearfix"> </div>
@@ -155,9 +163,12 @@
 							<div class="clearfix"> </div>
 							<div class="i-textarea">
 								<span>备注</span>
-								<textarea></textarea>
+								<textarea name="textarea" maxlength="500"></textarea>
 							</div>
-							<input type="submit" value="提交" />
+							<div v-show="required">
+								<input type="submit" value="提交" />
+							</div>
+
 							</form>
 						</div>
 						<!------ reserv-form ----->
@@ -377,12 +388,38 @@
 					</div>
 				</div>
 				<!----- footer ----->
+
+
+		<!--模态框-->
+			<div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title">商家申请入驻</h4>
+						</div>
+						<div class="modal-body">
+							<p> {{tip_content}}&hellip;</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">确定</button>
+							<!--<button type="button" class="btn btn-primary">确定</button>-->
+						</div>
+					</div><!-- /.modal-content -->
+				</div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
+
 		</div>
+
+
+
 </body>
 	<script>
         var province={$province};
         var city={$city};
-        var $getCityUrl="{:url('store/Application/getCity')}"
+        var send_code={$send_code};
+        var $getCityUrl="{:url('store/Application/getCity')}";
+        var $getCodeUrl="{:url('store/Application/getCode')}";
 	</script>
 	<script src="__JS__/storeEnter.js" type="text/javascript">
 	</script>
