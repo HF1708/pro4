@@ -9,6 +9,8 @@ class Chat extends Controller
     public function index()
     {
 
+        $chat_one = input("?get.chat_one")? input("get.chat_one"):'' ;
+        $this->assign('domain',$chat_one) ;
         $res = $this->fetch() ;
         return $res ;
     }
