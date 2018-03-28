@@ -20,12 +20,6 @@
 				margin:0 ;
 				padding:0 ;
 			}
-			.flex{
-				display:flex ;
-				align-items:center ;
-			}
-			.flex-center{
-			}
 		</style>
    		 <!-- Custom Theme files -->
    		 <!---- start-smoth-scrolling---->
@@ -98,7 +92,6 @@
 				<!----- reservation ---->
 				<div class="container" >
 					<div class="col-sm-2">
-						<button class="btn btn-primary">聊天对象</button>
 					</div>
 					<div class="col-sm-8">
 						<div class="row" style="min-height: 350px ;border:1px solid #999;" >
@@ -107,19 +100,30 @@
 								<div class="col-sm-3 hidden-sm hidden-xs reviews-people" style="" >
 									<img class="img_header_2" src="__STATIC__/images/g1.jpg" />用户名字
 								</div>
-								<div class="col-sm-9  hidden-sm hidden-xs ">
+								<div class="col-sm-9  ">
 									<div class="media">
 										<div class="media-left media-middle ">
-											<a href="#">
+											<a class="reviews-people" href="#">
 												<img class="img_header_2 media-object pull-left" src="__STATIC__/images/g1.jpg"  alt="...">
-
 											</a>
-											<div class="flex">聊天对象</div>
-											<div class="clearfix"> </div>
+											<div>聊天对象</div>
 										</div>
+										<div class="clearfix"> </div>
 										<div class="media-body">
 											<h4 class="media-heading">Middle aligned media</h4>
-											...
+										</div>
+									</div>
+									<div class="media" style="display:flex ;justify-content:flex-end;">
+										<div class="media-body">
+											<div class="pull-right">聊天对象</div>
+											<div class="clearfix"> </div>
+											<br />
+											<h4 class="media-heading">Middle aligned media</h4>
+										</div>
+										<div class="media-left media-middle ">
+											<a class="reviews-people" href="#">
+												<img class="img_header_2 media-object pull-left" src="__STATIC__/images/g1.jpg"  alt="...">
+											</a>
 										</div>
 									</div>
 								</div>
