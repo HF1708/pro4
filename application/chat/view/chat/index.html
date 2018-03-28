@@ -8,17 +8,36 @@
 		 <!-- Custom Theme files -->
 		<link href="__CSS__/style.css" rel='stylesheet' type='text/css' />
 		<style type="text/css">
-			.img_header{
-				width:40px ;
-				height:40px ;
-			}
+			/*聊天头像大小*/
 			.img_header_2{
 				width:45px ;
 				height:45px ;
 			}
+			/*清除内外部白*/
 			.clearMarginPadding{
 				margin:0 ;
 				padding:0 ;
+			}
+			/*聊天会话容器*/
+			.chatCon{
+				min-height: 350px ;
+				border-left: 1px solid #d4d3d2
+			}
+			/*点击发送消息*/
+			.sendMsg{
+				position:absolute;
+				bottom:0 ;
+				right:0 ;
+			}
+			/*发送的内容容器*/
+			.sendCon{
+				min-height: 100px;
+				border:1px solid #d5d5e5 ;
+			}
+			/*使聊天内容靠右*/
+			.sendRight{
+				display:flex ;
+				justify-content:flex-end;
 			}
 		</style>
    		 <!-- Custom Theme files -->
@@ -101,7 +120,7 @@
 									<img class="img_header_2" src="__STATIC__/images/g1.jpg" />用户名字
 								</div>
 								<div class="col-sm-9  ">
-									<div class="row" style="min-height: 350px ;border-left: 1px solid #d4d3d2">
+									<div class="row chatCon" >
 										<div class="media">
 											<div class="media-left media-middle ">
 												<a class="reviews-people" href="#">
@@ -114,7 +133,7 @@
 												<div>Middle aligned media</div>
 											</div>
 										</div>
-										<div class="media" style="display:flex ;justify-content:flex-end;">
+										<div class="media sendRight" >
 											<div class="media-body">
 												<h4 class="media-heading pull-right">聊天对象</h4>
 												<div class="clearfix"> </div>
@@ -130,8 +149,8 @@
 									</div>
 
 									<div class="row" style="position:relative;">
-										<div style="min-height: 100px;border:1px solid #d5d5e5 ;" contenteditable="true" >sad</div>
-										<button class="btn btn-primary" type="button" style="position:absolute;bottom:0 ;right:0 ;" >发送</button>
+										<div class="sendCon" contenteditable="true" >sad</div>
+										<button class="btn btn-primary sendMsg" @click="sendMsg()" type="button" >发送</button>
 									</div>
 
 								</div>
@@ -232,27 +251,39 @@
 			Msg_footer_link:'#' ,
 			msg_footer_button_exit:'loginMsgModel_exit' ,
 			chat_one:'' ,
-			chat_two:''
+			chat_two:'' ,
+			ws:''
 
 		} ,
 		methods: {
+			sendMsg:function()
+			{
+				var that = this ;
+				/**
+				 * 获取聊天信息
+				 *
+				 * */
 
+				console.log(13) ;
+			}
 		} ,
 		mounted:function(){
 			/*
 				获取聊天记录
 			*/
-			var ws = new WebSocket( "ws://localhost:8888" ) ;
-			ws.onopen = function()
+			var that = this ;
+			that.ws = new WebSocket( "ws://localhost:8888" ) ;
+
+			that.ws.onopen = function()
 			{
-				ws.send( sendData( 'use' ,'server' ,'ss' ,'hello' ) ) ;
+				that.ws.send( sendData( 'use' ,'server' ,'ss' ,'hello' ) ) ;
 			} ;
-			ws.onmessage = function( result )
+			that.ws.onmessage = function( result )
 			{
 				var msgObj = JSON.parse( result.data ) ;
 				switch( msgObj.type )
 				{
-					case "ss":
+					case "ss" :
 						console.log('客户端接收的消息',msgObj) ;
 						break;
 				}
