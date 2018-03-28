@@ -88,6 +88,7 @@ ALTER TABLE `store_info` ADD UNIQUE INDEX `sda` (`store_name`) USING BTREE ;
 ALTER TABLE `store_info` ADD UNIQUE INDEX `sda2` (`store_phone`) USING BTREE ;
 -- 添加商店名字的符合索引(查询索引)/手机邮箱
 ALTER TABLE `store_info` ADD INDEX `sad1` (`store_name`) USING BTREE ;
+INSERT INTO `qdm181738524_db`.`store_info`(`store_id`, `store_name`, `store_state`, `store_phone`, `store_apply_time`, `store_province_id`, `store_city_id`, `store_town_id`, `store_address_detail`, `store_textarea`) VALUES (1, '13255917292', 'F', '13255917292', '2018-03-28 19:41:23', 1964, 1965, 1966, '13255917292', '似懂非懂斯蒂芬萨芬 ');
 -- 商家 广告
 -- id 自增id
 -- name 广告名

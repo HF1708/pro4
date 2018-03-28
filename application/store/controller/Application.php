@@ -17,10 +17,6 @@ class Application extends Controller
     public function storeEnter()
     {
 //        根据IP定位用户所在地区设置默认地址
-
-
-
-
         //消除手机号记录
         if(Session::has('mobile')){
             Session::delete('mobile');
