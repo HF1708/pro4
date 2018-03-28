@@ -1,4 +1,4 @@
--- drop database if exists travel;
+﻿-- drop database if exists travel;
 -- create database travel DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;-- 
 -- use travel;
 -- 
@@ -52,8 +52,11 @@ create table if not exists store_info
 	store_name char(12) , -- 商家名字
 	store_state enum('F','T','S') default 'F' , -- 商家状态 F 未审核； T审核通过； S 被锁定 
 	store_phone char(11),-- 商家绑定手机
-	store_apply_time  datetime -- 申请时间
-	
+	store_apply_time  datetime, -- 申请时间
+	store_province_id SMALLINT,
+	store_city_id SMALLINT,
+	store_town_id SMALLINT,
+	store_address_detail varchar(50)
 	-- foreign key() references table() 
 ) ;
 -- 添加商店名字的唯一索引
