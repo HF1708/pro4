@@ -3,7 +3,27 @@
 -- use travel;
 -- 
 
+#地区表
 
+-- ----------------------------
+-- Table structure for hy_area
+-- ----------------------------
+-- DROP TABLE IF EXISTS `hy_area`;
+create table if not exists `hy_area` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `pid` int(11) DEFAULT NULL COMMENT '父id',
+  `shortname` varchar(100) DEFAULT NULL COMMENT '简称',
+  `name` varchar(100) DEFAULT NULL COMMENT '名称',
+  `merger_name` varchar(255) DEFAULT NULL COMMENT '全称',
+  `level` tinyint(4) DEFAULT NULL COMMENT '层级 0 1 2 省市区县',
+  `pinyin` varchar(100) DEFAULT NULL COMMENT '拼音',
+  `code` varchar(100) DEFAULT NULL COMMENT '长途区号',
+  `zip_code` varchar(100) DEFAULT NULL COMMENT '邮编',
+  `first` varchar(50) DEFAULT NULL COMMENT '首字母',
+  `lng` varchar(100) DEFAULT NULL COMMENT '经度',
+  `lat` varchar(100) DEFAULT NULL COMMENT '纬度',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3750 DEFAULT CHARSET=utf8;
 
 -- 普通用户表 
 -- id 自增id
@@ -53,11 +73,14 @@ create table if not exists store_info
 	store_state enum('F','T','S') default 'F' , -- 商家状态 F 未审核； T审核通过； S 被锁定 
 	store_phone char(11),-- 商家绑定手机
 	store_apply_time  datetime, -- 申请时间
-	store_province_id SMALLINT,
-	store_city_id SMALLINT,
-	store_town_id SMALLINT,
-	store_address_detail varchar(50)
-	-- foreign key() references table() 
+	store_province_id INT,
+	store_city_id INT,
+	store_town_id INT,
+	store_address_detail varchar(50),
+	store_textarea text, 
+	foreign key(store_province_id) references `hy_area`(id), 
+	foreign key(store_province_id) references `hy_area`(id), 
+	foreign key(store_province_id) references `hy_area`(id) 
 ) ;
 -- 添加商店名字的唯一索引
 ALTER TABLE `store_info` ADD UNIQUE INDEX `sda` (`store_name`) USING BTREE ;
@@ -165,27 +188,7 @@ create table if not exists store_hotelOrder(
 
 
 
-#地区表
 
--- ----------------------------
--- Table structure for hy_area
--- ----------------------------
--- DROP TABLE IF EXISTS `hy_area`;
-create table if not exists `hy_area` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `pid` int(11) DEFAULT NULL COMMENT '父id',
-  `shortname` varchar(100) DEFAULT NULL COMMENT '简称',
-  `name` varchar(100) DEFAULT NULL COMMENT '名称',
-  `merger_name` varchar(255) DEFAULT NULL COMMENT '全称',
-  `level` tinyint(4) DEFAULT NULL COMMENT '层级 0 1 2 省市区县',
-  `pinyin` varchar(100) DEFAULT NULL COMMENT '拼音',
-  `code` varchar(100) DEFAULT NULL COMMENT '长途区号',
-  `zip_code` varchar(100) DEFAULT NULL COMMENT '邮编',
-  `first` varchar(50) DEFAULT NULL COMMENT '首字母',
-  `lng` varchar(100) DEFAULT NULL COMMENT '经度',
-  `lat` varchar(100) DEFAULT NULL COMMENT '纬度',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3750 DEFAULT CHARSET=utf8;
 
 
 

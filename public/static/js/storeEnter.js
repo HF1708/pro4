@@ -128,7 +128,7 @@ var vue=new Vue({
                 //模态框弹出警告
                 this.tip_content=decodeURI(travel_code_error);
                 $('#myModal').modal('show') ;
-                // document.cookie = "travel_code_error=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+                document.cookie = "travel_code_error=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
             }
         }
 
