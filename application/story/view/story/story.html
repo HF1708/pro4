@@ -1,12 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<meta charset="UTF-8">
-		<!--为了向下兼容ie8浏览器的效果-->
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<!--禁止用户对页面进行缩放，让页面更加接近原生APP的效果，滚轮为1：1-->
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>去野 身临其境方知奥妙</title>
+		<title>去野 故事集</title>
 		<link href="__CSS__/bootstrap.css" rel='stylesheet' type='text/css' />
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="__JS__/jquery.min.js"></script>
@@ -16,11 +11,6 @@
    		 <!---- start-smoth-scrolling---->
 		<script type="text/javascript" src="__JS__/move-top.js"></script>
 		<script type="text/javascript" src="__JS__/easing.js"></script>
-        <script src="__JS__/bootstrap.min.js"></script>
-		<!--视频广告插件-->
-		<link rel="stylesheet" href="__CSS__/jquery.vidbacking.css" type="text/css">
-		<link rel="stylesheet" href="__CSS__/media.css" type="text/css">
-
 		<script type="text/javascript">
 			jQuery(document).ready(function($) {
 				$(".scroll").click(function(event){		
@@ -32,7 +22,6 @@
 		 <!---- start-smoth-scrolling---->
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-
 		<!----start-top-nav-script---->
 		<script>
 			$(function() {
@@ -55,172 +44,86 @@
 	</head>
 	<body>
 		<!----- start-header---->
-			<div id="home" class="header">
-					<div class="top-header">
-						<div class="container">
-						<div class="logo">
-							<a href="index.html"><span>去野</span>Journey<span>...</span></a>
+		<div id="home" class="header">
+			<div class="top-header">
+				<div class="container">
+					<div class="logo">
+						<a href="index.html"><span>去野</span>Journey<span>...</span></a>
+					</div>
+					<!----start-top-nav---->
+					<nav class="top-nav">
+						<ul class="top-nav">
+							<li class="active"><a href="{:url('index/index/index')}">首页home</a></li>
+							<li><a href="menu.html">目的地locations</a></li>
+							<li><a href="{:url('story/story/story')}">故事storys</a></li>
+							<li><a href="news.html"> 登录</a></li>
+							<li><a href="reviews.html">注册</a></li>
+						</ul>
+						<a href="#" id="pull"><img src="__STATIC__/images/nav-icon.png" title="menu" /></a>
+					</nav>
+					<div class="clearfix"> </div>
+				</div>
+			</div>
+		</div>
+			<!----- //End-header---->
+			<!----- menu-page ----->
+			<div class="news">
+				<!------ menu-header ----->
+				<div class="news-header">
+					<div class="container">
+						<h1><span>Tourister</span> Storys</h1>
+					</div>
+				</div>
+				<!------ menuheader ----->
+			<div class="clearfix"> </div>
+			<!----- reservation ---->
+			<div class="News-page">
+				<div class="container">
+					<h2><span> </span>&nbsp;&nbsp;&nbsp;&nbsp;故事Storys &nbsp;<span> </span></h2>
+					<p>Tourister Latest-Storys </p>
+				<!----- recent-news ----->		
+				<div class="recent-news">
+					<div class="recent-news-grid" style="cursor:pointer" onclick="window.open('{:url(\'index/index/index\')}')">
+						<div class="recent-news-grid-left">
+							<a href="#"><img src="__STATIC__/images/d1.jpg" title="name" /></a>
 						</div>
-						<!----start-top-nav---->
-						 <nav class="top-nav">
-							<ul class="top-nav">
-								<li class="active"><a href="{:url('index/index/index')}">首页home</a></li>
-								<li><a href="menu.html">目的地locations</a></li>
-								<li><a href="{:url('story/story/story')}">故事story</a></li>
-								<li><a href="news.html"> 登录</a></li>
-								<li><a href="reviews.html">注册</a></li>
-							</ul>
-							<a href="#" id="pull"><img src="__STATIC__/images/nav-icon.png" title="menu" /></a>
-						</nav>
+						<div class="recent-news-grid-right">
+							<h2>南京聚宝山走一遭，便是一个春天了。</h2>
+							<p>要说南京这座城市，虽然没有那么四季分明，但一年四季都有它独特的样子，自然我最爱的还是春天。</p>
+							<p>春天是相机最忙的季节，三月中旬的时候南京便成了花的海洋。南京最出名的赏花地莫过于鸡鸣寺的樱花大道，明孝陵的梅花山或者是南理工的二月兰，但每个地方在晴好的周末都会被汹涌的人流包围，那阵势俨然成了“花赏人”。</p>
+							<p></p>
+						</div>
 						<div class="clearfix"> </div>
 					</div>
-				</div>
-			</div>
-			<!----- //End-header---->
-			<!----- banner ---->
-			<div id="myCarousel" class="carousel slide text-center">
-				<!-- 轮播（Carousel）指标 -->
-				<ol class="carousel-indicators">
-					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-					<li data-target="#myCarousel" data-slide-to="1"></li>
-					<li data-target="#myCarousel" data-slide-to="2"></li>
-				</ol>
-				<!-- 轮播（Carousel）项目 -->
-				<div class="carousel-inner">
-					<div class="item active">
-						<img src="__STATIC__/images/banner.jpg" alt="">
-					</div>
-					<div class="item">
-						<img src="__STATIC__/images/banner1.jpg">
-					</div>
-					<div class="item">
-						<img src="__STATIC__/images/banner2.jpg">
-					</div>
-				</div>
-				<!-- 轮播（Carousel）导航 -->
-				<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-					<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-					<span class="sr-only">Previous</span>
-				</a>
-				<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-					<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-					<span class="sr-only">Next</span>
-				</a>
-			</div>
-			<!----- banner ---->
-			<!----- search ---->
-			<div class="search-group">
-				<ul>
-					<li >
-						<input class="tab-select" type="radio" name="type" title="全部"/>
-						<i>全部</i>
-					</li>
-					<li>
-						<input class="tab-select" type="radio" name="type"  title="目的地"/>
-						<i>目的地</i>
-					</li>
-					<li>
-						<input class="tab-select" type="radio" name="type"  title="酒店"/>
-						<i>酒店</i>
-					</li>
-				</ul>
-				<div>
-					<input class="search" type="text" />
-					<button class="btn btn-inverse btn-search"></button>
-				</div>
-
-			</div>
-			<!----- search ---->
-			<!----- menu ---->
-			<div class="menu">
-				<div class="container">
-					<div class="menu-head text-center">
-						<h3><span>目的地</span></h3>
-					</div>
-				</div>
-				<!----- main-menus ----->
-				<div class="main-menus">
-					<div class="container">
-					<div class="menus-left col-md-6">
-						<div class="jq22-container">
-
-							<div class="video-back">
-								<video poster="__STATIC__/images/g2.jpg" autoplay muted loop class="vidbacking">
-									<source src="__STATIC__/media/mp4_video_1.3gp" type="video/mp4">
-								</video>
-							</div>
+					<div class="recent-news-grid">
+						<div class="recent-news-grid-left">
+							<a href="#"><img src="__STATIC__/images/d2.jpg" title="name" /></a>
 						</div>
+						<div class="recent-news-grid-right">
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque aliquam at lectus sed imperdiet. Vestibulum scelerisque fermentum lorem vitae condimentum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed ultricies dapibus nibh, in vehicula tortor aliquam id. Nunc id laoreet sem, ac bibendum lectus.</p>
+							<p>Cras hendrerit lectus non enim vulputate, eget ornare lectus tincidunt. Quisque at est cursus lectus aliquet sagittis sed id lacus. Vivamus eu adipiscing enim</p>
+						</div>
+						<div class="clearfix"> </div>
 					</div>
-					<div class="menus-right col-md-6">
-						<div class="menus-left-grid">
-							<div class="item">
-								<h3>凤凰古城Fenghuanggucheng</h3>
-								<span>自然与人文完美结合的旅程</span>
-							</div>
-							<div class="item-line">
-								<span> </span>
-							</div>
-							<div class="item-price">
-								<label><a>Go</a></label>
-							</div>
-							<div class="clearfix"> </div>
+					<div class="recent-news-grid">
+						<div class="recent-news-grid-left">
+							<a href="#"><img src="__STATIC__/images/d3.jpg" title="name" /></a>
 						</div>
-						<div class="menus-left-grid">
-							<div class="item">
-								<h3>上海迪士尼Disney</h3>
-								<span>点亮心中的奇梦</span>
-							</div>
-							<div class="item-line">
-								<span> </span>
-							</div>
-							<div class="item-price">
-                                <label><a>Go</a></label>
-							</div>
-							<div class="clearfix"> </div>
+						<div class="recent-news-grid-right">
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque aliquam at lectus sed imperdiet. Vestibulum scelerisque fermentum lorem vitae condimentum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed ultricies dapibus nibh, in vehicula tortor aliquam id. Nunc id laoreet sem, ac bibendum lectus.</p>
+							<p>Cras hendrerit lectus non enim vulputate, eget ornare lectus tincidunt. Quisque at est cursus lectus aliquet sagittis sed id lacus. Vivamus eu adipiscing enim</p>
 						</div>
-						<div class="menus-left-grid">
-							<div class="item">
-								<h3>响沙湾Sand Bay</h3>
-								<span>中国沙漠度假地</span>
-							</div>
-							<div class="item-line">
-								<span> </span>
-							</div>
-							<div class="item-price">
-                                <label><a>Go</a></label>
-							</div>
-							<div class="clearfix"> </div>
-						</div>
-						<div class="menus-left-grid">
-							<div class="item">
-								<h3>西北Xibei</h3>
-								<span>唯美国度 丝路圣地</span>
-							</div>
-							<div class="item-line">
-								<span> </span>
-							</div>
-							<div class="item-price">
-                                <label><a>Go</a></label>
-							</div>
-							<div class="clearfix"> </div>
-						</div>
-                        <!----- load- more-items ----->
-                        <a class="loadmore" href="#">load more<label><span> </span></label></a>
-                        <!----- load- more-items ----->
+						<div class="clearfix"> </div>
 					</div>
 					<div class="clearfix"> </div>
-				
-
+					<a class="news-btn" href="#">View all News</a>
 				</div>
+				<!----- recent-news ----->		
 				</div>
-				<!----- main-menus ----->
-			</div>
-			<div class="clearfix"> </div>
-			<!----- menu ---->
 			<!----- fearuted-diesh ----->
 			<div class="fearuted-diesh">
 				<div class="container">
-					<h3>酒店Hotel<span> </span></h3>
+					<h3>Featured Locations<span> </span></h3>
 					<!----sreen-gallery-cursual---->
 						<div class="sreen-gallery-cursual">
 							 <!-- requried-jsfiles-for owl -->
@@ -342,7 +245,7 @@
 					                				<span class="item-rate"> </span>
 					                			</div>
 					                			<div class="item-info-right">
-					                				<label>$214</label>
+					                				<label>$124</label>
 					                			</div>
 					                			<div class="clearfix"> </div>
 					                		</div>
@@ -389,78 +292,11 @@
 						<!--//sreen-gallery-cursual---->
 				</div>
 			</div>
-			<!----- fearuted-diesh ----->
-			<!----- gallery ----->
-			<div class="gallery">
-				<div class="container">
-					<h3>热门故事Story</h3>
-					<div class="gallery-grids">
-						<div class="gallery-grids-left">
-							<div class="gallery-grid-left">
-								<img src="__STATIC__/images/g1.jpg" title="name" />
-								<div class="gallery-grid-left-caption">
-									<h4>Place Name</h4>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi convallis, mi ac placerat iaculis, nulla sem eleifend felis, sed ullamcorper augue massa in</p>
-									<a class="more" href="#">ReadMore</a>
-								</div>
-							</div>
-							<div class="clearfix"> </div>
-						</div>
-						<!----->
-						<div class="gallery-grids-right">
-							<div class="gallery-grids-right-top">
-								<div class="gallery-grids-right-top-grid">
-									<div class="gallery-grids-right-top-grid-pic">
-										<img src="__STATIC__/images/g2.jpg" title="name" />
-									</div>
-									<div class="gallery-grids-right-top-grid-caption">
-										<h4>Place Name</h4>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi convallis, mi ac placerat iaculis, nulla sem eleifend felis, sed ullamcorper augue massa in</p>
-										<a class="more" href="reservation.html">ReadMore</a>
-									</div>
-								</div>
-								<div class="gallery-grids-right-top-grid">
-									<div class="gallery-grids-right-top-grid-pic">
-										<img src="__STATIC__/images/g3.jpg" title="name" />
-									</div>
-									<div class="gallery-grids-right-top-grid-caption">
-										<h4>Place Name</h4>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi convallis, mi ac placerat iaculis, nulla sem eleifend felis, sed ullamcorper augue massa in</p>
-										<a class="more" href="reservation.html">ReadMore</a>
-									</div>
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-							<!----->
-							<div class="gallery-grids-right-bottom">
-								<div class="gallery-grids-right-top-grid">
-									<div class="gallery-grids-right-top-grid-pic">
-										<img src="__STATIC__/images/g4.jpg" title="name" />
-									</div>
-									<div class="gallery-grids-right-top-grid-caption">
-										<h4>Place Name</h4>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi convallis, mi ac placerat iaculis, nulla sem eleifend felis, sed ullamcorper augue massa in</p>
-										<a class="more" href="reservation.html">ReadMore</a>
-									</div>
-								</div>
-								<div class="gallery-grids-right-top-grid">
-									<div class="gallery-grids-right-top-grid-pic">
-										<img src="__STATIC__/images/g5.jpg" title="name" />
-									</div>
-									<div class="gallery-grids-right-top-grid-caption">
-										<h4>Place Name</h4>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi convallis, mi ac placerat iaculis, nulla sem eleifend felis, sed ullamcorper augue massa in</p>
-										<a class="more" href="reservation.html">ReadMore</a>
-									</div>
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-				</div>
 			</div>
-			<!----- gallery ----->
+			</div>
+			</div>
+			<!----- fearuted-diesh ----->
+			<!----- End-Menu-page ----->
 			<!----- footer ----->
 			<div class="footer">
 				<div class="container">
@@ -499,6 +335,5 @@
 			<!----- footer ----->
 	
 </body>
-	<script src="__JS__/jquery.vidbacking.js" type="text/javascript"></script>
 </html>
 
