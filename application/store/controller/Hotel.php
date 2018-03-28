@@ -2,7 +2,7 @@
 namespace app\store\controller;
 
 use think\Controller;
-use think\Request;
+
 
 class Hotel extends Controller
 {
@@ -30,9 +30,10 @@ class Hotel extends Controller
         //input获取参数在tp框架中可以自动过滤xss攻击和sql注入等
         $cityChoice=input('?post.cityChoice')?input('post.cityChoice'):'';
         $hotelChoice=input('?post.hotelChoice')?input('?post.hotelChoice'):'';
-        $url=http://api.shujuzhihui.cn/api/hotel/search;
-        $allHotelMessage=curl->curlHttp($url,$type='GET',$data='hotalName');
-
+        $gethotel=new \ curl();
+        $data=[];
+        $result=$gethotel->curlHttp("http://api.shujuzhihui.cn/api/hotel/search",'POST',["appKey"=>"2535ac5bbec441548fa9e57834a3fc49"]);
+       var_dump($result);
 
     }
 
