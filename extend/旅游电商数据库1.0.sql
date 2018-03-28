@@ -59,7 +59,7 @@ create table if not exists store_info
 -- 添加商店名字的唯一索引
 ALTER TABLE `store_info` ADD UNIQUE INDEX `sda` (`store_name`) USING BTREE ;
 -- 添加商店手机id的唯一索引
-ALTER TABLE `store_info` ADD UNIQUE INDEX `sda` (`store_phone`) USING BTREE ;
+ALTER TABLE `store_info` ADD UNIQUE INDEX `sda2` (`store_phone`) USING BTREE ;
 -- 添加商店名字的符合索引(查询索引)/手机邮箱
 ALTER TABLE `store_info` ADD INDEX `sad1` (`store_name`) USING BTREE ;
 -- 商家 广告
