@@ -73,6 +73,7 @@ create table if not exists store_info
 	store_id int primary key auto_increment,-- 自增ID
 	store_name char(12) , -- 商家名字
 	store_state enum('F','T','S') default 'F' , -- 商家状态 F 未审核； T审核通过； S 被锁定 
+	store_image varchar(100) ,
 	store_phone char(11),-- 商家绑定手机
 	store_apply_time  datetime, -- 申请时间
 	store_province_id INT,
@@ -123,7 +124,7 @@ create table if not exists user_chat
 (
 	user_chat_id int primary key auto_increment ,
 	user_uid char(20) ,
-	user_chat_char_two_id int ,
+	user_chat_char_two_id char(20) ,
 	user_chat_type enum('A','B','C','D','E','F') default 'A' ,
 	user_chat_obj enum('F','T') default 'F' ,
 	user_chat_content varchar(100) ,
@@ -132,6 +133,7 @@ create table if not exists user_chat
 	-- foreign key() references table() 
 ) ;
 
+ALTER TABLE `user_chat` ADD INDEX `user_chat_1` (`user_uid`,`user_chat_char_two_id`) USING BTREE ;
 
 
 
