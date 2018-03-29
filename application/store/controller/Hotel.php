@@ -2,7 +2,7 @@
 namespace app\store\controller;
 
 use think\Controller;
-
+use think\db;
 
 class Hotel extends Controller
 {
@@ -15,7 +15,10 @@ class Hotel extends Controller
      **/
     public function hotel()
     {
-
+        //数据库查询到所有酒店
+        $gethotel=db('store_shotel')->where([])->select();
+        //导出酒店数组到页面
+        $this->assign("hotel",$gethotel);
         return $this->fetch();
     }
     /**
@@ -30,10 +33,12 @@ class Hotel extends Controller
         //input获取参数在tp框架中可以自动过滤xss攻击和sql注入等
         $cityChoice=input('?post.cityChoice')?input('post.cityChoice'):'';
         $hotelChoice=input('?post.hotelChoice')?input('?post.hotelChoice'):'';
-        $gethotel=new \ curl();
-        $data=[];
-        $result=$gethotel->curlHttp("http://api.shujuzhihui.cn/api/hotel/search",'POST',["appKey"=>"2535ac5bbec441548fa9e57834a3fc49"]);
-       var_dump($result);
+        //调接口获取数据
+//        $gethotel=new \ curl();
+//        $data=[];
+//        $result=$gethotel->curlHttp("http://api.shujuzhihui.cn/api/hotel/search",'POST',["appKey"=>"2535ac5bbec441548fa9e57834a3fc49"]);
+//       var_dump($result);
+
 
     }
 

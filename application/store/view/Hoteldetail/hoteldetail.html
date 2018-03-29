@@ -28,8 +28,6 @@
 </script>
 <!---- start-smoth-scrolling---->
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-</script>
 <!----start-top-nav-script---->
 <script>
 $(function() {
@@ -97,16 +95,17 @@ $(function() {
     <div class="container topHotel">首页>酒店>酒店详情>威尼斯酒店</div>
     <!----- 酒店详情内容 ---->
     <div class="container hdAll">
-        <div style="background-color: #eee; width: 1153px;  height: 75px;">
-            <h2><span> </span>&nbsp;&nbsp;&nbsp;&威尼斯  酒店 &nbsp;<span> </span></h2>
-            <h4><span>酒店地址：福建省福州市鼓楼区湖前路97路</span></h4>
+        {volist name="nowHotel" id="vo"}
+            <div style="background-color: #eee; width: 1153px;  height: 75px;">
+            <h2><span> </span>&nbsp;&nbsp;&nbsp;& {$vo.hName}&nbsp;<span> </span></h2>
+            <h4><span>酒店地址：{$vo.hAddress}</span></h4>
         </div>
-        <div class="row">
+            <div class="row">
             <div class="col-lg-9">
                 <div class="item" style="height: 400px">
                     <div class="item-grid">
                         <div class="item-pic" style="width: 850px;height: 400px">
-                            <img src="__STATIC__/images/d1.jpg" title="dish-name" style="height: 400px"/>
+                            <img src="__STATIC__/images/{$vo.hImg}" title="dish-name" style="height: 400px"/>
                         </div>
                     </div>
                 </div>
@@ -124,13 +123,13 @@ $(function() {
                 </div>
             </div>
         </div>
-
+        {/volist}
         <div><img src="" alt=""></div>
     </div>
     <!----- 酒店小图片轮播 ----->
     <div class="fearuted-diesh">
         <div class="container">
-            <h4>更多酒店图片详情<span></span></h4>
+            <h4 style="margin-top: 30px">更多酒店图片详情<span></span></h4>
             <!----sreen-gallery-cursual---->
             <div class="sreen-gallery-cursual" style="padding: 0px 0px 0px 0px;">
                 <!-- requried-jsfiles-for owl -->
