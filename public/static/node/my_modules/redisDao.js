@@ -11,7 +11,14 @@ function Redis()
     this.getData('redis','link',function(rows){
         console.log(rows) ;
     }) ;
+
+    // 引入mysql模块
+    this.adapter = require("./MySql.js") ;
+
 }
+
+
+
 /**
  * 功能描述：发送聊天内容
  * 参数：( 'h'/存到哪一行, 'key1'/存在哪一列, 'data'/存储的数据 )
@@ -75,6 +82,6 @@ Redis.prototype.getData = function( h ,key ,callback )
 
 
 
-module.exports = new Redis();
+module.exports = new Redis() ;
 
 
