@@ -3,7 +3,27 @@
 -- use travel;
 -- 
 
+#地区表
 
+-- ----------------------------
+-- Table structure for hy_area
+-- ----------------------------
+-- DROP TABLE IF EXISTS `hy_area`;
+create table if not exists `hy_area` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `pid` int(11) DEFAULT NULL COMMENT '父id',
+  `shortname` varchar(100) DEFAULT NULL COMMENT '简称',
+  `name` varchar(100) DEFAULT NULL COMMENT '名称',
+  `merger_name` varchar(255) DEFAULT NULL COMMENT '全称',
+  `level` tinyint(4) DEFAULT NULL COMMENT '层级 0 1 2 省市区县',
+  `pinyin` varchar(100) DEFAULT NULL COMMENT '拼音',
+  `code` varchar(100) DEFAULT NULL COMMENT '长途区号',
+  `zip_code` varchar(100) DEFAULT NULL COMMENT '邮编',
+  `first` varchar(50) DEFAULT NULL COMMENT '首字母',
+  `lng` varchar(100) DEFAULT NULL COMMENT '经度',
+  `lat` varchar(100) DEFAULT NULL COMMENT '纬度',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3750 DEFAULT CHARSET=utf8;
 
 -- 普通用户表 
 -- id 自增id
@@ -29,7 +49,9 @@ create table if not exists user_user
 	user_email VARCHAR(40) ,
 	user_phone char(11) ,
 	user_image varchar(100) ,
-	user_time int ,
+	user_sex enum("男",'女') default'男' ,
+	user_birthday datetime ,
+	user_time datetime ,
 	user_msg varchar(100) 
 ) ;
 -- 添加账号的唯一索引
@@ -40,7 +62,7 @@ ALTER TABLE `user_user` ADD INDEX `sad` (`user_uid`,`user_password`) USING BTREE
 -- ALTER TABLE `user_user` ADD INDEX `sad1` (`user_email`) USING BTREE ;
 -- ALTER TABLE `user_user` ADD INDEX `sad2` (`user_phone`) USING BTREE ;
 insert into user_user( user_uid ,user_name ,user_password ,user_email ,user_phone ,user_image ,user_msg ,user_time )values
-( 'test' , '测试用', md5('123456'), '', '', '', '',(unix_timestamp(now())) ) ;
+( 'test' , '测试用', md5('123456'), '', '15324488756', '', 'test',now()  ) ;
 
 -- 商家信息表
 
@@ -51,13 +73,17 @@ create table if not exists store_info
 	store_id int primary key auto_increment,-- 自增ID
 	store_name char(12) , -- 商家名字
 	store_state enum('F','T','S') default 'F' , -- 商家状态 F 未审核； T审核通过； S 被锁定 
+	store_image varchar(100) ,
 	store_phone char(11),-- 商家绑定手机
 	store_apply_time  datetime, -- 申请时间
-	store_province_id SMALLINT,
-	store_city_id SMALLINT,
-	store_town_id SMALLINT,
-	store_address_detail varchar(50)
-	-- foreign key() references table() 
+	store_province_id INT,
+	store_city_id INT,
+	store_town_id INT,
+	store_address_detail varchar(50),
+	store_textarea text, 
+	foreign key(store_province_id) references `hy_area`(id), 
+	foreign key(store_province_id) references `hy_area`(id), 
+	foreign key(store_province_id) references `hy_area`(id) 
 ) ;
 -- 添加商店名字的唯一索引
 ALTER TABLE `store_info` ADD UNIQUE INDEX `sda` (`store_name`) USING BTREE ;
@@ -65,6 +91,7 @@ ALTER TABLE `store_info` ADD UNIQUE INDEX `sda` (`store_name`) USING BTREE ;
 ALTER TABLE `store_info` ADD UNIQUE INDEX `sda2` (`store_phone`) USING BTREE ;
 -- 添加商店名字的符合索引(查询索引)/手机邮箱
 ALTER TABLE `store_info` ADD INDEX `sad1` (`store_name`) USING BTREE ;
+INSERT INTO `qdm181738524_db`.`store_info`(`store_id`, `store_name`, `store_state`, `store_phone`, `store_apply_time`, `store_province_id`, `store_city_id`, `store_town_id`, `store_address_detail`, `store_textarea`) VALUES (1, '13255917292', 'F', '13255917292', '2018-03-28 19:41:23', 1964, 1965, 1966, '13255917292', '似懂非懂斯蒂芬萨芬 ');
 -- 商家 广告
 -- id 自增id
 -- name 广告名
@@ -79,12 +106,13 @@ create table if not exists store_advert
 	store_adv_url  varchar(100),
 	store_adv_link varchar(50),
 	user_uid int, 
+	user_state enum('F','T','S') default 'F' , -- 广告状态 F 未审核； T审核通过； S 被锁定 
 	foreign key(user_uid) references store_info(store_id) 
 ) ;
 -- 添加账号的唯一索引/ 广告名
 ALTER TABLE `store_advert` ADD UNIQUE INDEX `sdaa` (`store_adv_name`) USING BTREE ;
 
--- 店家聊天记录
+-- 聊天记录表
 -- （店家/用户）A/（店家/客服）B/（客服/用户）C/（店家/店家）D/（用户/用户）E/（客服/客服）F 聊天记录
 -- id 自增id
 -- 用户id
@@ -98,7 +126,7 @@ create table if not exists user_chat
 (
 	user_chat_id int primary key auto_increment ,
 	user_uid char(20) ,
-	user_chat_char_two_id int ,
+	user_chat_char_two_id char(20) ,
 	user_chat_type enum('A','B','C','D','E','F') default 'A' ,
 	user_chat_obj enum('F','T') default 'F' ,
 	user_chat_content varchar(100) ,
@@ -107,6 +135,7 @@ create table if not exists user_chat
 	-- foreign key() references table() 
 ) ;
 
+ALTER TABLE `user_chat` ADD INDEX `user_chat_1` (`user_uid`,`user_chat_char_two_id`) USING BTREE ;
 
 
 
@@ -177,27 +206,7 @@ create table if not exists store_hotelOrder(
 
 
 
-#地区表
 
--- ----------------------------
--- Table structure for hy_area
--- ----------------------------
--- DROP TABLE IF EXISTS `hy_area`;
-create table if not exists `hy_area` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `pid` int(11) DEFAULT NULL COMMENT '父id',
-  `shortname` varchar(100) DEFAULT NULL COMMENT '简称',
-  `name` varchar(100) DEFAULT NULL COMMENT '名称',
-  `merger_name` varchar(255) DEFAULT NULL COMMENT '全称',
-  `level` tinyint(4) DEFAULT NULL COMMENT '层级 0 1 2 省市区县',
-  `pinyin` varchar(100) DEFAULT NULL COMMENT '拼音',
-  `code` varchar(100) DEFAULT NULL COMMENT '长途区号',
-  `zip_code` varchar(100) DEFAULT NULL COMMENT '邮编',
-  `first` varchar(50) DEFAULT NULL COMMENT '首字母',
-  `lng` varchar(100) DEFAULT NULL COMMENT '经度',
-  `lat` varchar(100) DEFAULT NULL COMMENT '纬度',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3750 DEFAULT CHARSET=utf8;
 
 
 

@@ -1,0 +1,15 @@
+body{
+    background-color: rgba(102, 102, 102, 0.21);
+}
+.left_style{
+    border: 1px solid silver;
+    background-color: white;
+}
+.right_style{
+    border: 1px solid silver;
+    background-color: white;
+}
+.personInfo{
+    width: 100%;
+    resize:none;
+}

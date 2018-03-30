@@ -6,7 +6,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<!--禁止用户对页面进行缩放，让页面更加接近原生APP的效果，滚轮为1：1-->
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Home</title>
+		<title>去野 身临其境方知奥妙</title>
 		<link href="__CSS__/bootstrap.css" rel='stylesheet' type='text/css' />
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="__JS__/jquery.min.js"></script>
@@ -16,8 +16,10 @@
    		 <!---- start-smoth-scrolling---->
 		<script type="text/javascript" src="__JS__/move-top.js"></script>
 		<script type="text/javascript" src="__JS__/easing.js"></script>
+        <script src="__JS__/bootstrap.min.js"></script>
 		<!--视频广告插件-->
-		<script src="http://www.lanrenzhijia.com/ajaxjs/three.min.js"></script>
+		<link rel="stylesheet" href="__CSS__/jquery.vidbacking.css" type="text/css">
+		<link rel="stylesheet" href="__CSS__/media.css" type="text/css">
 
 		<script type="text/javascript">
 			jQuery(document).ready(function($) {
@@ -54,26 +56,26 @@
 	<body>
 		<!----- start-header---->
 			<div id="home" class="header">
-			<div class="top-header">
-				<div class="container">
-					<div class="logo">
-						<a href="index.html"><span>去野</span>Journey<span>...</span></a>
+					<div class="top-header">
+						<div class="container">
+						<div class="logo">
+							<a href="index.html"><span>去野</span>Journey<span>...</span></a>
+						</div>
+						<!----start-top-nav---->
+						 <nav class="top-nav">
+							<ul class="top-nav">
+								<li class="active"><a href="{:url('index/index/index')}">首页home</a></li>
+								<li><a href="menu.html">目的地locations</a></li>
+								<li><a href="{:url('story/story/story')}">故事story</a></li>
+								<li><a href="news.html"> 登录</a></li>
+								<li><a href="reviews.html">注册</a></li>
+							</ul>
+							<a href="#" id="pull"><img src="__STATIC__/images/nav-icon.png" title="menu" /></a>
+						</nav>
+						<div class="clearfix"> </div>
 					</div>
-					<!----start-top-nav---->
-					<nav class="top-nav">
-						<ul class="top-nav">
-							<li class="active"><a href="index.html">首页home</a></li>
-							<li><a href="menu.html">目的地locations</a></li>
-							<li><a href="reservation.html">故事story</a></li>
-							<li><a href="news.html"> 登录</a></li>
-							<li><a href="reviews.html">注册</a></li>
-						</ul>
-						<a href="#" id="pull"><img src="__STATIC__/images/nav-icon.png" title="menu" /></a>
-					</nav>
-					<div class="clearfix"> </div>
 				</div>
 			</div>
-		</div>
 			<!----- //End-header---->
 			<!----- banner ---->
 			<div id="myCarousel" class="carousel slide text-center">
@@ -87,24 +89,9 @@
 				<div class="carousel-inner">
 					<div class="item active">
 						<img src="__STATIC__/images/banner.jpg" alt="">
-						<div class="banner text-center">
-							<div class="container">
-								<div class="banner-info">
-									<h1>This Tourister Is Awesome</h1>
-									<!--<h2><label> </label>Tourister bootstrap framework website template<label> </label></h2>-->
-								</div>
-							</div>
-				</div>
 					</div>
 					<div class="item">
 						<img src="__STATIC__/images/banner1.jpg">
-						<div class="banner text-center">
-							<div class="container">
-								<div class="banner-info">
-									<h1>My way,on my way</h1>
-								</div>
-							</div>
-						</div>
 					</div>
 					<div class="item">
 						<img src="__STATIC__/images/banner2.jpg">
@@ -120,7 +107,30 @@
 					<span class="sr-only">Next</span>
 				</a>
 			</div>
-		<!----- banner ---->
+			<!----- banner ---->
+			<!----- search ---->
+			<div class="search-group">
+				<ul>
+					<li >
+						<input class="tab-select" type="radio" name="type" title="全部"/>
+						<i>全部</i>
+					</li>
+					<li>
+						<input class="tab-select" type="radio" name="type"  title="目的地"/>
+						<i>目的地</i>
+					</li>
+					<li>
+						<input class="tab-select" type="radio" name="type"  title="酒店"/>
+						<i>酒店</i>
+					</li>
+				</ul>
+				<div>
+					<input class="search" type="text" />
+					<button class="btn btn-inverse btn-search"></button>
+				</div>
+
+			</div>
+			<!----- search ---->
 			<!----- menu ---->
 			<div class="menu">
 				<div class="container">
@@ -132,258 +142,75 @@
 				<div class="main-menus">
 					<div class="container">
 					<div class="menus-left col-md-6">
-						<video id="video" autoplay style="display:none">
-							<source src="http://demo.lanrenzhijia.com/2015/video0114/images/sintel.mp4" codecs="avc1.42E01E, mp4a.40.2"'>
-							<source src="http://demo.lanrenzhijia.com/2015/video0114/images/sintel.ogv" codecs="theora, vorbis"'>
-						</video>
-						<script>
-                            var AMOUNT = 100;
-                            var container;
-                            var camera, scene, renderer;
-                            var video, image, imageContext,
-                                imageReflection, imageReflectionContext, imageReflectionGradient,
-                                texture, textureReflection;
-                            var mesh;
-                            var mouseX = 0;
-                            var mouseY = 0;
-                            var windowHalfX = window.innerWidth / 2;
-                            var windowHalfY = window.innerHeight / 2;
-                            init();
-                            animate();
-                            function init() {
-                                container = document.createElement('div');
-                                document.body.appendChild(container);
-                                var info = document.createElement('div');
-                                info.style.position = 'absolute';
-                                info.style.top = '10px';
-                                info.style.width = '100%';
-                                info.style.textAlign = 'center';
-								// info.innerHTML = '欢迎访问<a href="http://www.lanrenzhijia.com" target="_blank">懒人之家</a> ';
-								container.appendChild(info);
-                                camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 10000);
-                                camera.position.z = 1000;
-                                //camera.position.y = 200;
-                                scene = new THREE.Scene();
-                                video = document.getElementById('video');
-                                image = document.createElement('canvas');
-                                image.width = 480;
-                                image.height = 204;
-                                imageContext = image.getContext('2d');
-                                imageContext.fillStyle = '#000000';
-                                imageContext.fillRect(0, 0, 480, 204);
-                                texture = new THREE.Texture(image);
-                                texture.minFilter = THREE.LinearFilter;
-                                texture.magFilter = THREE.LinearFilter;
-                                var material = new THREE.MeshBasicMaterial({
-                                    map: texture,
-                                    overdraw: true
-                                });
-                                imageReflection = document.createElement('canvas');
-                                imageReflection.width = 480;
-                                imageReflection.height = 204;
-                                imageReflectionContext = imageReflection.getContext('2d');
-                                imageReflectionContext.fillStyle = '#000000';
-                                imageReflectionContext.fillRect(0, 0, 480, 204);
-                                imageReflectionGradient = imageReflectionContext.createLinearGradient(0, 0, 0, 204);
-                                imageReflectionGradient.addColorStop(0.2, 'rgba(240, 240, 240, 1)');
-                                imageReflectionGradient.addColorStop(1, 'rgba(240, 240, 240, 0.8)');
-                                textureReflection = new THREE.Texture(imageReflection);
-                                textureReflection.minFilter = THREE.LinearFilter;
-                                textureReflection.magFilter = THREE.LinearFilter;
-                                var materialReflection = new THREE.MeshBasicMaterial({
-                                    map: textureReflection,
-                                    side: THREE.BackSide,
-                                    overdraw: true
-                                });
-                                //
-                                var plane = new THREE.PlaneGeometry(480, 204, 4, 4);
-                                mesh = new THREE.Mesh(plane, material);
-                                mesh.scale.x = mesh.scale.y = mesh.scale.z = 1.5;
-                                scene.add(mesh);
-                                mesh = new THREE.Mesh(plane, materialReflection);
-                                mesh.position.y = -306;
-                                mesh.rotation.x = -Math.PI;
-                                mesh.scale.x = mesh.scale.y = mesh.scale.z = 1.5;
-                                scene.add(mesh);
-                                //
-                                var separation = 50;
-                                var amountx = 10;
+						<div class="jq22-container">
 
-                                var amounty = 10;
-
-                                var PI2 = Math.PI * 2;
-
-                                var material = new THREE.ParticleCanvasMaterial({
-
-                                    color: 0x0808080,
-
-                                    program: function(context) {
-
-                                        context.beginPath();
-
-                                        context.arc(0, 0, 1, 0, PI2, true);
-
-                                        context.closePath();
-
-                                        context.fill();
-
-                                    }
-
-                                });
-
-                                for (var ix = 0; ix < amountx; ix++) {
-
-                                    for (var iy = 0; iy < amounty; iy++) {
-
-                                        particle = new THREE.Particle(material);
-
-                                        particle.position.x = ix * separation - ((amountx * separation) / 2);
-
-                                        particle.position.y = -153
-
-                                        particle.position.z = iy * separation - ((amounty * separation) / 2);
-
-                                        scene.add(particle);
-
-                                    }
-
-                                }
-
-                                renderer = new THREE.CanvasRenderer();
-
-                                renderer.setSize(window.innerWidth, window.innerHeight);
-
-                                container.appendChild(renderer.domElement);
-
-                                document.addEventListener('mousemove', onDocumentMouseMove, false);
-
-                                //
-
-                                window.addEventListener('resize', onWindowResize, false);
-
-                            }
-
-                            function onWindowResize() {
-
-									windowHalfX = window.innerWidth / 2;
-
-                                windowHalfY = window.innerHeight / 2;
-
-                                camera.aspect = window.innerWidth / window.innerHeight;
-
-                                camera.updateProjectionMatrix();
-
-                                renderer.setSize(window.innerWidth, window.innerHeight);
-
-                            }
-
-                            function onDocumentMouseMove(event) {
-
-                                mouseX = (event.clientX - windowHalfX);
-
-                                mouseY = (event.clientY - windowHalfY) * 0.2;
-
-                            }
-
-                            //
-
-                            function animate() {
-
-                                requestAnimationFrame(animate);
-
-                                render();
-
-                            }
-
-                            function render() {
-
-                                camera.position.x += (mouseX - camera.position.x) * 0.05;
-
-                                camera.position.y += ( - mouseY - camera.position.y) * 0.05;
-
-                                camera.lookAt(scene.position);
-
-                                if (video.readyState === video.HAVE_ENOUGH_DATA) {
-
-                                    imageContext.drawImage(video, 0, 0);
-
-                                    if (texture) texture.needsUpdate = true;
-
-                                    if (textureReflection) textureReflection.needsUpdate = true;
-
-                                }
-
-                                imageReflectionContext.drawImage(image, 0, 0);
-
-                                imageReflectionContext.fillStyle = imageReflectionGradient;
-
-                                imageReflectionContext.fillRect(0, 0, 480, 204);
-
-                                renderer.render(scene, camera);
-
-                            }
-						</script>
-						<!-- 代码部分end -->
+							<div class="video-back">
+								<video poster="__STATIC__/images/g2.jpg" autoplay muted loop class="vidbacking">
+									<source src="__STATIC__/media/mp4_video_1.3gp" type="video/mp4">
+								</video>
+							</div>
+						</div>
 					</div>
 					<div class="menus-right col-md-6">
 						<div class="menus-left-grid">
 							<div class="item">
-								<h3>Arcu pede enim justo.</h3>
-								<span>Tuna, Sweetcorn, Cheese.</span>
+								<h3>凤凰古城Fenghuanggucheng</h3>
+								<span>自然与人文完美结合的旅程</span>
 							</div>
 							<div class="item-line">
 								<span> </span>
 							</div>
 							<div class="item-price">
-								<label>$145</label>
+								<label><a>Go</a></label>
 							</div>
 							<div class="clearfix"> </div>
 						</div>
 						<div class="menus-left-grid">
 							<div class="item">
-								<h3>Cras dapibussemper nisi.</h3>
-								<span>Pineapple, Minced Beef, Cheese.</span>
+								<h3>上海迪士尼Disney</h3>
+								<span>点亮心中的奇梦</span>
 							</div>
 							<div class="item-line">
 								<span> </span>
 							</div>
 							<div class="item-price">
-								<label>$132</label>
+                                <label><a>Go</a></label>
 							</div>
 							<div class="clearfix"> </div>
 						</div>
 						<div class="menus-left-grid">
 							<div class="item">
-								<h3>Quam semper libero.</h3>
-								<span>Cheese, tomato, mushrooms, onions.</span>
+								<h3>响沙湾Sand Bay</h3>
+								<span>中国沙漠度假地</span>
 							</div>
 							<div class="item-line">
 								<span> </span>
 							</div>
 							<div class="item-price">
-								<label>$115</label>
+                                <label><a>Go</a></label>
 							</div>
 							<div class="clearfix"> </div>
 						</div>
 						<div class="menus-left-grid">
 							<div class="item">
-								<h3>Nam eget dui Etiam.</h3>
-								<span>Chicken, mozzarella cheese, onions.</span>
+								<h3>西北Xibei</h3>
+								<span>唯美国度 丝路圣地</span>
 							</div>
 							<div class="item-line">
 								<span> </span>
 							</div>
 							<div class="item-price">
-								<label>$135</label>
+                                <label><a>Go</a></label>
 							</div>
 							<div class="clearfix"> </div>
 						</div>
+                        <!----- load- more-items ----->
+                        <a class="loadmore" href="#">load more<label><span> </span></label></a>
+                        <!----- load- more-items ----->
 					</div>
 					<div class="clearfix"> </div>
 				
-				<!----- load- more-items ----->
-				<a class="loadmore" href="#">load more<label><span> </span></label></a>
-				<!----- load- more-items ----->
+
 				</div>
 				</div>
 				<!----- main-menus ----->
@@ -393,7 +220,7 @@
 			<!----- fearuted-diesh ----->
 			<div class="fearuted-diesh">
 				<div class="container">
-					<h3>Featured Locations<span> </span></h3>
+					<h3>酒店Hotel<span> </span></h3>
 					<!----sreen-gallery-cursual---->
 						<div class="sreen-gallery-cursual">
 							 <!-- requried-jsfiles-for owl -->
@@ -566,7 +393,7 @@
 			<!----- gallery ----->
 			<div class="gallery">
 				<div class="container">
-					<h3>The Gallery</h3>
+					<h3>热门故事Story</h3>
 					<div class="gallery-grids">
 						<div class="gallery-grids-left">
 							<div class="gallery-grid-left">
@@ -640,30 +467,30 @@
 					<div class="footer-grids">
 						<div class="col-md-3 footer-grid">
 							<p>
-								<span>New York tourister</span>
-								<span>3926 Anmoore Road</span>
-								<span>New York, NY 10014</span>
-								<span>718-749-1714</span>
+								<span>关于我们</span>
+								<span>关于去野</span>
+								<span><a class="line" href="{:url('store/Application/storeEnter')}">商家入驻</a></span>
+								<span>联系我们</span>
 							</p>
 						</div>
 						<div class="col-md-3 footer-grid">
 							<p>
-								<span>France tourister</span>
+								<span>China tourister</span>
 								<span>68, rue  de la Couronne</span>
 								<span>75002 PARIS</span>
-								<span>02.94.23.69.56</span>
+								<span>718-749-1714</span>
 							</p>
 						</div>
 						<div class="col-md-3 footer-grid">
 							<ul>
-								<li><a href="#">Blog</a></li>
-								<li><a href="#">Careers</a></li>
-								<li><a href="#">Privacy Policy</a></li>
-								<li><a href="contact.html">Contact</a></li>
+								<span>友情链接</span>
+								<li><a href="https://zh.airbnb.com">Airbnb爱彼迎</a></li>
+								<li><a href="http://www.booking.com">缤客</a></li>
+								<li><a href="http://www.mafengwo.cn/">马蜂窝</a></li>
 							</ul>
 						</div>
 						<div class="col-md-3 footer-grid copy-right">
-							<p>Copyright &copy; 2014.Company name All rights reserved.<a target="_blank" href="http://h2design.taobao.com/">氢设计</a></p>
+							<p>Copyright &copy; 2018.去野All rights reserved.</p>
 						</div>
 						<div class="clearfix"> </div>
 					</div>
@@ -672,6 +499,6 @@
 			<!----- footer ----->
 	
 </body>
-	<script src="__JS__/bootstrap.min.js"></script>
+	<script src="__JS__/jquery.vidbacking.js" type="text/javascript"></script>
 </html>
 

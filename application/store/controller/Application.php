@@ -17,10 +17,6 @@ class Application extends Controller
     public function storeEnter()
     {
 //        根据IP定位用户所在地区设置默认地址
-
-
-
-
         //消除手机号记录
         if(Session::has('mobile')){
             Session::delete('mobile');
@@ -84,7 +80,7 @@ class Application extends Controller
     public function submitform(){
         if($_POST){
             //echo '<pre>';print_r($_POST);print_r($_SESSION);
-            $code=input('?post.code')?input('code'):"";
+            $mobile_code=input('?post.mobile_code')?input('mobile_code'):"";
             $settledType=input('?post.settledType')?input('settledType'):"";
             $corporation=input('?post.corporation')?input('corporation'):"";
             $corporation_province=input('?post.corporation_province')?input('corporation_province'):"";
@@ -93,8 +89,9 @@ class Application extends Controller
             $corporation_detail=input('?post.corporation_detail')?input('corporation_detail'):"";
             $mobile=input('?post.mobile')?input('mobile'):"";
             $email=input('?post.email')?input('email'):"";
+            $textarea=input('?post.textarea')?input('textarea'):"";
             //后台验证
-            if(empty($code)){
+            if(empty($mobile_code)){
                 $this->error('验证码不能为空');
             }
             if($settledType!="景点入驻" && $settledType!="酒店入驻"){
@@ -104,27 +101,28 @@ class Application extends Controller
                 $this->error('非法请求');
             }
             if(empty($corporation_province)||!preg_match("/^\d*$/",$corporation_province)){
-                $this->error('非法请求3');
+                $this->error('非法请求');
             }
             if(empty($corporation_city)||!preg_match("/^\d*$/",$corporation_city)){
-                $this->error('非法请求4');
+                $this->error('非法请求');
             }
             if(empty($corporation_town)||!preg_match("/^\d*$/",$corporation_town)){
-                $this->error('非法请求5');
+                $this->error('非法请求');
             }
             if(empty($corporation_detail)||count($corporation_detail)>50){
-                $this->error('非法请求6');
+                $this->error('非法请求');
             }
             if(empty($email)||!preg_match("/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/",$email)){
-                $this->error('非法请求7');
+                $this->error('非法请求');
             }
             if(empty($mobile)||!preg_match("/^(0|86|17951)?1[0-9]{10}/",$mobile)){
-                $this->error('非法请求8');
+                $this->error('非法请求');
             }
             $mobile=input('?post.mobile')?input('mobile'):"";
             $mobile_code=input('?post.mobile_code')?input('mobile_code'):"";
             //验证码是否能通过验证
-            if($mobile!=Session::get('mobile') or $mobile_code!=Session::get('mobile_code') or empty($_POST['mobile']) or empty($_POST['mobile_code'])){
+           
+            if($mobile!=Session::get('mobile') or $mobile_code!=Session::get('mobile_code') or empty($mobile) or empty($mobile_code)){
                 // cookie初始化
                 Cookie::init(['prefix'=>'travel_','expire'=>3600,'path'=>'/']);
                 // 设置
@@ -146,14 +144,23 @@ class Application extends Controller
                     $re=db("hy_area")->where($where)->select();
                     $re=json_encode($re);
                     $this->assign("city",$re);
-                    $this->redirect('Application/storeEnter');
+//                    $this->redirect('Application/storeEnter');
             }else{
                 $submitTime=@date("Y-m-d H:i:s",time()+60*60*8);
-                Db::table('store_info')
-                    ->data(['store_name'=>$corporation,'store_state'=>"F","store_phone"=>$mobile,"store_apply_time"=>$submitTime])
-                    ->insert();
+                $data=['store_name'=>$corporation,
+                    'store_state'=>"F",
+                    "store_phone"=>$mobile,
+                    "store_apply_time"=>$submitTime,
+                    "store_province_id"=>$corporation_province,
+                    "store_city_id"=>$corporation_city,
+                    "store_town_id"=>$corporation_town,
+                    "store_address_detail"=>$corporation_detail,
+                    "store_textarea"=>$textarea
+                ];
+                db('store_info')->insert($data);
                 Session::set("mobile",'');
                 Session::set("mobile_code",'');
+
                 $this->success('提交成功！请保持手机畅通。');
             }
         }else{

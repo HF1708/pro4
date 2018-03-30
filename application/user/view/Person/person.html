@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>个人中心页</title>
+    <link href="__CSS__/bootstrap.min.css" rel='stylesheet' type='text/css' />
+    <link href="__CSS__/style.css" rel='stylesheet' type='text/css' />
+    <link href="__CSS__/person.css" rel='stylesheet' type='text/css' />
+    <meta charset="UTF-8">
+    <title>个人中心页</title>
+</head>
+<body>
+<!--导航页-->
+<div id="home" class="header">
+    <div class="top-header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html"><span>去野</span>Journey<span>...</span></a>
+            </div>
+            <!----start-top-nav---->
+            <nav class="top-nav">
+                <ul class="top-nav">
+                    <li><a href="index.html">首页home</a><span class="glyphicon glyphicon-search"></span> </li>
+                    <li class="active"><a href="{:url('attractions/attractions/attractions')}">目的地locations</a></li>
+                    <li><a href="reservation.html">故事story</a></li>
+                    <li><a href="news.html"> 登录</a></li>
+                    <li><a href="reviews.html">注册</a></li>
+                </ul>
+                <a href="#" id="pull"><img src="__STATIC__/images/nav-icon.png" title="menu" /></a>
+            </nav>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
+<div>点亮地图区</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3 left_style text-center">
+            <div>
+                <img src="__STATIC__/images/testHead.jpg" alt="用户头像" class="img-circle ">.
+                <p>用户名</p>
+                <span>注册时间：|</span>
+                <span>现居：|</span>
+                <!--跳转修改信息页-->
+                <a><span class="glyphicon glyphicon-cog"></span></a>
+                <!--此处进行判断，用户有简介则显示简介-->
+                <button type="button" class="btn btn-warning btn-sm btn-block">填写个人简介</button>
+                <div class="show">
+                    <textarea autofocus="true" placeholder="例：摄影师/旅居澳洲/潜水爱好者" maxlength="100" rows="3" class="personInfo"></textarea>
+                    <button type="button" class="btn btn-warning btn-sm btn-block">保存</button>
+                </div>
+                <div>显示个人简介区域</div>
+            </div>
+            <div>我的关注</div>
+            <div>我的粉丝</div>
+        </div>
+        <div class="col-lg-9 right_style">
+            <!--<div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-3">我的游记</div>
+                    <div class="col-lg-3">我的收藏</div>
+                    <div class="col-lg-3">我的点评</div>
+                    <div class="col-lg-3">我的订单</div>
+
+                </div>
+            </div>-->
+            <ul id="myTab" class="nav nav-tabs">
+                <li class="active" >
+                    <a href="#myStory" data-toggle="tab">
+                        我的游记
+                    </a>
+                </li>
+                <li>
+                    <a href="#myCollect" data-toggle="tab">我的收藏</a>
+                </li>
+                <li>
+                    <a href="#myComment" data-toggle="tab">我的点评</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" id="myTabDrop1" class="dropdown-toggle"
+                       data-toggle="dropdown">我的订单
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
+                        <li><a href="#allIndent" tabindex="-1" data-toggle="tab">全部订单</a></li>
+                        <li><a href="#unpaid" tabindex="-1" data-toggle="tab">未支付订单</a></li>
+                        <li><a href="#paid" tabindex="-1" data-toggle="tab">已支付订单</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade in active " id="myStory">
+                    <p>我的游记</p>
+                </div>
+                <div class="tab-pane fade " id="myCollect">
+                    <p>我的收藏</p>
+                </div>
+                <div class="tab-pane fade " id="myComment">
+                    <p>我的点评</p>
+                </div>
+                <div class="tab-pane fade" id="allIndent">
+                    <p>全部订单</p>
+                </div>
+                <div class="tab-pane fade" id="unpaid">
+                    <p>
+                        未支付订单
+                    </p>
+                </div>
+                <div class="tab-pane fade" id="paid">
+                    <p>
+                        已支付订单
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="__JS__/jquery.min.js"></script>
+<script src="__JS__/bootstrap.min.js"></script>
+</html>
