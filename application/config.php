@@ -269,4 +269,9 @@ return [
     'Captcha' => [
         'length' => 4
     ] ,
+    //分页配置
+    'Paginate'  => [
+        'type'     => 'bootstrap',
+        'var_page' => 'page',
+    ],
 ];

@@ -2,7 +2,8 @@
 namespace app\store\controller;
 
 use think\Controller;
-use think\db;
+use think\db;//数据库
+
 
 class Hoteldetail extends Controller
 {

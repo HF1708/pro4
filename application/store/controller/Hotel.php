@@ -2,7 +2,8 @@
 namespace app\store\controller;
 
 use think\Controller;
-use think\db;
+use think\db;//数据库
+use think\paginator;//分页
 
 class Hotel extends Controller
 {
@@ -15,10 +16,33 @@ class Hotel extends Controller
      **/
     public function hotel()
     {
-        //数据库查询到所有酒店
-        $gethotel=db('store_shotel')->where([])->select();
+
+        //input获取参数在tp框架中可以自动过滤xss攻击和sql注入等
+        $cityChoice=input('?post.cityChoice')?input('post.cityChoice'):'';
+        $hotelChoice=input('?hotelChoice')?input('hotelChoice'):'23';
+        echo $hotelChoice;
+        echo 22222;
+//        if($cityChoice!=null && $hotelChoice!=null){
+//
+//        } elseif($cityChoice!=null && $hotelChoice!=null){
+//            $where['hName']=['like','%'.$hotelChoice.'%'];
+//
+//        }elseif($cityChoice!=null && $hotelChoice==null){
+//            $where['hAddress']=['like','%'.$cityChoice.'%'];
+//
+//        }else{
+//            $where=[];
+//        }
+
+        $where['hAddress']=['like','%'.$cityChoice.'%'];
+        $where['hName']=['like','%'.$hotelChoice.'%'];
+        //查询所有酒店
+        $gethotel=db('store_shotel')->where($where)->paginate(4);
+        // 获取分页显示
+        $page = $gethotel->render();
         //导出酒店数组到页面
         $this->assign("hotel",$gethotel);
+        $this->assign('page', $page);
         return $this->fetch();
     }
     /**
@@ -30,15 +54,12 @@ class Hotel extends Controller
      **/
     public function getHotel()
     {
-        //input获取参数在tp框架中可以自动过滤xss攻击和sql注入等
-        $cityChoice=input('?post.cityChoice')?input('post.cityChoice'):'';
-        $hotelChoice=input('?post.hotelChoice')?input('?post.hotelChoice'):'';
+
         //调接口获取数据
 //        $gethotel=new \ curl();
 //        $data=[];
 //        $result=$gethotel->curlHttp("http://api.shujuzhihui.cn/api/hotel/search",'POST',["appKey"=>"2535ac5bbec441548fa9e57834a3fc49"]);
 //       var_dump($result);
-
 
     }
 
