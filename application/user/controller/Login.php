@@ -74,12 +74,12 @@ class Login extends Controller
         if( !empty($res) )
         {
             // 登录成功 存储数据到redis
-            $redis = new \Redis() ;
+            /*$redis = new \Redis() ;
             $redis->connect('127.0.0.1',6379) ;
             $redis->hSet('userStore', $res['store_id'], serialize($res)) ;
-            $res = unserialize($redis->hGet('userStore', $res['store_id'])) ;
+            $res = unserialize($redis->hGet('userStore', $res['store_id'])) ;*/
             // 用户数据存到session
-            Session::set('userLoginData',serialize($res)) ;
+            Session::set('loginData',serialize($res)) ;
             $returnJson = [
                 'code' => 10000 ,
                 'msg' => config('loginMsg')['SUCCESS'] ,
@@ -153,7 +153,7 @@ class Login extends Controller
             $redis->hSet('userStore', $res['store_id'], serialize($res)) ;
             $res = unserialize($redis->hGet('userStore', $res['store_id'])) ;
             // 商家数据存到session
-            Session::set('storeLoginData',serialize($res));
+            Session::set('loginData',serialize($res));
             $returnJson = [
                 'code' => 10000 ,
                 'msg' => config('loginMsg')['SUCCESS'] ,
