@@ -150,10 +150,18 @@ create table if not exists store_shotel(
 	hId int not null auto_increment primary key,-- 酒店ID
 	hName varchar(50) not null , -- 酒店名字
 	hImg varchar(50),-- 封面 图片ID
-	hRemain TINYINT,-- 酒店剩余房房间
-	hAddress varchar(50),-- 酒店地址 （待优化）
+	hRoomNumber TINYINT,-- 酒店总房间数
+	provinceID int(11),
+	cityID int(11),
+	townID int(11),
+	grade VARCHAR(8),
+	hAddress varchar(50),-- 酒店详细地址 （待优化）
 	hPrice int, -- 价格
 	store_id int,
+	textarea VARCHAR(500),
+		foreign key(provinceID) references `hy_area`(id), 
+	foreign key(cityID) references `hy_area`(id), 
+	foreign key(townID) references `hy_area`(id),
 	foreign key(store_id) references store_info(store_id)  -- 酒店属于的商家ID
 ) ;
 
