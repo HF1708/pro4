@@ -8,8 +8,8 @@ var socketList = [] ;
 var useList = [] ;
 // 引入redis模块
 var redis = require("./my_modules/redisDao.js") ;
-// 引入mysql模块
-var mysql = require("./my_modules/Mysql.js") ;
+//引入聊天表操作刀
+var chat = require("./my_modules/t_user_chat.js") ;
 
 server.on( "connection" ,function( socket ){
 	socketList.push( socket );
@@ -29,12 +29,37 @@ server.on( "connection" ,function( socket ){
 			break;
 			// 对话
 			case 'message' :
-				socket.send( sendData(
-					msgObj.rever ,
-					msgObj.sender ,
-					'message' ,
-					msgObj.content
-				)) ;
+				//console.log( msgObj.sender,msgObj.rever  ) ;
+				//// 判断是否为游客
+				//for(var i = 0;i < socketList.length;i++)
+				//{
+				//	var otherSocket = socketList[i] ;
+				//	if( otherSocket.readyState == wsModule.OPEN  && otherSocket == useList[ msgObj.rever ] )
+				//	{
+				//		otherSocket.send( sendData(
+				//			msgObj.rever ,
+				//			msgObj.sender ,
+				//			'useTalk' ,
+				//			{ content:msgObj.content.con }
+				//		)) ;
+				//	}
+				//}
+				// 消息存到数据库再发消息给用户
+				chat.setChatStoreUserData(msgObj.sender,msgObj.rever,msgObj.content,function( flag ){
+					for(var i = 0;i < socketList.length;i++)
+					{
+						var otherSocket = socketList[i] ;
+						if( otherSocket.readyState == wsModule.OPEN  && otherSocket == useList[ msgObj.rever ] )
+						{
+							otherSocket.send( sendData(
+								msgObj.rever ,
+								msgObj.sender ,
+								'message' ,
+								{flag:flag,content:msgObj.content['message'],login:msgObj.content['chat_login']}
+							)) ;
+						}
+					}
+				}) ;
 				break ;
 
 		}

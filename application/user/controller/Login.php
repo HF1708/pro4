@@ -2,7 +2,8 @@
 namespace app\user\controller;
 use think\Controller;
 use think\captcha ;
-use \think\Session ;
+use think\Session ;
+use think\Cookie ;
 
 class Login extends Controller
 {
@@ -73,11 +74,19 @@ class Login extends Controller
         $res = Db('user_user')->where($where)->find() ;
         if( !empty($res) )
         {
+            $res['userType'] = "user" ;
             // 登录成功 存储数据到redis
             /*$redis = new \Redis() ;
             $redis->connect('127.0.0.1',6379) ;
+<<<<<<< HEAD
             $redis->hSet('userStore', $res['store_id'], serialize($res)) ;
             $res = unserialize($redis->hGet('userStore', $res['store_id'])) ;*/
+=======
+//            $redis->hSet('userStore', $res['store_id'], serialize($res)) ;
+//            $res = unserialize($redis->hGet('userStore', $res['store_id'])) ;
+//            $redis->hSet('userStore', $res['store_id'], serialize($res)) ;
+
+>>>>>>> f6de44e61d6ceded1f30ba6283171178c8f46ba3
             // 用户数据存到session
             Session::set('loginData',serialize($res)) ;
             $returnJson = [
@@ -147,11 +156,12 @@ class Login extends Controller
 
         if( !empty($res) )
         {
+            $res['userType'] = "store" ;
             // 登录成功 存储数据到redis
             $redis = new \Redis() ;
             $redis->connect('127.0.0.1',6379) ;
-            $redis->hSet('userStore', $res['store_id'], serialize($res)) ;
-            $res = unserialize($redis->hGet('userStore', $res['store_id'])) ;
+//            $redis->hSet('userStore', $res['store_id'], serialize($res)) ;
+//            $res = unserialize($redis->hGet('userStore', $res['store_id'])) ;
             // 商家数据存到session
             Session::set('loginData',serialize($res));
             $returnJson = [

@@ -10,8 +10,12 @@ final class Auth
 
     public function __construct($accessKey, $secretKey)
     {
+<<<<<<< HEAD
         require 'functions.php';
 
+=======
+        require_once ("functions.php");
+>>>>>>> f6de44e61d6ceded1f30ba6283171178c8f46ba3
         $this->accessKey = $accessKey;
         $this->secretKey = $secretKey;
     }
