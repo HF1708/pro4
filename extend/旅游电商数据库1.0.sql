@@ -106,6 +106,7 @@ create table if not exists store_advert
 	store_adv_url  varchar(100),
 	store_adv_link varchar(50),
 	user_uid int, 
+	user_state enum('F','T','S') default 'F' , -- 广告状态 F 未审核； T审核通过； S 被锁定 
 	foreign key(user_uid) references store_info(store_id) 
 ) ;
 -- 添加账号的唯一索引/ 广告名

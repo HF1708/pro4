@@ -75,7 +75,7 @@ class Chat extends Controller
             // 判断聊天类型(用户—》店家/客服)
             if( strcmp($chatOneType,'user')==0 )
             {
-                $chatType = $chatOne['user_uid']."_".$chatOneType ;
+                $chatType = "user"."_".$chatOneType ;
                 $user = $chatOne['user_uid'] ;
                 $chat_one_image = $chatOne['user_image'] ;
                 $chat_one_name = $chatOne['user_name'] ;

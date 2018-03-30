@@ -22,31 +22,36 @@ function t_useChat( ada )
 */
 t_useChat.prototype.setChatStoreUserData = function( user_uid_1 ,user_uid_2,content ,callback)
 {
+	var that = this ;
 	// 判断是否为游客
 	// 游客不存
 	if( content['setPut'] == '游客123' )
 	{
-		callback( true ) ;
+		callback( false ) ;
 		return ;
 	}
+	// 非游客存
 	var type = '' ;
 	var obj = '' ;
-	this.setChatType(content['type'],function(types,object){
+	console.log("content:"+content) ;
+	that.setChatType(content['type'],function(types,object){
 		type = types ;
 		obj = object ;
+		var sql = "insert into user_chat( user_uid ,user_chat_char_two_id ,user_chat_type ,user_chat_obj ,user_chat_content ,user_chat_time )VALUES"+
+			"(? ,? ,? ,? ,? ,now()) ;" ;
+		console.log("asdfljkasdjflkdsaf------",type,obj) ;
+		that.adapter( sql ,[ user_uid_1,user_uid_2,type,obj,content['message'] ] ,function( err ){
+			if( err )
+			{
+				callback( true ) ;
+			}
+			else
+			{
+				callback( false ) ;
+			}
+		}) ;
 	}) ;
-	var sql = "insert into user_chat( user_uid ,user_chat_char_two_id ,user_chat_type ,user_chat_obj ,user_chat_content ,user_chat_time )VALUES"+
-	"(? ,? ,? ,? ,? ,now()) ;" ;
-	this.adapter( sql ,[ user_uid_1,parseInt(user_uid_2),type,obj,content['message'] ] ,function( err ){
-		if( err )
-		{
-			callback( true ) ;
-		}
-		else
-		{
-			callback( false ) ;
-		}
-	}) ;
+
 } ;
 
 /*
@@ -72,7 +77,7 @@ t_useChat.prototype.setChatType = function( type ,callback)
 			break ;
 		//（店家/客服）
 		case "store_server":
-			callback("B","T") ;
+			callback("B","F") ;
 			break ;
 		//（客服/店家）
 		case "server_store":
@@ -84,19 +89,19 @@ t_useChat.prototype.setChatType = function( type ,callback)
 			break ;
 		//（用户/客服）
 		case "user_server":
-			callback("C","T") ;
+			callback("C","F") ;
 			break ;
 		//（店家/店家）
 		case "store_store":
-			callback("D","L") ;
+			callback("D","T") ;
 			break ;
 		//（用户/用户）
 		case "user_user":
-			callback("E","L") ;
+			callback("E","T") ;
 			break ;
 		//（客服/客服）
 		case "server_server":
-			callback("F","L") ;
+			callback("F","T") ;
 			break ;
 	}
 
