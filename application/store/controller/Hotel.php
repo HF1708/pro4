@@ -18,29 +18,17 @@ class Hotel extends Controller
     {
 
         //input获取参数在tp框架中可以自动过滤xss攻击和sql注入等
-        $cityChoice=input('?post.cityChoice')?input('post.cityChoice'):'';
-        $hotelChoice=input('?hotelChoice')?input('hotelChoice'):'23';
-        echo $hotelChoice;
-        echo 22222;
-//        if($cityChoice!=null && $hotelChoice!=null){
-//
-//        } elseif($cityChoice!=null && $hotelChoice!=null){
-//            $where['hName']=['like','%'.$hotelChoice.'%'];
-//
-//        }elseif($cityChoice!=null && $hotelChoice==null){
-//            $where['hAddress']=['like','%'.$cityChoice.'%'];
-//
-//        }else{
-//            $where=[];
-//        }
-
+        $cityChoice=input('?get.cityChoice')?input('get.cityChoice'):'';
+        $hotelChoice=input('?get.hotelChoice')?input('get.hotelChoice'):'';
         $where['hAddress']=['like','%'.$cityChoice.'%'];
         $where['hName']=['like','%'.$hotelChoice.'%'];
         //查询所有酒店
         $gethotel=db('store_shotel')->where($where)->paginate(4);
         // 获取分页显示
         $page = $gethotel->render();
+        $allHotel=db('store_shotel')->where([])->select();
         //导出酒店数组到页面
+        $this->assign("allhotel",$allHotel);
         $this->assign("hotel",$gethotel);
         $this->assign('page', $page);
         return $this->fetch();

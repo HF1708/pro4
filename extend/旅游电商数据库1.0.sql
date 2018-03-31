@@ -140,11 +140,6 @@ ALTER TABLE `user_chat` ADD INDEX `user_chat_1` (`user_uid`,`user_chat_char_two_
 
 
 -- -----------------------------------邱萍--------------------------------------------
-
-
-
-
-
 -- 酒店表
 create table if not exists store_shotel(
 	hId int not null auto_increment primary key,-- 酒店ID
@@ -167,8 +162,6 @@ insert into store_shotel(hId,hName,hImg,hRemain,hAddress,hPrice,store_id)values
 (9007,'厦门磐基皇冠假日酒店 ','hotel7.jpg',20,'思明区嘉禾路199号(近明发商业广场)',755,''),
 (9008,'厦门马哥孛罗东方大酒店','hotel8.jpg',20,' 思明区湖滨北建业路8号(近白鹭洲公园,筼筜湖畔)',709,'');
 
-
-
 -- 酒店图片表
 create table if not exists store_shotel_img(
 	id int not null auto_increment primary key,
@@ -183,12 +176,15 @@ create table if not exists store_hotelComment(
 		hcId int not null auto_increment primary key,
 		hId int, -- 酒店ID
 		hcContent varchar (200),-- 评价内容
-		hcTime varchar (200),-- 评价图片 
+		hcTime varchar (200),-- 评价时间
 		userId int not null ,-- 用户ID 
 		commentTo  int DEFAULT 0, -- 回复
 		FOREIGN KEY (hId) REFERENCES store_shotel(hId),
 		FOREIGN KEY (userId) REFERENCES user_user(user_id)
 );
+
+insert  into  store_hotelComment  (hcId,hId,hcContent,hcTime,userId,commentTo)VALUES
+(1000,9001,'这家酒店很好！','2018-04-01','test','')
 
 -- 订单表
 create table if not exists store_hotelOrder(

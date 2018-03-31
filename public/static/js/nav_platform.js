@@ -9,14 +9,14 @@ var navs = [{
 	"href" : AdvertUrl,
 	"spread" : false
 },{
-	"title" : "发布商品",
+    "title" : "发布商品",
+    "icon" : "icon-jlk",
+    "href" : "",
+    "spread" : false
+}, {
+	"title" : "用户管理",
 	"icon" : "icon-text",
-	"href" : "page/links/linksList.html",
-	"spread" : false
-},{
-	"title" : "404页面",
-	"icon" : "&#xe61c;",
-	"href" : "page/404.html",
+	"href" : UserbgUrl,
 	"spread" : false
 },{
 	"title" : "系统基本参数",

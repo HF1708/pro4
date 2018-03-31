@@ -22,6 +22,8 @@ class Hoteldetail extends Controller
         $getnowhotel=db('store_shotel')->where($where)->select();
         //导出当前酒店到页面
         $this->assign("nowHotel",$getnowhotel);
+        $getcomment=db('store_hotelComment')->where($where)->select();
+        $this->assign('comment',$getcomment);
         return $this->fetch();
     }
 }

@@ -72,7 +72,7 @@
             padding-left: 0px;
         }
         .searchForm{
-            width: 80px;
+            width: 110px;
             height: 30px;
             float: left;
         }
@@ -155,44 +155,39 @@
         <div class="container">
             <div class="row text-center searchbox1">
                 <!--城市选择器插件-->
-                <form  method="post" action="{:url('store/Hotel/hotel')}" id="submit">
-                    <div class="col-lg-3" style="display: inline-block">
-                        <span class="searchForm">目的地：</span>
-                        <input type="text" PLACEHOLDER="选择地址" class="form-control searchForm" id="cityChoice" name="cityChoice" style="background-color: white">
-                        <input type="hidden" id="province" value="">
-                        <input type="hidden" id="city" value="">
-                    </div>
-                    <div class="col-lg-4">
-                        <span class="searchForm">入住~退房：</span>
-                        <!--日历插件-->
-                        <form class="form-horizontal">
-                            <fieldset>
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <div class="input-prepend input-group">
-                                            <span class="add-on input-group-addon" style="background-color: white;">
-                                                <i class="glyphicon glyphicon-calendar" aria-hidden='true'></i>
-                                            </span>
-                                            <input type="text" readonly style="background-color:white; width: 200px" name="reservation" id="reservation" class="form-control" value="2014-5-21 - 2014-6-21" />
-                                        </div>
+                <div class="col-lg-3" style="display: inline-block">
+                    <span class="searchForm">目的地：</span>
+                    <input type="text" PLACEHOLDER="选择地址" class="form-control searchForm" id="cityChoice" name="cityChoice" style="background-color: white">
+                    <input type="hidden" id="province" value="">
+                    <input type="hidden" id="city" value="">
+                </div>
+                <div class="col-lg-4">
+                    <span class="searchForm">入住~退房：</span>
+                    <!--日历插件-->
+                    <form class="form-horizontal">
+                        <fieldset>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <div class="input-prepend input-group">
+                                        <span class="add-on input-group-addon" style="background-color: white;">
+                                            <i class="glyphicon glyphicon-calendar" aria-hidden='true'></i>
+                                        </span>
+                                        <input type="text" readonly style="background-color:white; width: 200px" name="reservation" id="reservation" class="form-control" value="2014-5-21 - 2014-6-21" />
                                     </div>
                                 </div>
-                            </fieldset>
-                        </form>
-                    </div>
-                    <div class="col-lg-3" style="display: inline-block">
-                        <span class="searchForm">搜酒店名：</span>
-                        <input type="text" PLACEHOLDER="输入酒店名" class="form-control searchForm" id="hotelChoice" name="hotelChoice" style="background-color: white">
-                    </div>
-                    <div class="col-lg-2">
-                        <span class="glyphicon glyphicon-search" aria-hidden='true' style="position: absolute; left: 65px; top: 8px;"></span>
-                        <button onclick="upform()" type="button" value="搜索" style="width: 100px;height:30px;border: 1px solid #ccc;border-radius: 4px;" id="searchHotel">
-                        </button>
-                    </div>
-
-                </form>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="col-lg-3" style="display: inline-block">
+                    <span class="searchForm">搜酒店名：</span>
+                    <input type="text" PLACEHOLDER="输入酒店名" class="form-control searchForm" id="hotelChoice" name="hotelChoice" style="background-color: white">
+                </div>
+                <div class="col-lg-2">
+                    <span class="glyphicon glyphicon-search" aria-hidden='true' style="position: absolute; left: 65px; top: 8px;"></span>
+                    <input onclick="upform()" type="button" value="搜索" style="width: 100px;height:30px;border: 1px solid #ccc;border-radius: 4px;" id="searchHotel"/>
+                </div>
             </div>
-
         </div>
         <div class="container searchBox">
             <div class="row " style="width: 1000px">
@@ -313,7 +308,7 @@
                     </script>
                     <!-- 轮播图片显示-->
                     <div id="owl-demo" class="owl-carousel">
-                        {volist name="hotel" id="vo"}
+                        {volist name="allhotel" id="vo"}
                         <div class="item">
                             <div class="item-grid">
                                 <div class="item-pic">
@@ -410,9 +405,11 @@
     //     })
     // })
     function upform() {
+        //alert(11)
         /*$('#submit').submit();*/
-        var cityChoice=('#cityChoice').val();
-        var hotelChoice=('#hotelChoice').val();
+        var cityChoice=$('#cityChoice').val();
+        var hotelChoice=$('#hotelChoice').val();
+        window.location.href='{:url("store/Hotel/hotel")}?cityChoice'+cityChoice+'&hotelChoice='+hotelChoice;
     }
 
 </script>
