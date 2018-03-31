@@ -265,6 +265,19 @@ return [
         'LOSE' => '注册失败' ,
         'REGISTER_DATA_EXISTS' => '用户已存在'
     ] ,
+    // 广告操作状态
+    "advert_state" => [
+        'LOCKING' => 'locking' ,
+        'PASS' => 'pass' ,
+        'UNLOCK' => 'unlock'
+    ] ,
+    // 广告返回消息配置
+    "advert" => [
+        'SUCCESS' => '恭喜你，操作成功' ,
+        'EMPTY' => '很遗憾，找不到可操作的广告' ,
+        "OPERATION" => "错误的操作" ,
+        'ERROR' => '很遗憾，操作失败' ,
+    ] ,
     // 验证码
     'Captcha' => [
         'length' => 4

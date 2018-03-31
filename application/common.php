@@ -10,8 +10,27 @@
 // +----------------------------------------------------------------------
 
 // 应用公共文件
-
+//使用步骤
+/*
+ *  $that = new \user() ;
+ *  $that->emptyData(参数，参数，参数) ;
+ *
+ */
 // 用户模块公共方法
+// 简单介绍
+// 一：类user
+// 1. 判断数据是否为空（为空直接退出，并返回错误消息,否则不进行任何操作）
+// 2. 判断表中是否存在数据（不存在数据直接退出，并返回错误消息,否则不进行任何操作）
+// 3. 判断两个数据是否相同（不相同直接退出，并返回错误消息,否则不进行任何操作）
+//
+// 二：类curl
+// 1. 发送curl请求
+//
+
+
+
+
+
 class user{
     /**
      * 功能描述：判断表中元素是否为空
@@ -21,15 +40,14 @@ class user{
      * 作者：yonjin L
      * 时间：18-3-27
      */
-    public function emptyData( $data ,$msgTitle ,$msgBody,$code=10001)
+    public function emptyData( $data ,$msgTitle ,$msgBody,$content=[],$code=10001)
     {
         if( empty($data) )
         {
-
             echo json_encode([
                 'code' => $code ,
                 'msg' => config($msgTitle)[$msgBody] ,
-                'data' => []
+                'data' => $content
             ]) ;
             exit ;
         }
@@ -44,7 +62,7 @@ class user{
      * 作者：yonjin L
      * 时间：18-3-27
      */
-    public function issetData( $table ,$arr ,$msgTitle ,$msgBody,$code=10001)
+    public function issetData( $table ,$arr ,$msgTitle ,$msgBody,$content=[],$code=10001)
     {
         $resData = Db($table)->where($arr)->find() ;
         if( !empty($resData) )
@@ -52,7 +70,7 @@ class user{
             echo json_encode([
                 'code' => $code ,
                 'msg' => config($msgTitle)[$msgBody] ,
-                'data' => []
+                'data' => $content
             ]) ;
             exit ;
         }
@@ -60,21 +78,21 @@ class user{
     }
 
     /**
-     * 功能描述：判断表中两个数据是否相同是否存在
+     * 功能描述：判断两个数据是否相同是否存在
      * 参数：数据1，数据2、出错返回的信息类型、出错返回的信息内容、返回码
      * QQUser：
      * 返回：无(出错直接退出)
      * 作者：yonjin L
      * 时间：18-3-27
      */
-    public function strcmpData($dataOne,$dataTwo,$msgTitle ,$msgBody ,$code=10001)
+    public function strcmpData($dataOne,$dataTwo,$msgTitle ,$msgBody ,$content=[] ,$code=10001)
     {
         if( strcmp($dataOne,$dataTwo)!=0 )
         {
             $returnJson = [
                 'code' => $code ,
                 'msg' => config($msgTitle)[$msgBody] ,
-                'data' => []
+                'data' => $content
             ] ;
             echo json_encode($returnJson) ;
             exit ;
