@@ -11,7 +11,7 @@ var navs = [{
 },{
 	"title" : "发布商品",
 	"icon" : "icon-text",
-	"href" : "page/links/linksList.html",
+	"href" : "",
 	"spread" : false
 },{
 	"title" : "404页面",
