@@ -121,9 +121,28 @@ class Advert extends Controller
         // 修改是否成功或者没报错
         if( empty($res) || strcmp($res,1)==0 )
         {
-            // 已修改
-            $that->emptyData($res,'advert','SUCCESS') ;
-
+            // 审核操作判断
+            switch($setClass)
+            {
+                // F 未审核； T审核通过； S 被锁定
+                // 审核
+                case "pass":
+                    // 审核已通过时
+                    $that->emptyData($res,'advert','PASS_ALREADY',$res) ;
+                    break ;
+                // 锁定
+                case "locking":
+                    // 用户已被锁定时
+                    $that->emptyData($res,'advert','PASS_ALREADY',$res) ;
+                    break ;
+                // 解锁
+                case "unlock":
+                    // 用户未被锁定时
+                    $that->emptyData($res,'advert','UNLOCK_ALREADY',$res) ;
+                    break ;
+                default:
+                    exit ;
+            }
             // 修改成功
             $returnJson = [
                 'code' => 10001 ,
