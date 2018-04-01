@@ -157,11 +157,15 @@ class Application extends Controller
                     "store_address_detail"=>$corporation_detail,
                     "store_textarea"=>$textarea
                 ];
-                db('store_info')->insert($data);
+                $re=db('store_info')->insert($data);
                 Session::set("mobile",'');
                 Session::set("mobile_code",'');
+                if($re){
+                    $this->success('提交成功！请保持手机畅通。');
+                }else{
+                    $this->error('提交失败请重试！');
+                }
 
-                $this->success('提交成功！请保持手机畅通。');
             }
         }else{
             $this->error('非法请求！');

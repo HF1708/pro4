@@ -155,17 +155,19 @@ create table if not exists store_shotel(
 	cityID int(11),
 	townID int(11),
 	grade VARCHAR(8),
+	upTime datetime,-- 发布时间时间
 	hAddress varchar(50),-- 酒店详细地址 （待优化）
 	hPrice int, -- 价格
 	store_id int,
 	textarea VARCHAR(500),
+	state enum('F','T') default 'F' , -- 酒店审核状态
 		foreign key(provinceID) references `hy_area`(id), 
 	foreign key(cityID) references `hy_area`(id), 
 	foreign key(townID) references `hy_area`(id),
 	foreign key(store_id) references store_info(store_id)  -- 酒店属于的商家ID
 ) ;
 
-insert into store_shotel(hId,hName,hImg,hRemain,hAddress,hPrice,store_id)values
+insert into store_shotel(hId,hName,hImg,hRoomNumber,hAddress,hPrice,store_id)values
 (9001,'厦门香格里拉大酒店','hotel1.jpg',20,'观音山国际商务区台东路168号',1009,''),
 (9002,'厦门海悦山庄酒店','hotel2.jpg',20,'思明区环岛南路3999号(紧邻环岛路,国家会计学院旁)',810,''),
 (9003,'厦门海景千禧大酒店','hotel3.jpg',20,'镇海路12号之8号 (近中山路商业步行街, 轮渡码头和和平码头)',790,''),
