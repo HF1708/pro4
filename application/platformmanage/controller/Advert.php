@@ -10,6 +10,10 @@ use think\Controller;
 use think\Paginator ;
 use think\Session ;
 use \think\Request ;
+// 引入鉴权类
+use Qiniu\Auth;
+// 引入上传类
+use Qiniu\Storage\UploadManager;
 
 class Advert extends Controller
 {
@@ -195,8 +199,12 @@ class Advert extends Controller
            "name" => $res["store_adv_name"] ,
            "link" => $res["store_adv_link"] ,
            "url" => $res["store_adv_url"] ,
-           "advertiser" => $res["store_name"]
+           "advertiser" => $res["store_name"] ,
+           "setId" => $res["store_adv_id"]
         ] ;
+
+
+
 
         // 广告获取成功
         $that->returnJson("advert","SUCCESS",$returnData) ;
@@ -230,4 +238,45 @@ class Advert extends Controller
         $that->returnJson("advert","SUCCESS",$res,10000) ;
     }
 
+    /**
+     *    功能描述:上传图片
+     *  参数：无
+     *  返回：无
+     *  作者:yonjin L
+     *  时间：18-3-31
+     **/
+    public function imgUpload()
+    {
+        $that = new \user() ;
+        $imageId = input("?post.setId") ? input("post.setId"):"" ;
+        // 操作图片的id为空 不上传图片
+        // 否则上传图片
+        if( !empty($imageId) )
+        {
+            // 获取文件流
+            $file = $_FILES["file"] ;
+            // 上传图片
+            // 成功返回可访问的url路径
+            $url = $that->uploadImage($file) ;
+
+            // 保存url路径
+            $where = [
+                "store_adv_id" => $imageId
+            ] ;
+            $update = [
+                "store_adv_url" => $url
+            ] ;
+            $res = Db("store_advert")->where($where)->update($update) ;
+
+            $that->emptyData($res,"advert","ERROR") ;
+
+            echo json_encode([
+                'code' => 10000 ,
+                'data' => $url
+            ]) ;
+        }
+
+    }
+
 }
+

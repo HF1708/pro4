@@ -25,11 +25,13 @@ var vue = new Vue({
         imgUrlShow:'false' ,
         seeAdvert:false ,
         seeLoading:false ,
+        fileUpload:'' ,
         advertDetails: {
+            setId:"1" ,
             name: '广告',
             link: 'www.baidu.com' ,
             url : 'http://127.0.0.1/gitHub/pro4/public/static/images/face.jpg' ,
-            advertiser:'广告商' ,
+            advertiser:'广告商'
         } ,
         set_adv_id:"false"
     } ,
@@ -44,7 +46,6 @@ var vue = new Vue({
          */
         setDataAdvert:function(e){
             var that = this ;
-            var $set_id = $(e.target).attr('set_adv_id') ;
             console.log(that.advertDetails) ;
         } ,
         /**
@@ -107,7 +108,7 @@ var vue = new Vue({
                     that.advertDetails["link"] = res.data["link"] ;
                     that.advertDetails["url"] = res.data["url"] ;
                     that.advertDetails['advertiser'] = res.data["advertiser"] ;
-                    console.log(res) ;
+                    that.advertDetails['setId'] = res.data["setId"] ;
                 }
             }) ;
         } ,
@@ -188,11 +189,67 @@ var vue = new Vue({
                 }
             }) ;
 
+        } ,
+        /**
+         * 功能描述：取消上传图片
+         * 参数：
+         * QQUser：
+         * 返回：
+         * 作者：yonjin L
+         * 时间：18-4-1
+         */
+        cancelUpload:function(){
+            $('#store_image').attr('src', this.advertDetails["url"]);
         }
+
+
     } ,
     mounted:function(){
-        console.log("go to mounted") ;
+        var that = this ;
         // 开始获取所有广告
+
+        // 图片上传
+        layui.use('upload', function(){
+            var $ = layui.jquery
+                ,upload = layui.upload ;
+
+            //普通图片上传
+            var uploadInst = upload.render({
+                elem: '#test1'
+                ,url: img_upload_url
+                ,method:"post"
+                ,bindAction:"#uploadImg"
+                ,auto:false
+                ,data:{
+                    setId: that.advertDetails['setId']
+                }
+                // 文件上传前的回调
+                ,before: function(obj){
+                    //预读本地文件示例，不支持ie8
+                    obj.preview(function(index, file, result){
+                        $('#store_image').attr('src', result); //图片链接（base64）
+                        that.fileUpload = file ;
+                        console.log(that.fileUpload) ;
+                    });
+                }
+                // 选择图片的回调
+                ,choose:function(obj){
+                    obj.preview(function(index, file, result){
+                        $('#store_image').attr('src', result); //图片链接（base64）
+                    }) ;
+
+                }
+                // 上传后的回调
+                ,done: function(res){
+                    console.log(res) ;
+                    //如果上传失败
+                    //上传成功
+                    var item = this.item;
+                    console.log(item);
+
+                }
+            });
+        });
     }
 }) ;
 

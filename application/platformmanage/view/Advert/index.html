@@ -128,7 +128,15 @@
         <div class="layui-form-item">
             <label class="layui-form-label">图片</label>
             <div class="layui-input-block">
-                <img style="max-height:100px ;" :src="advertDetails.url" />
+                <img id="store_image" style="max-height:100px ;" :src="advertDetails.url" />
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">&nbsp;</label>
+            <div class="layui-upload">
+                <button type="button" class="layui-btn" id="test1">选择图片</button>
+                <button type="button" class="layui-btn" id="uploadImg">修改图片</button>
+                <button type="button" class="layui-btn" @click="cancelUpload">取消上传</button>
             </div>
         </div>
         <div class="layui-form-item">
@@ -163,6 +171,7 @@
 
         //…
     });
+
 </script>
 <script type="text/javascript" src="__JS__/vue.min.js"></script>
 <script type="text/javascript" src="__JS__/jquery.min.js"></script>
@@ -174,6 +183,8 @@
     var replace_advert_url = "{:url('platformmanage/Advert/replaceAdvert')}" ;
     // 设置搜索条件
     var set_search_url = "{:url('platformmanage/Advert/searchCondition')}" ;
+    // 图片上传
+    var img_upload_url = "{:url('platformmanage/Advert/imgUpload')}" ;
 
 </script>
 <script type="text/javascript" src="__JS__/platform/platform.js"></script>
