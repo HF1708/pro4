@@ -275,21 +275,40 @@ class Login extends Controller
         if( Session::has('loginData') )
         {
             $res = unserialize(Session::get('loginData')) ;
-
-            // 没头像用默认
-            if( empty($res['user_image']) )
+            if( strcmp($res['userType'],'user')==0 )
             {
-                $image = config("default")["IMAGE_USER"];
+                // 没头像用默认
+                if( empty($res['user_image']) )
+                {
+                    $image = config("default")["IMAGE_USER"] ;
+                }
+                else
+                {
+                    $image = $res['user_image'] ;
+                }
+                $data = [
+                    "name" =>  $res['user_name'] ,
+                    "image" =>  $image
+                ] ;
             }
-            else
+            else if( strcmp($res['userType'],'store')==0 )
             {
-                $image = $res['user_image'] ;
+                // 没头像用默认
+                if( empty($res['store_image']) )
+                {
+                    $image = config("default")["IMAGE_STORE"] ;
+                }
+                else
+                {
+                    $image = $res['store_image'] ;
+                }
+                $data = [
+                    "name" =>  $res['store_name'] ,
+                    "image" =>  $image
+                ] ;
             }
 
-            $data = [
-               "name" =>  $res['user_name'] ,
-               "image" =>  $image
-            ] ;
+//            if( $res )
             // 返回用户信息
             $msg->returnJson("loginMsg","SUCCESS_USER_DATA",$data,10000) ;
 

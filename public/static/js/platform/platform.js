@@ -71,12 +71,14 @@ var vue = new Vue({
         {
             var that = this ;
             var $search = $(e.target).attr('setState') ;
+
             $.ajax({
                 url:set_search_url ,
                 type:"post" ,
                 data:{search:$search} ,
                 dataType:"json" ,
                 success:function(res){
+                    //window.location.reload() ;
                     console.log(res) ;
                 }
             }) ;

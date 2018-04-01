@@ -47,8 +47,6 @@ new Vue({
          */
         userLoginAlready:function(){
             var that = this ;
-            console.log("用户是否已登录",$user_login_already) ;
-
             $.ajax({
                 url:$user_login_already ,
                 data:"" ,
@@ -73,7 +71,6 @@ new Vue({
                             }) ;
                         }) ;
                     }
-                    console.log(res) ;
                 }
             }) ;
         }

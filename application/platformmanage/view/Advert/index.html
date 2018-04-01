@@ -32,16 +32,16 @@
                     <cite>审核状态</cite>
                 </a>
                 <dl class="layui-nav-child">
-                    <dd @click="setSeartch(event)" ><a href="javascript:;" data-url="page/user/userInfo.html"><i class="iconfont icon-zhanghu" data-icon="icon-zhanghu" ></i><cite setState="up">上架</cite></a></dd>
-                    <dd @click="setSeartch(event)" ><a href="javascript:;" data-url="page/user/changePwd.html"><i class="iconfont icon-shezhi1" data-icon="icon-shezhi1" ></i><cite setState="down">下架</cite></a></dd>
-                    <dd @click="setSeartch(event)" ><a href="javascript:;"><i class="iconfont icon-loginout" ></i><cite setState="none" >未审核</cite></a></dd>
-                    <dd @click="setSeartch(event)" ><a href="javascript:;"><i class="iconfont icon-loginout"></i><cite setState="all" >全部</cite></a></dd>
+                    <dd @click="setSeartch(event)" ><a href="javascript:window.location.reload();" class="btn btn-link" ><i class="iconfont icon-zhanghu" data-icon="icon-zhanghu" ></i><cite setState="up">上架</cite></a></dd>
+                    <dd @click="setSeartch(event)" ><a href="javascript:window.location.reload();" class="btn btn-link" ><i class="iconfont icon-shezhi1" data-icon="icon-shezhi1" ></i><cite setState="down">下架</cite></a></dd>
+                    <dd @click="setSeartch(event)" ><a href="javascript:window.location.reload();" class="btn btn-link" ><i class="iconfont icon-loginout" ></i><cite setState="none" >未审核</cite></a></dd>
+                    <dd @click="setSeartch(event)" ><a href="javascript:window.location.reload();" class="btn btn-link" ><i class="iconfont icon-loginout"></i><cite setState="all" >全部</cite></a></dd>
                 </dl>
             </div>
         </blockquote>
     </form>
 
-    <div class="layui-form links_list">
+    <div  class="layui-form links_list">
         <table class="layui-table">
             <colgroup>
                 <col width="50">
@@ -105,7 +105,7 @@
     <div id="page">
         {$list->render()}
     </div>
-    <div v-show="seeAdvert" class="layui-bg-gray" style="width:500px ;position:fixed ;top:10% ;left:10% ;padding:20px ;" >
+    <div v-show="seeAdvert" class="layui-bg-gray" style="width:500px ;position:absolute ;top:5% ;left:10% ;padding:20px ;" >
         <div class="layui-form-item">
             <label class="layui-form-label"></label>
             <label class="layui-input-block">广告详情</label>

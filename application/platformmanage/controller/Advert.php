@@ -26,21 +26,37 @@ class Advert extends Controller
      **/
     public function index()
     {
-        $request = Request::instance();
-        echo "当前模块名称是" . $request->module();
-        echo "当前控制器名称是" . $request->controller();
-        echo "当前操作名称是" . $request->action();
+//        $request = Request::instance();
+//        echo "当前模块名称是" . $request->module();
+//        echo "当前控制器名称是" . $request->controller();
+//        echo "当前操作名称是" . $request->action();
         // 获取session中的搜索条件
+        $seatch_2 =  cookie('search') ;
 
         if( Session::has('search_advert') || input("?post.seartch_advert") )
         {
             $seatch = input("?post.seartch_advert")? input("post.seartch_advert"):(Session::has('search_advert')?Session::get('search_advert'):"") ;
-            $list = Db("store_advert")->alias('a')->join('store_info w', 'a.user_uid = w.store_phone')->where('store_adv_name','like','%'.$seatch.'%')->paginate(5);
+
+
+            if(!empty($seatch_2))
+            {
+                $where = [
+                    "a.user_state" =>  $seatch_2
+                ] ;
+                $list = Db("store_advert")->alias('a')->join('store_info w', 'a.user_uid = w.store_phone')->where('store_adv_name','like','%'.$seatch.'%')->where($where)->paginate(5);
+
+            }
+            else
+            {
+                $list = Db("store_advert")->alias('a')->join('store_info w', 'a.user_uid = w.store_phone')->where('store_adv_name','like','%'.$seatch.'%')->paginate(5);
+
+            }
+
+
         }
         else
         {
             // 获取5条广告
-//        $list = Db("store_advert")->alias('a')->join('store_info w', 'a.user_uid = w.store_phone')->where('a.user_state','F')->paginate(5);
             $list = Db("store_advert")->alias('a')->join('store_info w', 'a.user_uid = w.store_phone')->paginate(5);
 
         }
@@ -225,13 +241,45 @@ class Advert extends Controller
         // 获取设置的条件
         $condition = input("?post.search") ? input("post.search"):"" ;
 
+
+
         // 搜索条件是否存在
         $that->emptyData($condition,"advert","ERROR") ;
 
+        switch($condition)
+        {
+            // 上架
+            case "up":
+                $condition = "T" ;
+                break ;
+            // 未审核
+            case "none":
+                $condition = "F" ;
+                break ;
+            // 下架
+            case "down":
+                $condition = "S" ;
+                break ;
+            case "all":
+                $condition = null ;
+                // 将条件存入3600秒cookie缓存
+                cookie('search', $condition, 3600);
+                $res =  cookie('search') ;
+                $that->returnJson("advert","SUCCESS",$res,10000) ;
+                break ;
+            default :
+                $condition = null ;
+                // 将条件存入3600秒cookie缓存
+                cookie('search', $condition, 3600);
+                $res =  cookie('search') ;
+                $that->returnJson("advert","SUCCESS",$res,10000) ;
+        }
+
         // 将条件存入3600秒cookie缓存
-        cookie('search', 'value', 3600);
+        cookie('search', $condition, 3600);
 
         $res =  cookie('search') ;
+
         $that->emptyData($res,"advert","ERROR") ;
 
         // 返回成功提示
@@ -268,6 +316,8 @@ class Advert extends Controller
             ] ;
             $res = Db("store_advert")->where($where)->update($update) ;
 
+            // 保存是否成功
+            // 失败返回消息
             $that->emptyData($res,"advert","ERROR") ;
 
             echo json_encode([

@@ -194,7 +194,6 @@ var app = new Vue({
                 name : $name ,
                 code : $code
             } ;
-            console.log($data) ;
             $.ajax({
                 url:$store_register,
                 type:'post' ,
@@ -204,7 +203,6 @@ var app = new Vue({
                     if( res['code'] == 10000 )
                     {
                         $("#loginMsgModel").modal('show') ;
-                        console.log('商店注册成功') ;
                     }
                     else
                     {

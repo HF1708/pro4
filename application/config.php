@@ -240,9 +240,10 @@ return [
     ],
 
     // 默认信息
-    // IMAGE_USER 测试
+    // IMAGE_USER/IMAGE_STORE 默认用户/店家头像
     "default" =>[
-        'IMAGE_USER' => 'http://p6gnb5g93.bkt.clouddn.com/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg' ,
+        'IMAGE_USER' => 'http://p6gnb5g93.bkt.clouddn.com/user.png' ,
+        'IMAGE_STORE' => 'http://p6gnb5g93.bkt.clouddn.com/store.png' ,
     ] ,
 
     // 登录返回消息配置
