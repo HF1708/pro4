@@ -32,6 +32,26 @@
 
 
 class user{
+
+    /**
+     * 功能描述：返回信息
+     * 参数：返回的信息类型、返回的信息内容、返回码
+     * QQUser：
+     * 返回：无(出错直接退出)
+     * 作者：yonjin L
+     * 时间：18-3-31
+     */
+    public function returnJson($msgTitle ,$msgBody,$content=[],$code=10001)
+    {
+
+        echo json_encode([
+            'code' => $code ,
+            'msg' => config($msgTitle)[$msgBody] ,
+            'data' => $content
+        ]) ;
+
+    }
+
     /**
      * 功能描述：判断表中元素是否为空
      * 参数：内容、出错返回的信息类型、出错返回的信息内容、返回码

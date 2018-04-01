@@ -32,19 +32,15 @@
                     <cite>审核状态</cite>
                 </a>
                 <dl class="layui-nav-child">
-                    <dd><a href="javascript:;" data-url="page/user/userInfo.html"><i class="iconfont icon-zhanghu" data-icon="icon-zhanghu"></i><cite>未审核</cite></a></dd>
-                    <dd><a href="javascript:;" data-url="page/user/changePwd.html"><i class="iconfont icon-shezhi1" data-icon="icon-shezhi1"></i><cite>审核通过</cite></a></dd>
-                    <dd><a href="javascript:;"><i class="iconfont icon-loginout"></i><cite>被锁定</cite></a></dd>
+                    <dd @click="setSeartch(event)" ><a href="javascript:;" data-url="page/user/userInfo.html"><i class="iconfont icon-zhanghu" data-icon="icon-zhanghu" ></i><cite setState="up">上架</cite></a></dd>
+                    <dd @click="setSeartch(event)" ><a href="javascript:;" data-url="page/user/changePwd.html"><i class="iconfont icon-shezhi1" data-icon="icon-shezhi1" ></i><cite setState="down">下架</cite></a></dd>
+                    <dd @click="setSeartch(event)" ><a href="javascript:;"><i class="iconfont icon-loginout" ></i><cite setState="none" >未审核</cite></a></dd>
+                    <dd @click="setSeartch(event)" ><a href="javascript:;"><i class="iconfont icon-loginout"></i><cite setState="all" >全部</cite></a></dd>
                 </dl>
-            </div>
-            <div class="layui-inline">
-                <a class="layui-btn layui-btn-danger batchDel">批量删除</a>
-            </div>
-            <div class="layui-inline">
-                <div class="layui-form-mid layui-word-aux">本页面刷新后除新添加的链接外所有操作无效，关闭页面所有数据重置</div>
             </div>
         </blockquote>
     </form>
+
     <div class="layui-form links_list">
         <table class="layui-table">
             <colgroup>
@@ -66,49 +62,98 @@
                 <th>审核状态</th>
                 <th colspan="3">操作</th>
             </tr>
-
-            {volist name='list' id='user'}
-            <tr>
-                <th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose" id="allChoose"></th>
-                <th style="text-align:left;">{$user.store_adv_name}</th>
-                <th>{$user.store_name}</th>
-                <th>
-                    <div class="layui-btn-container">
-                        <button class="layui-btn">查看</button>
-                    </div>
-                </th>
-                <th>{$user.user_state}</th>
-                <th>
-                    <div class="layui-hide layui-show-md-block">
-                        <button class="layui-btn" set_adv_id="{$user.store_adv_id}" setClass="pass" @click="examineAdv(event)" >审核通过</button>
-                        <button class="layui-btn" set_adv_id="{$user.store_adv_id}" setClass="locking"  @click="examineAdv(event)" >锁定</button>
-                        <button class="layui-btn" set_adv_id="{$user.store_adv_id}" setClass="unlock"  @click="examineAdv(event)" >解锁</button>
-                    </div>
-                   <div class=" layui-hide-md ">
-                       <ul class="layui-nav layui-nav-tree" lay-filter="test">
-                           <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
-                           <li class="layui-nav-item">
-                               <a href="javascript:;">操作</a>
-                               <dl class="layui-nav-child">
-                                   <dd><a href="" set_adv_id="{$user.store_adv_id}" setClass="pass" @click="examineAdv(event)" >审核通过</a></dd>
-                                   <dd><a href="" set_adv_id="{$user.store_adv_id}" setClass="locking"  @click="examineAdv(event)" >锁定</a></dd>
-                                   <dd><a href="" set_adv_id="{$user.store_adv_id}" setClass="unlock"  @click="examineAdv(event)" >解锁</a></dd>
-                               </dl>
-                           </li>
-                       </ul>
-                   </div>
-
-                </th>
-            </tr>
-            {/volist}
             </thead>
             <tbody class="links_content">
+                {volist name='list' id='user'}
+                <tr>
+                    <th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose" id="allChoose"></th>
+                    <th style="text-align:left;">{$user.store_adv_name}</th>
+                    <th>{$user.store_name}</th>
+                    <th>
+                        <div class="layui-btn-container">
+                            <button @click="seeData" set_adv_id="{$user.store_adv_id}" class="layui-btn">查看</button>
+                        </div>
+                    </th>
+                    <th>{$user.user_state}</th>
+                    <th>
+                        <div class="layui-hide layui-show-md-block">
+                            <button class="layui-btn" set_adv_id="{$user.store_adv_id}" setClass="pass" @click="examineAdv(event)" >审核通过</button>
+                            <button class="layui-btn" set_adv_id="{$user.store_adv_id}" setClass="locking"  @click="examineAdv(event)" >下架</button>
+                            <button class="layui-btn" set_adv_id="{$user.store_adv_id}" setClass="unlock"  @click="examineAdv(event)" >上架</button>
+
+                        </div>
+                        <div class=" layui-hide-md ">
+                            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                                <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
+                                <li class="layui-nav-item">
+                                    <a href="javascript:;">操作</a>
+                                    <dl class="layui-nav-child">
+                                        <dd><a href="javascript:;" set_adv_id="{$user.store_adv_id}" setClass="pass" @click="examineAdv(event)" >审核通过</a></dd>
+                                        <dd><a href="javascript:;" set_adv_id="{$user.store_adv_id}" setClass="locking"  @click="examineAdv(event)" >下架</a></dd>
+                                        <dd><a href="javascript:;" set_adv_id="{$user.store_adv_id}" setClass="unlock"  @click="examineAdv(event)" >上架</a></dd>
+                                    </dl>
+                                </li>
+                            </ul>
+                        </div>
+                    </th>
+
+                </tr>
+                {/volist}
             </tbody>
         </table>
     </div>
     <div id="page">
         {$list->render()}
     </div>
+    <div v-show="seeAdvert" class="layui-bg-gray" style="width:500px ;position:fixed ;top:10% ;left:10% ;padding:20px ;" >
+        <div class="layui-form-item">
+            <label class="layui-form-label"></label>
+            <label class="layui-input-block">广告详情</label>
+            <button class="layui-btn layui-btn-sm layui-bg-gray" style="float:right"  @click="seeAdvert = (seeAdvert)?false:true ;set_adv_id = 'false' ;" >
+                <i class="layui-icon">&#x1006;</i>
+            </button>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">广告名</label>
+            <div class="layui-input-block">
+                <input @change="advertDetails.name=set_advert_data(event)" type="text" name="title" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" :value="advertDetails.name" >
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">链接</label>
+            <div class="layui-input-block">
+                <input type="text" @change="advertDetails.link=set_advert_data(event)" name="title" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" :value="advertDetails.link" >
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">图片</label>
+            <div class="layui-input-block">
+                <img style="max-height:100px ;" :src="advertDetails.url" />
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">商家</label>
+            <div class="layui-input-block">
+                <input type="text" @change="advertDetails.advertiser=set_advert_data(event)" name="title" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" :value="advertDetails.advertiser" >
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"></label>
+            <div class="layui-input-block">
+                <div class="layui-btn-group">
+                    <button class="layui-btn" :set_adv_id="set_adv_id" @click="setDataAdvert" >修改</button>
+                    <button class="layui-btn" @click="seeAdvert = (seeAdvert)?false:true ;set_adv_id = 'false' ;" >确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div v-show="seeLoading" style="position:fixed ;top:40% ;left:40% ;" >
+        <div class="layui-anim layui-anim-rotate layui-anim-loop" data-anim="layui-anim-rotate layui-anim-loop">
+            <i class="layui-icon " style="font-size: 30px;">&#xe63d;</i>
+        </div>
+    </div>
+
 </div>
 </body>
 <script src="__STATIC__/layui/layui.js"></script>
@@ -125,6 +170,10 @@
     var url = "{:url('platformmanage/index/main')}" ;
     // 广告的请求
     var advertSetDataUrl = "{:url('platformmanage/Advert/setExamine')}" ;
+    // 更换广告
+    var replace_advert_url = "{:url('platformmanage/Advert/replaceAdvert')}" ;
+    // 设置搜索条件
+    var set_search_url = "{:url('platformmanage/Advert/searchCondition')}" ;
 
 </script>
 <script type="text/javascript" src="__JS__/platform/platform.js"></script>

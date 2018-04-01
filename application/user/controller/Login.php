@@ -262,6 +262,68 @@ class Login extends Controller
         return $return ;
     }
 
+    /**
+     * 功能描述：用户是否已登录
+     * 参数：
+     * QQUser：
+     * 返回：
+     * 作者：yonjin L
+     * 时间：18-4-1
+     */
+    function userLoginAlready(){
+        $msg = new \user() ;
+        if( Session::has('loginData') )
+        {
+            $res = unserialize(Session::get('loginData')) ;
+
+            // 没头像用默认
+            if( empty($res['user_image']) )
+            {
+                $image = config("default")["IMAGE_USER"];
+            }
+            else
+            {
+                $image = $res['user_image'] ;
+            }
+
+            $data = [
+               "name" =>  $res['user_name'] ,
+               "image" =>  $image
+            ] ;
+            // 返回用户信息
+            $msg->returnJson("loginMsg","SUCCESS_USER_DATA",$data,10000) ;
+
+        }
+        else
+        {
+            // 返回未登录信息
+            $msg->returnJson("loginMsg","ERROR_USER_DATA") ;
+        }
+    }
+
+    /**
+     * 功能描述：用户退出登录
+     * 参数：
+     * QQUser：
+     * 返回：
+     * 作者：yonjin L
+     * 时间：18-4-1
+     */
+    function outLogin(){
+        $msg = new \user() ;
+        if( Session::has('loginData') )
+        {
+            $res = Session::delete('loginData');
+            // 返回用户信息
+            $msg->returnJson("loginMsg","SUCCESS_USER_DATA",$res,10000) ;
+        }
+        else
+        {
+            // 返回未登录信息
+            $msg->returnJson("loginMsg","SUCCESS_USER_OUT") ;
+        }
+    }
+
 }
 
 

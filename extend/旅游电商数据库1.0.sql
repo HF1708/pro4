@@ -62,7 +62,7 @@ ALTER TABLE `user_user` ADD INDEX `sad` (`user_uid`,`user_password`) USING BTREE
 -- ALTER TABLE `user_user` ADD INDEX `sad1` (`user_email`) USING BTREE ;
 -- ALTER TABLE `user_user` ADD INDEX `sad2` (`user_phone`) USING BTREE ;
 insert into user_user( user_uid ,user_name ,user_password ,user_email ,user_phone ,user_image ,user_msg ,user_time )values
-( 'test' , '测试用', md5('123456'), '', '15324488756', '', 'test',now()  ) ;
+( 'test' , '测试用', md5('123456'), '', '15324488756', 'http://p6gnb5g93.bkt.clouddn.com/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg', 'test',now()  ) ;
 
 -- 商家信息表
 
@@ -95,6 +95,7 @@ INSERT INTO `qdm181738524_db`.`store_info`(`store_id`, `store_name`, `store_stat
 (1, '13255917292', 'F', '13255917292', '2018-03-28 19:41:23', 1964, 1965, 1966, '13255917292', '似懂非懂斯蒂芬萨芬 ');
 -- 商家 广告
 -- id 自增id
+-- 订单流水号
 -- name 广告名
 -- link 广告链接
 -- 广告商
@@ -103,30 +104,22 @@ drop table if exists store_advert ;
 create table if not exists store_advert
 (
 	store_adv_id int primary key auto_increment ,
+	-- store_adv_number char(43) ,
 	store_adv_name char(12) ,
-	store_adv_url  varchar(200),
-	store_adv_link varchar(50),
-	user_uid char(11), 
-	user_state enum('F','T','S') default 'F'  -- 广告状态 F 未审核； T审核通过； S 被锁定 
+	-- store_adv_page char(20) , -- 广告页面
+	 
+	store_adv_url  varchar(200) , 
+	store_adv_link varchar(50) , 
+	user_uid char(11) , 
+	user_state enum('F','T','S') default 'F'  -- 广告状态 F 未审核； T审核通过->上架； S 被锁定-> 下架 
 ) ; 
 -- 添加账号的唯一索引/ 广告名
 ALTER TABLE `store_advert` ADD UNIQUE INDEX `sdaa` (`store_adv_name`) USING BTREE ;
+-- 添加账号的唯一索引/ 广告名
+ALTER TABLE `store_advert` ADD UNIQUE INDEX `sdaa` (`store_adv_number`) USING BTREE ;
 
 insert into store_advert(store_adv_name,store_adv_url,store_adv_link,user_uid)values
 ("广告1","https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'13255917292') ;
-insert into store_advert(store_adv_name,store_adv_url,store_adv_link,user_uid)values
-("广告2","https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'13255917292') ;
-
-insert into store_advert(store_adv_name,store_adv_url,store_adv_link,user_uid)values
-("广告3","https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'13255917292') ;
-
-insert into store_advert(store_adv_name,store_adv_url,store_adv_link,user_uid)values
-("广告4","https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'13255917292') ;
-
-insert into store_advert(store_adv_name,store_adv_url,store_adv_link,user_uid)values
-("广告5","https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'13255917292') ;
-insert into store_advert(store_adv_name,store_adv_url,store_adv_link,user_uid)values
-("广告6","https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'13255917292') ;
 
 
 

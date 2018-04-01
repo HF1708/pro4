@@ -79,16 +79,20 @@
 				<div class="top-header">
 					<div class="container">
 						<div class="logo">
-							<a href="index.html"><span>T</span>ourister<span>...</span></a>
+							<a href="index.html"><span>去野</span>Journey<span>...</span></a>
 						</div>
 						<!----start-top-nav---->
-						<nav class="top-nav">
+						<nav class="top-nav"  id="login-register">
 							<ul class="top-nav">
-								<li><a href="index.html">Our Story</a></li>
-								<li><a href="menu.html">Menu</a></li>
-								<li class="active"><a href="reservation.html">Reservations</a></li>
-								<li><a href="news.html"> News</a></li>
-								<li><a href="reviews.html">Reviews</a></li>
+								<li class="active"><a href="{:url('index/index/index')}">首页home</a></li>
+								<li><a href="menu.html">目的地locations</a></li>
+								<li><a href="{:url('story/story/story')}">故事story</a></li>
+								<li>
+									<user-login></user-login>
+								</li>
+								<li>
+									<user-register></user-register>
+								</li>
 							</ul>
 							<a href="#" id="pull"><img src="__STATIC__/images/nav-icon.png" title="menu" /></a>
 						</nav>
@@ -310,7 +314,7 @@
 						{{Msg_body}}
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal" >退出</button>
+						<a type="button" class="btn btn-default" onclick="javascript:window.location.reload() ; ;" >退出</a>
 						<a :href="Msg_footer_link" class="btn btn-default" >{{Msg_footer}}</a>
 					</div>
 				</div>
@@ -319,13 +323,21 @@
 		<!--end 登录模态框 -->
 	</div>
 
-
-
 	
 </body>
 	<script type="text/javascript" src="__JS__/bootstrap.min.js"></script>
 	<script type="text/javascript" src="__JS__/vue.min.js"></script>
 	<script>
+
+		/*
+		点击登录/注册跳转页面
+		*/
+		var $login_jump = "{:url('user/Login/index')}" ;
+		var $register_jump = "{:url('user/Register/index')}" ;
+		var $user_login_already = "{:url('user/Login/userLoginAlready')}" ;
+		var $user_person_url = "{:url('user/Person/person')}" ;
+		var $user_login_out = "{:url('user/Login/outLogin')}" ;
+
 		/*
 		修改验证码的url
 		 */
@@ -342,168 +354,14 @@
 		 店家手机登录的url
 		 */
 		var $user_login_phone_url_1 = "{:url('user/Login/phoneLogin')}" ;
+		/*
+		店家登录成功跳转
+		 */
+		var $store_success_url = "{:url('storemanage/index/index')}" ;
+
+
 	</script>
-<script>
-	$('.carousel').carousel({
-		interval: 5000 // in milliseconds
-	}) ;
-	$(".modal-backdrop").remove() ;
-//	$("#loginMsgModel").modal('show') ;
-	var app = new Vue({
-		el:"#myApp" ,
-		data: {
-			shortMsg:"获取验证码" ,
-			shortShow:true ,
-			shortTimeMsg:'秒后重发' ,
-			shortJudge:'T' ,
-			Msg_head:'登录' ,
-			Msg_body:'登录成功' ,
-			Msg_footer:'确认' ,
-			Msg_footer_link:'#' ,
-			msg_footer_button_exit:'loginMsgModel_exit'
-
-		} ,
-		methods: {
-			/**
-			 * 功能描述：修改验证码
-			 * 参数：
-			 * QQUser：
-			 * 返回：
-			 * 作者：yonjin L
-			 * 时间：18-3-25
-			 */
-			setCaptcha:function(event)
-			{
-				$(event.target).attr('src',$code_url_1) ;
-			} ,
-			/**
-			 * 功能描述：发送短信验证码给用户
-			 * 参数：
-			 * QQUser：
-			 * 返回：
-			 * 作者：yonjin L
-			 * 时间：18-3-24
-			 */
-			getPhoneMsg: function(){
-				var that = this ;
-				var $name = $("#register_name").val() ;
-				$dataTel = {
-					tel : $name
-				} ;
-				if( that.shortJudge == 'T' )
-				{
-					$.ajax({
-						url:$code_user_url_1 ,
-						type:'post' ,
-						data:$dataTel ,
-						dataType:'json' ,
-						success:function(res){
-							// 验证码成功发送，则提示
-							if( res.code == 10000 )
-							{
-								that.shortTimeMsg = 60 ;
-								that.shortMsg = "60秒后重发" ;
-								that.shortJudge = 'F' ;
-								that.shortShow = false ;
-								var setTimeInterval = setInterval(function () {
-									that.shortTimeMsg-- ;
-									that.shortMsg = that.shortTimeMsg+"秒后重发" ;
-									if(that.shortTimeMsg <= 0)
-									{
-										that.shortTimeMsg = '秒后重发' ;
-										that.shortMsg = "获取验证码" ;
-										that.shortJudge = 'T' ;
-										that.shortShow = true ;
-										clearInterval(setTimeInterval) ;
-									}
-								}, 10) ;
-							}
-							else
-							{
-								alert(res.msg) ;
-							}
-						}
-					})
-				}
-
-			} ,
-			/**
-			 * 功能描述：用户登录
-			 * 参数：
-			 * QQUser：
-			 * 返回：
-			 * 作者：yonjin L
-			 * 时间：18-3-24
-			 */
-			login:function(){
-				var $name = $("#login_user").val() ;
-				var $pwd = $("#login_pwd").val() ;
-				var $code = $("#login_code").val() ;
-				var $data = {
-					name : $name ,
-					pwd : $pwd ,
-					code : $code
-				} ;
-				$.ajax({
-					url:$user_login_url_1,
-					type:'post' ,
-					data:$data ,
-					dataType:'json' ,
-					success:function(res){
-						if( res['code'] == 10000 )
-						{
-							$("#loginMsgModel").modal('show') ;
-							console.log('登录成功') ;
-						}
-						else
-						{
-							alert(res['msg']) ;
-						}
-					}
-				}) ;
-			} ,
-			/**
-			 * 功能描述：店家登录（用手机号码登录）
-			 * 参数：
-			 * QQUser：
-			 * 返回：
-			 * 作者：yonjin L
-			 * 时间：18-3-25
-			 */
-			phoneLogin:function(){
-				var that = this ;
-				var $name = $("#register_name").val() ;
-				var $code = $("#register_code").val() ;
-				var $data = {
-					name : $name ,
-					code : $code
-				} ;
-				console.log($data) ;
-				$.ajax({
-					url:$user_login_phone_url_1 ,
-					type:'post' ,
-					data:$data ,
-					dataType:'json' ,
-					success:function(res){
-						if( res['code'] == 10000 )
-						{
-							$("#loginMsgModel").modal('show') ;
-							console.log('手机登录成功') ;
-							that.Msg_footer_link = "{:url('storemanage/index/index')}" ;
-						}
-						else
-						{
-							alert(res) ;
-						}
-					}
-				}) ;
-			}
-
-		}
-	}) ;
-
-
-
-</script>
+	<script type="text/javascript" src="__JS__/user/user_login_page.js"></script>
+	<script type="text/javascript" src="__JS__/user/user_login.js"></script>
 </html>
 
