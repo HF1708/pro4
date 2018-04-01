@@ -90,6 +90,7 @@ var app = new Vue({
          * 时间：18-3-24
          */
         login:function(){
+            var that = this ;
             var $name = $("#login_user").val() ;
             var $pwd = $("#login_pwd").val() ;
             var $code = $("#login_code").val() ;
@@ -106,12 +107,16 @@ var app = new Vue({
                 success:function(res){
                     if( res['code'] == 10000 )
                     {
+                        that.Msg_footer_link = $user_person_url ;
                         $("#loginMsgModel").modal('show') ;
-                        console.log('登录成功') ;
                     }
                     else
                     {
-                        alert(res['msg']) ;
+                        that.Msg_head = '登录' ;
+                        that.Msg_body = res['msg'] ;
+                        that.Msg_footer = '确认' ;
+                        that.Msg_footer_link = "#loginMsgModel" ;
+                        $("#loginMsgModel").modal('show') ;
                     }
                 }
             }) ;
@@ -141,12 +146,16 @@ var app = new Vue({
                 success:function(res){
                     if( res['code'] == 10000 )
                     {
+                        that.Msg_footer_link = $user_person_url ;
                         $("#loginMsgModel").modal('show') ;
-                        that.Msg_footer_link = $store_success_url ;
                     }
                     else
                     {
-                        alert(res) ;
+                        that.Msg_head = '登录' ;
+                        that.Msg_body = res['msg'] ;
+                        that.Msg_footer = '确认' ;
+                        that.Msg_footer_link = "#loginMsgModel" ;
+                        $("#loginMsgModel").modal('show') ;
                     }
                 }
             }) ;

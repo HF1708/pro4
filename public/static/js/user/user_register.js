@@ -147,6 +147,7 @@ var app = new Vue({
          * 时间：18-3-25
          */
         register:function(){
+            var that = this ;
             var $name = $("#register_user").val() ;
             var $pwd = $("#register_pwd").val() ;
             var $pwd2 = $("#register_pwd2").val() ;
@@ -159,7 +160,6 @@ var app = new Vue({
                 code : $code ,
                 phone : $phone
             } ;
-            console.log($data) ;
             $.ajax({
                 url:$user_register ,
                 type:'post' ,
@@ -168,11 +168,16 @@ var app = new Vue({
                 success:function(res){
                     if( res['code'] == 10000 )
                     {
+                        that.Msg_footer_link = $user_person_url ;
                         $("#loginMsgModel").modal('show') ;
                     }
                     else
                     {
-                        alert(res['msg']) ;
+                        that.Msg_head = '注册' ;
+                        that.Msg_body = res['msg'] ;
+                        that.Msg_footer = '确认' ;
+                        that.Msg_footer_link = "#loginMsgModel" ;
+                        $("#loginMsgModel").modal('show') ;
                     }
                 }
             }) ;
@@ -186,6 +191,7 @@ var app = new Vue({
          * 时间：18-3-25
          */
         phoneRegister:function(){
+            var that = this ;
             var $tel = $("#register_name_stroe").val() ;
             var $code = $("#register_code_stroe").val() ;
             var $name = $("#register_nameStore").val() ;
@@ -202,12 +208,16 @@ var app = new Vue({
                 success:function(res){
                     if( res['code'] == 10000 )
                     {
+                        that.Msg_footer_link = $user_person_url ;
                         $("#loginMsgModel").modal('show') ;
                     }
                     else
                     {
-                        console.log(res) ;
-//							alert(res['msg']) ;
+                        that.Msg_head = '注册' ;
+                        that.Msg_body = res['msg'] ;
+                        that.Msg_footer = '确认' ;
+                        that.Msg_footer_link = "#loginMsgModel" ;
+                        $("#loginMsgModel").modal('show') ;
                     }
                 }
             }) ;
