@@ -1,40 +1,215 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>广告管理</title>
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="format-detection" content="telephone=no">
-    <link rel="stylesheet" href="__STATIC__/layui/css/layui.css" media="all" />
-    <link rel="stylesheet" href="__CSS__/bootstrap.min.css" media="all" />
-    <link rel="stylesheet" href="__STATIC__/css/font_eolqem241z66flxr.css" media="all" />
-    <style type="text/css">
-        .layui-table td, .layui-table th{ text-align: center; }
-        .layui-table td{ padding:5px; }
-    </style>
+    <title>聊天</title>
+    <link href="__CSS__/bootstrap.css" rel='stylesheet' type='text/css' />
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="__JS__/jquery.min.js"></script>
+    <!-- Custom Theme files -->
+    <link href="__CSS__/style.css" rel='stylesheet' type='text/css' />
+    <link href="__CSS__/backstage/chat.css" rel='stylesheet' type='text/css' />
+    <!-- Custom Theme files -->
+    <!---- start-smoth-scrolling---->
+    <script type="text/javascript" src="__JS__/move-top.js"></script>
+    <script type="text/javascript" src="__JS__/easing.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $(".scroll").click(function(event){
+                event.preventDefault();
+                $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+            });
+        });
+    </script>
+    <!---- start-smoth-scrolling---->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+
+
 </head>
-<body class="childrenBody">
+<body>
+<div id="myApp">
+    <div>
+        <!----- start-header---->
+        <!----- //End-header---->
+        <!----- menu-page ----->
+        <div class="reservation">
+            <!------ menu-header ----->
+            <!------ menuheader ----->
+            <div class="clearfix"> </div>
+            <div class="empty"></div>
+            <!----- reservation ---->
+            <div class="container" >
+                <div class="col-sm-2">
+                </div>
+                <div class="col-sm-8">
+                    <div class="row" style="border:1px solid #999;" >
+                        <div class="row"></div>
+                        <div class="row clearMarginPadding">
+                            <div class="col-sm-3 hidden-sm hidden-xs reviews-people" style="" >
+                                <div v-for="(val,key) in chat_obj" >
+                                    <img class="img_header_2" :src="val.chat_image" />{{val.chat_title}}
+                                </div>
+
+                            </div>
+                            <div class="col-sm-9  ">
+                                <div class="row chatCon" >
+                                    <div  v-for="(val,key) in chat_data">
+                                        <div class="media"  v-if="val.chat_login!=login" >
+                                            <div class="media-left media-middle ">
+                                                <a class="reviews-people" href="#">
+                                                    <img class="img_header_2 media-object pull-left" src="__STATIC__/images/g1.jpg"  alt="...">
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
+                                                <h4 class="media-heading">{{val.chat_title}}</h4>
+                                                <br />
+                                                <div>{{val.chat_con}}</div>
+                                            </div>
+                                        </div>
+                                        <div class="media sendConRight"  v-else  >
+                                            <div class="media-body">
+                                                <h4 class="media-heading pull-right">{{val.chat_title}}</h4>
+                                                <div class="clearfix"> </div>
+                                                <br />
+                                                <div class="">{{val.chat_con}}</div>
+                                            </div>
+                                            <div class="media-left media-middle ">
+                                                <a class="reviews-people" href="#">
+                                                    <img class="img_header_2 media-object pull-left" src="__STATIC__/images/g1.jpg"  alt="...">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row" style="position:relative;">
+                                    <div class="sendChatCon" contenteditable="true" id="message" >sad</div>
+                                    <button class="btn btn-primary sendMsg" @click="sendMsg()" type="button"  >发送</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
 
 </body>
-<script src="__STATIC__/layui/layui.js"></script>
+<script type="text/javascript" src="__JS__/bootstrap.min.js"></script>
+<script type="text/javascript" src="__JS__/vue.min.js"></script>
 <script>
-    layui.use('element', function(){
-        var element = layui.element;
-
-        //…
-    });
 
 </script>
-<script type="text/javascript" src="__JS__/vue.min.js"></script>
-<script type="text/javascript" src="__JS__/jquery.min.js"></script>
 <script>
+    $('.carousel').carousel({
+        interval: 5000 // in milliseconds
+    }) ;
+    $(".modal-backdrop").remove() ;
+    //	$("#loginMsgModel").modal('show') ;
+    var app = new Vue({
+        el:"#myApp" ,
+        data: {
+            chat_obj:{
+                chat_title:'aa' ,
+                chat_image:''
+            } ,
+            chat_data:[] ,
+
+        } ,
+        methods: {
+            /**
+             * 功能描述：发送聊天内容
+             * 参数：
+             * QQUser：
+             * 返回：
+             * 作者：yonjin L
+             * 时间：18-3-28
+             */
+            sendMsg: function()
+            {
+
+
+            }
+        } ,
+        mounted:function(){
+
+        }
+
+    }) ;
+
+    /**
+     * 功能描述：小于10的时分秒前加零
+     * 参数：
+     * QQUser：
+     * 返回：当前时间
+     * 作者：yonjin L
+     * 时间：18-3-28
+     */
+    function p(s) {
+        return s < 10 ? '0' + s: s;
+    }
+    /**
+     * 功能描述：获取当前时间
+     * 参数：
+     * QQUser：
+     * 返回：当前时间
+     * 作者：yonjin L
+     * 时间：18-3-28
+     */
+    function nowDdate()
+    {
+        var myDate = new Date();
+        //获取当前年
+        var year=myDate.getFullYear();
+        //获取当前月
+        var month=myDate.getMonth()+1;
+        //获取当前日
+        var date=myDate.getDate();
+        var h=myDate.getHours();       //获取当前小时数(0-23)
+        var m=myDate.getMinutes();     //获取当前分钟数(0-59)
+        var s=myDate.getSeconds();
+        var now=year+'-'+p(month)+"-"+p(date)+" "+p(h)+':'+p(m)+":"+p(s);
+        return now ;
+    }
+    function sendData( sender ,rever ,type ,content )
+    {
+        if( !sender )
+        {
+            console.log( "客户端错误的发送者" ,sender ) ;
+        }
+        if( !rever )
+        {
+            console.log( "客户端错误的发送者" ,rever ) ;
+        }
+        if( !type )
+        {
+            console.log( "客户端错误的发送者" ,type ) ;
+        }
+        if( !content )
+        {
+            console.log( "客户端错误的发送者" ,content ) ;
+        }
+        var msg = JSON.stringify( {
+            sender:sender,
+            rever:rever,
+            type:type,
+            content:content,
+            msgtime:( new Date() ).getTime()
+        });
+        console.log( "客户端发送的消息" ,msg );
+        return msg;
+    }
+
 
 
 </script>
 </html>
+

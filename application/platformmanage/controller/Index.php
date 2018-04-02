@@ -16,40 +16,6 @@ class Index extends Controller
     public function index()
     {
 
-        // 查询登录的用户
-        $msg = new \user() ;
-        if( Session::has('loginData') )
-        {
-            $res = unserialize(Session::get('loginData')) ;
-            if( strcmp($res['userType'],'server')==0 )
-            {
-                // 没头像用默认
-                if( empty($res['user_image']) )
-                {
-                    $image = config("default")["IMAGE_USER"] ;
-                }
-                else
-                {
-                    $image = config("default")["IMAGE_USER"] ;
-                }
-                $data = [
-                    "name" =>  $res['user_name'] ,
-                    "image" =>  $image
-                ] ;
-                // 返回用户信息
-                $userName = $res['user_name'] ;
-            }
-            else
-            {
-                $userName="登录" ;
-            }
-        }
-        else
-        {
-            // 返回未登录信息
-            $userName="登录" ;
-        }
-        $this->assign("userName",$userName) ;
         return $this->fetch() ;
 
     }
@@ -106,11 +72,8 @@ class Index extends Controller
     public function backstageLoginAlready()
     {
 
-
         // 如果单前页面不在登录页面，则为N 否则为Y
         $url =  strcmp(strstr($_SERVER['HTTP_REFERER'],"/login/index.html"),"/login/index.html")==0 ? "Y":"N";
-
-
 
         // 查询用户是否登录
         $msg = new \user() ;
@@ -140,6 +103,7 @@ class Index extends Controller
 
                 // 返回未登录信息
                 $msg->returnJson("loginMsg","UPDATA_ERROR") ;
+
             }
         }
         else
