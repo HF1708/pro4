@@ -41,25 +41,6 @@ use \Qiniu\Cdn\CdnManager;
 class user{
 
     /**
-     * 功能描述：判断post数据是否存在,为空返回报错信息
-     * 参数：待判断的数据,返回的信息类型、返回的信息内容、返回码
-     * QQUser：
-     * 返回：处理完的字符串
-     * 作者：yonjin L
-     * 时间：18-4-1
-     */
-    public function getData( $dataName ,$msgTitle ,$msgBody,$method="post" )
-    {
-        $getData = input("?".$method.".".$dataName) ? input($method.".".$dataName):"" ;
-
-        // 为空返回报错消息
-        $this->emptyData($getData,$msgTitle ,$msgBody) ;
-
-        return $getData ;
-
-    }
-
-    /**
      * 功能描述：删除\u 字符串（七牛云上传有中文的话，返回的外链用不了）
      * 参数：$name 预处理的字符串
      * QQUser：
