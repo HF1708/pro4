@@ -262,6 +262,7 @@ class Login extends Controller
         return $return ;
     }
 
+<<<<<<< HEAD
     /**
      * 功能描述：用户是否已登录
      * 参数：
@@ -348,6 +349,8 @@ class Login extends Controller
         }
     }
 
+=======
+>>>>>>> parent of c72416b... Merge branch 'master' of https://github.com/HF1708/pro4
 }
 
 

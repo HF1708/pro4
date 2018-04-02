@@ -22,22 +22,15 @@
 // 1. 判断数据是否为空（为空直接退出，并返回错误消息,否则不进行任何操作）
 // 2. 判断表中是否存在数据（不存在数据直接退出，并返回错误消息,否则不进行任何操作）
 // 3. 判断两个数据是否相同（不相同直接退出，并返回错误消息,否则不进行任何操作）
-// 4. 上传图片（成功返回可访问的url）
-// 5. 删除\u 字符串（处理完的字符串）
 //
 // 二：类curl
 // 1. 发送curl请求
 //
-// 引入鉴权类
-use Qiniu\Auth;
-
-// 引入上传类
-use Qiniu\Storage\UploadManager;
-// 时间戳防盗链
-use \Qiniu\Cdn\CdnManager;
 
 
 
+
+<<<<<<< HEAD
 class user{
 
     /**
@@ -179,7 +172,10 @@ class user{
         }
 
     }
+=======
+>>>>>>> parent of c72416b... Merge branch 'master' of https://github.com/HF1708/pro4
 
+class user{
     /**
      * 功能描述：判断表中元素是否为空
      * 参数：内容、出错返回的信息类型、出错返回的信息内容、返回码
