@@ -32,11 +32,14 @@ class Register extends Controller
         $pwd2 = input("?post.pwd2") ? input("post.pwd2") : '' ;
         $code = input("?post.code") ? input("post.code") : '' ;
         $phone = input("?post.phone") ? input("post.phone") : '' ;
+        $image = config("default")["IMAGE_USER"] ;
+        $time = date( "Y-m-d H:i:s" ,time() );
         $data = [
             "user_uid" => $name ,
             "user_password" => md5($pwd) ,
             "user_phone" => $phone ,
-            "user_time" => time()
+            "user_time" => $time ,
+            "user_image" => $image
         ] ;
         // 获取session缓存中的手机号码
         $sessionPhone = SESSION::get($phone) ;
@@ -143,10 +146,12 @@ class Register extends Controller
         $tel = input("?post.tel") ? input("post.tel") : "" ;
         $code = input("?post.code") ? input("post.code") : "" ;
         $name = input("?post.name") ? input("post.name") : "" ;
+        $image = config("default")["IMAGE_STORE"] ;
 
         $data = [
             "store_name" => $name ,
-            "store_phone" => $name ,
+            "store_phone" => $tel ,
+            "store_image" => $image ,
             "store_apply_time" => date('Y-m-d H:i:s',time())
         ] ;
 

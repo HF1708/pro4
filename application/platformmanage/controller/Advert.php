@@ -9,6 +9,11 @@ namespace app\platformmanage\controller;
 use think\Controller;
 use think\Paginator ;
 use think\Session ;
+use \think\Request ;
+// 引入鉴权类
+use Qiniu\Auth;
+// 引入上传类
+use Qiniu\Storage\UploadManager;
 
 class Advert extends Controller
 {
@@ -21,18 +26,37 @@ class Advert extends Controller
      **/
     public function index()
     {
-
+//        $request = Request::instance();
+//        echo "当前模块名称是" . $request->module();
+//        echo "当前控制器名称是" . $request->controller();
+//        echo "当前操作名称是" . $request->action();
         // 获取session中的搜索条件
+        $seatch_2 =  cookie('search') ;
 
         if( Session::has('search_advert') || input("?post.seartch_advert") )
         {
             $seatch = input("?post.seartch_advert")? input("post.seartch_advert"):(Session::has('search_advert')?Session::get('search_advert'):"") ;
-            $list = Db("store_advert")->alias('a')->join('store_info w', 'a.user_uid = w.store_phone')->where('store_adv_name','like','%'.$seatch.'%')->paginate(5);
+
+
+            if(!empty($seatch_2))
+            {
+                $where = [
+                    "a.user_state" =>  $seatch_2
+                ] ;
+                $list = Db("store_advert")->alias('a')->join('store_info w', 'a.user_uid = w.store_phone')->where('store_adv_name','like','%'.$seatch.'%')->where($where)->paginate(5);
+
+            }
+            else
+            {
+                $list = Db("store_advert")->alias('a')->join('store_info w', 'a.user_uid = w.store_phone')->where('store_adv_name','like','%'.$seatch.'%')->paginate(5);
+
+            }
+
+
         }
         else
         {
             // 获取5条广告
-//        $list = Db("store_advert")->alias('a')->join('store_info w', 'a.user_uid = w.store_phone')->where('a.user_state','F')->paginate(5);
             $list = Db("store_advert")->alias('a')->join('store_info w', 'a.user_uid = w.store_phone')->paginate(5);
 
         }
@@ -118,9 +142,12 @@ class Advert extends Controller
 
         // 修改广告状态
         $res = Db("store_advert")->where($where)->update($upData) ;
+        // 成功返回的消息
+        $success = "" ;
         // 修改是否成功或者没报错
         if( empty($res) || strcmp($res,1)==0 )
         {
+
             // 审核操作判断
             switch($setClass)
             {
@@ -128,32 +155,178 @@ class Advert extends Controller
                 // 审核
                 case "pass":
                     // 审核已通过时
-                    $that->emptyData($res,'advert','PASS_ALREADY',$res) ;
+                    $that->emptyData($res,'advert','PASS_ALREADY') ;
+                    // 审核已通过返回的消息
+                    $success = "T" ;
                     break ;
                 // 锁定
                 case "locking":
-                    // 用户已被锁定时
-                    $that->emptyData($res,'advert','PASS_ALREADY',$res) ;
+                    // 用户未通过审核时
+                    $that->emptyData($res,'advert','PASS_ALREADY') ;
+                    // 审核锁定返回的消息
+                    $success = "S" ;
                     break ;
                 // 解锁
                 case "unlock":
                     // 用户未被锁定时
-                    $that->emptyData($res,'advert','UNLOCK_ALREADY',$res) ;
+                    $that->emptyData($res,'advert','UNLOCK_ALREADY') ;
+                    // 审核已通过返回的消息
+                    $success = "S" ;
                     break ;
                 default:
                     exit ;
             }
-            // 修改成功
-            $returnJson = [
-                'code' => 10001 ,
-                'msg' => config('advert')['SUCCESS'] ,
-                'data' => []
-            ] ;
         }
-
+        // 修改成功
+        $returnJson = [
+            'code' => 10000 ,
+            'msg' => config('advert')['SUCCESS'] ,
+            'data' => ["success"=>$success]
+        ] ;
         // 返回消息
         echo json_encode($returnJson) ;
 
     }
+    /**
+     *    功能描述:更换广告
+     *  参数：无
+     *  返回：无
+     *  作者:yonjin L
+     *  时间：18-3-31
+     **/
+    public function replaceAdvert()
+    {
+        $advert_id = input("?post.setId")? input("post.setId") : "" ;
+        $that = new \user() ;
+
+        // 广告id是否存在
+        $that->emptyData($advert_id,"advert","REPLACE_ADVERT_ERROR") ;
+
+        // 获取广告
+        $where = [
+            "a.store_adv_id" => $advert_id
+        ] ;
+        $res = Db("store_advert")->alias('a')->join('store_info w', 'a.user_uid = w.store_phone')->where($where)->find();
+        // 广告是否获取失败
+        $that->emptyData($advert_id,"advert","REPLACE_ADVERT_ERROR") ;
+
+        // 打包数据
+        $returnData = [
+           "name" => $res["store_adv_name"] ,
+           "link" => $res["store_adv_link"] ,
+           "url" => $res["store_adv_url"] ,
+           "advertiser" => $res["store_name"] ,
+           "setId" => $res["store_adv_id"]
+        ] ;
+
+
+
+
+        // 广告获取成功
+        $that->returnJson("advert","SUCCESS",$returnData) ;
+
+    }
+
+    /**
+     *    功能描述:修改广告查询条件
+     *  参数：无
+     *  返回：无
+     *  作者:yonjin L
+     *  时间：18-3-31
+     **/
+    public function searchCondition()
+    {
+        $that = new \user() ;
+
+        // 获取设置的条件
+        $condition = input("?post.search") ? input("post.search"):"" ;
+
+
+
+        // 搜索条件是否存在
+        $that->emptyData($condition,"advert","ERROR") ;
+
+        switch($condition)
+        {
+            // 上架
+            case "up":
+                $condition = "T" ;
+                break ;
+            // 未审核
+            case "none":
+                $condition = "F" ;
+                break ;
+            // 下架
+            case "down":
+                $condition = "S" ;
+                break ;
+            case "all":
+                $condition = null ;
+                // 将条件存入3600秒cookie缓存
+                cookie('search', $condition, 3600);
+                $res =  cookie('search') ;
+                $that->returnJson("advert","SUCCESS",$res,10000) ;
+                break ;
+            default :
+                $condition = null ;
+                // 将条件存入3600秒cookie缓存
+                cookie('search', $condition, 3600);
+                $res =  cookie('search') ;
+                $that->returnJson("advert","SUCCESS",$res,10000) ;
+        }
+
+        // 将条件存入3600秒cookie缓存
+        cookie('search', $condition, 3600);
+
+        $res =  cookie('search') ;
+
+        $that->emptyData($res,"advert","ERROR") ;
+
+        // 返回成功提示
+        $that->returnJson("advert","SUCCESS",$res,10000) ;
+    }
+
+    /**
+     *    功能描述:上传图片
+     *  参数：无
+     *  返回：无
+     *  作者:yonjin L
+     *  时间：18-3-31
+     **/
+    public function imgUpload()
+    {
+        $that = new \user() ;
+        $imageId = input("?post.setId") ? input("post.setId"):"" ;
+        // 操作图片的id为空 不上传图片
+        // 否则上传图片
+        if( !empty($imageId) )
+        {
+            // 获取文件流
+            $file = $_FILES["file"] ;
+            // 上传图片
+            // 成功返回可访问的url路径
+            $url = $that->uploadImage($file) ;
+
+            // 保存url路径
+            $where = [
+                "store_adv_id" => $imageId
+            ] ;
+            $update = [
+                "store_adv_url" => $url
+            ] ;
+            $res = Db("store_advert")->where($where)->update($update) ;
+
+            // 保存是否成功
+            // 失败返回消息
+            $that->emptyData($res,"advert","ERROR") ;
+
+            echo json_encode([
+                'code' => 10000 ,
+                'data' => $url
+            ]) ;
+        }
+
+    }
 
 }
+

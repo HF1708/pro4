@@ -9,9 +9,9 @@ var navs = [{
 	"href" : PosttradeUrl,
 	"spread" : false
 },{
-	"title" : "发布商品",
+	"title" : "商品管理",
 	"icon" : "icon-text",
-	"href" : "page/links/linksList.html",
+	"href" : commodityManagementUrl,
 	"spread" : false
 },{
 	"title" : "404页面",

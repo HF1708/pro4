@@ -22,16 +22,145 @@
 // 1. 判断数据是否为空（为空直接退出，并返回错误消息,否则不进行任何操作）
 // 2. 判断表中是否存在数据（不存在数据直接退出，并返回错误消息,否则不进行任何操作）
 // 3. 判断两个数据是否相同（不相同直接退出，并返回错误消息,否则不进行任何操作）
+// 4. 上传图片（成功返回可访问的url）
+// 5. 删除\u 字符串（处理完的字符串）
 //
 // 二：类curl
 // 1. 发送curl请求
 //
+// 引入鉴权类
+use Qiniu\Auth;
 
-
+// 引入上传类
+use Qiniu\Storage\UploadManager;
+// 时间戳防盗链
+use \Qiniu\Cdn\CdnManager;
 
 
 
 class user{
+
+    /**
+     * 功能描述：删除\u 字符串（七牛云上传有中文的话，返回的外链用不了）
+     * 参数：$name 预处理的字符串
+     * QQUser：
+     * 返回：处理完的字符串
+     * 作者：yonjin L
+     * 时间：18-4-1
+     */
+    function unicode_decode($name)
+    {
+        // 转换编码，将Unicode编码转换成可以浏览的utf-8编码
+        $pattern = '/([\w]+)|(\\\u([\w]{4}))/i';
+        preg_match_all($pattern, $name, $matches);
+        if (!empty($matches))
+        {
+            $name = '';
+            for ($j = 0; $j < count($matches[0]); $j++)
+            {
+                $str = $matches[0][$j];
+                if (strpos($str, '\\u') === 0)
+                {
+                    $code = base_convert(substr($str, 2, 2), 16, 10);
+                    $code2 = base_convert(substr($str, 4), 16, 10);
+                    $c = chr($code).chr($code2);
+                    $c = iconv('UCS-2', 'UTF-8', $c);
+                    $name .= $c;
+                }
+                else
+                {
+                    $name .= $str;
+                }
+            }
+        }
+        return $name;
+    }
+
+    /**
+     * 功能描述：上传图片
+     * 参数：$file 图片文件流  ( $_FILES["file"] )
+     * QQUser：
+     * 返回：无(出错直接退出)
+     * 作者：yonjin L
+     * 时间：18-4-1
+     */
+    public function uploadImage($file)
+    {
+
+        $key = $file['name'] ;
+        $filePath = $file['tmp_name'] ;
+
+        // 如果$key 含有中文 则删除中文并添加随机数
+        if(preg_match('/[\x{4e00}-\x{9fa5}]/u', $key)>0){
+            // 设置图片的名字
+            // 删除中文并暂不添加随机数
+            $key = $this->unicode_decode($key) ;
+        }
+
+        // 需要填写你的 Access Key 和 Secret Key
+        $accessKey ="3yKhvENwZChpq8Z-JeBP352ODYP7mUay1Eicyr9u";
+        $secretKey = "Duh05-2QpbyKp7Bec0UFlE7XdHYZxdXnQqznJtdB" ;
+        $bucket = "ling";
+
+        // 构建鉴权对象
+        $auth = new Auth($accessKey, $secretKey);
+
+        // 生成上传 Token
+        $token = $auth->uploadToken($bucket);
+
+        // 初始化 UploadManager 对象并进行文件的上传。
+        $uploadMgr = new UploadManager();
+
+        // 调用 UploadManager 的 putFile 方法进行文件的上传。
+        list($ret, $err) = $uploadMgr->putFile($token, $key, $filePath);
+        if ($err !== null) {
+            return($err);
+        } else {
+            $url = $this->unicode_decode($ret['key']) ;
+            $http_url = "http://p6gnb5g93.bkt.clouddn.com/".$url ;
+            return $http_url ;
+        }
+
+    }
+
+    /**
+     * 功能描述：返回信息
+     * 参数：返回的信息类型、返回的信息内容、返回码
+     * QQUser：
+     * 返回：无(出错直接退出)
+     * 作者：yonjin L
+     * 时间：18-3-31
+     */
+    public function returnJson($msgTitle ,$msgBody,$content=[],$code=10001)
+    {
+
+        echo json_encode([
+            'code' => $code ,
+            'msg' => config($msgTitle)[$msgBody] ,
+            'data' => $content
+        ]) ;
+    }
+
+    /**
+     * 功能描述：将数据库的结果打包成数组发送回去
+     * 参数：返回的信息类型、返回的信息内容、返回码
+     * QQUser：
+     * 返回：无(出错直接退出)
+     * 作者：yonjin L
+     * 时间：18-3-31
+     */
+    public function returnDbJson($res ,$data,$content=[],$code=10001)
+    {
+
+        if( is_array($data) )
+        {
+            $return = [
+
+            ] ;
+        }
+
+    }
+
     /**
      * 功能描述：判断表中元素是否为空
      * 参数：内容、出错返回的信息类型、出错返回的信息内容、返回码
