@@ -51,6 +51,7 @@ var login = new Vue({
                         that.defaultImage =  defaultImage ;
                     }
 
+                    console.log(res) ;
                     if( res.data['setJump'] == "N" )
                     {
                         window.location.href=login_page ;

@@ -30,7 +30,7 @@
 
 
 
-<<<<<<< HEAD
+
 class user{
 
     /**
@@ -172,10 +172,7 @@ class user{
         }
 
     }
-=======
->>>>>>> parent of c72416b... Merge branch 'master' of https://github.com/HF1708/pro4
 
-class user{
     /**
      * 功能描述：判断表中元素是否为空
      * 参数：内容、出错返回的信息类型、出错返回的信息内容、返回码

@@ -106,8 +106,11 @@ class Index extends Controller
     public function backstageLoginAlready()
     {
 
+
         // 如果单前页面不在登录页面，则为N 否则为Y
         $url =  strcmp(strstr($_SERVER['HTTP_REFERER'],"/login/index.html"),"/login/index.html")==0 ? "Y":"N";
+
+
 
         // 查询用户是否登录
         $msg = new \user() ;
@@ -130,13 +133,13 @@ class Index extends Controller
                     "image" =>  $image
                 ] ;
                 // 返回用户信息
-                $msg->returnJson("loginMsg","SUCCESS_USER_DATA",$data,10000) ;
+                $msg->returnJson("loginMsg","SUCCESS",$data,10000) ;
             }
             else
             {
 
                 // 返回未登录信息
-                $msg->returnJson("loginMsg","ERROR_USER_DATA") ;
+                $msg->returnJson("loginMsg","UPDATA_ERROR") ;
             }
         }
         else
@@ -146,7 +149,7 @@ class Index extends Controller
             ] ;
             // 返回用户信息
             // 返回未登录信息
-            $msg->returnJson("loginMsg","ERROR_USER_DATA",$data) ;
+            $msg->returnJson("loginMsg","UPDATA_ERROR",$data) ;
         }
 
 

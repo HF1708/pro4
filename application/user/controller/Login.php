@@ -262,7 +262,6 @@ class Login extends Controller
         return $return ;
     }
 
-<<<<<<< HEAD
     /**
      * 功能描述：用户是否已登录
      * 参数：
@@ -340,7 +339,7 @@ class Login extends Controller
         {
             $res = Session::delete('loginData');
             // 返回用户信息
-            $msg->returnJson("loginMsg","SUCCESS_USER_DATA",$res,10000) ;
+            $msg->returnJson("loginMsg","SUCCESS_USER_DATA",Session::get('loginData'),10000) ;
         }
         else
         {
@@ -349,8 +348,6 @@ class Login extends Controller
         }
     }
 
-=======
->>>>>>> parent of c72416b... Merge branch 'master' of https://github.com/HF1708/pro4
 }
 
 
