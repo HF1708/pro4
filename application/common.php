@@ -22,23 +22,35 @@
 // 1. 判断数据是否为空（为空直接退出，并返回错误消息,否则不进行任何操作）
 // 2. 判断表中是否存在数据（不存在数据直接退出，并返回错误消息,否则不进行任何操作）
 // 3. 判断两个数据是否相同（不相同直接退出，并返回错误消息,否则不进行任何操作）
-// 4. 上传图片（成功返回可访问的url）
-// 5. 删除\u 字符串（处理完的字符串）
 //
 // 二：类curl
 // 1. 发送curl请求
 //
-// 引入鉴权类
-use Qiniu\Auth;
 
-// 引入上传类
-use Qiniu\Storage\UploadManager;
-// 时间戳防盗链
-use \Qiniu\Cdn\CdnManager;
+
 
 
 
 class user{
+
+    /**
+     * 功能描述：判断post数据是否存在,为空返回报错信息
+     * 参数：待判断的数据,返回的信息类型、返回的信息内容、返回码
+     * QQUser：
+     * 返回：处理完的字符串
+     * 作者：yonjin L
+     * 时间：18-4-1
+     */
+    public function getData( $dataName ,$msgTitle ,$msgBody,$method="post" )
+    {
+        $getData = input("?".$method.".".$dataName) ? input($method.".".$dataName):"" ;
+
+        // 为空返回报错消息
+        $this->emptyData($getData,$msgTitle ,$msgBody) ;
+
+        return $getData ;
+
+    }
 
     /**
      * 功能描述：删除\u 字符串（七牛云上传有中文的话，返回的外链用不了）
