@@ -238,20 +238,15 @@ return [
         'var_page'  => 'page',
         'list_rows' => 15,
     ],
-
-    // 默认信息
-    // IMAGE_USER/IMAGE_STORE 默认用户/店家头像
+    // 默认头像
     "default" =>[
-        'IMAGE_USER' => 'http://p6gnb5g93.bkt.clouddn.com/user.png' ,
-        'IMAGE_STORE' => 'http://p6gnb5g93.bkt.clouddn.com/store.png' ,
+       "IMAGE_USER" => "http://p6gnb5g93.bkt.clouddn.com/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg"
     ] ,
-
     // 登录返回消息配置
     "loginMsg" => [
         'SUCCESS' => '恭喜你，登录成功' ,
-        'SUCCESS_USER_DATA' => '用户已登录' ,
-        'SUCCESS_USER_OUT' => '用户已退出' ,
-        'ERROR_USER_DATA' => '用户未登录' ,
+        "SUCCESS_USER_DATA" => "获取用户数据成功" ,
+        "SUCCESS_USER_OUT" => "获取用户数据失败" ,
         'ACCOUNT_EMPTY' => '用户密码不能为空，请重新输入' ,
         'ACCOUNT_ERROR' => '用户密码错误，请重新输入' ,
         'ACCOUNT_REPEAT' => '用户名已存在，请重新输入' ,
@@ -290,7 +285,6 @@ return [
         "PASS_ALREADY" => "操作异常，用户未通过审核" ,
         "LOCKING_ALREADY" => "操作异常，用户已被锁定" ,
         "UNLOCK_ALREADY" => "操作异常，用户未被锁定" ,
-        "REPLACE_ADVERT_ERROR" => "广告获取失败" ,
         "NOPASS" => "审核未通过，无法锁定" ,
         'ERROR' => '很遗憾，操作失败' ,
     ] ,

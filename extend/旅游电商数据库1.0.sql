@@ -1,4 +1,4 @@
-﻿-- drop database if exists travel;
+-- drop database if exists travel;
 -- create database travel DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;-- 
 -- use travel;
 -- 
@@ -62,7 +62,7 @@ ALTER TABLE `user_user` ADD INDEX `sad` (`user_uid`,`user_password`) USING BTREE
 -- ALTER TABLE `user_user` ADD INDEX `sad1` (`user_email`) USING BTREE ;
 -- ALTER TABLE `user_user` ADD INDEX `sad2` (`user_phone`) USING BTREE ;
 insert into user_user( user_uid ,user_name ,user_password ,user_email ,user_phone ,user_image ,user_msg ,user_time )values
-( 'test' , '测试用', md5('123456'), '', '15324488756', 'http://p6gnb5g93.bkt.clouddn.com/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg', 'test',now()  ) ;
+( 'test' , '测试用', md5('123456'), '', '15324488756', '', 'test',now()  ) ;
 
 -- 商家信息表
 
@@ -72,7 +72,7 @@ create table if not exists store_info
 (
 	store_id int primary key auto_increment,-- 自增ID
 	store_name char(12) , -- 商家名字
-	store_state enum('I','F','T','S') default 'F' , -- 商家状态 F 未审核； T审核通过； S 被锁定 
+	store_state enum('F','T','S') default 'F' , -- 商家状态 F 未审核； T审核通过； S 被锁定 
 	store_image varchar(100) ,
 	store_phone char(11),-- 商家绑定手机
 	store_apply_time  datetime, -- 申请时间
@@ -95,7 +95,6 @@ INSERT INTO `qdm181738524_db`.`store_info`(`store_id`, `store_name`, `store_stat
 (1, '13255917292', 'F', '13255917292', '2018-03-28 19:41:23', 1964, 1965, 1966, '13255917292', '似懂非懂斯蒂芬萨芬 ');
 -- 商家 广告
 -- id 自增id
--- 订单流水号
 -- name 广告名
 -- link 广告链接
 -- 广告商
@@ -104,22 +103,37 @@ drop table if exists store_advert ;
 create table if not exists store_advert
 (
 	store_adv_id int primary key auto_increment ,
-	-- store_adv_number char(43) ,
 	store_adv_name char(12) ,
-	-- store_adv_page char(20) , -- 广告页面
-	 
-	store_adv_url  varchar(200) , 
-	store_adv_link varchar(50) , 
-	user_uid char(11) , 
-	user_state enum('F','T','S') default 'F'  -- 广告状态 F 未审核； T审核通过->上架； S 被锁定-> 下架 
+	store_adv_url  varchar(200),
+	store_adv_link varchar(50),
+	user_uid char(11), 
+	user_state enum('F','T','S') default 'F'  -- 广告状态 F 未审核； T审核通过； S 被锁定 
 ) ; 
 -- 添加账号的唯一索引/ 广告名
 ALTER TABLE `store_advert` ADD UNIQUE INDEX `sdaa` (`store_adv_name`) USING BTREE ;
--- 添加账号的唯一索引/ 广告名
--- ALTER TABLE `store_advert` ADD UNIQUE INDEX `sdaa` (`store_adv_number`) USING BTREE ;
 
 insert into store_advert(store_adv_name,store_adv_url,store_adv_link,user_uid)values
 ("广告1","https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'13255917292') ;
+insert into store_advert(store_adv_name,store_adv_url,store_adv_link,user_uid)values
+("广告2","https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'13255917292') ;
+<<<<<<< HEAD
+insert into store_advert(store_adv_name,store_adv_url,store_adv_link,user_uid)values
+("广告3","https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'13255917292') ;
+insert into store_advert(store_adv_name,store_adv_url,store_adv_link,user_uid)values
+("广告4","https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'13255917292') ;
+=======
+
+insert into store_advert(store_adv_name,store_adv_url,store_adv_link,user_uid)values
+("广告3","https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'13255917292') ;
+
+insert into store_advert(store_adv_name,store_adv_url,store_adv_link,user_uid)values
+("广告4","https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'13255917292') ;
+
+>>>>>>> parent of c72416b... Merge branch 'master' of https://github.com/HF1708/pro4
+insert into store_advert(store_adv_name,store_adv_url,store_adv_link,user_uid)values
+("广告5","https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'13255917292') ;
+insert into store_advert(store_adv_name,store_adv_url,store_adv_link,user_uid)values
+("广告6","https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'13255917292') ;
 
 
 
@@ -148,7 +162,22 @@ create table if not exists user_chat
 
 ALTER TABLE `user_chat` ADD INDEX `user_chat_1` (`user_uid`,`user_chat_char_two_id`) USING BTREE ;
 
+-------------------------------------后台---------------------------------------------
+-- 员工管理表
+drop table if exists backstage_user ;
+create table if not exists backstage_user
+(
+	user_id int primary key auto_increment ,
+	user_uid char(8) , -- 例：hf170809
+	user_password char(20) ,
+	user_name char(10)
+) ;
 
+-- 添加账号密码的符合索引(联合索引)
+ALTER TABLE `backstage_user` ADD INDEX `sad` (`user_uid`,`user_password`) USING BTREE ;
+
+insert into backstage_user(user_uid,user_password,user_name) values
+('hf170809','123456',"测试客服") ;
 
 -- -----------------------------------邱萍--------------------------------------------
 
@@ -166,19 +195,17 @@ create table if not exists store_shotel(
 	cityID int(11),
 	townID int(11),
 	grade VARCHAR(8),
-	upTime datetime,-- 发布时间时间
 	hAddress varchar(50),-- 酒店详细地址 （待优化）
 	hPrice int, -- 价格
 	store_id int,
 	textarea VARCHAR(500),
-	state enum('F','T','U','D','I') default 'I' , -- 酒店审核状态 
 		foreign key(provinceID) references `hy_area`(id), 
 	foreign key(cityID) references `hy_area`(id), 
 	foreign key(townID) references `hy_area`(id),
 	foreign key(store_id) references store_info(store_id)  -- 酒店属于的商家ID
 ) ;
 
-insert into store_shotel(hId,hName,hImg,hRoomNumber,hAddress,hPrice,store_id)values
+insert into store_shotel(hId,hName,hImg,hRemain,hAddress,hPrice,store_id)values
 (9001,'厦门香格里拉大酒店','hotel1.jpg',20,'观音山国际商务区台东路168号',1009,''),
 (9002,'厦门海悦山庄酒店','hotel2.jpg',20,'思明区环岛南路3999号(紧邻环岛路,国家会计学院旁)',810,''),
 (9003,'厦门海景千禧大酒店','hotel3.jpg',20,'镇海路12号之8号 (近中山路商业步行街, 轮渡码头和和平码头)',790,''),
@@ -4161,5 +4188,5 @@ INSERT INTO `hy_area` VALUES ('3745', '3738', '氹仔岛', '氹仔岛', '中国,
 INSERT INTO `hy_area` VALUES ('3746', '3745', '嘉模堂区', '嘉模堂区', '中国,澳门特别行政区,氹仔岛,嘉模堂区', '3', 'ourladyofcarmel\'sparish', '00853', '999078', 'J', '113.565303', '22.149029');
 INSERT INTO `hy_area` VALUES ('3747', '3738', '路环岛', '路环岛', '中国,澳门特别行政区,路环岛', '2', 'coloane', '00853', '999078', 'L', '113.564857', '22.116226');
 INSERT INTO `hy_area` VALUES ('3748', '3747', '圣方济各堂区', '圣方济各堂区', '中国,澳门特别行政区,路环岛,圣方济各堂区', '3', 'stfrancisxavier\'sparish', '00853', '999078', 'S', '113.559954', '22.123486');
-INSERT INTO `hy_area` VALUES ('3749', '0', '钓鱼岛', '钓鱼岛', '中国,钓鱼岛', '1', 'diaoyudao', '', '', 'D', '123.478088', '25.742385');0
+INSERT INTO `hy_area` VALUES ('3749', '0', '钓鱼岛', '钓鱼岛', '中国,钓鱼岛', '1', 'diaoyudao', '', '', 'D', '123.478088', '25.742385');
 

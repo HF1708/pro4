@@ -17,7 +17,7 @@
 
 </head>
 <body class="main_body">
-	<div class="layui-layout layui-layout-admin">
+	<div class="layui-layout layui-layout-admin"  id="login-backstage" >
 		<!-- 顶部 -->
 		<div class="layui-header header">
 			<div class="layui-main">
@@ -63,15 +63,14 @@
 					<!--<li class="layui-nav-item lockcms" pc>-->
 						<!--<a href="javascript:;"><i class="iconfont icon-lock1"></i><cite>锁屏</cite></a>-->
 					<!--</li>-->
-					<li class="layui-nav-item" pc>
+					<li class="layui-nav-item" v-show="out_login_show"  pc>
 						<a href="javascript:;">
-							<img src="__STATIC__/images/face.jpg" class="layui-circle" width="35" height="35">
-							<cite>{$userName}</cite>
+							<img :src="defaultImage" class="layui-circle" width="35" height="35">
+							<cite>{{user_name}}</cite>
 						</a>
 						<dl class="layui-nav-child">
 							<dd><a href="javascript:;" data-url="page/user/userInfo.html"><i class="iconfont icon-zhanghu" data-icon="icon-zhanghu"></i><cite>个人资料</cite></a></dd>
-							<dd><a href="javascript:;" data-url="page/user/changePwd.html"><i class="iconfont icon-shezhi1" data-icon="icon-shezhi1"></i><cite>修改密码</cite></a></dd>
-							<dd><a href="javascript:;"><i class="iconfont icon-loginout"></i><cite>退出</cite></a></dd>
+							<dd @click="outLogin" ><a href="javascript:;"><i class="iconfont icon-loginout"></i><cite>退出</cite></a></dd>
 						</dl>
 					</li>
 				</ul>
@@ -80,8 +79,9 @@
 		<!-- 左侧导航 -->
 		<div class="layui-side layui-bg-black">
 			<div class="user-photo">
-				<a class="img" title="我的头像" ><img src="__STATIC__/images/face.jpg"></a>
-				<p>你好！<span class="userName">{$userName}</span>, 欢迎登录</p>
+				<a class="img" title="我的头像" ><img :src="defaultImage"></a>
+				<p v-show="out_login_show" >你好！<span class="userName" >{{user_name}}</span>, 欢迎登录</p>
+				<p v-show="!out_login_show" >请先<span class=" userName" >登录</span></p>
 			</div>
 			<div class="navBar layui-side-scroll"></div>
 		</div>
@@ -89,20 +89,33 @@
 		<div class="layui-body layui-form">
 			<div class="layui-tab marg0" lay-filter="bodyTab">
 				<ul class="layui-tab-title top_tab">
-					<li class="layui-this" lay-id=""><i class="iconfont icon-computer"></i> <cite>后台首页</cite></li>
+					<li class="layui-this" lay-id=""><i class="iconfont icon-computer"></i> <cite>平台首页</cite></li>
 				</ul>
 				<div class="layui-tab-content clildFrame">
 					<div class="layui-tab-item layui-show">
-						<iframe src="{:url('storemanage/index/main')}"></iframe>
+						<iframe src="{:url('platformmanage/index/main')}"></iframe>
 					</div>
 				</div>
 			</div>
 		</div>
+
+		<div >
+			<div class="layui-form-item">
+				<label class="layui-form-label"></label>
+				<div class="layui-input-block">
+
+				</div>
+			</div>
+		</div>
+
+
 		<!-- 底部 -->
 		<div class="layui-footer footer">
 			<p>Copyright © 2018.去野All rights </p>
 		</div>
 	</div>
+
+
 
 	<!-- 锁屏 -->
 	<!--<div class="admin-header-lock" id="lock-box" style="display: none;">-->
@@ -118,14 +131,16 @@
 	<div class="site-tree-mobile layui-hide"><i class="layui-icon">&#xe602;</i></div>
 	<div class="site-mobile-shade"></div>
 	<script>
-<<<<<<< HEAD
         var mainUrl="{:url('platformmanage/index/main')}";
         var AdvertUrl="{:url('platformmanage/Advert/index')}";
         var UserbgUrl="{:url('platformmanage/Userbg/index')}";
-=======
         var mainUrl="{:url('platformmanage/index/main')}" ;
+		// 广告管理
         var AdvertUrl="{:url('platformmanage/Advert/index')}" ;
->>>>>>> 3e5347d2ba163fb42732ea1097ffe037ff1151d9
+		// 客服聊天
+		var ServerChatUrl = "{:url('platformmanage/Chat/index')}" ;
+
+
 	</script>
 		<script src="__STATIC__/layui/layui.js"></script>
         <script type="text/javascript" src="__JS__/nav_platform.js"></script>
@@ -137,6 +152,18 @@
 <script>
 	var url = "{:url('platformmanage/index/main')}" ;
 
-</script>
 
+
+	// 用户是否已登录
+	var backstage_login_already = "{:url('platformmanage/Index/backstageLoginAlready')}" ;
+	// 默认头像
+	var defaultImage = "__STATIC__/images/face.jpg" ;
+	// 登录页面
+	var login_page = "{:url('platformmanage/Login/index')}" ;
+
+	// 退出登录
+	var out_login_url = "{:url('user/Login/outLogin')}" ;
+
+</script>
+<script type="text/javascript" src="__JS__/backstage/login.js"></script>
 </html>
