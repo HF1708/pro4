@@ -1,4 +1,4 @@
-﻿-- drop database if exists travel;
+-- drop database if exists travel;
 -- create database travel DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;-- 
 -- use travel;
 -- 
@@ -91,7 +91,8 @@ ALTER TABLE `store_info` ADD UNIQUE INDEX `sda` (`store_name`) USING BTREE ;
 ALTER TABLE `store_info` ADD UNIQUE INDEX `sda2` (`store_phone`) USING BTREE ;
 -- 添加商店名字的符合索引(查询索引)/手机邮箱
 ALTER TABLE `store_info` ADD INDEX `sad1` (`store_name`) USING BTREE ;
-INSERT INTO `qdm181738524_db`.`store_info`(`store_id`, `store_name`, `store_state`, `store_phone`, `store_apply_time`, `store_province_id`, `store_city_id`, `store_town_id`, `store_address_detail`, `store_textarea`) VALUES (1, '13255917292', 'F', '13255917292', '2018-03-28 19:41:23', 1964, 1965, 1966, '13255917292', '似懂非懂斯蒂芬萨芬 ');
+INSERT INTO `qdm181738524_db`.`store_info`(`store_id`, `store_name`, `store_state`, `store_phone`, `store_apply_time`, `store_province_id`, `store_city_id`, `store_town_id`, `store_address_detail`, `store_textarea`) VALUES 
+(1, '13255917292', 'F', '13255917292', '2018-03-28 19:41:23', 1964, 1965, 1966, '13255917292', '似懂非懂斯蒂芬萨芬 ');
 -- 商家 广告
 -- id 自增id
 -- name 广告名
@@ -103,14 +104,31 @@ create table if not exists store_advert
 (
 	store_adv_id int primary key auto_increment ,
 	store_adv_name char(12) ,
-	store_adv_url  varchar(100),
+	store_adv_url  varchar(200),
 	store_adv_link varchar(50),
-	user_uid int, 
-	user_state enum('F','T','S') default 'F' , -- 广告状态 F 未审核； T审核通过； S 被锁定 
-	foreign key(user_uid) references store_info(store_id) 
-) ;
+	user_uid char(11), 
+	user_state enum('F','T','S') default 'F'  -- 广告状态 F 未审核； T审核通过； S 被锁定 
+) ; 
 -- 添加账号的唯一索引/ 广告名
 ALTER TABLE `store_advert` ADD UNIQUE INDEX `sdaa` (`store_adv_name`) USING BTREE ;
+
+insert into store_advert(store_adv_name,store_adv_url,store_adv_link,user_uid)values
+("广告1","https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'13255917292') ;
+insert into store_advert(store_adv_name,store_adv_url,store_adv_link,user_uid)values
+("广告2","https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'13255917292') ;
+
+insert into store_advert(store_adv_name,store_adv_url,store_adv_link,user_uid)values
+("广告3","https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'13255917292') ;
+
+insert into store_advert(store_adv_name,store_adv_url,store_adv_link,user_uid)values
+("广告4","https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'13255917292') ;
+
+insert into store_advert(store_adv_name,store_adv_url,store_adv_link,user_uid)values
+("广告5","https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'13255917292') ;
+insert into store_advert(store_adv_name,store_adv_url,store_adv_link,user_uid)values
+("广告6","https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'13255917292') ;
+
+
 
 -- 聊天记录表
 -- （店家/用户）A/（店家/客服）B/（客服/用户）C/（店家/店家）D/（用户/用户）E/（客服/客服）F 聊天记录
@@ -145,10 +163,18 @@ create table if not exists store_shotel(
 	hId int not null auto_increment primary key,-- 酒店ID
 	hName varchar(50) not null , -- 酒店名字
 	hImg varchar(50),-- 封面 图片ID
-	hRemain TINYINT,-- 酒店剩余房房间
-	hAddress varchar(50),-- 酒店地址 （待优化）
+	hRoomNumber TINYINT,-- 酒店总房间数
+	provinceID int(11),
+	cityID int(11),
+	townID int(11),
+	grade VARCHAR(8),
+	hAddress varchar(50),-- 酒店详细地址 （待优化）
 	hPrice int, -- 价格
 	store_id int,
+	textarea VARCHAR(500),
+		foreign key(provinceID) references `hy_area`(id), 
+	foreign key(cityID) references `hy_area`(id), 
+	foreign key(townID) references `hy_area`(id),
 	foreign key(store_id) references store_info(store_id)  -- 酒店属于的商家ID
 ) ;
 
@@ -184,7 +210,7 @@ create table if not exists store_hotelComment(
 );
 
 insert  into  store_hotelComment  (hcId,hId,hcContent,hcTime,userId,commentTo)VALUES
-(1000,9001,'这家酒店很好！','2018-04-01','test','')
+(1000,9001,'这家酒店很好！','2018-04-01','test','');
 
 -- 订单表
 create table if not exists store_hotelOrder(

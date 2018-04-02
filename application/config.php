@@ -265,6 +265,23 @@ return [
         'LOSE' => '注册失败' ,
         'REGISTER_DATA_EXISTS' => '用户已存在'
     ] ,
+    // 广告操作状态
+    "advert_state" => [
+        'LOCKING' => 'locking' ,
+        'PASS' => 'pass' ,
+        'UNLOCK' => 'unlock'
+    ] ,
+    // 广告返回消息配置
+    "advert" => [
+        'SUCCESS' => '恭喜你，操作成功' ,
+        'EMPTY' => '很遗憾，找不到可操作的广告' ,
+        "OPERATION" => "错误的操作" ,
+        "PASS_ALREADY" => "操作异常，用户未通过审核" ,
+        "LOCKING_ALREADY" => "操作异常，用户已被锁定" ,
+        "UNLOCK_ALREADY" => "操作异常，用户未被锁定" ,
+        "NOPASS" => "审核未通过，无法锁定" ,
+        'ERROR' => '很遗憾，操作失败' ,
+    ] ,
     // 验证码
     'Captcha' => [
         'length' => 4

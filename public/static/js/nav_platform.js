@@ -16,7 +16,16 @@ var navs = [{
 }, {
 	"title" : "用户管理",
 	"icon" : "icon-text",
+<<<<<<< HEAD
 	"href" : UserbgUrl,
+=======
+	"href" : "",
+	"spread" : false
+},{
+	"title" : "404页面",
+	"icon" : "&#xe61c;",
+	"href" : "page/404.html",
+>>>>>>> 3e5347d2ba163fb42732ea1097ffe037ff1151d9
 	"spread" : false
 },{
 	"title" : "系统基本参数",

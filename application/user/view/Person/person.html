@@ -37,18 +37,23 @@
         <div class="col-lg-3 left_style text-center">
             <div>
                 <img src="__STATIC__/images/testHead.jpg" alt="用户头像" class="img-circle ">.
-                <p>用户名</p>
-                <span>注册时间：|</span>
-                <span>现居：|</span>
+                <p>{$user_name}</p>
+                <p>注册时间:{$user_time}</p>
+                <span>性别：{$user_sex} |</span>
                 <!--跳转修改信息页-->
                 <a><span class="glyphicon glyphicon-cog"></span></a>
+                <p></p>
                 <!--此处进行判断，用户有简介则显示简介-->
-                <button type="button" class="btn btn-warning btn-sm btn-block">填写个人简介</button>
-                <div class="show">
-                    <textarea autofocus="true" placeholder="例：摄影师/旅居澳洲/潜水爱好者" maxlength="100" rows="3" class="personInfo"></textarea>
-                    <button type="button" class="btn btn-warning btn-sm btn-block">保存</button>
+                <div>
+                    <button id="introBtn" type="button" class="btn btn-warning btn-sm btn-block intro_btn" >填写个人简介</button>
+                    <div>
+                        <span id="userIntro">{$user_msg}</span>
+                    </div>
+                    <div id="inputIntro">
+                        <textarea id = "myIntro" autofocus="true" placeholder="例：摄影师/旅居澳洲/潜水爱好者" maxlength="100" rows="3" class="personInfo"></textarea>
+                        <button id="saveIntro" type="button" class="btn btn-warning btn-sm btn-block">保存</button>
+                    </div>
                 </div>
-                <div>显示个人简介区域</div>
             </div>
             <div>我的关注</div>
             <div>我的粉丝</div>
@@ -117,4 +122,9 @@
 </body>
 <script src="__JS__/jquery.min.js"></script>
 <script src="__JS__/bootstrap.min.js"></script>
+<script src="__JS__/vue.min.js"></script>
+<script>
+    var changeUrl="{:url('user/person/changeIntro')}"
+</script>
+<script src="__JS__/person.js"></script>
 </html>
