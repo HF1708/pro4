@@ -26,33 +26,83 @@
 <script src="__STATIC__/layui/layui.js"></script>
 
 <script>
-    console.log(2555)
+
     layui.use('table', function(){
         var table = layui.table;
         //第一个实例
-        console.log(23111)
+
         table.render({
             elem: '#demo'
             ,height: 315
             ,url: '{:url("storemanage/Commodity/shotelData")}' //数据接口
             ,page: true //开启分页
             ,cols: [[ //表头
-                {field: 'hName', title: '酒店名称', width:80, sort: true, fixed: 'left'}
-                ,{field: 'username', title: '用户名', width:80}
-                ,{field: 'sex', title: '性别', width:80, sort: true}
-                ,{field: 'city', title: '城市', width:80}
-                ,{field: 'sign', title: '签名', width: 177}
-                ,{field: 'experience', title: '积分', width: 80, sort: true}
-                ,{field: 'score', title: '评分', width: 80, sort: true}
-                ,{field: 'classify', title: '职业', width: 80}
-                ,{field: 'wealth', title: '财富', width: 135, sort: true}
+                {field: 'hName', title: '酒店名称', width:280, fixed: 'left'}
+                ,{field: 'hPrice', title: '价格', width:80, sort: true}
+                ,{field: 'hAddress', title: '详细地址', width:180}
+                ,{field: 'state', title: '状态', width:180,toolbar: '#barState'}
+                ,{field: 'oper', title: '操作', width:180,toolbar: '#barOper'}
+                ,{field: 'info', title: '查看详情',width:120,toolbar: '#barInfo'}
             ]]
         });
-        console.log(2111)
+        //监听工具条
+        table.on('toolbar(info)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+            alert(11);
+            var data = obj.data; //获得当前行数据
+            var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+            var tr = obj.tr; //获得当前行 tr 的DOM对象
+
+            if(layEvent === 'detail'){ //查看
+                //do somehing
+            } else if(layEvent === 'del'){ //删除
+                layer.confirm('真的删除行么', function(index){
+                    obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                    layer.close(index);
+                    //向服务端发送删除指令
+                });
+            } else if(layEvent === 'edit'){ //编辑
+                //do something
+
+                //同步更新缓存对应的值
+                obj.update({
+                    username: '123'
+                    ,title: 'xxx'
+                });
+            }
+        });
 
     });
     //上传图片URL
-    console.log(111)
+
 </script>
+<script type="text/html" id="barState">
+     <!--这里同样支持 laytpl 语法，如： -->
+    {{#  if(d.state =='I'){ }}
+        <span>审核中</span>
+    {{#  } else if(d.state =='F') { }}
+    <span>审核失败</span>
+    {{#  } else {}}
+     <span>审核通过</span>
+     {{#  } }}
+</script>
+<script type="text/html" id="barOper">
+    {{#  if(d.state =='D'){ }}
+        <a class="layui-btn layui-btn-xs" lay-event="detail">上架</a>
+    {{#  } else if(d.state =='U') { }}
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="detail">下架</a>
+    {{#  } else if(d.state =='T') { }}
+    <a class="layui-btn layui-btn-xs" lay-event="detail">上架</a>
+    {{#  } else {}}
+
+    {{#  } }}
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+</script>
+<script type="text/html" id="barInfo">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="info">查看详情</a>
+</script>
+<script>
+
+</script>
+
 
 </html>

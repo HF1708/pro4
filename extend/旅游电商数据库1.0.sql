@@ -1,4 +1,4 @@
--- drop database if exists travel;
+﻿-- drop database if exists travel;
 -- create database travel DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;-- 
 -- use travel;
 -- 
@@ -72,7 +72,7 @@ create table if not exists store_info
 (
 	store_id int primary key auto_increment,-- 自增ID
 	store_name char(12) , -- 商家名字
-	store_state enum('F','T','S') default 'F' , -- 商家状态 F 未审核； T审核通过； S 被锁定 
+	store_state enum('I','F','T','S') default 'F' , -- 商家状态 F 未审核； T审核通过； S 被锁定 
 	store_image varchar(100) ,
 	store_phone char(11),-- 商家绑定手机
 	store_apply_time  datetime, -- 申请时间
@@ -116,7 +116,7 @@ create table if not exists store_advert
 -- 添加账号的唯一索引/ 广告名
 ALTER TABLE `store_advert` ADD UNIQUE INDEX `sdaa` (`store_adv_name`) USING BTREE ;
 -- 添加账号的唯一索引/ 广告名
-ALTER TABLE `store_advert` ADD UNIQUE INDEX `sdaa` (`store_adv_number`) USING BTREE ;
+-- ALTER TABLE `store_advert` ADD UNIQUE INDEX `sdaa` (`store_adv_number`) USING BTREE ;
 
 insert into store_advert(store_adv_name,store_adv_url,store_adv_link,user_uid)values
 ("广告1","https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'13255917292') ;
@@ -171,7 +171,7 @@ create table if not exists store_shotel(
 	hPrice int, -- 价格
 	store_id int,
 	textarea VARCHAR(500),
-	state enum('F','T') default 'F' , -- 酒店审核状态
+	state enum('F','T','U','D','I') default 'I' , -- 酒店审核状态 
 		foreign key(provinceID) references `hy_area`(id), 
 	foreign key(cityID) references `hy_area`(id), 
 	foreign key(townID) references `hy_area`(id),
@@ -4163,5 +4163,5 @@ INSERT INTO `hy_area` VALUES ('3745', '3738', '氹仔岛', '氹仔岛', '中国,
 INSERT INTO `hy_area` VALUES ('3746', '3745', '嘉模堂区', '嘉模堂区', '中国,澳门特别行政区,氹仔岛,嘉模堂区', '3', 'ourladyofcarmel\'sparish', '00853', '999078', 'J', '113.565303', '22.149029');
 INSERT INTO `hy_area` VALUES ('3747', '3738', '路环岛', '路环岛', '中国,澳门特别行政区,路环岛', '2', 'coloane', '00853', '999078', 'L', '113.564857', '22.116226');
 INSERT INTO `hy_area` VALUES ('3748', '3747', '圣方济各堂区', '圣方济各堂区', '中国,澳门特别行政区,路环岛,圣方济各堂区', '3', 'stfrancisxavier\'sparish', '00853', '999078', 'S', '113.559954', '22.123486');
-INSERT INTO `hy_area` VALUES ('3749', '0', '钓鱼岛', '钓鱼岛', '中国,钓鱼岛', '1', 'diaoyudao', '', '', 'D', '123.478088', '25.742385');
+INSERT INTO `hy_area` VALUES ('3749', '0', '钓鱼岛', '钓鱼岛', '中国,钓鱼岛', '1', 'diaoyudao', '', '', 'D', '123.478088', '25.742385');0
 

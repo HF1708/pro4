@@ -18,17 +18,22 @@ class Commodity extends Controller
      *  时间：18-4-1
      **/
     public function index(){
-        //查询所有酒店
-        $where=['store_id'=>0];
-        $gethotel=db('store_shotel')->where($where)->paginate(4);
-
-        echo json_encode($gethotel);
-
+//        //查询所有酒店
+//        $where=['store_id'=>0];
+//        $gethotel=db('store_shotel')->where($where)->select();
+//        $count=count($gethotel);
+//        $arr['code']=0;
+//        $arr['msg']="";
+//        $arr['count']=1000;
+//        $arr['data']=$gethotel;
+//
+//
+//        echo json_encode($arr);
         // 获取分页显示
-        $page = $gethotel->render();
+//        $page = $gethotel->render();
         //导出酒店数组到页面
-        $this->assign("hotel",$gethotel);
-        $this->assign('page', $page);
+//        $this->assign("hotel",$gethotel);
+//        $this->assign('count', $count);
          return $this->fetch();
     }
     /**
@@ -41,13 +46,12 @@ class Commodity extends Controller
     public function shotelData(){
         //查询所有酒店
         $where=['store_id'=>0];
-        $gethotel=db('store_shotel')->where($where)->paginate(4);
+        $gethotel=db('store_shotel')->where($where)->select();
+        $count=count($gethotel);
         $arr['code']=0;
         $arr['msg']="";
-        $arr['count']=1000;
+        $arr['count']=$count;
         $arr['data']=$gethotel;
-
-
         echo json_encode($arr);
     }
 }
