@@ -43,7 +43,7 @@ class Commodity extends Controller
      *  作者:qingtian Y
      *  时间：18-4-1
      **/
-    public function shotelData(){
+    public function hotelData(){
         //查询所有酒店
         $where=['store_id'=>0];
         $gethotel=db('store_shotel')->where($where)->select();
@@ -53,6 +53,58 @@ class Commodity extends Controller
         $arr['count']=$count;
         $arr['data']=$gethotel;
         echo json_encode($arr);
+    }
+    /**
+     *  *  功能描述:酒店上架
+     *  参数：无
+     *  返回：无
+     *  作者:qingtian Y
+     *  时间：18-4-2
+     **/
+    public function uphotel(){
+        $hotelID=input("?post.hotelID")?input("post.hotelID"):"";
+        $re=db('store_shotel')->where('hId',$hotelID)->setField('state', 'U');
+        if($re==1){
+            $returnJson = [
+                'code' => 10000 ,
+                'msg' => "修改成功" ,
+                'data' => []
+            ] ;
+            echo json_encode($returnJson);
+        }else{
+            $returnJson = [
+                'code' => 10001,
+                'msg' => "修改失败" ,
+                'data' => []
+            ] ;
+            echo json_encode($returnJson);
+        }
+    }
+    /**
+     *  *  功能描述:酒店下架
+     *  参数：无
+     *  返回：无
+     *  作者:qingtian Y
+     *  时间：18-4-2
+     **/
+    public function downhotel(){
+        $hotelID=input("?post.hotelID")?input("post.hotelID"):"";
+        $re=db('store_shotel')->where('hId',$hotelID)->setField('state', 'D');
+        if($re==1){
+            $returnJson = [
+                'code' => 10000 ,
+                'msg' => "修改成功" ,
+                'data' => []
+            ] ;
+            echo json_encode($returnJson);
+        }else{
+            $returnJson = [
+                'code' => 10001,
+                'msg' => "修改失败" ,
+                'data' => []
+            ] ;
+            echo json_encode($returnJson);
+        }
     }
 }
 

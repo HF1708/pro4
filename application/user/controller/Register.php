@@ -21,7 +21,7 @@ class Register extends Controller
      */
     public function register()
     {
-        $that = new \user() ;
+        $that = new \user();
         $returnJson = [
             'code' => 10001 ,
             'msg' => config('loginMsg')['ACCOUNT_ERROR'] ,
@@ -43,7 +43,6 @@ class Register extends Controller
         ] ;
         // 获取session缓存中的手机号码
         $sessionPhone = SESSION::get($phone) ;
-
         // 手机号码是否为空
         if( empty($phone) )
         {

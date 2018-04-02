@@ -34,15 +34,15 @@
         table.render({
             elem: '#demo'
             ,height: 315
-            ,url: '{:url("storemanage/Commodity/hotelData")}' //数据接口
+            ,url: '{:url("storemanage/Order/hotelOrderData")}' //数据接口
             ,page: true //开启分页
             ,cols: [[ //表头
-                {field: 'hName', title: '酒店名称', width:280, fixed: 'left'}
+                {field: 'hoId', title: '订单ID', width:80, fixed: 'left'}
+                ,{field: 'hName', title: '酒店名称', width:280, fixed: 'left'}
                 ,{field: 'hPrice', title: '价格', width:80, sort: true}
                 ,{field: 'hAddress', title: '详细地址', width:180}
-                ,{field: 'state', title: '状态', width:180,toolbar: '#barState'}
+                ,{field: 'orderstate', title: '订单状态', width:180,toolbar: '#barState'}
                 ,{field: 'oper', title: '操作', width:180,toolbar: '#barOper'}
-                ,{field: 'info', title: '查看详情',width:120,toolbar: '#barInfo'}
             ]]
         });
         //监听工具条
@@ -54,9 +54,9 @@
             if(layEvent === 'info'){ //查看
                 layer.alert('');
                 //do somehing
-            } else if(layEvent === 'up'){ //上架
-                layer.confirm('确定上架吗', function(index){
-                    $.post("{:url('storemanage/Commodity/uphotel')}",{"hotelID":obj.data.hId},function (res) {
+            } else if(layEvent === 'cancel'){ //取消订单
+                layer.confirm('确定取消订单吗', function(index){
+                    $.post("{:url('storemanage/Order/cancel')}",{"hoId":obj.data.hoId},function (res) {
                         var msg=JSON.parse(res);
                         if(msg.code==10000){
                             layer.alert('操作成功');
@@ -64,16 +64,16 @@
                             layer.alert('操作失败');
                         }
                     table.reload('demo', {
-                        url: '{:url("storemanage/Commodity/shotelData")}'
+                        url: '{:url("storemanage/Order/hotelOrderData")}'
                         ,where: {} //设定异步数据接口的额外参数
                         //,height: 300
                     });
                     });
                     layer.close(index);
                 });
-            } else if(layEvent === 'down'){ //下架
-                layer.confirm('确定下架吗', function(index){
-                    $.post("{:url('storemanage/Commodity/downhotel')}",{"hotelID":obj.data.hId},function (res) {
+            } else if(layEvent === 'use'){ //使用
+                layer.confirm('确定使用吗', function(index){
+                    $.post("{:url('storemanage/Commodity/use')}",{"hoId":obj.data.hoId},function (res) {
                         var msg=JSON.parse(res);
                         if(msg.code==10000){
                             layer.alert('操作成功');
@@ -81,7 +81,7 @@
                             layer.alert('操作失败');
                         }
                         table.reload('demo', {
-                            url: '{:url("storemanage/Commodity/shotelData")}'
+                            url: '{:url("storemanage/Order/hotelOrderData")}'
                             ,where: {} //设定异步数据接口的额外参数
                             //,height: 300
                         });
@@ -104,22 +104,23 @@
 
 </script>
 <script type="text/html" id="barState">
-     <!--这里同样支持 laytpl 语法，如： -->
-    {{#  if(d.state =='I'){ }}
-        <span>审核中</span>
-    {{#  } else if(d.state =='F') { }}
-    <span>审核失败</span>
+    <!-- 这里同样支持 laytpl 语法，如： -->
+    {{#  if(d.orderstate =='0'){ }}
+    <span>未支付</span>
+    {{#  } else if(d.orderstate =='1') { }}
+    <span>已支付</span>
     {{#  } else {}}
-     <span>审核通过</span>
-     {{#  } }}
+    <span>失效</span>
+    {{#  } }}
 </script>
 <script type="text/html" id="barOper">
-    {{#  if(d.state =='D'){ }}
-        <a class="layui-btn layui-btn-xs" lay-event="up">上架</a>
-    {{#  } else if(d.state =='U') { }}
-        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="down">下架</a>
-    {{#  } else if(d.state =='T') { }}
-    <a class="layui-btn layui-btn-xs" lay-event="up">上架</a>
+    {{#  if(d.orderstate =='0'){ }}
+        <a class="layui-btn layui-btn-xs" lay-event="cancel">取消订单</a>
+    {{#  } else if(d.orderstate =='1') { }}
+        <a class="layui-btn layui-btn-xs" lay-event="use">使用</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="refund">退款</a>
+    {{#  } else if(d.orderstate =='2') { }}
+    <!--<a class="layui-btn layui-btn-xs" lay-event="up">退款</a>-->
     {{#  } else {}}
 
     {{#  } }}

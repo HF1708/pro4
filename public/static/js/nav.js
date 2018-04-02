@@ -14,9 +14,9 @@ var navs = [{
 	"href" : commodityManagementUrl,
 	"spread" : false
 },{
-	"title" : "404页面",
+	"title" : "订单管理",
 	"icon" : "&#xe61c;",
-	"href" : "page/404.html",
+	"href" : orderUrl,
 	"spread" : false
 },{
 	"title" : "系统基本参数",
