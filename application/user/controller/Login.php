@@ -209,9 +209,9 @@ class Login extends Controller
 //        $redis->set('test',$codeSet);
         // 存储验证码到session缓存
         $sessionName = $tel."loginCode" ;
-        Session::set($sessionName,$codeSet);
-        Session::set($tel.'session',$tel);
-        $codeSet2 = Session::get($sessionName);
+        Session::set($sessionName,$codeSet) ;
+        Session::set($tel.'session',$tel) ;
+        $codeSet2 = Session::get($sessionName) ;
 
         // 发送验证码到手机
 //        $content = '您的验证码是：1234。请不要把验证码泄露给其他人。' ;
@@ -307,6 +307,11 @@ class Login extends Controller
                     "image" =>  $image
                 ] ;
             }
+            else
+            {
+
+            }
+
 
 //            if( $res )
             // 返回用户信息
