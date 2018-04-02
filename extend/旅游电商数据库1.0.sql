@@ -116,10 +116,20 @@ create table if not exists store_advert
 -- 添加账号的唯一索引/ 广告名
 ALTER TABLE `store_advert` ADD UNIQUE INDEX `sdaa` (`store_adv_name`) USING BTREE ;
 -- 添加账号的唯一索引/ 广告名
-ALTER TABLE `store_advert` ADD UNIQUE INDEX `sdaa` (`store_adv_number`) USING BTREE ;
+-- ALTER TABLE `store_advert` ADD UNIQUE INDEX `sdaa` (`store_adv_number`) USING BTREE ;
 
 insert into store_advert(store_adv_name,store_adv_url,store_adv_link,user_uid)values
 ("广告1","https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'13255917292') ;
+insert into store_advert(store_adv_name,store_adv_url,store_adv_link,user_uid)values
+("广告2","https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'13255917292') ;
+insert into store_advert(store_adv_name,store_adv_url,store_adv_link,user_uid)values
+("广告3","https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'13255917292') ;
+insert into store_advert(store_adv_name,store_adv_url,store_adv_link,user_uid)values
+("广告4","https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'13255917292') ;
+insert into store_advert(store_adv_name,store_adv_url,store_adv_link,user_uid)values
+("广告5","https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'13255917292') ;
+insert into store_advert(store_adv_name,store_adv_url,store_adv_link,user_uid)values
+("广告6","https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'13255917292') ;
 
 
 
@@ -148,7 +158,22 @@ create table if not exists user_chat
 
 ALTER TABLE `user_chat` ADD INDEX `user_chat_1` (`user_uid`,`user_chat_char_two_id`) USING BTREE ;
 
+-------------------------------------后台---------------------------------------------
+-- 员工管理表
+drop table if exists backstage_user ;
+create table if not exists backstage_user
+(
+	user_id int primary key auto_increment ,
+	user_uid char(8) , -- 例：hf170809
+	user_password char(20) ,
+	user_name char(10)
+) ;
 
+-- 添加账号密码的符合索引(联合索引)
+ALTER TABLE `backstage_user` ADD INDEX `sad` (`user_uid`,`user_password`) USING BTREE ;
+
+insert into backstage_user(user_uid,user_password,user_name) values
+('hf170809','123456',"测试客服") ;
 
 -- -----------------------------------邱萍--------------------------------------------
 
