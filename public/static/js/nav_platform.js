@@ -19,9 +19,9 @@ var navs = [{
 	"href" : "page/404.html",
 	"spread" : false
 },{
-	"title" : "客服聊天",
+	"title" : "系统基本参数",
 	"icon" : "&#xe631;",
-	"href" : ServerChatUrl,
+	"href" : "page/systemParameter/systemParameter.html",
 	"spread" : false
 },{
 	"title" : "二级菜单演示",
