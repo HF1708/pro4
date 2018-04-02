@@ -55,7 +55,7 @@ class Posttrade extends Controller
                 // 生成上传Token
                                 $token = $auth->uploadToken($bucket);
                 // 构建 UploadManager 对象
-                               /* $filePath=ROOT_PATH.DS.'public/uploads/'.$info->getSaveName();*/
+                               $filePath=ROOT_PATH.DS.'public/uploads/'.$info->getSaveName();
                                $filePath = "test.png";
                                 $uploadMgr = new UploadManager();
                                 $key=$info->getFilename();

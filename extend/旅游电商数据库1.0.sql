@@ -180,6 +180,11 @@ insert into backstage_user(user_uid,user_password,user_name) values
 ('hf170809','123456',"测试客服") ;
 
 -- -----------------------------------邱萍--------------------------------------------
+
+
+
+
+
 -- 酒店表
 create table if not exists store_shotel(
 	hId int not null auto_increment primary key,-- 酒店ID
@@ -210,6 +215,8 @@ insert into store_shotel(hId,hName,hImg,hRemain,hAddress,hPrice,store_id)values
 (9007,'厦门磐基皇冠假日酒店 ','hotel7.jpg',20,'思明区嘉禾路199号(近明发商业广场)',755,''),
 (9008,'厦门马哥孛罗东方大酒店','hotel8.jpg',20,' 思明区湖滨北建业路8号(近白鹭洲公园,筼筜湖畔)',709,'');
 
+
+
 -- 酒店图片表
 create table if not exists store_shotel_img(
 	id int not null auto_increment primary key,
@@ -224,33 +231,28 @@ create table if not exists store_hotelComment(
 		hcId int not null auto_increment primary key,
 		hId int, -- 酒店ID
 		hcContent varchar (200),-- 评价内容
-		hcTime varchar (200),-- 评价时间
+		hcTime varchar (200),-- 评价图片 
 		userId int not null ,-- 用户ID 
 		commentTo  int DEFAULT 0, -- 回复
 		FOREIGN KEY (hId) REFERENCES store_shotel(hId),
 		FOREIGN KEY (userId) REFERENCES user_user(user_id)
 );
 
-insert  into  store_hotelComment  (hcId,hId,hcContent,hcTime,userId,commentTo)VALUES
-(1000,9001,'这家酒店很好！','2018-04-01','test','');
-
 -- 订单表
-create table if not exists store_hotelOrder(
+create table if not exists store_hotelorder(
 	hoId int not null auto_increment primary key,
 	huId int,-- 酒店ID
 	hoTime datetime,-- 下单订单时间
 	paytime datetime,-- 支付时间
-	state enum("0","1","2"),-- 订单状态 0 未支付 ；1 已支付 ；2 失效；
+	orderstate enum("0","1","2"),-- 订单状态 0 未支付 ；1 已支付 ；2 失效；
 	user_id int,
 	FOREIGN KEY (huId) REFERENCES store_shotel(hId),
 	FOREIGN KEY (user_id) REFERENCES user_user(user_id)
 );
 
-
-
-
-
-
+INSERT INTO `qdm181738524_db`.`store_hotelorder`( `huId`, `hoTime`, `paytime`, `orderstate`, `user_id`) VALUES ( 9001, '2018-04-02 15:14:35', '0000-00-00 00:00:00', '0', 1);
+INSERT INTO `qdm181738524_db`.`store_hotelorder`( `huId`, `hoTime`, `paytime`, `orderstate`, `user_id`) VALUES ( 9001, '2018-04-02 15:14:35', '0000-00-00 00:00:00', '1', 1);INSERT INTO `qdm181738524_db`.`store_hotelorder`( `huId`, `hoTime`, `paytime`, `orderstate`, `user_id`) VALUES ( 9001, '2018-04-02 15:14:35', '0000-00-00 00:00:00', '0', 1);
+INSERT INTO `qdm181738524_db`.`store_hotelorder`( `huId`, `hoTime`, `paytime`, `orderstate`, `user_id`) VALUES ( 9001, '2018-04-02 15:14:35', '0000-00-00 00:00:00', '2', 1);
 
 
 
