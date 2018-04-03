@@ -48,9 +48,11 @@ var app = new Vue({
                 chat_image:that.chat_one_image ,
                 chat_login:that.login
             } ;
-            console.log(that.chat_data) ;
             that.chat_data.push($data_2) ;
             that.ws.send( sendData( that.chat_one ,that.chat_two ,'message' ,$data ) ) ;
+            var div = document.getElementById('chat') ;
+            div.scrollTop = div.scrollHeight ;
+            setTimeout(function(){div.scrollTop = div.scrollHeight} , 50) ;
         }
     } ,
     mounted:function(){
@@ -69,7 +71,6 @@ var app = new Vue({
                 that.chat_type = res.chat_type ;
 
                 that.chat_one=res.user ;
-                console.log("获取的自己信息",res) ;
                 // 为游客123
                 if( res.user == '游客123' )
                 {
@@ -87,13 +88,9 @@ var app = new Vue({
                     that.chat_two_title = res.chat_two_title ;
                     that.chat_two_image = res.chat_two_img ;
                 }
+
+
                 that.ws.send( sendData( that.chat_one ,'server' ,'ss' ,'hello' ) ) ;
-//					that.chat_data = [{
-//						chat_con:'聊天asdf' ,
-//						chat_title:'asdf' ,
-//						chat_image:'' ,
-//						chat_login:'user'
-//					}] ;
             }
         }) ;
         /*
@@ -126,7 +123,9 @@ var app = new Vue({
                     } ;
                     that.chat_two = msgObj.rever ;
                     that.chat_data.push($data) ;
-                    console.log(that.chat_data,that.login) ;
+                    var div = document.getElementById('chat') ;
+                    div.scrollTop = div.scrollHeight ;
+                    setTimeout(function(){div.scrollTop = div.scrollHeight} , 50) ;
                     break ;
             }
         } ;

@@ -29,21 +29,6 @@ server.on( "connection" ,function( socket ){
 			break;
 			// 对话
 			case 'message' :
-				//console.log( msgObj.sender,msgObj.rever  ) ;
-				//// 判断是否为游客
-				//for(var i = 0;i < socketList.length;i++)
-				//{
-				//	var otherSocket = socketList[i] ;
-				//	if( otherSocket.readyState == wsModule.OPEN  && otherSocket == useList[ msgObj.rever ] )
-				//	{
-				//		otherSocket.send( sendData(
-				//			msgObj.rever ,
-				//			msgObj.sender ,
-				//			'useTalk' ,
-				//			{ content:msgObj.content.con }
-				//		)) ;
-				//	}
-				//}
 				// 消息存到数据库再发消息给用户
 				chat.setChatStoreUserData(msgObj.sender,msgObj.rever,msgObj.content,function( flag ){
 					for(var i = 0;i < socketList.length;i++)
@@ -51,6 +36,7 @@ server.on( "connection" ,function( socket ){
 						var otherSocket = socketList[i] ;
 						if( otherSocket.readyState == wsModule.OPEN  && otherSocket == useList[ msgObj.rever ] )
 						{
+							console.log("客户端法律的内容"+msgObj.content['chat_image']) ;
 							otherSocket.send( sendData(
 								msgObj.rever ,
 								msgObj.sender ,
