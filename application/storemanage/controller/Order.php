@@ -9,7 +9,7 @@
 namespace app\storemanage\controller;
 use think\Controller;
 use think\Db;
-use think\Model;
+
 class Order  extends Controller
 {
     /**
@@ -78,4 +78,49 @@ class Order  extends Controller
      *  作者:qingtian Y
      *  时间：18-4-2
      **/
+    public function useOrder(){
+        $hotelID=input("?post.hoId")?input("post.hoId"):"";
+        $re=db('store_hotelorder')->where('hoId',$hotelID)->setField('orderstate', '2');
+        if($re==1){
+            $returnJson = [
+                'code' => 10000 ,
+                'msg' => "操作成功" ,
+                'data' => []
+            ] ;
+            echo json_encode($returnJson);
+        }else{
+            $returnJson = [
+                'code' => 10001,
+                'msg' => "操作失败" ,
+                'data' => []
+            ] ;
+            echo json_encode($returnJson);
+        }
+    }
+    /**
+     *  *  功能描述:退款
+     *  参数：无
+     *  返回：无
+     *  作者:qingtian Y
+     *  时间：18-4-2
+     **/
+    public function refund(){
+        $hotelID=input("?post.hoId")?input("post.hoId"):"";
+        $re=db('store_hotelorder')->where('hoId',$hotelID)->setField('orderstate', '2');
+        if($re==1){
+            $returnJson = [
+                'code' => 10000 ,
+                'msg' => "操作成功" ,
+                'data' => []
+            ] ;
+            echo json_encode($returnJson);
+        }else{
+            $returnJson = [
+                'code' => 10001,
+                'msg' => "操作失败" ,
+                'data' => []
+            ] ;
+            echo json_encode($returnJson);
+        }
+    }
 }
