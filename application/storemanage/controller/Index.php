@@ -30,4 +30,14 @@ class Index extends Controller
     {
         return $this->fetch();
     }
+    /**
+     *  *  功能描述:显示商家信息
+     *  参数：无
+     *  返回：无
+     *  作者:qingtian Y
+     *  时间：18-3-28
+     **/
+    public function info(){
+        return $this->fetch();
+    }
 }

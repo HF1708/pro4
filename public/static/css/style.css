@@ -421,14 +421,14 @@ input,
 	padding-right:5%;
 }
 .menus-right{
-	padding-left:10%;
+	padding-left:2%;
 }
 a.loadmore{
 	color: #b7b7b7;
 	border: 1px solid #EEE;
 	padding: 0.55em 0 0.4em 1.2em;
 	margin: 0 auto;
-	width: 32%;
+	width: 29%;
 	display: block;
 	text-decoration: none;
 	margin-top:1em;
@@ -884,9 +884,9 @@ span.item-rate:hover{
 .News-page p {
 	font-family: 'aleoregular';
 	color: #b7b7b7;
-	width: 70%;
+	width: 80%;
 	margin: 0.5em auto;
-	text-align: center;
+	/*text-align: center;*/
 	line-height: 1.8em;
 }
 .News-page{
@@ -931,6 +931,18 @@ a.news-btn{
 }
 a.news-btn:hover{
 	background: #DDD177;
+}
+.news-btn i{
+	width:50px;
+	height:50px;
+	background-color: white;
+	background: url(../images/edit.png) no-repeat;
+	background-size: 200px;
+}
+section {
+	width: 80%;
+	margin: auto;
+	text-align: left;
 }
 /*---- reviews -----*/
 .reviews{
@@ -1715,6 +1727,11 @@ label.date-reviws{
 	.item-price label {
 		font-size: 1.2em;
 	}
+	a.go:hover{
+		text-decoration: none;
+		color:yellow;
+		cursor:pointer;
+	}
 	.fearuted-diesh h3 {
 		font-size: 1.2em;
 	}
@@ -2015,3 +2032,28 @@ label.date-reviws{
 		font-size:1em;
 	}
 }
+#title{
+	margin-left:10%;
+	width:80%;
+	height:40px;
+	border:2px solid #DDD177;
+}
+input:focus{
+	outline:none
+}
+#publish{
+	margin-left:10%;
+}
+/*#edit{*/
+	/*float:left;*/
+	/*width:50%;*/
+	/*height:500px;*/
+	/*border:1px solid #fff;*/
+	/*margin-left:5%;*/
+	/*margin-top:2%;*/
+	/*border-radius:10px;*/
+	/*box-shadow:10px 5px 10px 5px gray*/
+/*}*/
+/*#edit:focus{*/
+	/*outline-style: none;*/
+/*}*/
