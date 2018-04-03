@@ -297,4 +297,8 @@ return [
         'type'     => 'bootstrap',
         'var_page' => 'page',
     ],
+    'publishMsg'=>[
+        'CONTENT_EMPTY'=>'遊記标题和内容不能为空',
+        'SUCCESS'=>'遊記发表成功'
+    ],
 ];

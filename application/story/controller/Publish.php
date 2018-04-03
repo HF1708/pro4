@@ -28,7 +28,8 @@ class Publish extends Controller
         $file = $_FILES['file'] ;
         $obj=new \user();
         $re=$obj->uploadImage($file);
-        echo $re;
+        $rejson=["link"=>$re];
+        echo json_encode($rejson);
 
     }
 

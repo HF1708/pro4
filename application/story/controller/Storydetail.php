@@ -36,14 +36,11 @@ class Storydetail extends Controller
      *  时间：18-3-30
      **/
     public function getNotes(){
-        $id=input('?post.id')?input('id'):"";
-        $where=['userId'=>$id];
+//        $id=input('?post.id')?input('id'):"";
+//        $where=['userId'=>$id];
+        $where=['sid'=>3];
         $getnotes=db('user_story')->where($where)->select();
-        $count=count($getnotes);
-        $arr['code']=0;
-        $arr['msg']="";
-        $arr['count']=$count;
-        $arr['data']=$getnotes;
-        echo json_encode($arr);
+
+        echo json_encode($getnotes);
     }
 }

@@ -91,17 +91,13 @@
 
 			<!----- recent-news ----->
 			<div class="recent-news">
-				<div v-for="(value,key) in notes" id="notes_img">
-					<img src=""/>
-					<img src="__STATIC__/images/1.jpg"/>
-					<img src="__STATIC__/images/2.jpg"/>
+				<div v-for="value in notes" >
+					<p>kdsfkdsjfso</p>
+					<div v-html="value.content" >{{value.content}}</div>
 				</div>
 				<div id="notes_con">
-					<div v-for="(vlaue,key) in notes">
-						<p>{{value.section}}</p>
-						<p>
-							你是坐飞机来的旁晚航班，我还是很建议坐在窗口的，厦门机场在市区，飞机准备降落的时候飞行高度很低， 这时候是从老城区上空走过的。你可以看到灯火通明的街道，真的就像摄影大片一样，黄昏周围都是昏暗的，但是街道是泛着黄色暖光的，蜿蜒的街道川流的人群，这个场景很赞。抱歉我一直没能拍下来。
-						</p>
+					<div>
+
 					</div>
 				</div>
 			</div>
