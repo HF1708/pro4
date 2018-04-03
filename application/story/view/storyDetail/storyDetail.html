@@ -1,0 +1,331 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>去野 身临其境方知奥妙·遊記</title>
+	<!--网页图标-->
+	<link rel="shortcut icon" href="__STATIC__/images/logo.ico" type="image/x-icon"/>
+	<link href="__CSS__/bootstrap.css" rel='stylesheet' type='text/css' />
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="__JS__/jquery.min.js"></script>
+	<!-- Custom Theme files -->
+	<link href="__CSS__/style.css" rel='stylesheet' type='text/css' />
+	<link href="__CSS__/storyDetail.css" rel='stylesheet' type='text/css' />
+	<!-- Custom Theme files -->
+	<!---- start-smoth-scrolling---->
+	<script type="text/javascript" src="__JS__/move-top.js"></script>
+	<script type="text/javascript" src="__JS__/easing.js"></script>
+	<script type="text/javascript" src="__JS__/vue.min.js"></script>
+	<script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $(".scroll").click(function(event){
+                event.preventDefault();
+                $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+            });
+        });
+	</script>
+	<!---- start-smoth-scrolling---->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	<!----start-top-nav-script---->
+	<script>
+        $(function() {
+            var pull 		= $('#pull');
+            menu 		= $('nav ul');
+            menuHeight	= menu.height();
+            $(pull).on('click', function(e) {
+                e.preventDefault();
+                menu.slideToggle();
+            });
+            $(window).resize(function(){
+                var w = $(window).width();
+                if(w > 320 && menu.is(':hidden')) {
+                    menu.removeAttr('style');
+                }
+            });
+        });
+	</script>
+	<!----//End-top-nav-script---->
+</head>
+<body>
+<!----- start-header---->
+<div id="home" class="header">
+	<div class="top-header">
+		<div class="container">
+			<div class="logo">
+				<a href="index.html"><span>去野</span>Journey<span>...</span></a>
+			</div>
+			<!----start-top-nav---->
+			<nav class="top-nav">
+				<ul class="top-nav">
+					<li class="active"><a href="{:url('index/index/index')}">首页home</a></li>
+					<li><a href="menu.html">目的地locations</a></li>
+					<li><a href="{:url('story/story/story')}">遊記notes</a></li>
+					<li><a href="news.html"> 登录</a></li>
+					<li><a href="reviews.html">注册</a></li>
+				</ul>
+				<a href="#" id="pull"><img src="__STATIC__/images/nav-icon.png" title="menu" /></a>
+			</nav>
+			<div class="clearfix"> </div>
+		</div>
+	</div>
+</div>
+<!----- //End-header---->
+<!----- menu-page ----->
+<div id="app" class="news">
+	<!------ menu-header ----->
+	<div class="news-header">
+		<div class="container">
+			<h1><span>Travel</span> Notes</h1>
+		</div>
+	</div>
+	<!------ menuheader ----->
+	<div class="clearfix"> </div>
+	<!----- reservation ---->
+	<div class="News-page">
+		<div class="container">
+			<img id="per_img" src="__STATIC__/images/11.jpg"/>
+			<span>id</span>
+			<span>发表时间</span>
+			<h2><span> </span>&nbsp;&nbsp;&nbsp;&nbsp;遊記标题 &nbsp;<span> </span></h2>
+			<p>Travel Latest-Notes </p>
+
+			<!----- recent-news ----->
+			<div class="recent-news">
+				<div v-for="(value,key) in notes" id="notes_img">
+					<img src=""/>
+					<img src="__STATIC__/images/1.jpg"/>
+					<img src="__STATIC__/images/2.jpg"/>
+				</div>
+				<div id="notes_con">
+					<div v-for="(vlaue,key) in notes">
+						<p>{{value.section}}</p>
+						<p>
+							你是坐飞机来的旁晚航班，我还是很建议坐在窗口的，厦门机场在市区，飞机准备降落的时候飞行高度很低， 这时候是从老城区上空走过的。你可以看到灯火通明的街道，真的就像摄影大片一样，黄昏周围都是昏暗的，但是街道是泛着黄色暖光的，蜿蜒的街道川流的人群，这个场景很赞。抱歉我一直没能拍下来。
+						</p>
+					</div>
+				</div>
+			</div>
+			<!----- recent-news ----->
+		</div>
+		<!----- fearuted-diesh ----->
+		<div class="fearuted-diesh">
+			<div class="container">
+				<h3>相关遊記<span> </span></h3>
+				<!----sreen-gallery-cursual---->
+				<div class="sreen-gallery-cursual">
+					<!-- requried-jsfiles-for owl -->
+					<link href="__CSS__/owl.carousel.css" rel="stylesheet">
+					<script src="__JS__/owl.carousel.js"></script>
+					<script>
+                        $(document).ready(function() {
+                            $("#owl-demo").owlCarousel({
+                                items :4,
+                                lazyLoad : true,
+                                autoPlay : true,
+                                navigation : false,
+                                navigationText :  false,
+                                pagination : true,
+                            });
+                        });
+					</script>
+					<!-- //requried-jsfiles-for owl -->
+					<!-- start content_slider -->
+					<div id="owl-demo" class="owl-carousel">
+						<div class="item">
+							<div class="item-grid">
+								<div class="item-pic">
+									<img src="__STATIC__/images/d1.jpg" title="dish-name" />
+								</div>
+								<div class="item-info">
+									<div class="item-info-left">
+										<h4>Fugiat nulla sint</h4>
+										<span class="item-rate"> </span>
+									</div>
+									<div class="item-info-right">
+										<label>$130</label>
+									</div>
+									<div class="clearfix"> </div>
+								</div>
+							</div>
+						</div>
+						<!----->
+						<div class="item">
+							<div class="item-grid">
+								<div class="item-pic">
+									<img src="__STATIC__/images/d2.jpg" title="dish-name" />
+								</div>
+								<div class="item-info">
+									<div class="item-info-left">
+										<h4>Daute irure dolor</h4>
+										<span class="item-rate"> </span>
+									</div>
+									<div class="item-info-right">
+										<label>$124</label>
+									</div>
+									<div class="clearfix"> </div>
+								</div>
+							</div>
+						</div>
+						<!----->
+						<div class="item">
+							<div class="item-grid">
+								<div class="item-pic">
+									<img src="__STATIC__/images/d3.jpg" title="dish-name" />
+								</div>
+								<div class="item-info">
+									<div class="item-info-left">
+										<h4>Officia deserunt mollit</h4>
+										<span class="item-rate"> </span>
+									</div>
+									<div class="item-info-right">
+										<label>$160</label>
+									</div>
+									<div class="clearfix"> </div>
+								</div>
+							</div>
+						</div>
+						<!----->
+						<div class="item">
+							<div class="item-grid">
+								<div class="item-pic">
+									<img src="__STATIC__/images/d4.jpg" title="dish-name" />
+								</div>
+								<div class="item-info">
+									<div class="item-info-left">
+										<h4>Pim minim veniam</h4>
+										<span class="item-rate"> </span>
+									</div>
+									<div class="item-info-right">
+										<label>$117</label>
+									</div>
+									<div class="clearfix"> </div>
+								</div>
+							</div>
+						</div>
+						<!----->
+						<div class="item">
+							<div class="item-grid">
+								<div class="item-pic">
+									<img src="__STATIC__/images/d1.jpg" title="dish-name" />
+								</div>
+								<div class="item-info">
+									<div class="item-info-left">
+										<h4>Fugiat nulla sint</h4>
+										<span class="item-rate"> </span>
+									</div>
+									<div class="item-info-right">
+										<label>$130</label>
+									</div>
+									<div class="clearfix"> </div>
+								</div>
+							</div>
+						</div>
+						<!----->
+						<div class="item">
+							<div class="item-grid">
+								<div class="item-pic">
+									<img src="__STATIC__/images/d2.jpg" title="dish-name" />
+								</div>
+								<div class="item-info">
+									<div class="item-info-left">
+										<h4>Daute irure dolor</h4>
+										<span class="item-rate"> </span>
+									</div>
+									<div class="item-info-right">
+										<label>$124</label>
+									</div>
+									<div class="clearfix"> </div>
+								</div>
+							</div>
+						</div>
+						<!----->
+						<div class="item">
+							<div class="item-grid">
+								<div class="item-pic">
+									<img src="__STATIC__/images/d3.jpg" title="dish-name" />
+								</div>
+								<div class="item-info">
+									<div class="item-info-left">
+										<h4>Officia deserunt mollit</h4>
+										<span class="item-rate"> </span>
+									</div>
+									<div class="item-info-right">
+										<label>$160</label>
+									</div>
+									<div class="clearfix"> </div>
+								</div>
+							</div>
+						</div>
+						<!----->
+						<div class="item">
+							<div class="item-grid">
+								<div class="item-pic">
+									<img src="__STATIC__/images/d4.jpg" title="dish-name" />
+								</div>
+								<div class="item-info">
+									<div class="item-info-left">
+										<h4>Pim minim veniam</h4>
+										<span class="item-rate"> </span>
+									</div>
+									<div class="item-info-right">
+										<label>$117</label>
+									</div>
+									<div class="clearfix"> </div>
+								</div>
+							</div>
+						</div>
+						<!----->
+					</div>
+					<!--//sreen-gallery-cursual---->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!----- fearuted-diesh ----->
+<!----- End-Menu-page ----->
+<!----- footer ----->
+<div class="footer">
+	<div class="container">
+		<div class="footer-grids">
+			<div class="col-md-3 footer-grid">
+				<p>
+					<span>关于我们</span>
+					<span>关于去野</span>
+					<span><a class="line" href="{:url('store/Application/storeEnter')}">商家入驻</a></span>
+					<span>联系我们</span>
+				</p>
+			</div>
+			<div class="col-md-3 footer-grid">
+				<p>
+					<span>China tourister</span>
+					<span>68, rue  de la Couronne</span>
+					<span>75002 PARIS</span>
+					<span>718-749-1714</span>
+				</p>
+			</div>
+			<div class="col-md-3 footer-grid">
+				<ul>
+					<span>友情链接</span>
+					<li><a href="https://zh.airbnb.com">Airbnb爱彼迎</a></li>
+					<li><a href="http://www.booking.com">缤客</a></li>
+					<li><a href="http://www.mafengwo.cn/">马蜂窝</a></li>
+				</ul>
+			</div>
+			<div class="col-md-3 footer-grid copy-right">
+				<p>Copyright &copy; 2018.去野All rights reserved.</p>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+	</div>
+</div>
+<!----- footer ----->
+
+</body>
+<script type="text/javascript">
+	var getUserUrl="{:url('story/storydetail/getUser')}";
+	var getNotesUrl="{:url('story/storydetail/getNotes')}";
+</script>
+<script type="text/javascript" src="__JS__/story/storyDetail.js"></script>
+</html>
+
