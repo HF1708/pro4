@@ -232,7 +232,11 @@ create table if not exists store_hotelcomment(
 );
 
 -- 订单表
+<<<<<<< HEAD
 create table if not exists store_hotelorder(
+=======
+create table if not exists store_hotel_order(
+>>>>>>> qp
 	hoId int not null auto_increment primary key,
 	huId int,-- 酒店ID
 	hoTime datetime,-- 下单订单时间
