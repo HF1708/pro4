@@ -261,7 +261,7 @@
 			chat_one:'游客123' ,
 			chat_one_title:'' ,
 			chat_one_image:'' ,
-			chat_two:'15659978516' ,
+			chat_two:'hf170809' ,
 			chat_two_title:'' ,
 			chat_two_image:'' ,
 			chat_type: 'store_user' ,
@@ -312,7 +312,7 @@
 				url:"{:url('chat/chat/setChatTwo')}" ,
 				type:'post' ,
 				dataType:'json' ,
-				data:{chatTwo:'15659978516',chatType:'store'} ,
+				data:{chatTwo:'hf170809',chatType:'server'} ,
 				success:function(res){
 					that.login = res.login ;
 					that.chat_type = res.chat_type ;
@@ -357,7 +357,7 @@
 			that.ws = new WebSocket( "ws://localhost:8888" ) ;
 			that.ws.onopen = function()
 			{
-//				that.ws.send( sendData( that.chat_one ,'server' ,'ss' ,'hello' ) ) ;
+				that.ws.send( sendData( that.chat_one, that.chat_two ,'ss' ,'hello' ) ) ;
 			} ;
 			that.ws.onmessage = function( result )
 			{

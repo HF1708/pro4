@@ -32,7 +32,7 @@
         <!----- start-header---->
         <!----- //End-header---->
         <!----- menu-page ----->
-        <div class="reservation">
+        <div class="reservation marPadd">
             <!------ menu-header ----->
             <!------ menuheader ----->
             <div class="clearfix"> </div>
@@ -51,13 +51,13 @@
                                 </div>
 
                             </div>
-                            <div class="col-sm-9  ">
+                            <div class="col-sm-9 ">
                                 <div class="row chatCon" >
                                     <div  v-for="(val,key) in chat_data">
                                         <div class="media"  v-if="val.chat_login!=login" >
                                             <div class="media-left media-middle ">
                                                 <a class="reviews-people" href="#">
-                                                    <img class="img_header_2 media-object pull-left" src="__STATIC__/images/g1.jpg"  alt="...">
+                                                    <img class="img_header_2 media-object pull-left" :src="val.chat_image"  alt="...">
                                                 </a>
                                             </div>
                                             <div class="media-body">
@@ -75,7 +75,7 @@
                                             </div>
                                             <div class="media-left media-middle ">
                                                 <a class="reviews-people" href="#">
-                                                    <img class="img_header_2 media-object pull-left" src="__STATIC__/images/g1.jpg"  alt="...">
+                                                    <img class="img_header_2 media-object pull-left"  :src="val.chat_image"  alt="...">
                                                 </a>
                                             </div>
                                         </div>
@@ -100,116 +100,15 @@
 </div>
 
 
+<script>
+//    获取聊天对象的url
+    var char_obj_url = "{:url('chat/chat/setChatTwo')}" ;
 
+</script>
 
 </body>
 <script type="text/javascript" src="__JS__/bootstrap.min.js"></script>
 <script type="text/javascript" src="__JS__/vue.min.js"></script>
-<script>
-
-</script>
-<script>
-    $('.carousel').carousel({
-        interval: 5000 // in milliseconds
-    }) ;
-    $(".modal-backdrop").remove() ;
-    //	$("#loginMsgModel").modal('show') ;
-    var app = new Vue({
-        el:"#myApp" ,
-        data: {
-            chat_obj:{
-                chat_title:'aa' ,
-                chat_image:''
-            } ,
-            chat_data:[] ,
-
-        } ,
-        methods: {
-            /**
-             * 功能描述：发送聊天内容
-             * 参数：
-             * QQUser：
-             * 返回：
-             * 作者：yonjin L
-             * 时间：18-3-28
-             */
-            sendMsg: function()
-            {
-
-
-            }
-        } ,
-        mounted:function(){
-
-        }
-
-    }) ;
-
-    /**
-     * 功能描述：小于10的时分秒前加零
-     * 参数：
-     * QQUser：
-     * 返回：当前时间
-     * 作者：yonjin L
-     * 时间：18-3-28
-     */
-    function p(s) {
-        return s < 10 ? '0' + s: s;
-    }
-    /**
-     * 功能描述：获取当前时间
-     * 参数：
-     * QQUser：
-     * 返回：当前时间
-     * 作者：yonjin L
-     * 时间：18-3-28
-     */
-    function nowDdate()
-    {
-        var myDate = new Date();
-        //获取当前年
-        var year=myDate.getFullYear();
-        //获取当前月
-        var month=myDate.getMonth()+1;
-        //获取当前日
-        var date=myDate.getDate();
-        var h=myDate.getHours();       //获取当前小时数(0-23)
-        var m=myDate.getMinutes();     //获取当前分钟数(0-59)
-        var s=myDate.getSeconds();
-        var now=year+'-'+p(month)+"-"+p(date)+" "+p(h)+':'+p(m)+":"+p(s);
-        return now ;
-    }
-    function sendData( sender ,rever ,type ,content )
-    {
-        if( !sender )
-        {
-            console.log( "客户端错误的发送者" ,sender ) ;
-        }
-        if( !rever )
-        {
-            console.log( "客户端错误的发送者" ,rever ) ;
-        }
-        if( !type )
-        {
-            console.log( "客户端错误的发送者" ,type ) ;
-        }
-        if( !content )
-        {
-            console.log( "客户端错误的发送者" ,content ) ;
-        }
-        var msg = JSON.stringify( {
-            sender:sender,
-            rever:rever,
-            type:type,
-            content:content,
-            msgtime:( new Date() ).getTime()
-        });
-        console.log( "客户端发送的消息" ,msg );
-        return msg;
-    }
-
-
-
-</script>
+<script type="text/javascript" src="__JS__/backstage/chat.js"></script>
 </html>
 
