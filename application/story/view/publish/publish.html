@@ -1,9 +1,9 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>去野 身临其境方知奥妙·遊記</title>
-		<!--网页图标-->
-		<link rel="shortcut icon" href="__STATIC__/images/logo.ico" type="image/x-icon"/>
+		<title>去野 身临其境方知奥妙·发表遊記</title>
+        <!--网页图标-->
+        <link rel="shortcut icon" href="__STATIC__/images/logo.ico" type="image/x-icon"/>
 		<link href="__CSS__/bootstrap.css" rel='stylesheet' type='text/css' />
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="__JS__/jquery.min.js"></script>
@@ -13,6 +13,9 @@
    		 <!---- start-smoth-scrolling---->
 		<script type="text/javascript" src="__JS__/move-top.js"></script>
 		<script type="text/javascript" src="__JS__/easing.js"></script>
+        <link rel="stylesheet" type="text/css" href="__CSS__/font-awesome.min.css">
+        <link href="__STATIC__/css/froala_editor.min.css" rel="stylesheet" type="text/css">
+		<!--<link href="__CSS__/fileinput.css" media="all" rel="stylesheet" type="text/css" />-->
 		<script type="text/javascript">
 			jQuery(document).ready(function($) {
 				$(".scroll").click(function(event){		
@@ -41,88 +44,69 @@
 	        		}
 	    		});
 			});
+            var imageUploadURL="{:url('story/publish/uploadImg')}"
 		</script>
 		<!----//End-top-nav-script---->
 	</head>
 	<body>
 		<!----- start-header---->
-		<div id="home" class="header">
-			<div class="top-header">
-				<div class="container">
-					<div class="logo">
-						<a href="index.html"><span>去野</span>Journey<span>...</span></a>
-					</div>
-					<!----start-top-nav---->
-					<nav class="top-nav">
-						<ul class="top-nav">
-							<li class="active"><a href="{:url('index/index/index')}">首页home</a></li>
-							<li><a href="menu.html">目的地locations</a></li>
-							<li><a href="{:url('story/story/story')}">遊記notes</a></li>
-							<li><a href="news.html"> 登录</a></li>
-							<li><a href="reviews.html">注册</a></li>
-						</ul>
-						<a href="#" id="pull"><img src="__STATIC__/images/nav-icon.png" title="menu" /></a>
-					</nav>
-					<div class="clearfix"> </div>
-				</div>
-			</div>
-		</div>
+        <div id="home" class="header">
+            <div class="top-header">
+                <div class="container">
+                    <div class="logo">
+                        <a href="{:url('index/index/index')}"><span>去野</span>Journey<span>...</span></a>
+                    </div>
+                    <!----start-top-nav---->
+                    <nav class="top-nav">
+                        <ul class="top-nav">
+                            <li class="active"><a href="{:url('index/index/index')}">首页home</a></li>
+                            <li><a href="menu.html">目的地locations</a></li>
+                            <li><a href="{:url('story/story/story')}">遊記notes</a></li>
+                            <li><a href="news.html"> 登录</a></li>
+                            <li><a href="reviews.html">注册</a></li>
+                        </ul>
+                        <a href="#" id="pull"><img src="__STATIC__/images/nav-icon.png" title="menu" /></a>
+                    </nav>
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+        </div>
 			<!----- //End-header---->
 			<!----- menu-page ----->
-			<div class="news">
+			<div class="reservation">
 				<!------ menu-header ----->
-				<div class="news-header">
+				<div class="reservation-form">
 					<div class="container">
-						<h1><span>Travel</span> Notes</h1>
+						<div style="width:100%;height:45%;background-color:red"></div>
 					</div>
 				</div>
 				<!------ menuheader ----->
 			<div class="clearfix"> </div>
 			<!----- reservation ---->
-			<div class="News-page">
+			<div class="reservation-form">
 				<div class="container">
-					<h2><span> </span>&nbsp;&nbsp;&nbsp;&nbsp;遊記Notes &nbsp;<span> </span></h2>
-					<p>Travel Latest-Notes </p>
-					<a href="{:url('story/publish/publish')}" class="news-btn" href="#"><i></i>写遊記</a>
-					<!----- recent-news ----->
-					<div class="recent-news">
-						<div class="recent-news-grid" style="cursor:pointer" onclick="window.open('{:url(\'story/storydetail/storydetail\')}')">
-							<div class="recent-news-grid-left">
-								<a href="{:url('story/storydetail/storydetail')}"><img src="__STATIC__/images/d1.jpg" title="name" /></a>
-							</div>
-							<div class="recent-news-grid-right">
-								<h2>南京聚宝山走一遭，便是一个春天了。</h2>
-								<p>要说南京这座城市，虽然没有那么四季分明，但一年四季都有它独特的样子，自然我最爱的还是春天。</p>
-								<p>春天是相机最忙的季节，三月中旬的时候南京便成了花的海洋。南京最出名的赏花地莫过于鸡鸣寺的樱花大道，明孝陵的梅花山或者是南理工的二月兰，但每个地方在晴好的周末都会被汹涌的人流包围，那阵势俨然成了“花赏人”。</p>
-								<p></p>
-							</div>
-							<div class="clearfix"> </div>
-						</div>
-						<div class="recent-news-grid">
-							<div class="recent-news-grid-left">
-								<a href="#"><img src="__STATIC__/images/d2.jpg" title="name" /></a>
-							</div>
-							<div class="recent-news-grid-right">
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque aliquam at lectus sed imperdiet. Vestibulum scelerisque fermentum lorem vitae condimentum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed ultricies dapibus nibh, in vehicula tortor aliquam id. Nunc id laoreet sem, ac bibendum lectus.</p>
-								<p>Cras hendrerit lectus non enim vulputate, eget ornare lectus tincidunt. Quisque at est cursus lectus aliquet sagittis sed id lacus. Vivamus eu adipiscing enim</p>
-							</div>
-							<div class="clearfix"> </div>
-						</div>
-						<div class="recent-news-grid">
-							<div class="recent-news-grid-left">
-								<a href="#"><img src="__STATIC__/images/d3.jpg" title="name" /></a>
-							</div>
-							<div class="recent-news-grid-right">
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque aliquam at lectus sed imperdiet. Vestibulum scelerisque fermentum lorem vitae condimentum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed ultricies dapibus nibh, in vehicula tortor aliquam id. Nunc id laoreet sem, ac bibendum lectus.</p>
-								<p>Cras hendrerit lectus non enim vulputate, eget ornare lectus tincidunt. Quisque at est cursus lectus aliquet sagittis sed id lacus. Vivamus eu adipiscing enim</p>
-							</div>
-							<div class="clearfix"> </div>
-						</div>
-						<div class="clearfix"> </div>
-						<a class="news-btn" href="#">View all News</a>
-					</div>
-					<!----- recent-news ----->
+					<h2><span> </span>&nbsp;&nbsp;&nbsp;&nbsp; 写新遊記 &nbsp;<span> </span></h2>
+					<p>Publish Notes</p>
 				</div>
+				<!----- make-Reserver ------>
+				<div class="make-reserve">
+                    <div id="" class="container">
+                        <input id="title" placeholder="请在这里输入标题"/>
+                    </div>
+					<div class="container">
+						<section id="editor">
+							<div id='edit' style="margin-top: 30px;">
+
+							</div>
+						</section>
+						<input id="publish" type="submit" value="发表" />
+
+					</div>
+					<!------ reserv-form ----->
+				</div>
+				</div>
+				<!----- make-Reserver ------>
+			</div>
 			<!----- fearuted-diesh ----->
 			<div class="fearuted-diesh">
 				<div class="container">
@@ -297,50 +281,64 @@
 			</div>
 			</div>
 			</div>
-			</div>
 			<!----- fearuted-diesh ----->
 			<!----- End-Menu-page ----->
 			<!----- footer ----->
-			<div class="footer">
-				<div class="container">
-					<div class="footer-grids">
-						<div class="col-md-3 footer-grid">
-							<p>
-								<span>关于我们</span>
-								<span>关于去野</span>
-								<span><a class="line" href="{:url('store/Application/storeEnter')}">商家入驻</a></span>
-								<span>联系我们</span>
-							</p>
-						</div>
-						<div class="col-md-3 footer-grid">
-							<p>
-								<span>China tourister</span>
-								<span>68, rue  de la Couronne</span>
-								<span>75002 PARIS</span>
-								<span>718-749-1714</span>
-							</p>
-						</div>
-						<div class="col-md-3 footer-grid">
-							<ul>
-								<span>友情链接</span>
-								<li><a href="https://zh.airbnb.com">Airbnb爱彼迎</a></li>
-								<li><a href="http://www.booking.com">缤客</a></li>
-								<li><a href="http://www.mafengwo.cn/">马蜂窝</a></li>
-							</ul>
-						</div>
-						<div class="col-md-3 footer-grid copy-right">
-							<p>Copyright &copy; 2018.去野All rights reserved.</p>
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-				</div>
-			</div>
+            <div class="footer">
+                <div class="container">
+                    <div class="footer-grids">
+                        <div class="col-md-3 footer-grid">
+                            <p>
+                                <span>关于我们</span>
+                                <span>关于去野</span>
+                                <span><a class="line" href="{:url('store/Application/storeEnter')}">商家入驻</a></span>
+                                <span>联系我们</span>
+                            </p>
+                        </div>
+                        <div class="col-md-3 footer-grid">
+                            <p>
+                                <span>China tourister</span>
+                                <span>68, rue  de la Couronne</span>
+                                <span>75002 PARIS</span>
+                                <span>718-749-1714</span>
+                            </p>
+                        </div>
+                        <div class="col-md-3 footer-grid">
+                            <ul>
+                                <span>友情链接</span>
+                                <li><a href="https://zh.airbnb.com">Airbnb爱彼迎</a></li>
+                                <li><a href="http://www.booking.com">缤客</a></li>
+                                <li><a href="http://www.mafengwo.cn/">马蜂窝</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3 footer-grid copy-right">
+                            <p>Copyright &copy; 2018.去野All rights reserved.</p>
+                        </div>
+                        <div class="clearfix"> </div>
+                    </div>
+                </div>
+            </div>
 			<!----- footer ----->
 	
 </body>
+	<script src="__JS__/fileinput.js" type="text/javascript"></script>
+	<script src="__JS__/froala_editor.min.js"></script>
+	<!--[if lt IE 9]>
+	<script src="__JS__/froala_editor_ie8.min.js"></script>
+	<![endif]-->
+	<script src="__JS__/tables.min.js"></script>
+	<script src="__JS__/lists.min.js"></script>
+	<script src="__JS__/colors.min.js"></script>
+	<script src="__JS__/media_manager.min.js"></script>
+	<script src="__JS__/font_family.min.js"></script>
+	<script src="__JS__/font_size.min.js"></script>
+	<script src="__JS__/block_styles.min.js"></script>
+	<script src="__JS__/video.min.js"></script>
+    <script src="__JS__/file_upload.min.js"></script>
 	<script type="text/javascript">
-		var storydetailUrl="{:url('story/storydetail/storydetail')}";
+        var publishUrl="{:url('story/publish/publishStory')}";
 	</script>
-    <script src="__JS__/story/story.js" type="text/javascript"></script>
+    <script src="__JS__/story/publish.js"></script>
+
 </html>
 
