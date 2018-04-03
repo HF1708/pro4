@@ -105,6 +105,7 @@ create table if not exists store_advert
 	store_adv_name char(12) ,
 	store_adv_url  varchar(200),
 	store_adv_link varchar(50),
+	advert_textarea varchar(150),
 	store_id int, 
 	advert_state enum('F','T','S') default 'F' , -- 广告状态 F 未审核； T审核通过； S 被锁定
 foreign key(store_id) references `store_info`(store_id) 	
@@ -191,6 +192,7 @@ create table if not exists store_shotel(
 	hAddress varchar(50),-- 酒店详细地址 （待优化）
 	hPrice int, -- 价格
 	store_id int,
+	upTime datetime,
 	textarea VARCHAR(500),
 		foreign key(provinceID) references `hy_area`(id), 
 	foreign key(cityID) references `hy_area`(id), 
