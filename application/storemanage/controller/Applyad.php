@@ -33,8 +33,17 @@ class Applyad extends Controller
         $file = $_FILES['file'] ;
         $obj=new \user();
         $re=$obj->uploadImage($file);
-        echo $re;
-
-
+        $store_adv_name=input("?post.advName")?input("?advName"):"";
+        $store_adv_link=input("?post.link")?input("?link"):"";
+        $advert_textarea=input("?post.advert_textarea")?input("?advert_textarea"):"";
+        $store_adv_url=$re;
+        $store_id=1;
+        $data=["store_adv_name"=>$store_adv_name,"store_adv_link"=>$store_adv_link,"store_adv_url"=>$store_adv_url,"store_id"=>$store_id,"advert_textarea"=>$advert_textarea];
+        $re=db('store_advert')->insert($data);
+        if($re==1){
+            $this->success('提交成功！请等待审核');
+        }else{
+            $this->error('提交失败请重试！');
+        }
     }
 }

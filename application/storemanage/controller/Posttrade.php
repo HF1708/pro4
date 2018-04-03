@@ -69,7 +69,7 @@ class Posttrade extends Controller
 //                echo $info->getFilename();
 
                 //获取表单提交数据
-                $store_id=0;
+                $store_id=1;
                 $hotelName=input("?post.hotelName")?input("post.hotelName"):"";
                 $corporation_province=input("?post.corporation_province")?input("post.corporation_province"):"";
                 $corporation_city=input("?post.corporation_city")?input("post.corporation_city"):"";
@@ -95,7 +95,12 @@ class Posttrade extends Controller
                     'grade'=>$corporation_grade,
                     'textarea'=>$hotel_textarea
                 ];
-                db('store_info')->insert($data);
+                $re=db('store_shotel')->insert($data);
+               if($re==1){
+                   $this->success('提交成功！请等待审核');
+               }else{
+                   $this->error('提交失败请重试！');
+               }
 
             }else{
                 // 上传失败获取错误信息
