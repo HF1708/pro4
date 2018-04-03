@@ -237,7 +237,11 @@ create table if not exists store_hotelcomment(
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 create table if not exists store_hotelorder(
+=======
+create table if not exists store_hotel_order(
+>>>>>>> qp
 =======
 create table if not exists store_hotel_order(
 >>>>>>> qp
@@ -257,9 +261,9 @@ create table if not exists store_hotelorder(
 	FOREIGN KEY (user_id) REFERENCES user_user(user_id)
 );
 
-INSERT INTO `qdm181738524_db`.`store_hotelorder`( `huId`, `hoTime`, `paytime`, `orderstate`, `user_id`) VALUES ( 9001, '2018-04-02 15:14:35', '0000-00-00 00:00:00', '0', 1);
-INSERT INTO `qdm181738524_db`.`store_hotelorder`( `huId`, `hoTime`, `paytime`, `orderstate`, `user_id`) VALUES ( 9001, '2018-04-02 15:14:35', '0000-00-00 00:00:00', '1', 1);INSERT INTO `qdm181738524_db`.`store_hotelorder`( `huId`, `hoTime`, `paytime`, `orderstate`, `user_id`) VALUES ( 9001, '2018-04-02 15:14:35', '0000-00-00 00:00:00', '0', 1);
-INSERT INTO `qdm181738524_db`.`store_hotelorder`( `huId`, `hoTime`, `paytime`, `orderstate`, `user_id`) VALUES ( 9001, '2018-04-02 15:14:35', '0000-00-00 00:00:00', '2', 1);
+INSERT INTO `qdm181738524_db`.`store_hotel_order`( `huId`, `hoTime`, `paytime`, `orderstate`, `user_id`) VALUES ( 9001, '2018-04-02 15:14:35', '0000-00-00 00:00:00', '0', 1);
+INSERT INTO `qdm181738524_db`.`store_hotel_order`( `huId`, `hoTime`, `paytime`, `orderstate`, `user_id`) VALUES ( 9001, '2018-04-02 15:14:35', '0000-00-00 00:00:00', '1', 1);INSERT INTO `qdm181738524_db`.`store_hotelorder`( `huId`, `hoTime`, `paytime`, `orderstate`, `user_id`) VALUES ( 9001, '2018-04-02 15:14:35', '0000-00-00 00:00:00', '0', 1);
+INSERT INTO `qdm181738524_db`.`store_hotel_order`( `huId`, `hoTime`, `paytime`, `orderstate`, `user_id`) VALUES ( 9001, '2018-04-02 15:14:35', '0000-00-00 00:00:00', '2', 1);
 
 
 

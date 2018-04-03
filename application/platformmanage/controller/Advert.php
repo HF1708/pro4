@@ -33,9 +33,13 @@ class Advert extends Controller
         {
             // 获取5条广告
 //        $list = Db("store_advert")->alias('a')->join('store_info w', 'a.user_uid = w.store_phone')->where('a.user_state','F')->paginate(5);
+<<<<<<< HEAD
             $list = Db("store_advert")->alias('a')->join('store_info w', 'a.store_id = w.store_id')->paginate(5);
 //            var_dump($list) ;
 //            exit ;
+=======
+            $list = Db("store_advert")->alias('a')->join('store_info w', 'a.store_id = w.store_phone')->paginate(5);
+>>>>>>> qp
 
         }
 

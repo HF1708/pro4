@@ -13,6 +13,11 @@ var navs = [{
     "icon" : "icon-jlk",
     "href" : "",
     "spread" : false
+},{
+    "title" : "酒店管理",
+    "icon" : "icon-text",
+    "href" : HotelbgUrl,
+    "spread" : false
 }, {
 	"title" : "用户管理",
 	"icon" : "icon-text",
