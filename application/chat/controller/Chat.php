@@ -30,6 +30,9 @@ class Chat extends Controller
         $chatTwo = input("?post.chatTwo") ? input("post.chatTwo"):"" ;
         $chatTwoType = input("?post.chatType") ? input("post.chatType"):"" ;
 
+//        var_dump($chatOne) ;
+//        exit ;
+
         // 用户未登录
         if( !$chatOne )
         {
@@ -44,6 +47,12 @@ class Chat extends Controller
                 $chatTwoData = Db("store_info")->where(["store_phone"=>$chatTwo])->find() ;
                 $chat_two_image = $chatTwoData['store_image'] ;
                 $chat_two_name = $chatTwoData['store_name'] ;
+            }
+            else if( strcmp($chatTwoType,'server')==0 )
+            {
+                $chatTwoData = Db("backstage_user")->where(["user_uid"=>$chatTwo])->find() ;
+                $chat_two_image = $chatTwoData['user_image'] ;
+                $chat_two_name = $chatTwoData['user_name'] ;
             }
             else
             {
@@ -109,7 +118,7 @@ class Chat extends Controller
             }
             else
             {
-                $chatTwoData = Db("store_info")->where(["store_phone"=>$chatTwo])->find() ;
+                $chatTwoData = Db("backstage_user")->where(["user_uid"=>$chatTwo])->find() ;
                 $chat_two_image = $chatTwoData['user_image'] ;
                 $chat_two_name = $chatTwoData['user_name'] ;
             }
