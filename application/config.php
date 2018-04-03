@@ -256,7 +256,8 @@ return [
         'UPDATA_SUCCESS' => '数据更新成功' ,
         'UPDATA_ERROR' => '数据更新失败' ,
         'PHONE_NO_EXISTS' => '手机号码不存在,请确认后输入' ,
-        'PHONE_EMPTY' => '手机号码为空,请重新输入'
+        'PHONE_EMPTY' => '手机号码为空,请重新输入' ,
+        "ERROR_USER_DATA" => "用户未登录" ,
     ] ,
     // 注册返回消息配置
     "registerMsg" => [

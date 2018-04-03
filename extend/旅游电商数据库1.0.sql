@@ -50,7 +50,7 @@ create table if not exists user_user
 	user_phone char(11) ,
 	user_image varchar(100) ,
 	user_sex enum("男",'女') default'男' ,
-	user_birthday datetime ,
+	user_birthday date default"1995-11-22",
 	user_time datetime ,
 	user_msg varchar(100) 
 ) ;
@@ -62,7 +62,10 @@ ALTER TABLE `user_user` ADD INDEX `sad` (`user_uid`,`user_password`) USING BTREE
 -- ALTER TABLE `user_user` ADD INDEX `sad1` (`user_email`) USING BTREE ;
 -- ALTER TABLE `user_user` ADD INDEX `sad2` (`user_phone`) USING BTREE ;
 insert into user_user( user_uid ,user_name ,user_password ,user_email ,user_phone ,user_image ,user_msg ,user_time )values
-( 'test' , '测试用', md5('123456'), '', '15324488756', '', 'test',now()  ) ;
+( 'test' , '测试用', md5('123456'), '', '15324488756', 'http://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg', 'test',now()  ) ;
+insert into user_user( user_uid ,user_name ,user_password ,user_email ,user_phone ,user_image ,user_msg ,user_time )values
+( 'tests' , '测试用', md5('123456'), '', '15324488756', 'http://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg', 'test',now()  ) ;
+
 
 -- 商家信息表
 
@@ -234,19 +237,7 @@ create table if not exists store_hotelcomment(
 );
 
 -- 订单表
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 create table if not exists store_hotelorder(
-=======
-create table if not exists store_hotel_order(
->>>>>>> qp
-=======
-create table if not exists store_hotelOrder(
->>>>>>> yqt
-=======
-create table if not exists store_hotelorder(
->>>>>>> yqt
 	hoId int not null auto_increment primary key,
 	huId int,-- 酒店ID
 	hoTime datetime,-- 下单订单时间

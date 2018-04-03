@@ -93,13 +93,7 @@ var app = new Vue({
                 that.ws.send( sendData( that.chat_one ,'server' ,'ss' ,'hello' ) ) ;
             }
         }) ;
-        /*
-         获取聊天对象
-         */
-        that.chat_obj = [{
-            chat_title:'aa' ,
-            chat_image:''
-        }] ;
+
         that.ws = new WebSocket( "ws://localhost:8888" ) ;
         that.ws.onopen = function()
         {
@@ -121,6 +115,31 @@ var app = new Vue({
                         chat_image:msgObj.content['image'] ,
                         chat_login:msgObj.content['login']
                     } ;
+                    /*
+                     获取聊天对象
+                     */
+                    console.log(that.chat_obj.length) ;
+
+                    if( that.chat_obj.length==0 )
+                    {
+                        that.chat_obj = [{
+                            chat_title:msgObj.rever ,
+                            chat_image:msgObj.content['image']
+                        }] ;
+                    }
+
+                    for( var i = 0 ;i < that.chat_obj.length;i++ )
+                    {
+                        if( that.chat_obj[i].chat_title != msgObj.rever )
+                        {
+                            var new_obj = {
+                                chat_title:msgObj.rever ,
+                                chat_image:msgObj.content['image']
+                            } ;
+                            that.chat_obj.push(new_obj) ;
+                        }
+                    }
+
                     that.chat_two = msgObj.rever ;
                     that.chat_data.push($data) ;
                     var div = document.getElementById('chat') ;

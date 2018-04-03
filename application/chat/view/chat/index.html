@@ -347,10 +347,7 @@
 			/*
 				获取聊天对象
 			*/
-			that.chat_obj = [{
-				chat_title:'aa' ,
-				chat_image:''
-			}] ;
+
 			that.ws = new WebSocket( "ws://localhost:8888" ) ;
 			that.ws.onopen = function()
 			{
@@ -372,6 +369,25 @@
 							chat_image:msgObj.content['image'] ,
 							chat_login:msgObj.content['login']
 						} ;
+						if( that.chat_obj.length==0 )
+						{
+							that.chat_obj = [{
+								chat_title:msgObj.rever ,
+								chat_image:msgObj.content['image']
+							}] ;
+						}
+
+						for( var i = 0 ;i < that.chat_obj.length;i++ )
+						{
+							if( that.chat_obj[i].chat_title != msgObj.rever )
+							{
+								that.chat_obj = [{
+									chat_title:msgObj.rever ,
+									chat_image:msgObj.content['image']
+								}] ;
+							}
+						}
+							
 						that.chat_two = msgObj.rever ;
 						that.chat_data.push($data) ;
 						var div = document.getElementById('chat') ;
