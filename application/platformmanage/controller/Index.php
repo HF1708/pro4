@@ -62,7 +62,7 @@ class Index extends Controller
     }
 
     /**
-     *  *  功能描述:登录
+     *  *  功能描述:登录(服务器)
      *  参数：无
      *  返回：无
      *  作者:qingtian Y
@@ -83,8 +83,13 @@ class Index extends Controller
         ] ;
         $res = Db("backstage_user")->where($where)->find() ;
         // 判断是否存在用户
-        // 没有返回报错消息
-        $that->emptyData($res,"loginMsg","ACCOUNT_ERROR") ;
+        // 没有返回登录页面
+        if( empty($res) )
+        {
+
+            return $this->fetch("index") ;
+        }
+//        $that->emptyData($res,"loginMsg","ACCOUNT_ERROR") ;
         // 否则用户存在
         // 将信息存入SESSION
             // 1.设置type为server（后台人员专用）

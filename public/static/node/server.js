@@ -20,6 +20,7 @@ server.on( "connection" ,function( socket ){
 		{
 			case 'ss':
 				console.log( "服务器发送的消息") ;
+				// 查看
 				socket.send( sendData(
 					msgObj.rever ,
 					msgObj.sender ,

@@ -2,11 +2,11 @@ var $,tab,skyconsWeather;
 layui.config({
 	base : "../../static/js/"
 }).use(['bodyTab','form','element','layer','jquery'],function(){
-	var form = layui.form(),
+	var form = layui.form,
 		layer = layui.layer,
-		element = layui.element();
-		$ = layui.jquery;
-		tab = layui.bodyTab();
+		element = layui.element;
+	$ = layui.jquery;
+	tab = layui.bodyTab();
 
 	//锁屏
 	// function lockPage(){
@@ -116,8 +116,8 @@ layui.config({
 			openTitle += '<i class="layui-icon layui-unselect layui-tab-close" data-id="'+menu[i].layId+'">&#x1006;</i>';
 			element.tabAdd("bodyTab",{
 				title : openTitle,
-		        content :"<iframe src='"+menu[i].href+"' data-id='"+menu[i].layId+"'></frame>",
-		        id : menu[i].layId
+				content :"<iframe src='"+menu[i].href+"' data-id='"+menu[i].layId+"'></frame>",
+				id : menu[i].layId
 			})
 			//定位到刷新前的窗口
 			if(curmenu != "undefined"){

@@ -1,0 +1,39 @@
+/*聊天头像*/
+.img_header_2{
+    width:45px ;
+    height:45px ;
+}
+/*清除内外补白*/
+.clearMarginPadding{
+    margin:0 ;
+    padding:0 ;
+}
+/*聊天会话容器*/
+.chatCon{
+    height: 350px ;
+    padding:5px ;
+    border-left: 1px solid #d4d3d2 ;
+    overflow:scroll ;
+}
+/*发送聊天内容容器*/
+.sendChatCon{
+    min-height: 100px;
+    border:1px solid #d5d5e5 ;
+}
+/*使聊天内容靠右*/
+.sendConRight{
+    display:flex ;
+    justify-content:flex-end ;
+}
+/*发送消息*/
+.sendMsg{
+    position:absolute;
+    bottom:0 ;
+    right:0 ;
+}
+/*内外补白均为100%*/
+.marPadd{
+    width:100% ;
+    height:100% ;
+    padding:20px ;
+}
