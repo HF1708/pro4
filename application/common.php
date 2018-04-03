@@ -132,7 +132,7 @@ class user{
             return($err);
         } else {
             $url = $this->unicode_decode($ret['key']) ;
-            $http_url = "http://p6gnb5g93.bkt.clouddn.com/".$url ;
+            $http_url = "http://p6gnb5g93.bkt.clouddn.com/".$key ;
             return $http_url ;
         }
 

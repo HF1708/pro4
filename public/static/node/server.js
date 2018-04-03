@@ -55,7 +55,12 @@ server.on( "connection" ,function( socket ){
 								msgObj.rever ,
 								msgObj.sender ,
 								'message' ,
-								{flag:flag,content:msgObj.content['message'],login:msgObj.content['chat_login']}
+								{
+									flag:flag ,
+									content:msgObj.content['message'] ,
+									login:msgObj.content['chat_login'] ,
+									image:msgObj.content['chat_image']
+								}
 							)) ;
 						}
 					}

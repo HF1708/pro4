@@ -21,7 +21,7 @@ layui.define(["element","jquery"],function(exports){
 	if($(".navBar").html() == ''){
 		var _this = this;
 		$(".navBar").html(navBar(navs)).height($(window).height()-230);
-		element.init();  //初始化页面元素
+		element.init;  //初始化页面元素
 		$(window).resize(function(){
 			$(".navBar").height($(window).height()-230);
 		})
