@@ -69,6 +69,7 @@ class Posttrade extends Controller
 //                echo $info->getFilename();
 
                 //获取表单提交数据
+                $store_id=0;
                 $hotelName=input("?post.hotelName")?input("post.hotelName"):"";
                 $corporation_province=input("?post.corporation_province")?input("post.corporation_province"):"";
                 $corporation_city=input("?post.corporation_city")?input("post.corporation_city"):"";
@@ -78,12 +79,24 @@ class Posttrade extends Controller
                 $roomPrice=input("?post.roomPrice")?input("post.roomPrice"):"";
                 $corporation_grade=input("?post.corporation_grade")?input("post.corporation_grade"):"";
                 $corporation_grade=input("?post.hotel_textarea")?input("post.hotel_textarea"):"";
+                $corporation_town=input("?post.corporation_town")?input("post.corporation_town"):"";
+                $hotel_textarea=input("?post.hotel_textarea")?input("post.hotel_textarea"):"";
                 $submitTime=@date("Y-m-d H:i:s",time()+60*60*8);
                 $data=['hName'=>$hotelName,
                     'hImg'=>$info->getSaveName(),
-                    'hImg'=>$info->getSaveName(),
+                    'hRoomNumber'=>$roomNumber,
+                    'hAddress'=>$site,
+                    'hPrice'=>$roomPrice,
+                    'store_id'=>$store_id,
+                    'provinceID'=>$corporation_province,
+                    'cityID'=>$corporation_city,
+                    'townID'=>$corporation_town,
+                    'upTime'=>$submitTime,
+                    'grade'=>$corporation_grade,
+                    'textarea'=>$hotel_textarea
                 ];
                 db('store_info')->insert($data);
+
             }else{
                 // 上传失败获取错误信息
                 echo $file->getError();

@@ -9,9 +9,9 @@ var navs = [{
 	"href" : PosttradeUrl,
 	"spread" : false
 },{
-	"title" : "发布商品",
+	"title" : "商品管理",
 	"icon" : "icon-text",
-	"href" : "page/links/linksList.html",
+	"href" : commodityManagementUrl,
 	"spread" : false
 },{
 	"title" : "订单管理",
@@ -19,9 +19,9 @@ var navs = [{
 	"href" : orderUrl,
 	"spread" : false
 },{
-	"title" : "系统基本参数",
+	"title" : "申请广告位",
 	"icon" : "&#xe631;",
-	"href" : "page/systemParameter/systemParameter.html",
+	"href" : applyAdUrl,
 	"spread" : false
 },{
 	"title" : "二级菜单演示",

@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>发布商品</title>
+    <title>订单管理</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -30,7 +30,6 @@
     layui.use('table', function(){
         var table = layui.table;
         //第一个实例
-
         table.render({
             elem: '#demo'
             ,height: 315
@@ -73,7 +72,7 @@
                 });
             } else if(layEvent === 'use'){ //使用
                 layer.confirm('确定使用吗', function(index){
-                    $.post("{:url('storemanage/Commodity/use')}",{"hoId":obj.data.hoId},function (res) {
+                    $.post("{:url('storemanage/Order/useOrder')}",{"hoId":obj.data.hoId},function (res) {
                         var msg=JSON.parse(res);
                         if(msg.code==10000){
                             layer.alert('操作成功');
@@ -88,13 +87,22 @@
                     });
                     layer.close(index);
                 });
-            }else if(layEvent === 'edit'){ //编辑
-                //do something
-
-                //同步更新缓存对应的值
-                obj.update({
-                    username: '123'
-                    ,title: 'xxx'
+            }else if(layEvent === 'refund'){ //退款
+                layer.confirm('确定退款吗', function(index){
+                    $.post("{:url('storemanage/Order/refund')}",{"hoId":obj.data.hoId},function (res) {
+                        var msg=JSON.parse(res);
+                        if(msg.code==10000){
+                            layer.alert('操作成功');
+                        }else {
+                            layer.alert('操作失败');
+                        }
+                        table.reload('demo', {
+                            url: '{:url("storemanage/Order/hotelOrderData")}'
+                            ,where: {} //设定异步数据接口的额外参数
+                            //,height: 300
+                        });
+                    });
+                    layer.close(index);
                 });
             }
         });
