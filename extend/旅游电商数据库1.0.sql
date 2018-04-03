@@ -193,7 +193,7 @@ create table if not exists store_shotel_img(
 );
 
 -- 酒店评论表
-create table if not exists store_hotelComment(
+create table if not exists store_hotelcomment(
 		hcId int not null auto_increment primary key,
 		hId int, -- 酒店ID
 		hcContent varchar (200),-- 评价内容
@@ -208,7 +208,7 @@ insert  into  store_hotelComment  (hcId,hId,hcContent,hcTime,userId,commentTo)VA
 (1000,9001,'这家酒店很好！','2018-04-01','test','');
 
 -- 订单表
-create table if not exists store_hotelOrder(
+create table if not exists store_hotel_order(
 	hoId int not null auto_increment primary key,
 	huId int,-- 酒店ID
 	hoTime datetime,-- 下单订单时间
