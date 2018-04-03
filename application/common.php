@@ -26,7 +26,10 @@
 // 二：类curl
 // 1. 发送curl请求
 //
-
+//引用七牛CDN工具包
+use qiniu\Auth;
+//引用七牛 上传类
+use Qiniu\Storage\UploadManager;
 
 
 

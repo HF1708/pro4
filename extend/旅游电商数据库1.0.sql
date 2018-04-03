@@ -1,4 +1,4 @@
--- drop database if exists travel;
+﻿-- drop database if exists travel;
 -- create database travel DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;-- 
 -- use travel;
 -- 
@@ -66,7 +66,6 @@ insert into user_user( user_uid ,user_name ,user_password ,user_email ,user_phon
 
 -- 商家信息表
 
-drop table if exists store_advert ;
 drop table if exists store_info ;
 create table if not exists store_info
 (
@@ -106,33 +105,27 @@ create table if not exists store_advert
 	store_adv_name char(12) ,
 	store_adv_url  varchar(200),
 	store_adv_link varchar(50),
-	user_uid char(11), 
-	user_state enum('F','T','S') default 'F'  -- 广告状态 F 未审核； T审核通过； S 被锁定 
+	store_id int, 
+	advert_state enum('F','T','S') default 'F' , -- 广告状态 F 未审核； T审核通过； S 被锁定
+foreign key(store_id) references `store_info`(store_id) 	
 ) ; 
 -- 添加账号的唯一索引/ 广告名
 ALTER TABLE `store_advert` ADD UNIQUE INDEX `sdaa` (`store_adv_name`) USING BTREE ;
 
-insert into store_advert(store_adv_name,store_adv_url,store_adv_link,user_uid)values
+insert into store_advert(store_adv_name,store_adv_url,store_adv_link,store_id)values
 ("广告1","https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'13255917292') ;
-insert into store_advert(store_adv_name,store_adv_url,store_adv_link,user_uid)values
+insert into store_advert(store_adv_name,store_adv_url,store_adv_link,store_id)values
 ("广告2","https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'13255917292') ;
-<<<<<<< HEAD
-insert into store_advert(store_adv_name,store_adv_url,store_adv_link,user_uid)values
-("广告3","https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'13255917292') ;
-insert into store_advert(store_adv_name,store_adv_url,store_adv_link,user_uid)values
-("广告4","https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'13255917292') ;
-=======
 
-insert into store_advert(store_adv_name,store_adv_url,store_adv_link,user_uid)values
+insert into store_advert(store_adv_name,store_adv_url,store_adv_link,store_id)values
 ("广告3","https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'13255917292') ;
-
-insert into store_advert(store_adv_name,store_adv_url,store_adv_link,user_uid)values
+insert into store_advert(store_adv_name,store_adv_url,store_adv_link,store_id)values
 ("广告4","https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'13255917292') ;
 
->>>>>>> parent of c72416b... Merge branch 'master' of https://github.com/HF1708/pro4
-insert into store_advert(store_adv_name,store_adv_url,store_adv_link,user_uid)values
+
+insert into store_advert(store_adv_name,store_adv_url,store_adv_link,store_id)values
 ("广告5","https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'13255917292') ;
-insert into store_advert(store_adv_name,store_adv_url,store_adv_link,user_uid)values
+insert into store_advert(store_adv_name,store_adv_url,store_adv_link,store_id)values
 ("广告6","https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'13255917292') ;
 
 
@@ -162,7 +155,7 @@ create table if not exists user_chat
 
 ALTER TABLE `user_chat` ADD INDEX `user_chat_1` (`user_uid`,`user_chat_char_two_id`) USING BTREE ;
 
--------------------------------------后台---------------------------------------------
+-- -----------------------------------后台---------------------------------------------
 -- 员工管理表
 drop table if exists backstage_user ;
 create table if not exists backstage_user
@@ -205,7 +198,7 @@ create table if not exists store_shotel(
 	foreign key(store_id) references store_info(store_id)  -- 酒店属于的商家ID
 ) ;
 
-insert into store_shotel(hId,hName,hImg,hRemain,hAddress,hPrice,store_id)values
+insert into store_shotel(hId,hName,hImg,hRoomNumber,hAddress,hPrice,store_id)values
 (9001,'厦门香格里拉大酒店','hotel1.jpg',20,'观音山国际商务区台东路168号',1009,''),
 (9002,'厦门海悦山庄酒店','hotel2.jpg',20,'思明区环岛南路3999号(紧邻环岛路,国家会计学院旁)',810,''),
 (9003,'厦门海景千禧大酒店','hotel3.jpg',20,'镇海路12号之8号 (近中山路商业步行街, 轮渡码头和和平码头)',790,''),
@@ -227,7 +220,7 @@ create table if not exists store_shotel_img(
 );
 
 -- 酒店评论表
-create table if not exists store_hotelComment(
+create table if not exists store_hotelcomment(
 		hcId int not null auto_increment primary key,
 		hId int, -- 酒店ID
 		hcContent varchar (200),-- 评价内容
