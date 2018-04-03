@@ -1,4 +1,4 @@
--- drop database if exists travel;
+﻿-- drop database if exists travel;
 -- create database travel DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;-- 
 -- use travel;
 -- 
@@ -62,11 +62,10 @@ ALTER TABLE `user_user` ADD INDEX `sad` (`user_uid`,`user_password`) USING BTREE
 -- ALTER TABLE `user_user` ADD INDEX `sad1` (`user_email`) USING BTREE ;
 -- ALTER TABLE `user_user` ADD INDEX `sad2` (`user_phone`) USING BTREE ;
 insert into user_user( user_uid ,user_name ,user_password ,user_email ,user_phone ,user_image ,user_msg ,user_time )values
-( 'test' , '测试用', md5('123456'), '', '15324488756', 'https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg', 'test',now()  ) ;
+( 'test' , '测试用', md5('123456'), '', '15324488756', '', 'test',now()  ) ;
 
 -- 商家信息表
 
-drop table if exists store_advert ;
 drop table if exists store_info ;
 create table if not exists store_info
 (
@@ -106,8 +105,10 @@ create table if not exists store_advert
 	store_adv_name char(12) ,
 	store_adv_url  varchar(200),
 	store_adv_link varchar(50),
-	store_id char(11), 
-	advert_state enum('F','T','S') default 'F'  -- 广告状态 F 未审核； T审核通过； S 被锁定 
+	advert_textarea varchar(150),
+	store_id int, 
+	advert_state enum('F','T','S') default 'F' , -- 广告状态 F 未审核； T审核通过； S 被锁定
+foreign key(store_id) references `store_info`(store_id) 	
 ) ; 
 -- 添加账号的唯一索引/ 广告名
 ALTER TABLE `store_advert` ADD UNIQUE INDEX `sdaa` (`store_adv_name`) USING BTREE ;
@@ -121,6 +122,7 @@ insert into store_advert(store_adv_name,store_adv_url,store_adv_link,store_id)va
 ("广告3","https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'13255917292') ;
 insert into store_advert(store_adv_name,store_adv_url,store_adv_link,store_id)values
 ("广告4","https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'13255917292') ;
+
 
 insert into store_advert(store_adv_name,store_adv_url,store_adv_link,store_id)values
 ("广告5","https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'13255917292') ;
@@ -154,7 +156,7 @@ create table if not exists user_chat
 
 ALTER TABLE `user_chat` ADD INDEX `user_chat_1` (`user_uid`,`user_chat_char_two_id`) USING BTREE ;
 
--------------------------------------后台---------------------------------------------
+-- -----------------------------------后台---------------------------------------------
 -- 员工管理表
 drop table if exists backstage_user ;
 create table if not exists backstage_user
@@ -162,17 +164,21 @@ create table if not exists backstage_user
 	user_id int primary key auto_increment ,
 	user_uid char(8) , -- 例：hf170809
 	user_password char(20) ,
-	user_name char(10) ,
-	user_image varchar(150)
+	user_name char(10)
 ) ;
 
 -- 添加账号密码的符合索引(联合索引)
 ALTER TABLE `backstage_user` ADD INDEX `sad` (`user_uid`,`user_password`) USING BTREE ;
 
-insert into backstage_user(user_uid,user_password,user_name,user_image) values
-('hf170809','123456',"测试客服","http://p6gnb5g93.bkt.clouddn.com/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg") ;
+insert into backstage_user(user_uid,user_password,user_name) values
+('hf170809','123456',"测试客服") ;
 
 -- -----------------------------------邱萍--------------------------------------------
+
+
+
+
+
 -- 酒店表
 create table if not exists store_shotel(
 	hId int not null auto_increment primary key,-- 酒店ID
@@ -186,6 +192,7 @@ create table if not exists store_shotel(
 	hAddress varchar(50),-- 酒店详细地址 （待优化）
 	hPrice int, -- 价格
 	store_id int,
+	upTime datetime,
 	textarea VARCHAR(500),
 		foreign key(provinceID) references `hy_area`(id), 
 	foreign key(cityID) references `hy_area`(id), 
@@ -193,7 +200,7 @@ create table if not exists store_shotel(
 	foreign key(store_id) references store_info(store_id)  -- 酒店属于的商家ID
 ) ;
 
-insert into store_shotel(hId,hName,hImg,hRemain,hAddress,hPrice,store_id)values
+insert into store_shotel(hId,hName,hImg,hRoomNumber,hAddress,hPrice,store_id)values
 (9001,'厦门香格里拉大酒店','hotel1.jpg',20,'观音山国际商务区台东路168号',1009,''),
 (9002,'厦门海悦山庄酒店','hotel2.jpg',20,'思明区环岛南路3999号(紧邻环岛路,国家会计学院旁)',810,''),
 (9003,'厦门海景千禧大酒店','hotel3.jpg',20,'镇海路12号之8号 (近中山路商业步行街, 轮渡码头和和平码头)',790,''),
@@ -202,6 +209,8 @@ insert into store_shotel(hId,hName,hImg,hRemain,hAddress,hPrice,store_id)values
 (9006,'厦门喜来登酒店','hotel6.jpg',20,' 思明区嘉禾路386-1号(近SM城市广场)',709,''),
 (9007,'厦门磐基皇冠假日酒店 ','hotel7.jpg',20,'思明区嘉禾路199号(近明发商业广场)',755,''),
 (9008,'厦门马哥孛罗东方大酒店','hotel8.jpg',20,' 思明区湖滨北建业路8号(近白鹭洲公园,筼筜湖畔)',709,'');
+
+
 
 -- 酒店图片表
 create table if not exists store_shotel_img(
@@ -213,21 +222,19 @@ create table if not exists store_shotel_img(
 );
 
 -- 酒店评论表
-create table if not exists store_hotelComment(
+create table if not exists store_hotelcomment(
 		hcId int not null auto_increment primary key,
 		hId int, -- 酒店ID
 		hcContent varchar (200),-- 评价内容
-		hcTime varchar (200),-- 评价时间
+		hcTime varchar (200),-- 评价图片 
 		userId int not null ,-- 用户ID 
 		commentTo  int DEFAULT 0, -- 回复
 		FOREIGN KEY (hId) REFERENCES store_shotel(hId),
 		FOREIGN KEY (userId) REFERENCES user_user(user_id)
 );
 
-insert  into  store_hotelComment  (hcId,hId,hcContent,hcTime,userId,commentTo)VALUES
-(1000,9001,'这家酒店很好！','2018-04-01','test','');
-
 -- 订单表
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 create table if not exists store_hotelorder(
@@ -237,21 +244,22 @@ create table if not exists store_hotel_order(
 =======
 create table if not exists store_hotelOrder(
 >>>>>>> yqt
+=======
+create table if not exists store_hotelorder(
+>>>>>>> yqt
 	hoId int not null auto_increment primary key,
 	huId int,-- 酒店ID
 	hoTime datetime,-- 下单订单时间
 	paytime datetime,-- 支付时间
-	state enum("0","1","2"),-- 订单状态 0 未支付 ；1 已支付 ；2 失效；
+	orderstate enum("0","1","2"),-- 订单状态 0 未支付 ；1 已支付 ；2 失效；
 	user_id int,
 	FOREIGN KEY (huId) REFERENCES store_shotel(hId),
 	FOREIGN KEY (user_id) REFERENCES user_user(user_id)
 );
 
-
-
-
-
-
+INSERT INTO `qdm181738524_db`.`store_hotelorder`( `huId`, `hoTime`, `paytime`, `orderstate`, `user_id`) VALUES ( 9001, '2018-04-02 15:14:35', '0000-00-00 00:00:00', '0', 1);
+INSERT INTO `qdm181738524_db`.`store_hotelorder`( `huId`, `hoTime`, `paytime`, `orderstate`, `user_id`) VALUES ( 9001, '2018-04-02 15:14:35', '0000-00-00 00:00:00', '1', 1);INSERT INTO `qdm181738524_db`.`store_hotelorder`( `huId`, `hoTime`, `paytime`, `orderstate`, `user_id`) VALUES ( 9001, '2018-04-02 15:14:35', '0000-00-00 00:00:00', '0', 1);
+INSERT INTO `qdm181738524_db`.`store_hotelorder`( `huId`, `hoTime`, `paytime`, `orderstate`, `user_id`) VALUES ( 9001, '2018-04-02 15:14:35', '0000-00-00 00:00:00', '2', 1);
 
 
 
