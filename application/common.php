@@ -95,7 +95,7 @@ class user{
      * 功能描述：上传图片
      * 参数：$file 图片文件流  ( $_FILES["file"] )
      * QQUser：
-     * 返回：无(出错直接退出)
+     * 返回：返回cdn加速后的url
      * 作者：yonjin L
      * 时间：18-4-1
      */

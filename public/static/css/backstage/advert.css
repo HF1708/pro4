@@ -1,0 +1,54 @@
+
+/*商品详情*/
+.advertCon{
+    position:absolute ;
+    top:5% ;
+    left:10% ;
+    width:400px ;
+    min-height:400px ;
+    background-color:#fff ;
+    border:1px solid #d2d2d2 ;
+}
+
+/*广告图片大小*/
+.advert_pic{
+    width:100px ;
+    height:100px ;
+}
+
+/*关闭广告详情*/
+.close_advert{
+    display:flex ;
+    justify-content: flex-end;
+}
+
+/*关闭广告详情图标*/
+.close_icon{
+    font-size: 30px;
+    color: #ff0022;
+}
+
+/*内容居中*/
+.text_center{
+    text-align:center ;
+}
+
+/*等待广告详情的提示*/
+.msgLoading{
+    display:flex ;
+    position:fixed ;
+    top:0 ;
+    left:0 ;
+    justify-content:center;
+    width:100% ;
+    height:100% ;
+    background-color:rgba(0,0,0,0.5) ;
+    z-index:100 ;
+
+}
+.msgLoading i{
+    position:fixed ;
+    top:20% ;
+    left:40% ;
+}
+
