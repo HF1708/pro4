@@ -75,7 +75,7 @@ class Login extends Controller
         if( !empty($res) )
         {
             $res['userType'] = "user" ;
-
+<<<<<<< HEAD
             // 登录成功 存储数据到redis
             /*$redis = new \Redis() ;
             $redis->connect('127.0.0.1',6379) ;
@@ -88,9 +88,9 @@ class Login extends Controller
 //            $redis->hSet('userStore', $res['store_id'], serialize($res)) ;
 
 
+=======
 
-
-
+>>>>>>> lyz
             // 用户数据存到session
             Session::set('loginData',serialize($res)) ;
             $returnJson = [
