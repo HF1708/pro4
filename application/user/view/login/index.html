@@ -126,7 +126,7 @@
 								<div id="myTabContent" class="tab-content" >
 
 									<div class="tab-pane fade in active" id="user">
-										<div class="container">
+										<div class="">
 											<!------ reserv-form ----->
 											<div class="reserv-form">
 												<form>
@@ -344,10 +344,12 @@
 		var $user_login_phone_url_1 = "{:url('user/Login/phoneLogin')}" ;
 
 
+
+
 	    /*
 		 个人中心的url
 	     */
-		var $user_person_url = "{:url('user/Person/index')}" ;
+		var $user_person_url = "{:url('user/Person/person')}" ;
 		/*
 		登录页面的url
 		 */
@@ -360,6 +362,14 @@
 		是否已登录
 		 */
 		var $user_login_already = "{:url('user/Login/userLoginAlready')}" ;
+		/*
+		退出登录的url
+		 */
+		var $user_login_out = "{:url('user/Login/outLogin')}" ;
+		/*
+		跳转商家的url
+		 */
+		var $store_jump = "{:url('storemanage/index/index')}" ;
 
 	</script>
 	<script type="text/javascript" src="__JS__/user/user_login_page.js"></script>

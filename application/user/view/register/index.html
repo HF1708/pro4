@@ -152,7 +152,7 @@
 							<div id="myTabContent" class="tab-content" >
 
 								<div class="tab-pane fade in active" id="user">
-									<div class="container">
+									<div class="">
 										<!------ reserv-form ----->
 										<div class="reserv-form">
 											<form>
@@ -355,7 +355,7 @@
 	/*
 	 个人中心的url
 	 */
-	var $user_person_url = "{:url('user/Person/index')}" ;
+	var $user_person_url = "{:url('user/Person/person')}" ;
 	/*
 	 登录页面的url
 	 */
@@ -368,6 +368,22 @@
 	 是否已登录
 	 */
 	var $user_login_already = "{:url('user/Login/userLoginAlready')}" ;
+	/*
+	 退出登录的url
+	 */
+	var $user_login_out = "{:url('user/Login/outLogin')}" ;
+	/*
+	 注册的验证码
+	 */
+	var $code_user_url = "{:url('user/Register/getPhoneCode')}" ;
+	/*
+	用户注册
+	 */
+	var $user_register = "{:url('user/Register/register')}" ;
+	/*
+	手机商家注册
+	 */
+	var $store_register = "{:url('user/Register/phoneRegisterStore')}" ;
 
 </script>
 <script type="text/javascript" src="__JS__/user/user_login.js"></script>

@@ -311,15 +311,18 @@ class Login extends Controller
                     "image" =>  $image
                 ] ;
             }
-            else
+            else if( strcmp($res['userType'],'server')==0 )
             {
-
+                // 前台不能用后台管理员信息
+                // 返回未登录信息
+                $msg->returnJson("loginMsg","ERROR_USER_DATA") ;
+                // 并直接退出
+                exit ;
             }
 
-
-//            if( $res )
             // 返回用户信息
             $msg->returnJson("loginMsg","SUCCESS_USER_DATA",$data,10000) ;
+
 
         }
         else

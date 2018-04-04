@@ -169,6 +169,9 @@ var app = new Vue({
                     if( res['code'] == 10000 )
                     {
                         that.Msg_footer_link = $user_person_url ;
+                        that.Msg_head = '注册' ;
+                        that.Msg_body = res['msg'] ;
+                        that.Msg_footer = '确认' ;
                         $("#loginMsgModel").modal('show') ;
                     }
                     else
@@ -209,6 +212,10 @@ var app = new Vue({
                     if( res['code'] == 10000 )
                     {
                         that.Msg_footer_link = $user_person_url ;
+                        that.Msg_head = '注册' ;
+                        that.Msg_body = res['msg'] ;
+                        that.Msg_footer = '确认' ;
+                        that.Msg_footer_link = "#loginMsgModel" ;
                         $("#loginMsgModel").modal('show') ;
                     }
                     else

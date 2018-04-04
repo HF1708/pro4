@@ -113,15 +113,19 @@ class Register extends Controller
             echo json_encode($returnJson) ;
             exit ;
         }
+        else
+        {
+            // 插入数据
+            $res = Db("user_user")->insert($data) ;
+            $returnJson = [
+                'code' => 10000 ,
+                'msg' => config('registerMsg')['SUCCESS'] ,
+                'data' => $res
+            ] ;
+            echo json_encode($returnJson) ;
+        }
 
-        // 插入数据
-        $res = Db("user_user")->insert($data) ;
-        $returnJson = [
-            'code' => 10000 ,
-            'msg' => config('registerMsg')['SUCCESS'] ,
-            'data' => $res
-        ] ;
-        echo json_encode($returnJson) ;
+
     }
     /**
      * 功能描述：店家注册
@@ -189,8 +193,12 @@ class Register extends Controller
         // 填入注册信息
         $res = Db("store_info")->insert($data) ;
         // 是否注册成功
-        $that->emptyData($res,'registerMsg','REGISTER_DATA_EXISTS') ;
-
+//        $that->emptyData($res,'registerMsg','REGISTER_DATA_EXISTS') ;
+        $returnJson = [
+            'code' => 10000 ,
+            'msg' => config('registerMsg')['SUCCESS'] ,
+            'data' => $res
+        ] ;
         echo json_encode($returnJson) ;
 
     }
