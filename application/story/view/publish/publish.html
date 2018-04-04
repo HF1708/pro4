@@ -57,13 +57,17 @@
                         <a href="{:url('index/index/index')}"><span>去野</span>Journey<span>...</span></a>
                     </div>
                     <!----start-top-nav---->
-                    <nav class="top-nav">
+                    <nav class="top-nav" id="login-register">
                         <ul class="top-nav">
                             <li class="active"><a href="{:url('index/index/index')}">首页home</a></li>
                             <li><a href="menu.html">目的地locations</a></li>
                             <li><a href="{:url('story/story/story')}">遊記notes</a></li>
-                            <li><a href="news.html"> 登录</a></li>
-                            <li><a href="reviews.html">注册</a></li>
+							<li>
+								<user-login></user-login>
+							</li>
+							<li>
+								<user-register></user-register>
+							</li>
                         </ul>
                         <a href="#" id="pull"><img src="__STATIC__/images/nav-icon.png" title="menu" /></a>
                     </nav>
@@ -321,6 +325,8 @@
 			<!----- footer ----->
 	
 </body>
+	<script type="text/javascript" src="__JS__/vue.min.js"></script>
+	<script type="text/javascript" src="__JS__/bootstrap.min.js"></script>
 	<script src="__JS__/fileinput.js" type="text/javascript"></script>
 	<script src="__JS__/froala_editor.min.js"></script>
 	<!--[if lt IE 9]>
@@ -337,8 +343,30 @@
     <script src="__JS__/file_upload.min.js"></script>
 	<script type="text/javascript">
         var publishUrl="{:url('story/publish/publishStory')}";
+        /*
+         个人中心的url
+         */
+        var $user_person_url = "{:url('user/Person/person')}" ;
+        /*
+        /*
+        登录页面的url
+         */
+        var $login_jump = "{:url('user/Login/index')}" ;
+        /*
+        注册页面的url
+         */
+        var $register_jump = "{:url('user/Register/index')}" ;
+        /*
+        是否已登录
+         */
+        var $user_login_already = "{:url('user/Login/userLoginAlready')}" ;
+        /*
+		退出登录的url
+		 */
+        var $user_login_out = "{:url('user/Login/outLogin')}" ;
 	</script>
     <script src="__JS__/story/publish.js"></script>
-
+	<script type="text/javascript" src="__JS__/user/user_login_page.js"></script>
+	<script type="text/javascript" src="__JS__/user/user_login.js"></script>
 </html>
 

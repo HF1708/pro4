@@ -55,13 +55,17 @@
 				<a href="index.html"><span>去野</span>Journey<span>...</span></a>
 			</div>
 			<!----start-top-nav---->
-			<nav class="top-nav">
+			<nav class="top-nav" id="login-register">
 				<ul class="top-nav">
 					<li class="active"><a href="{:url('index/index/index')}">首页home</a></li>
 					<li><a href="menu.html">目的地locations</a></li>
 					<li><a href="{:url('story/story/story')}">遊記notes</a></li>
-					<li><a href="news.html"> 登录</a></li>
-					<li><a href="reviews.html">注册</a></li>
+					<li>
+						<user-login></user-login>
+					</li>
+					<li>
+						<user-register></user-register>
+					</li>
 				</ul>
 				<a href="#" id="pull"><img src="__STATIC__/images/nav-icon.png" title="menu" /></a>
 			</nav>
@@ -86,19 +90,12 @@
 			<img id="per_img" src="__STATIC__/images/11.jpg"/>
 			<span>id</span>
 			<span>发表时间</span>
-			<h2><span> </span>&nbsp;&nbsp;&nbsp;&nbsp;遊記标题 &nbsp;<span> </span></h2>
-			<p>Travel Latest-Notes </p>
+			<h2><span> </span>&nbsp;&nbsp;&nbsp;&nbsp;{$title} &nbsp;<span> </span></h2>
 
 			<!----- recent-news ----->
 			<div class="recent-news">
-				<div v-for="value in notes" >
-					<p>kdsfkdsjfso</p>
-					<div v-html="value.content" >{{value.content}}</div>
-				</div>
-				<div id="notes_con">
-					<div>
+				<div id="notes_con" >
 
-					</div>
 				</div>
 			</div>
 			<!----- recent-news ----->
@@ -318,10 +315,38 @@
 <!----- footer ----->
 
 </body>
+<script type="text/javascript" src="__JS__/bootstrap.min.js"></script>
 <script type="text/javascript">
 	var getUserUrl="{:url('story/storydetail/getUser')}";
 	var getNotesUrl="{:url('story/storydetail/getNotes')}";
 </script>
+<script type="text/javascript">
+    /*
+     个人中心的url
+     */
+    var $user_person_url = "{:url('user/Person/index')}" ;
+    /*
+    /*
+    登录页面的url
+     */
+    var $login_jump = "{:url('user/Login/index')}" ;
+    /*
+    注册页面的url
+     */
+    var $register_jump = "{:url('user/Register/index')}" ;
+    /*
+    是否已登录
+     */
+    var $user_login_already = "{:url('user/Login/userLoginAlready')}" ;
+    /*
+		退出登录的url
+		 */
+    var $user_login_out = "{:url('user/Login/outLogin')}" ;
+    /*
+
+</script>
+<script type="text/javascript" src="__JS__/user/user_login_page.js"></script>
+<script type="text/javascript" src="__JS__/user/user_login.js"></script>
 <script type="text/javascript" src="__JS__/story/storyDetail.js"></script>
 </html>
 

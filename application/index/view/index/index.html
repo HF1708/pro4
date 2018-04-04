@@ -64,7 +64,7 @@
 							<a href="{:url('index/index/index')}"><span>去野</span>Journey<span>...</span></a>
 						</div>
 						<!----start-top-nav---->
-						 <nav class="top-nav">
+						 <nav class="top-nav"id="login-register">
 							<ul class="top-nav">
 								<li class="active"><a href="{:url('index/index/index')}">首页home</a></li>
 								<li><a href="menu.html">目的地locations</a></li>
@@ -509,14 +509,30 @@
 	<script type="text/javascript" src="__JS__/vue.min.js"></script>
 	<script type="text/javascript">
         /*
-        点击登录/注册跳转页面
-        */
-        var $login_jump = "{:url('user/Login/index')}" ;
-        var $register_jump = "{:url('user/Register/index')}" ;
-        var $user_login_already = "{:url('user/Login/userLoginAlready')}" ;
+         个人中心的url
+         */
         var $user_person_url = "{:url('user/Person/person')}" ;
+        /*
+        /*
+        登录页面的url
+         */
+        var $login_jump = "{:url('user/Login/index')}" ;
+        /*
+        注册页面的url
+         */
+        var $register_jump = "{:url('user/Register/index')}" ;
+        /*
+        是否已登录
+         */
+        var $user_login_already = "{:url('user/Login/userLoginAlready')}" ;
+        /*
+		退出登录的url
+		 */
         var $user_login_out = "{:url('user/Login/outLogin')}" ;
-	</script>
+
+
+</script>
+	<script type="text/javascript" src="__JS__/user/user_login_page.js"></script>
 	<script type="text/javascript" src="__JS__/user/user_login.js"></script>
 </html>
 

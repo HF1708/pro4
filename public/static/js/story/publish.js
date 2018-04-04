@@ -2,10 +2,10 @@ $(function(){
     $('#edit').editable({inlineMode: false, alwaysBlank: true})
 });
 
-/**********图片上传***********/
+/**********写游记***********/
 $("#publish").click(function() {
     var title = $("#title").val();
-    var content = $('#edit')[0].childNodes[1].innerHTML;;
+    var content = $('#edit')[0].childNodes[1].innerHTML;
     console.log(content);
     $.ajax({
         url: publishUrl,
