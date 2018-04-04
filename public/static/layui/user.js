@@ -40,6 +40,7 @@ layui.config({
             }
         })
 
+<<<<<<< HEAD
         // //判断是否修改过头像，如果修改过则显示修改后的头像，否则显示默认头像
         // if(window.sessionStorage.getItem('userFace')){
         // 	$("#userFace").attr("src",window.sessionStorage.getItem('userFace'));
@@ -48,6 +49,16 @@ layui.config({
         // }
 
         //提交个人资料
+=======
+        //判断是否修改过头像，如果修改过则显示修改后的头像，否则显示默认头像
+        if(window.sessionStorage.getItem('userFace')){
+        	$("#userFace").attr("src",window.sessionStorage.getItem('userFace'));
+        }else{
+        	$("#userFace").attr("src","../../images/face.jpg");
+        }
+
+        /*//提交个人资料
+>>>>>>> lyz
         form.on("submit(changeUser)",function(data){
         	var index = layer.msg('提交中，请稍候',{icon: 16,time:false,shade:0.8});
             setTimeout(function(){
@@ -55,7 +66,11 @@ layui.config({
                 layer.msg("提交成功！");
             },2000);
         	return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+<<<<<<< HEAD
         })
+=======
+        })*/
+>>>>>>> lyz
 
         
 

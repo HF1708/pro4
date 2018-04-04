@@ -13,3 +13,6 @@ body{
     width: 100%;
     resize:none;
 }
+#inputIntro{
+    display:none;
+}
