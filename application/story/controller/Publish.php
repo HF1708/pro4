@@ -2,6 +2,7 @@
 namespace app\story\controller;
 use think\Controller;
 use \think\db;
+use \think\Session;
 
 class Publish extends Controller
 {
@@ -53,8 +54,11 @@ class Publish extends Controller
             ];
             return $returnJson;
         }else{
+            $user=unserialize(Session::get('loginData'));//序列化
+            $userId=$user['user_id'];
             //连接数据库，查询,实例化模型层
             $where=[
+                'userId'=>$userId,
                 'title'=>$title,
                 'content'=>$content
             ];

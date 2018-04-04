@@ -13,6 +13,10 @@ class Storydetail extends Controller
      **/
     public function storyDetail()
     {
+        $where=['sid'=>3];
+        $getnotes=db('user_story')->where($where)->select();
+        $title=$getnotes[0]['title'];
+        $this->assign('title',$title);
         return $this->fetch();
     }
     /**
@@ -29,7 +33,7 @@ class Storydetail extends Controller
         echo json_encode($getuser);
     }
     /**
-     *  *  功能描述：显示遊記的用户信息
+     *  *  功能描述：获取遊記详情
      *  参数：id
      *  返回：遊記
      *  作者:min H
@@ -40,7 +44,8 @@ class Storydetail extends Controller
 //        $where=['userId'=>$id];
         $where=['sid'=>3];
         $getnotes=db('user_story')->where($where)->select();
-
+//        $this->assign('getnotes',$getnotes);
         echo json_encode($getnotes);
     }
+
 }

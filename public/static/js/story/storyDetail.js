@@ -1,45 +1,23 @@
-// var vue=new Vue({
-//     el:'#app',
-//     data:{
-//         user:[],
-//         notes:[]
-//     },
-//     methods:{
-//         getUser:function () {
-//             this.user=[];
-//             $.ajaxSetup({
-//                 async: false
-//             });
-//             $.post(getUserUrl,{"id":id},function (res) {
-//                 var userArr=JSON.parse(res);
-//                 this.city=userArr;
-//             }.bind(this))
-//         },
-//         getNotes:function () {
-//             this.notes=[];
-//             $.ajaxSetup({
-//                 async: false
-//             });
-//             $.post(getNotesUrl,function (res) {
-//                 this.notes=JSON.parse(res);
-//
-//                 console.log(this.notes);
-//             }.bind(this))
-//         }
-//     },
-//     mounted:function(){
-//         this.getNotes();
-//         console.log(88888888888888888888)
-//         console.log(this.notes)
-//     },
-//     beforeUpdate: function () {
-//
-//     }
-// });
+
 $(function () {
     $.post(getNotesUrl,function (res) {
         $notes=JSON.parse(res);
-        console.log($notes);
-
+        // console.log($notes[0]['content']);
+        $con=$notes[0]['content'];
+        $content=escape2Html($con);
+        console.log($content);
+        $("#notes_con").html($content);
+        
+        /**
+         *  *  功能描述：标签转换
+         *  参数：str
+         *  返回：转换的标签
+         *  作者:min H
+         *  时间：18-4-3
+         **/
+        function escape2Html(str) {
+            var arrEntities={'lt':'<','gt':'>','nbsp':' ','amp':'&','quot':'"'};
+            return str.replace(/&(lt|gt|nbsp|amp|quot);/ig,function(all,t){return arrEntities[t];});
+        }
     });
 })
