@@ -239,8 +239,11 @@ return [
         'list_rows' => 15,
     ],
     // 默认头像
+    // 用户
+    // 商家
     "default" =>[
-       "IMAGE_USER" => "http://p6gnb5g93.bkt.clouddn.com/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg"
+       "IMAGE_USER" => "http://p6gnb5g93.bkt.clouddn.com/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg" ,
+        "IMAGE_STORE" => "http://p6gnb5g93.bkt.clouddn.com/member_270x210.jpg" ,
     ] ,
     // 登录返回消息配置
     "loginMsg" => [
@@ -256,7 +259,9 @@ return [
         'UPDATA_SUCCESS' => '数据更新成功' ,
         'UPDATA_ERROR' => '数据更新失败' ,
         'PHONE_NO_EXISTS' => '手机号码不存在,请确认后输入' ,
-        'PHONE_EMPTY' => '手机号码为空,请重新输入'
+        'PHONE_EMPTY' => '手机号码为空,请重新输入' ,
+        "ERROR_USER_DATA" => "用户未登录" ,
+        "SUCCESS_SEARCH_DATA" => "获取数据成功" ,
     ] ,
     // 注册返回消息配置
     "registerMsg" => [
@@ -282,7 +287,7 @@ return [
         'SUCCESS' => '恭喜你，操作成功' ,
         'EMPTY' => '很遗憾，找不到可操作的广告' ,
         "OPERATION" => "错误的操作" ,
-        "PASS_ALREADY" => "操作异常，用户未通过审核" ,
+        "PASS_ALREADY" => "操作异常，用户已通过审核" ,
         "LOCKING_ALREADY" => "操作异常，用户已被锁定" ,
         "UNLOCK_ALREADY" => "操作异常，用户未被锁定" ,
         "NOPASS" => "审核未通过，无法锁定" ,
@@ -296,5 +301,9 @@ return [
     'Paginate'  => [
         'type'     => 'bootstrap',
         'var_page' => 'page',
+    ],
+    'publishMsg'=>[
+        'CONTENT_EMPTY'=>'遊記标题和内容不能为空',
+        'SUCCESS'=>'遊記发表成功'
     ],
 ];

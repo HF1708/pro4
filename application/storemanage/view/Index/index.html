@@ -17,7 +17,7 @@
 
 </head>
 <body class="main_body">
-	<div class="layui-layout layui-layout-admin">
+	<div class="layui-layout layui-layout-admin" id="login-backstage">
 		<!-- 顶部 -->
 		<div class="layui-header header">
 			<div class="layui-main">
@@ -63,13 +63,13 @@
 					<!--</li>-->
 					<li class="layui-nav-item" pc>
 						<a href="javascript:;">
-							<img src="__STATIC__/images/face.jpg" class="layui-circle" width="35" height="35">
-							<cite>{$userName}</cite>
+							<img :src="defaultImage" class="layui-circle" width="35" height="35">
+							<cite>{{user_name}}</cite>
 						</a>
 						<dl class="layui-nav-child">
-							<dd><a href="javascript:;" data-url="page/user/userInfo.html"><i class="iconfont icon-zhanghu" data-icon="icon-zhanghu"></i><cite>个人资料</cite></a></dd>
-							<dd><a href="javascript:;" data-url="page/user/changePwd.html"><i class="iconfont icon-shezhi1" data-icon="icon-shezhi1"></i><cite>修改密码</cite></a></dd>
-							<dd><a href="javascript:;"><i class="iconfont icon-loginout"></i><cite>退出</cite></a></dd>
+							<dd><a href="javascript:;" data-url="{:url('storemanage/Index/info')}"><i class="iconfont icon-zhanghu" data-icon="icon-zhanghu"></i><cite>个人资料</cite></a></dd>
+							<!--<dd><a href="javascript:;" data-url="page/user/changePwd.html"><i class="iconfont icon-shezhi1" data-icon="icon-shezhi1"></i><cite>修改密码</cite></a></dd>-->
+							<dd @click="outLoginStore()" ><a href="javascript:;"><i class="iconfont icon-loginout"></i><cite>退出</cite></a></dd>
 						</dl>
 					</li>
 				</ul>
@@ -78,8 +78,8 @@
 		<!-- 左侧导航 -->
 		<div class="layui-side layui-bg-black">
 			<div class="user-photo">
-				<a class="img" title="我的头像" ><img src="__STATIC__/images/face.jpg"></a>
-				<p>你好！<span class="userName">{$userName}</span>, 欢迎登录</p>
+				<a class="img" title="我的头像" ><img :src="defaultImage"></a>
+				<p>你好！<span class="userName">{{user_name}}</span>, 欢迎登录</p>
 			</div>
 			<div class="navBar layui-side-scroll"></div>
 		</div>
@@ -127,5 +127,18 @@
         <script type="text/javascript" src="__JS__/nav.js"></script>
         <script type="text/javascript" src="__JS__/leftNav.js"></script>
         <script type="text/javascript" src="__JS__/index.js"></script>
+	<script type="text/javascript" src="__JS__/vue.min.js"></script>
+	<script type="text/javascript" src="__JS__/jquery.min.js"></script>
+<script>
+			// 用户是否已登录
+			var backstage_login_already = "{:url('storemanage/Index/backstageLoginAlready')}" ;
+			// 默认头像
+			var defaultImage = "__STATIC__/images/face.jpg" ;
+			// 登录页面
+			var login_page = "{:url('user/Login/index')}" ;
+			// 退出登录
+			var out_login_url = "{:url('user/Login/outLogin')}" ;
+</script>
+	<script type="text/javascript" src="__JS__/backstage/login.js"></script>
 </body>
 </html>

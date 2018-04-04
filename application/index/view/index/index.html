@@ -7,6 +7,8 @@
 		<!--禁止用户对页面进行缩放，让页面更加接近原生APP的效果，滚轮为1：1-->
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>去野 身临其境方知奥妙</title>
+		<!--网页图标-->
+		<link rel="shortcut icon" href="__STATIC__/images/logo.ico" type="image/x-icon"/>
 		<link href="__CSS__/bootstrap.css" rel='stylesheet' type='text/css' />
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="__JS__/jquery.min.js"></script>
@@ -59,16 +61,20 @@
 					<div class="top-header">
 						<div class="container">
 						<div class="logo">
-							<a href="index.html"><span>去野</span>Journey<span>...</span></a>
+							<a href="{:url('index/index/index')}"><span>去野</span>Journey<span>...</span></a>
 						</div>
 						<!----start-top-nav---->
 						 <nav class="top-nav">
 							<ul class="top-nav">
 								<li class="active"><a href="{:url('index/index/index')}">首页home</a></li>
-								<li><a href="menu.html">目的地locations</a></li>
-								<li><a href="{:url('story/story/story')}">故事story</a></li>
-								<li><a href="news.html"> 登录</a></li>
-								<li><a href="reviews.html">注册</a></li>
+								<li><a href="{:url('attractions/attractions/attractions')}">目的地locations</a></li>
+								<li><a href="{:url('story/story/story')}">遊記notes</a></li>
+								<li>
+									<user-login></user-login>
+								</li>
+								<li>
+									<user-register></user-register>
+								</li>
 							</ul>
 							<a href="#" id="pull"><img src="__STATIC__/images/nav-icon.png" title="menu" /></a>
 						</nav>
@@ -109,27 +115,27 @@
 			</div>
 			<!----- banner ---->
 			<!----- search ---->
-			<div class="search-group">
-				<ul>
-					<li >
-						<input class="tab-select" type="radio" name="type" title="全部"/>
-						<i>全部</i>
-					</li>
-					<li>
-						<input class="tab-select" type="radio" name="type"  title="目的地"/>
-						<i>目的地</i>
-					</li>
-					<li>
-						<input class="tab-select" type="radio" name="type"  title="酒店"/>
-						<i>酒店</i>
-					</li>
-				</ul>
-				<div>
-					<input class="search" type="text" />
-					<button class="btn btn-inverse btn-search"></button>
-				</div>
+			<!--<div class="search-group">-->
+				<!--<ul>-->
+					<!--<li >-->
+						<!--<input class="tab-select" type="radio" name="type" title="全部"/>-->
+						<!--<i>全部</i>-->
+					<!--</li>-->
+					<!--<li>-->
+						<!--<input class="tab-select" type="radio" name="type"  title="目的地"/>-->
+						<!--<i>目的地</i>-->
+					<!--</li>-->
+					<!--<li>-->
+						<!--<input class="tab-select" type="radio" name="type"  title="酒店"/>-->
+						<!--<i>酒店</i>-->
+					<!--</li>-->
+				<!--</ul>-->
+				<!--<div>-->
+					<!--<input class="search" type="text" />-->
+					<!--<button class="btn btn-inverse btn-search"></button>-->
+				<!--</div>-->
 
-			</div>
+			<!--</div>-->
 			<!----- search ---->
 			<!----- menu ---->
 			<div class="menu">
@@ -142,16 +148,6 @@
 				<div class="main-menus">
 					<div class="container">
 					<div class="menus-left col-md-6">
-						<div class="jq22-container">
-
-							<div class="video-back">
-								<video poster="__STATIC__/images/g2.jpg" autoplay muted loop class="vidbacking">
-									<source src="__STATIC__/media/mp4_video_1.3gp" type="video/mp4">
-								</video>
-							</div>
-						</div>
-					</div>
-					<div class="menus-right col-md-6">
 						<div class="menus-left-grid">
 							<div class="item">
 								<h3>凤凰古城Fenghuanggucheng</h3>
@@ -161,7 +157,7 @@
 								<span> </span>
 							</div>
 							<div class="item-price">
-								<label><a>Go</a></label>
+								<label><a class="go">Go</a></label>
 							</div>
 							<div class="clearfix"> </div>
 						</div>
@@ -174,7 +170,7 @@
 								<span> </span>
 							</div>
 							<div class="item-price">
-                                <label><a>Go</a></label>
+								<label><a class="go">Go</a></label>
 							</div>
 							<div class="clearfix"> </div>
 						</div>
@@ -187,7 +183,7 @@
 								<span> </span>
 							</div>
 							<div class="item-price">
-                                <label><a>Go</a></label>
+								<label><a class="go">Go</a></label>
 							</div>
 							<div class="clearfix"> </div>
 						</div>
@@ -200,13 +196,23 @@
 								<span> </span>
 							</div>
 							<div class="item-price">
-                                <label><a>Go</a></label>
+								<label><a class="go">Go</a></label>
 							</div>
 							<div class="clearfix"> </div>
 						</div>
-                        <!----- load- more-items ----->
-                        <a class="loadmore" href="#">load more<label><span> </span></label></a>
-                        <!----- load- more-items ----->
+						<!----- load- more-items ----->
+						<a class="loadmore" href="#">加载更多<label><span> </span></label></a>
+						<!----- load- more-items ----->
+
+					</div>
+					<div class="menus-right col-md-6">
+						<div class="jq22-container">
+							<div class="video-back">
+								<video poster="" autoplay muted loop class="vidbacking">
+									<source src="__STATIC__/media/mp4_video_1.3gp" type="video/mp4">
+								</video>
+							</div>
+						</div>
 					</div>
 					<div class="clearfix"> </div>
 				
@@ -500,5 +506,17 @@
 	
 </body>
 	<script src="__JS__/jquery.vidbacking.js" type="text/javascript"></script>
+	<script type="text/javascript" src="__JS__/vue.min.js"></script>
+	<script type="text/javascript">
+        /*
+        点击登录/注册跳转页面
+        */
+        var $login_jump = "{:url('user/Login/index')}" ;
+        var $register_jump = "{:url('user/Register/index')}" ;
+        var $user_login_already = "{:url('user/Login/userLoginAlready')}" ;
+        var $user_person_url = "{:url('user/Person/person')}" ;
+        var $user_login_out = "{:url('user/Login/outLogin')}" ;
+	</script>
+	<script type="text/javascript" src="__JS__/user/user_login.js"></script>
 </html>
 

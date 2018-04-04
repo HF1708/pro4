@@ -16,7 +16,6 @@ var login = new Vue({
         out_login_show : false
     } ,
     mounted:function(){
-
         // 判断是否已登录
         this.userLoginAlready() ;
 
@@ -82,7 +81,21 @@ var login = new Vue({
                 }
             }) ;
         } ,
-
+        outLoginStore:function(){
+            var that = this ;
+            $.ajax({
+                url:out_login_url ,
+                data:"" ,
+                type:"post" ,
+                dataType:"json" ,
+                success:function(res){
+                    that.out_login_show = false ;
+                    that.user_name = "登录" ;
+                    that.defaultImage =  defaultImage ;
+                    window.location.href=login_page ;
+                }
+            }) ;
+        } ,
         /**
          * 功能描述：几秒后刷新页面
          * 参数：

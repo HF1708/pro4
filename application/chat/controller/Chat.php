@@ -109,6 +109,8 @@ class Chat extends Controller
                 $chatTwoData = Db("user_user")->where(["user_uid"=>$chatTwo])->find() ;
                 $chat_two_image = $chatTwoData['user_image'] ;
                 $chat_two_name = $chatTwoData['user_name'] ;
+
+
             }
             else if( strcmp($chatTwoType,'store')==0 )
             {

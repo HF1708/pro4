@@ -75,6 +75,7 @@ class Login extends Controller
         if( !empty($res) )
         {
             $res['userType'] = "user" ;
+
             // 登录成功 存储数据到redis
             /*$redis = new \Redis() ;
             $redis->connect('127.0.0.1',6379) ;
@@ -85,6 +86,9 @@ class Login extends Controller
 //            $redis->hSet('userStore', $res['store_id'], serialize($res)) ;
 //            $res = unserialize($redis->hGet('userStore', $res['store_id'])) ;
 //            $redis->hSet('userStore', $res['store_id'], serialize($res)) ;
+
+
+
 
 
             // 用户数据存到session
@@ -307,15 +311,18 @@ class Login extends Controller
                     "image" =>  $image
                 ] ;
             }
-            else
+            else if( strcmp($res['userType'],'server')==0 )
             {
-
+                // 前台不能用后台管理员信息
+                // 返回未登录信息
+                $msg->returnJson("loginMsg","ERROR_USER_DATA") ;
+                // 并直接退出
+                exit ;
             }
 
-
-//            if( $res )
             // 返回用户信息
             $msg->returnJson("loginMsg","SUCCESS_USER_DATA",$data,10000) ;
+
 
         }
         else

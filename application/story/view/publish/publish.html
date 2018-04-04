@@ -1,0 +1,344 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>去野 身临其境方知奥妙·发表遊記</title>
+        <!--网页图标-->
+        <link rel="shortcut icon" href="__STATIC__/images/logo.ico" type="image/x-icon"/>
+		<link href="__CSS__/bootstrap.css" rel='stylesheet' type='text/css' />
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="__JS__/jquery.min.js"></script>
+		 <!-- Custom Theme files -->
+		<link href="__CSS__/style.css" rel='stylesheet' type='text/css' />
+   		 <!-- Custom Theme files -->
+   		 <!---- start-smoth-scrolling---->
+		<script type="text/javascript" src="__JS__/move-top.js"></script>
+		<script type="text/javascript" src="__JS__/easing.js"></script>
+        <link rel="stylesheet" type="text/css" href="__CSS__/font-awesome.min.css">
+        <link href="__STATIC__/css/froala_editor.min.css" rel="stylesheet" type="text/css">
+		<!--<link href="__CSS__/fileinput.css" media="all" rel="stylesheet" type="text/css" />-->
+		<script type="text/javascript">
+			jQuery(document).ready(function($) {
+				$(".scroll").click(function(event){		
+					event.preventDefault();
+					$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+				});
+			});
+		</script>
+		 <!---- start-smoth-scrolling---->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+		<!----start-top-nav-script---->
+		<script>
+			$(function() {
+				var pull 		= $('#pull');
+					menu 		= $('nav ul');
+					menuHeight	= menu.height();
+				$(pull).on('click', function(e) {
+					e.preventDefault();
+					menu.slideToggle();
+				});
+				$(window).resize(function(){
+	        		var w = $(window).width();
+	        		if(w > 320 && menu.is(':hidden')) {
+	        			menu.removeAttr('style');
+	        		}
+	    		});
+			});
+            var imageUploadURL="{:url('story/publish/uploadImg')}"
+		</script>
+		<!----//End-top-nav-script---->
+	</head>
+	<body>
+		<!----- start-header---->
+        <div id="home" class="header">
+            <div class="top-header">
+                <div class="container">
+                    <div class="logo">
+                        <a href="{:url('index/index/index')}"><span>去野</span>Journey<span>...</span></a>
+                    </div>
+                    <!----start-top-nav---->
+                    <nav class="top-nav">
+                        <ul class="top-nav">
+                            <li class="active"><a href="{:url('index/index/index')}">首页home</a></li>
+                            <li><a href="menu.html">目的地locations</a></li>
+                            <li><a href="{:url('story/story/story')}">遊記notes</a></li>
+                            <li><a href="news.html"> 登录</a></li>
+                            <li><a href="reviews.html">注册</a></li>
+                        </ul>
+                        <a href="#" id="pull"><img src="__STATIC__/images/nav-icon.png" title="menu" /></a>
+                    </nav>
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+        </div>
+			<!----- //End-header---->
+			<!----- menu-page ----->
+			<div class="reservation">
+				<!------ menu-header ----->
+				<div class="reservation-form">
+					<div class="container">
+						<div style="width:100%;height:45%;background-color:red"></div>
+					</div>
+				</div>
+				<!------ menuheader ----->
+			<div class="clearfix"> </div>
+			<!----- reservation ---->
+			<div class="reservation-form">
+				<div class="container">
+					<h2><span> </span>&nbsp;&nbsp;&nbsp;&nbsp; 写新遊記 &nbsp;<span> </span></h2>
+					<p>Publish Notes</p>
+				</div>
+				<!----- make-Reserver ------>
+				<div class="make-reserve">
+                    <div id="" class="container">
+                        <input id="title" placeholder="请在这里输入标题"/>
+                    </div>
+					<div class="container">
+						<section id="editor">
+							<div id='edit' style="margin-top: 30px;">
+
+							</div>
+						</section>
+						<input id="publish" type="submit" value="发表" />
+
+					</div>
+					<!------ reserv-form ----->
+				</div>
+				</div>
+				<!----- make-Reserver ------>
+			</div>
+			<!----- fearuted-diesh ----->
+			<div class="fearuted-diesh">
+				<div class="container">
+					<h3>Featured Locations<span> </span></h3>
+					<!----sreen-gallery-cursual---->
+						<div class="sreen-gallery-cursual">
+							 <!-- requried-jsfiles-for owl -->
+							<link href="__CSS__/owl.carousel.css" rel="stylesheet">
+							    <script src="__JS__/owl.carousel.js"></script>
+							        <script>
+							    $(document).ready(function() {
+							      $("#owl-demo").owlCarousel({
+							         items :4,
+							        lazyLoad : true,
+							        autoPlay : true,
+							        navigation : false,
+							        navigationText :  false,
+							        pagination : true,
+							      });
+							    });
+							    </script>
+							 <!-- //requried-jsfiles-for owl -->
+							 <!-- start content_slider -->
+						       <div id="owl-demo" class="owl-carousel">
+					                <div class="item">
+					                	<div class="item-grid">
+					                		<div class="item-pic">
+					                			<img src="__STATIC__/images/d1.jpg" title="dish-name" />
+					                		</div>
+					                		<div class="item-info">
+					                			<div class="item-info-left">
+					                				<h4>Fugiat nulla sint</h4>
+					                				<span class="item-rate"> </span>
+					                			</div>
+					                			<div class="item-info-right">
+					                				<label>$130</label>
+					                			</div>
+					                			<div class="clearfix"> </div>
+					                		</div>
+					                	</div>
+					                </div>
+					                <!----->
+					                <div class="item">
+					                	<div class="item-grid">
+					                		<div class="item-pic">
+					                			<img src="__STATIC__/images/d2.jpg" title="dish-name" />
+					                		</div>
+					                		<div class="item-info">
+					                			<div class="item-info-left">
+					                				<h4>Daute irure dolor</h4>
+					                				<span class="item-rate"> </span>
+					                			</div>
+					                			<div class="item-info-right">
+					                				<label>$124</label>
+					                			</div>
+					                			<div class="clearfix"> </div>
+					                		</div>
+					                	</div>
+					                </div>
+					                <!----->
+					                <div class="item">
+					                	<div class="item-grid">
+					                		<div class="item-pic">
+					                			<img src="__STATIC__/images/d3.jpg" title="dish-name" />
+					                		</div>
+					                		<div class="item-info">
+					                			<div class="item-info-left">
+					                				<h4>Officia deserunt mollit</h4>
+					                				<span class="item-rate"> </span>
+					                			</div>
+					                			<div class="item-info-right">
+					                				<label>$160</label>
+					                			</div>
+					                			<div class="clearfix"> </div>
+					                		</div>
+					                	</div>
+					                </div>
+					                <!----->
+					                <div class="item">
+					                	<div class="item-grid">
+					                		<div class="item-pic">
+					                			<img src="__STATIC__/images/d4.jpg" title="dish-name" />
+					                		</div>
+					                		<div class="item-info">
+					                			<div class="item-info-left">
+					                				<h4>Pim minim veniam</h4>
+					                				<span class="item-rate"> </span>
+					                			</div>
+					                			<div class="item-info-right">
+					                				<label>$117</label>
+					                			</div>
+					                			<div class="clearfix"> </div>
+					                		</div>
+					                	</div>
+					                </div>
+					                <!----->
+					                <div class="item">
+					                	<div class="item-grid">
+					                		<div class="item-pic">
+					                			<img src="__STATIC__/images/d1.jpg" title="dish-name" />
+					                		</div>
+					                		<div class="item-info">
+					                			<div class="item-info-left">
+					                				<h4>Fugiat nulla sint</h4>
+					                				<span class="item-rate"> </span>
+					                			</div>
+					                			<div class="item-info-right">
+					                				<label>$130</label>
+					                			</div>
+					                			<div class="clearfix"> </div>
+					                		</div>
+					                	</div>
+					                </div>
+					                <!----->
+					                <div class="item">
+					                	<div class="item-grid">
+					                		<div class="item-pic">
+					                			<img src="__STATIC__/images/d2.jpg" title="dish-name" />
+					                		</div>
+					                		<div class="item-info">
+					                			<div class="item-info-left">
+					                				<h4>Daute irure dolor</h4>
+					                				<span class="item-rate"> </span>
+					                			</div>
+					                			<div class="item-info-right">
+					                				<label>$124</label>
+					                			</div>
+					                			<div class="clearfix"> </div>
+					                		</div>
+					                	</div>
+					                </div>
+					                <!----->
+					                <div class="item">
+					                	<div class="item-grid">
+					                		<div class="item-pic">
+					                			<img src="__STATIC__/images/d3.jpg" title="dish-name" />
+					                		</div>
+					                		<div class="item-info">
+					                			<div class="item-info-left">
+					                				<h4>Officia deserunt mollit</h4>
+					                				<span class="item-rate"> </span>
+					                			</div>
+					                			<div class="item-info-right">
+					                				<label>$160</label>
+					                			</div>
+					                			<div class="clearfix"> </div>
+					                		</div>
+					                	</div>
+					                </div>
+					                <!----->
+					                <div class="item">
+					                	<div class="item-grid">
+					                		<div class="item-pic">
+					                			<img src="__STATIC__/images/d4.jpg" title="dish-name" />
+					                		</div>
+					                		<div class="item-info">
+					                			<div class="item-info-left">
+					                				<h4>Pim minim veniam</h4>
+					                				<span class="item-rate"> </span>
+					                			</div>
+					                			<div class="item-info-right">
+					                				<label>$117</label>
+					                			</div>
+					                			<div class="clearfix"> </div>
+					                		</div>
+					                	</div>
+					                </div>
+					                <!----->
+				              </div>
+						<!--//sreen-gallery-cursual---->
+				</div>
+			</div>
+			</div>
+			</div>
+			<!----- fearuted-diesh ----->
+			<!----- End-Menu-page ----->
+			<!----- footer ----->
+            <div class="footer">
+                <div class="container">
+                    <div class="footer-grids">
+                        <div class="col-md-3 footer-grid">
+                            <p>
+                                <span>关于我们</span>
+                                <span>关于去野</span>
+                                <span><a class="line" href="{:url('store/Application/storeEnter')}">商家入驻</a></span>
+                                <span>联系我们</span>
+                            </p>
+                        </div>
+                        <div class="col-md-3 footer-grid">
+                            <p>
+                                <span>China tourister</span>
+                                <span>68, rue  de la Couronne</span>
+                                <span>75002 PARIS</span>
+                                <span>718-749-1714</span>
+                            </p>
+                        </div>
+                        <div class="col-md-3 footer-grid">
+                            <ul>
+                                <span>友情链接</span>
+                                <li><a href="https://zh.airbnb.com">Airbnb爱彼迎</a></li>
+                                <li><a href="http://www.booking.com">缤客</a></li>
+                                <li><a href="http://www.mafengwo.cn/">马蜂窝</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3 footer-grid copy-right">
+                            <p>Copyright &copy; 2018.去野All rights reserved.</p>
+                        </div>
+                        <div class="clearfix"> </div>
+                    </div>
+                </div>
+            </div>
+			<!----- footer ----->
+	
+</body>
+	<script src="__JS__/fileinput.js" type="text/javascript"></script>
+	<script src="__JS__/froala_editor.min.js"></script>
+	<!--[if lt IE 9]>
+	<script src="__JS__/froala_editor_ie8.min.js"></script>
+	<![endif]-->
+	<script src="__JS__/tables.min.js"></script>
+	<script src="__JS__/lists.min.js"></script>
+	<script src="__JS__/colors.min.js"></script>
+	<script src="__JS__/media_manager.min.js"></script>
+	<script src="__JS__/font_family.min.js"></script>
+	<script src="__JS__/font_size.min.js"></script>
+	<script src="__JS__/block_styles.min.js"></script>
+	<script src="__JS__/video.min.js"></script>
+    <script src="__JS__/file_upload.min.js"></script>
+	<script type="text/javascript">
+        var publishUrl="{:url('story/publish/publishStory')}";
+	</script>
+    <script src="__JS__/story/publish.js"></script>
+
+</html>
+
