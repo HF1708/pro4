@@ -32,7 +32,6 @@ var app = new Vue({
          * 时间：18-3-25
          */
         getPhoneMsg: function(type){
-            console.log((type)) ;
             var that = this ;
             if( type == 'user' )
             {
@@ -53,11 +52,11 @@ var app = new Vue({
                 dataType:'json' ,
                 success:function(res){
                     if( that.shortJudgeUser == 'T' ) {
-                        that.setMsgTime(type);
+                        that.setMsgTime(type) ;
                     }
                     else if( that.shortJudgeStore == 'T' )
                     {
-                        that.setMsgTime(type);
+                        that.setMsgTime(type) ;
                     }
                     else
                     {

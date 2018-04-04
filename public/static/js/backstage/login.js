@@ -13,7 +13,9 @@ var login = new Vue({
     data:{
         defaultImage:defaultImage ,
         user_name:"登录" ,
-        out_login_show : false
+        out_login_show : false ,
+        set_out_time:5 ,
+        set_out_msg:""
     } ,
     mounted:function(){
         // 判断是否已登录
@@ -69,15 +71,52 @@ var login = new Vue({
          */
         outLogin:function(){
             var that = this ;
+            that.set_out_msg = "·" ;
+            layui.use('layer', function(){
+                layer.msg("用户正在退出···") ;
+            });
+
             $.ajax({
                 url:out_login_url ,
                 data:"" ,
                 type:"post" ,
                 dataType:"json" ,
                 success:function(res){
-                    that.out_login_show = false ;
-                    that.user_name = "登录" ;
-                    that.defaultImage =  defaultImage ;
+
+                    // 退出成功
+                    if( res.code == 10000 )
+                    {
+                        setInterval(function(){
+                            layui.use('layer', function(){
+                                if( that.set_out_time == 0 )
+                                {
+                                    window.location.href = login_page ;
+                                }
+                                var layer = layui.layer ;
+                                layer.msg("用户已成功退出,"+that.set_out_time+"秒后前往登录页面") ;
+                                that.set_out_time--;
+                            });
+                        },1000) ;
+
+                    }
+                    // 退出失败，提示
+                    else if( res.code == 10001 )
+                    {
+                        setTimeout(function(){
+                            layui.use('layer', function(){
+                                layer.msg(res.msg) ;
+                            }) ;
+                        },1000) ;
+                    }
+                    // 退出失败，内置提示
+                    else
+                    {
+                        setTimeout(function(){
+                            layui.use('layer', function(){
+                                layer.msg("服务器繁忙，请重新退出") ;
+                            }) ;
+                        },1000) ;
+                    }
                 }
             }) ;
         } ,

@@ -260,6 +260,7 @@ return [
         'UPDATA_ERROR' => '数据更新失败' ,
         'PHONE_NO_EXISTS' => '手机号码不存在,请确认后输入' ,
         'PHONE_EMPTY' => '手机号码为空,请重新输入' ,
+        'PHONE_ERROR' => '手机号码格式错误,请重新输入' ,
         "ERROR_USER_DATA" => "用户未登录" ,
         "SUCCESS_SEARCH_DATA" => "获取数据成功" ,
     ] ,
