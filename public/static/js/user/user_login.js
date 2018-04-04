@@ -47,12 +47,14 @@ new Vue({
          */
         userLoginAlready:function(){
             var that = this ;
+            console.log(132456) ;
             $.ajax({
                 url:$user_login_already ,
                 data:"" ,
                 type:"post" ,
                 dataType:"json" ,
                 success:function(res){
+                    console.log(res) ;
                     if( res.code == 10000 )
                     {
                         $("#user_login_url").empty().append("<a href="+$user_person_url+" ><img style='width:30px ;height:30px ;' src="+res.data['image']+" /><span>"+res.data['name']+"</span></a>") ;

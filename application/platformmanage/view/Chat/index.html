@@ -46,32 +46,34 @@
                         <div class="row"></div>
                         <div class="row clearMarginPadding">
                             <div class="col-sm-3 hidden-sm hidden-xs reviews-people" style="" >
-                                <div v-for="(val,key) in chat_data" >
+                                <div v-for="(val,key) in chat_obj" >
+                                    <!--{{val[0].chat_title}}-->
                                     <img class="img_header_2" :src="val.chat_image" />{{val.chat_title}}
-                                </div>
 
+                                </div>
                             </div>
                             <div class="col-sm-9 ">
                                 <div class="row chatCon " id="chat" >
                                     <div  v-for="(val,key) in chat_data">
-                                        <div class="media"  v-if="val.chat_login!=login" >
-                                            <div class="media-left media-middle ">
-                                                <a class="reviews-people" href="#">
-                                                    <img class="img_header_2 media-object pull-left" :src="val.chat_image"  alt="...">
+                                        <div class="media"  v-if="val[1].chat_login!=login && val[1].chat_title == chat_obj_user" >
+                                            <div class="media-left media-middle " >
+                                                <a class="reviews-people" href="#" >
+                                                    <img class="img_header_2 media-object pull-left" :src="val[1].chat_image"  alt="...">
                                                 </a>
                                             </div>
                                             <div class="media-body">
-                                                <h4 class="media-heading">{{val.chat_title}}</h4>
+                                                <h4 class="media-heading">{{val[1].chat_title}}</h4>
                                                 <br />
-                                                <div>{{val.chat_con}}</div>
+                                                <div>{{val[1].chat_con}}</div>
+                                                <!--<span>{{chat_data}}</span>-->
                                             </div>
                                         </div>
                                         <div class="media sendConRight"  v-else  >
                                             <div class="media-body">
-                                                <h4 class="media-heading pull-right">{{val.chat_title}}</h4>
+                                                <h4 class="media-heading pull-right">{{val[1].chat_title}}</h4>
                                                 <div class="clearfix"> </div>
                                                 <br />
-                                                <div class="">{{val.chat_con}}</div>
+                                                <div class="">{{val[1].chat_con}}</div>
                                             </div>
                                             <div class="media-left media-middle ">
                                                 <a class="reviews-people" href="#">
@@ -101,8 +103,10 @@
 
 
 <script>
-//    获取聊天对象的url
+    //    获取聊天对象的url
     var char_obj_url = "{:url('chat/chat/setChatTwo')}" ;
+
+
 
 </script>
 

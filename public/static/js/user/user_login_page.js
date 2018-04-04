@@ -146,7 +146,11 @@ var app = new Vue({
                 success:function(res){
                     if( res['code'] == 10000 )
                     {
-                        that.Msg_footer_link = $user_person_url ;
+                        // 商家登录成功跳转
+                        that.Msg_head = '登录' ;
+                        that.Msg_body = res['msg'] ;
+                        that.Msg_footer = '确认' ;
+                        that.Msg_footer_link = $store_jump ;
                         $("#loginMsgModel").modal('show') ;
                     }
                     else
