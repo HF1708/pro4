@@ -27,9 +27,9 @@
 // 1. 发送curl请求
 //
 //引用七牛CDN工具包
-use qiniu\Auth;
+use qiniu\Auth ;
 //引用七牛 上传类
-use Qiniu\Storage\UploadManager;
+use Qiniu\Storage\UploadManager ;
 
 
 
@@ -154,6 +154,7 @@ class user{
             'msg' => config($msgTitle)[$msgBody] ,
             'data' => $content
         ]) ;
+        exit ;
     }
 
     /**
@@ -242,6 +243,33 @@ class user{
             exit ;
         }
     }
+
+
+    // 手机号验证
+    function checkMobileValidity($mobilephone){
+        $exp = "/^13[0-9]{1}[0-9]{8}$|15[012356789]{1}[0-9]{8}$|18[012356789]{1}[0-9]{8}$|14[57]{1}[0-9]$/";
+        if(preg_match($exp,$mobilephone)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    // 手机号码归属地(返回: 如 广东移动)
+    function  checkMobilePlace($mobilephone){
+        $url = "http://tcc.taobao.com/cc/json/mobile_tel_segment.htm?tel=".$mobilephone."&t=".time() ;
+        $curl = new curl() ;
+        $content = $curl->curlHttp($url) ;
+        $p = substr($content, 56, 4) ;
+        $mo = substr($content, 81, 4) ;
+        return $str = $this->conv2utf8($p).$this->conv2utf8($mo) ;
+    }
+// 转换字符串编码为 UTF8
+    function conv2utf8($text){
+        return mb_convert_encoding($text,'UTF-8','ASCII,GB2312,GB18030,GBK,UTF-8');
+    }
+
+
 }
 
 

@@ -221,6 +221,8 @@ class Register extends Controller
         ] ;
         $type = input("?post.type") ? input("post.type") : '' ;
         $phone = input("?post.name") ? input("post.name") : '' ;
+
+
         /*
          * 类型是否为空
          */
@@ -230,6 +232,15 @@ class Register extends Controller
          * 手机号码是否为空
          */
         $that->emptyData( $phone ,'registerMsg' ,'PHONE_EMPTY' ) ;
+        /*
+         * 手机号码是否合法
+         */
+        // 不合法返回信息
+        if( !$that->checkMobileValidity($phone) )
+        {
+            $that->returnJson("loginMsg","PHONE_ERROR") ;
+        }
+
 
         /*
          * 发送验证码
