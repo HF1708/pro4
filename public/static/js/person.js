@@ -1,35 +1,77 @@
 
-$(function () {
-    var userIntro=$("#userIntro");
-    var introBtn=$("#introBtn");
-    var inputIntro=$("#inputIntro");
-    var saveIntro =$("#saveIntro");
-    if(userIntro.text()!=""){
-        userIntro.show();
-        introBtn.hide();
-        inputIntro.hide();
+new Vue({
+    el:"#userInfo",
+    data:{
+        userIntro:""
+    },
+    mounted:function () {
+        this.getuserIntro();
+    },
+    methods:{
+        /**
+         * 功能描述：获取用户简介信息
+         * 参数：
+         * QQUser：
+         * 返回：用户简介信息
+         * 作者：Lin YiZhe
+         * 时间：18-3-29
+         */
+        getuserIntro:function () {
+            var user_uid=$("#userInfo").attr("uid");
+            var that = this ;
+            $.ajax({
+                url:getIntroUrl,
+                data:{"user_uid":user_uid},
+                type:"post",
+                dataType:"json",
+                success:function (res) {
+                    that.userIntro=res.user_msg;
+                }
+            });
+        },
+        /**
+         * 功能描述：弹出修改个人简介框
+         * 参数：
+         * QQUser：
+         * 返回：
+         * 作者：Lin YiZhe
+         * 时间：18-4-2
+         */
+
+        show:function () {
+            //隐藏简介框
+            $("#userIntro").hide();
+            //隐藏按钮
+            $("#introBtn").hide();
+            //显示填写区
+            $("#inputIntro").show();
+        },
+        /**
+         * 功能描述：将修改的信息保存
+         * 参数：
+         * QQUser：
+         * 返回：修改后的简介
+         * 作者：Lin YiZhe
+         * 时间：18-4-2
+         */
+        saveIntro:function () {
+            var newUserIntro=$("#myIntro").val();
+            var that = this ;
+            $.ajax({
+                url:changeUrl,
+                data:{"nweUserIntro":newUserIntro},
+                type:"post",
+                dataType:"json",
+                success:function (res) {
+                    console.log(res);
+                    if(res==1){
+                        $("#inputIntro").hide();
+                        that.getuserIntro();
+                    }
+                }
+            });
+        }
+
+
     }
-    else{
-        userIntro.hide();
-        introBtn.show();
-        inputIntro.hide();
-    }
-    //填写用户简介弹出填写框
-    introBtn.click(function () {
-        introBtn.hide();
-        inputIntro.show();
-    });
-    //修改简介
-    saveIntro.click(function () {
-        var newUserIntro=$("#myIntro").val();
-        $.ajax({
-            url:changeUrl,
-            data:{"nweUserIntro":newUserIntro},
-            type:"post",
-            dataType:"json",
-            success:function (res) {
-                console.log(res)
-            }
-        });
-    });
 });

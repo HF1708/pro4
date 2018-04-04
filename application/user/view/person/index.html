@@ -10,7 +10,7 @@
 </head>
 <body>
 <!--导航页-->
-<div id="home" class="header">
+<div id="home" class="header" style="background-color: white">
     <div class="top-header">
         <div class="container">
             <div class="logo">
@@ -35,23 +35,23 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-3 left_style text-center">
-            <div>
-                <img src="__STATIC__/images/testHead.jpg" alt="用户头像" class="img-circle ">.
+            <div >
+                <img src={$user_image} alt="用户头像" class="img-circle ">.
                 <p>{$user_name}</p>
                 <p>注册时间:{$user_time}</p>
                 <span>性别：{$user_sex} |</span>
                 <!--跳转修改信息页-->
-                <a><span class="glyphicon glyphicon-cog"></span></a>
+                <a href="{:url('user/changeperson/index')}"><span class="glyphicon glyphicon-cog"></span></a>
                 <p></p>
                 <!--此处进行判断，用户有简介则显示简介-->
-                <div>
-                    <button id="introBtn" type="button" class="btn btn-warning btn-sm btn-block intro_btn" >填写个人简介</button>
-                    <div>
-                        <span id="userIntro">{$user_msg}</span>
+                <div id="userInfo" uid="{$user_uid}">
+                    <button @click="show" v-if="userIntro==''" id="introBtn" type="button" class="btn btn-warning btn-sm btn-block intro_btn" >填写个人简介</button>
+                    <div v-else>
+                        <span id="userIntro" @click="show">{{userIntro}}</span>
                     </div>
                     <div id="inputIntro">
                         <textarea id = "myIntro" autofocus="true" placeholder="例：摄影师/旅居澳洲/潜水爱好者" maxlength="100" rows="3" class="personInfo"></textarea>
-                        <button id="saveIntro" type="button" class="btn btn-warning btn-sm btn-block">保存</button>
+                        <button @click="saveIntro" type="button" class="btn btn-warning btn-sm btn-block">保存</button>
                     </div>
                 </div>
             </div>
@@ -124,6 +124,7 @@
 <script src="__JS__/bootstrap.min.js"></script>
 <script src="__JS__/vue.min.js"></script>
 <script>
+    var getIntroUrl="{:url('user/person/getIntro')}";
     var changeUrl="{:url('user/person/changeIntro')}"
 </script>
 <script src="__JS__/person.js"></script>
