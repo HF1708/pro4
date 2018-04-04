@@ -6,7 +6,7 @@ var navs = [{
 },{
     "title" : "我的头像",
     "icon" : "icon-text",
-    "href" : AdvertUrl,
+    "href" : HeadUrl,
     "spread" : false
 },{
     "title" : "帐号安全",
