@@ -39,7 +39,6 @@ var vue = new Vue({
                     console.log(res) ;
                 }
             }) ;
-
         }
     } ,
     mounted:function(){

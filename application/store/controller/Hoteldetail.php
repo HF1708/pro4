@@ -75,10 +75,10 @@ class Hoteldetail extends Controller
     public function add_order(){
         $hid=input('?get.hId')?input('get.hId'):"";
         $time=date('Y/m/d H:i:s', time());
-        $where=['hId'=>$hid];
+        $state=0;
         //$user=session::get('loginData');
         $user=1001;
-        $data=['huId'=>$hid,'hoTime'=>$time,'user_id'=>$user];
+        $data=['huId'=>$hid,'hoTime'=>$time,'user_id'=>$user,'state'=>$state];
         $add_order=db('store_hotelOrder')->insert($data);
 
     }

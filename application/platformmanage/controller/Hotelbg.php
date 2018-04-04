@@ -8,6 +8,8 @@
 
 namespace app\platformmanage\controller;
 use think\Controller;
+use think\Db;
+use think\paginator;
 
 class Hotelbg extends Controller
 {
@@ -18,8 +20,13 @@ class Hotelbg extends Controller
      *  作者:邱萍
      *  时间：18-3-30
      **/
-    public function show_hotelbg()
+    public function hotelbg()
     {
+        $where=[];
+        $get_hotelbg=db('store_shotel')->where($where)->paginate(5);
+        $page = $get_hotelbg->render();
+        $this->assign('page', $page);
+        $this->assign('hotelbg', $get_hotelbg);
         return $this->fetch();
     }
 }

@@ -16,7 +16,6 @@ class Hotel extends Controller
      **/
     public function hotel()
     {
-
         //input获取参数在tp框架中可以自动过滤xss攻击和sql注入等
         $cityChoice=input('?get.cityChoice')?input('get.cityChoice'):'';
         $hotelChoice=input('?get.hotelChoice')?input('get.hotelChoice'):'';

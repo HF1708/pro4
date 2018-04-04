@@ -1,10 +1,98 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <title>酒店管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="__STATIC__/layui/css/layui.css" media="all" />
+    <link rel="stylesheet" href="__CSS__/bootstrap.min.css" media="all" />
+    <link rel="stylesheet" href="__STATIC__/css/font_eolqem241z66flxr.css" media="all" />
+    <style type="text/css">
+        .layui-table td, .layui-table th{ text-align: center; }
+        .layui-table td{ padding:5px; }
+    </style>
 </head>
-<body>
-
+<body class="childrenBody">
+<div  id="myApp" >
+    <form method="post" action="{:url('platformmanage/Hotelbg/hotelbg')}" >
+    </form>
+    <div class="layui-form links_list">
+        <table class="layui-table">
+            <colgroup>
+                <col width="50">
+                <col width="30%">
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col width="13%">
+            </colgroup>
+            <thead>
+            <tr>
+                <th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose" id="allChoose"></th>
+                <th style="text-align:left;">酒店ID</th>
+                <th>酒店名字</th>
+                <th>酒店图片</th>
+                <th>房间总数</th>
+                <th>酒店地址</th>
+                <th>酒店价格</th>
+                <th>操作</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+        {volist name="hotelbg" id="vo"}
+            <tbody class="links_content">
+            <tr>
+                <th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose" id="allChoose1"></th>
+                <th style="text-align:left;">{$vo.hId}</th>
+                <th>{$vo.hName}</th>
+                <th><img src="__STATIC__/images/{$vo.hImg}" title="dish-name" /></th>
+                <th>{$vo.hRoomNumber}间</th>
+                <th>{$vo.hAddress}</th>
+                <th>{$vo.hPrice}元</th>
+                <th>
+                    <div class="layui-hide layui-show-md-block">
+                        <button class="layui-btn" setClass="pass">自动审核</button>
+                        <button class="layui-btn" setClass="pass">手动审核</button>
+                    </div>
+                </th>
+                <th>
+                    <div class="layui-hide layui-show-md-block">
+                        <button class="layui-btn" setClass="pass1">酒店上架</button>
+                        <button class="layui-btn" setClass="pass1">酒店下架</button>
+                    </div>
+                </th>
+            </tr>
+            </tbody>
+            {/volist}
+        </table>
+        {$page}
+    </div>
+    <div id="page">
+    </div>
+</div>
 </body>
+<script src="__STATIC__/layui/layui.js"></script>
+<script>
+    layui.use('element', function(){
+        var element = layui.element;
+
+        //…
+    });
+</script>
+<script type="text/javascript" src="__JS__/vue.min.js"></script>
+<script type="text/javascript" src="__JS__/jquery.min.js"></script>
+<script>
+    var url = "{:url('platformmanage/index/main')}" ;
+    // 广告的请求
+    var advertSetDataUrl = "{:url('platformmanage/Advert/setExamine')}" ;
+
+</script>
+<script type="text/javascript" src="__JS__/platform/platform.js"></script>
 </html>

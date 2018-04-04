@@ -18,12 +18,12 @@
     </style>
 </head>
 <body class="childrenBody">
-<div  id="myApp" >
+<div>
     <form method="post" action="{:url('platformmanage/Orderbg/orderbg')}" >
         <blockquote class="layui-elem-quote news_search">
             <div class="layui-inline">
                 <div class="layui-input-inline">
-                    <input type="text" value="" placeholder="请输入关键字" name="seartch_advert" class="layui-input search_input">
+                    <input type="text" id="input_search" placeholder="请输入关键字" name="input_search" class="layui-input search_input">
                 </div>
                 <button type="submit" class="layui-btn search_btn">订单查询</button>
             </div>
@@ -55,34 +55,43 @@
                 <th>下单用户</th>
             </tr>
             </thead>
-            <tbody class="links_content">
-            <tr>
-                <th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose" id="allChoose"></th>
-                <th style="text-align:left;">热尔</th>
-                <th>热</th>
-                <th>热</th>
-                <th>热</th>
-                <th>热</th>
-                <th>热</th>
-            </tr>
-            </tbody>
+            {volist name="order" id="vo"}
+                <tbody class="links_content">
+                    <tr>
+                        <th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose" id="allChoose"></th>
+                        <th style="text-align:left;">{$vo.huId}</th>
+                        <th>{$vo.hName}</th>
+                        <th>{$vo.hoTime}</th>
+                        <th>{$vo.state}</th>
+                        <th>{$vo.paytime}</th>
+                        <th>{$vo.user_id}</th>
+                    </tr>
+                </tbody>
+            {/volist}
         </table>
     </div>
-
+    {$page};
 </div>
 </body>
 <script src="__STATIC__/layui/layui.js"></script>
+<script type="text/javascript"></script>
+<script type="text/javascript" src="__JS__/vue.min.js"></script>
+<script type="text/javascript" src="__JS__/jquery.min.js"></script>
 <script>
     layui.use('element', function(){
         var element = layui.element;
     });
-</script>
-<script type="text/javascript" src="__JS__/vue.min.js"></script>
-<script type="text/javascript" src="__JS__/jquery.min.js"></script>
-<script>
-    // var url = "{:url('platformmanage/index/main')}" ;
-    // // 广告的请求
-    // var advertSetDataUrl = "{:url('platformmanage/Advert/setExamine')}" ;
+    //
+    // var orderArr={$order};
+    // console.log(orderArr);
+    // orderArr  ={};
+    //订单管理
+    var OrderbgUrl="{:url('platformmanage/Orderbg/orderbg')}";
+    // function search(){
+    //     var inputsearch=$('#input_search').val();
+    //     console.log(inputsearch);
+    //     window.location.href='{:url("platformmanage/Orderbg/orderbg")}?inputsearch='+inputsearch;
+    // }
 </script>
 <script type="text/javascript" src="__JS__/platform/orderbg.js"></script>
 </html>

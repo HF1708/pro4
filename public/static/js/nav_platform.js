@@ -23,6 +23,11 @@ var navs = [{
 	"icon" : "icon-text",
 	"href" : UserbgUrl,
 	"spread" : false
+}, {
+    "title" : "订单管理",
+    "icon" : "icon-text",
+    "href" : OrderbgUrl,
+    "spread" : false
 },{
 	"title" : "404页面",
 	"icon" : "&#xe61c;",
