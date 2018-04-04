@@ -12,13 +12,14 @@
     <link rel="stylesheet" href="__STATIC__/layui/css/layui.css" media="all" />
     <link rel="stylesheet" href="__CSS__/bootstrap.min.css" media="all" />
     <link rel="stylesheet" href="__STATIC__/css/font_eolqem241z66flxr.css" media="all" />
+    <link rel="stylesheet" href="__STATIC__/css/backstage/advert.css" media="all" />
     <style type="text/css">
         .layui-table td, .layui-table th{ text-align: center; }
         .layui-table td{ padding:5px; }
     </style>
 </head>
 <body class="childrenBody">
-<div  id="myApp" >
+<div  id="advert" >
     <form method="post" action="{:url('platformmanage/Advert/index')}" >
         <blockquote class="layui-elem-quote news_search">
             <div class="layui-inline">
@@ -29,19 +30,17 @@
             </div>
             <div class="layui-inline"  id="putStateExamine">
                 <a class="layui-btn linksAdd_btn" style="background-color:#5FB878">
-                    <cite>审核状态</cite>
+                    <cite>{{all_advert}}</cite>
                 </a>
                 <dl class="layui-nav-child">
-                    <dd><a href="javascript:;" data-url="page/user/userInfo.html"><i class="iconfont icon-zhanghu" data-icon="icon-zhanghu"></i><cite>未审核</cite></a></dd>
-                    <dd><a href="javascript:;" data-url="page/user/changePwd.html"><i class="iconfont icon-shezhi1" data-icon="icon-shezhi1"></i><cite>审核通过</cite></a></dd>
-                    <dd><a href="javascript:;"><i class="iconfont icon-loginout"></i><cite>被锁定</cite></a></dd>
+                    <dd @click="setSeartch(event)" ><a href="javascript:;" class="btn " setState="up" ><i class="iconfont icon-zhanghu" data-icon="icon-zhanghu" setState="up" ></i><cite setState="up" >上架</cite></a></dd>
+                    <dd @click="setSeartch(event)" ><a href="javascript:;" class="btn btn-link" setState="down" ><i class="iconfont icon-shezhi1" data-icon="icon-shezhi1" setState="down" ></i><cite setState="down" >下架</cite></a></dd>
+                    <dd @click="setSeartch(event)" ><a href="javascript:;" class="btn btn-link" setState="none" ><i class="iconfont icon-loginout" setState="none" ></i><cite setState="none" >未审核</cite></a></dd>
+                    <dd @click="setSeartch(event)" ><a href="javascript:;" class="btn btn-link" setState="all" ><i class="iconfont icon-loginout" setState="all" ></i><cite setState="all" >全部</cite></a></dd>
                 </dl>
             </div>
             <div class="layui-inline">
-                <a class="layui-btn layui-btn-danger batchDel">批量删除</a>
-            </div>
-            <div class="layui-inline">
-                <div class="layui-form-mid layui-word-aux">本页面刷新后除新添加的链接外所有操作无效，关闭页面所有数据重置</div>
+                <div class="layui-form-mid layui-word-aux"></div>
             </div>
         </blockquote>
     </form>
@@ -78,7 +77,7 @@
                     <th>{$user.store_name}</th>
                     <th>
                         <div class="layui-btn-container">
-                            <button class="layui-btn">查看</button>
+                            <button class="layui-btn"  @click="seeAdvert(event)" set_adv_id="{$user.store_adv_id}" >查看</button>
                         </div>
                     </th>
                     <th>{$user.advert_state}</th>
@@ -110,7 +109,55 @@
     <div id="page">
         {$list->render()}
     </div>
+
+    <!--等待提示-->
+    <div class="msgLoading" v-show="seeLoading" >
+        <i class="layui-icon layui-anim layui-anim-rotate layui-anim-loop" style="font-size: 130px; color: #1E9FFF;">
+            &#xe63d;
+        </i>
+    </div>
+
+
+    <!--查看广告详情-->
+    <div  class="layui-form advertCon " v-show="advert_show"  >
+        <div class="close_advert pull-right">
+            <i class="layui-icon close_icon" @click="advert_show = false" >&#x1007;</i>
+        </div>
+        <h1 class="text_center"> {{advert_name}} </h1>
+        <div class="layui-form-item">
+            <label class="layui-form-label">广告名</label>
+            <div class="layui-input-block">
+                <div class="layui-form-mid layui-word-aux">{{advert_name}}</div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">发布商</label>
+            <div class="layui-input-block">
+                <div class="layui-form-mid layui-word-aux">{{advert_store}}</div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">链接</label>
+            <div class="layui-input-block">
+                <div class="layui-form-mid layui-word-aux">{{advert_link}}</div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">图片</label>
+            <div class="layui-input-block ">
+                <img :src="advert_pic_url" class="advert_pic" />
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn layui-btn-primary layui-btn-lg"  @click="advert_show = false"  >确认</button>
+            </div>
+        </div>
+    </div>
+
 </div>
+
+
 </body>
 <script src="__STATIC__/layui/layui.js"></script>
 <script>
@@ -126,7 +173,13 @@
     var url = "{:url('platformmanage/index/main')}" ;
     // 广告的请求
     var advertSetDataUrl = "{:url('platformmanage/Advert/setExamine')}" ;
+    // 更换广告
+    var replace_advert_url = "{:url('platformmanage/Advert/replaceAdvert')}" ;
+    // 设置搜索条件
+    var set_search_url = "{:url('platformmanage/Advert/searchCondition')}" ;
+    // 获取显示的条件
+    var set_see_searct = "{:url('platformmanage/Advert/setSeeSearct')}" ;
 
 </script>
-<script type="text/javascript" src="__JS__/platform/platform.js"></script>
+<script type="text/javascript" src="__JS__/backstage/advert.js"></script>
 </html>
