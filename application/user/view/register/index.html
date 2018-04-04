@@ -337,7 +337,8 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal" >退出</button>
-					<a :href="Msg_footer_link" class="btn btn-default" >{{Msg_footer}}</a>
+					<a :href="Msg_footer_link" v-show="!msg_login_success_show" class="btn btn-default" data-dismiss="modal" >{{Msg_footer}}</a>
+					<a :href="Msg_footer_link" v-show="msg_login_success_show" class="btn btn-default" >{{Msg_footer}}</a>
 				</div>
 			</div>
 		</div>
@@ -384,6 +385,10 @@
 	手机商家注册
 	 */
 	var $store_register = "{:url('user/Register/phoneRegisterStore')}" ;
+	/*
+	 跳转商家的url
+	 */
+	var $store_jump = "{:url('storemanage/index/index')}" ;
 
 </script>
 <script type="text/javascript" src="__JS__/user/user_login.js"></script>

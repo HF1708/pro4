@@ -14,7 +14,8 @@ var app = new Vue({
         Msg_body:'登录成功' ,
         Msg_footer:'确认' ,
         Msg_footer_link:$user_person_url ,
-        msg_footer_button_exit:'loginMsgModel_exit'
+        msg_footer_button_exit:'loginMsgModel_exit' ,
+        msg_login_success_show:false
 
     } ,
     methods: {
@@ -91,6 +92,9 @@ var app = new Vue({
          */
         login:function(){
             var that = this ;
+            // 防止店家登录后有点用登录
+            // 先关闭链接按钮
+            that.msg_login_success_show = false ;
             var $name = $("#login_user").val() ;
             var $pwd = $("#login_pwd").val() ;
             var $code = $("#login_code").val() ;
@@ -100,24 +104,21 @@ var app = new Vue({
                 code : $code
             } ;
             $.ajax({
-                url:$user_login_url_1,
+                url:$user_login_url_1 ,
                 type:'post' ,
                 data:$data ,
                 dataType:'json' ,
                 success:function(res){
-                    if( res['code'] == 10000 )
+                    console.log(res) ;
+                    if( res.code == 10000 )
                     {
-                        that.Msg_footer_link = $user_person_url ;
-                        $("#loginMsgModel").modal('show') ;
+                        that.msg_login_success_show = true ;
                     }
                     else
                     {
-                        that.Msg_head = '登录' ;
-                        that.Msg_body = res['msg'] ;
-                        that.Msg_footer = '确认' ;
-                        that.Msg_footer_link = "#loginMsgModel" ;
-                        $("#loginMsgModel").modal('show') ;
+                        that.Msg_footer_link = "" ;
                     }
+                    $("#loginMsgModel").modal('show') ;
                 }
             }) ;
         } ,
@@ -131,6 +132,9 @@ var app = new Vue({
          */
         phoneLogin:function(){
             var that = this ;
+            // 防止用户登录后有点用登录
+            // 先关闭链接按钮
+            that.msg_login_success_show = false ;
             var $name = $("#register_name").val() ;
             var $code = $("#register_code").val() ;
             var $data = {
@@ -144,23 +148,20 @@ var app = new Vue({
                 data:$data ,
                 dataType:'json' ,
                 success:function(res){
-                    if( res['code'] == 10000 )
+                    if( res.code == 10000 )
                     {
                         // 商家登录成功跳转
-                        that.Msg_head = '登录' ;
-                        that.Msg_body = res['msg'] ;
-                        that.Msg_footer = '确认' ;
                         that.Msg_footer_link = $store_jump ;
-                        $("#loginMsgModel").modal('show') ;
+                        that.msg_login_success_show = true ;
                     }
                     else
                     {
-                        that.Msg_head = '登录' ;
-                        that.Msg_body = res['msg'] ;
-                        that.Msg_footer = '确认' ;
-                        that.Msg_footer_link = "#loginMsgModel" ;
-                        $("#loginMsgModel").modal('show') ;
+                        that.Msg_footer_link = "" ;
                     }
+                    that.Msg_head = '登录' ;
+                    that.Msg_body = res['msg'] ;
+                    that.Msg_footer = '确认' ;
+                    $("#loginMsgModel").modal('show') ;
                 }
             }) ;
         }

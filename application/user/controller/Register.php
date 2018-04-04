@@ -117,6 +117,11 @@ class Register extends Controller
         {
             // 插入数据
             $res = Db("user_user")->insert($data) ;
+            $id = Db("user_user")->getLastInsID() ;
+            $getData = Db("user_user")->where("user_id",$id)->find() ;
+
+            $getData['userType'] = "user" ;
+            Session::set('loginData',serialize($getData));
             $returnJson = [
                 'code' => 10000 ,
                 'msg' => config('registerMsg')['SUCCESS'] ,
@@ -137,24 +142,26 @@ class Register extends Controller
      */
     public function phoneRegisterStore()
     {
+        $tel = input("?post.tel") ? input("post.tel") : "" ;
+        $code = input("?post.code") ? input("post.code") : "" ;
+        $name = input("?post.name") ? input("post.name") : "" ;
         $that = new \user() ;
+        // 获取session缓存中的手机号码
+        $sessionPhone = SESSION::get($tel) ;
         $returnJson = [
             'code' => 10001 ,
             'msg' => config('registerMsg')['LOSE'] ,
             'data' => []
         ] ;
-        $tel = input("?post.tel") ? input("post.tel") : "" ;
-        $code = input("?post.code") ? input("post.code") : "" ;
-        $name = input("?post.name") ? input("post.name") : "" ;
+
 
         $data = [
             "store_name" => $name ,
-            "store_phone" => $name ,
+            "store_phone" => $sessionPhone ,
             "store_apply_time" => date('Y-m-d H:i:s',time())
         ] ;
 
-        // 获取session缓存中的手机号码
-        $sessionPhone = SESSION::get($tel) ;
+
 
         // 手机号码是否为空
         $that->emptyData($tel,'loginMsg','PHONE_EMPTY') ;
@@ -186,14 +193,21 @@ class Register extends Controller
 
         // 绑定的手机是否存在
         $where = [
-            "store_phone" => $tel
+            "store_phone" => $sessionPhone
         ] ;
         $that->issetData( "store_info" ,$where ,"registerMsg" ,'PHONE_EXISTS' ) ;
 
         // 填入注册信息
         $res = Db("store_info")->insert($data) ;
+        $id = Db("store_info")->getLastInsID() ;
+        $getData = Db("store_info")->where("store_id",$id)->find() ;
+
+        $getData['userType'] = "store" ;
+        Session::set('loginData',serialize($getData));
         // 是否注册成功
 //        $that->emptyData($res,'registerMsg','REGISTER_DATA_EXISTS') ;
+        // 存入session信息
+
         $returnJson = [
             'code' => 10000 ,
             'msg' => config('registerMsg')['SUCCESS'] ,

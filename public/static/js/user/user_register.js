@@ -19,7 +19,8 @@ var app = new Vue({
         Msg_body:'登录成功' ,
         Msg_footer:'确认' ,
         Msg_footer_link:'#' ,
-        msg_footer_button_exit:'loginMsgModel_exit'
+        msg_footer_button_exit:'loginMsgModel_exit' ,
+        msg_login_success_show:false
 
     } ,
     methods: {
@@ -44,9 +45,9 @@ var app = new Vue({
                 that.shortJudgeStore = 'T' ;
 
             }
-            $data = {name:$names,type:type};
+            $data = {name:$names,type:type} ;
             $.ajax({
-                url:$code_user_url,
+                url:$code_user_url ,
                 type:'post' ,
                 data:$data ,
                 dataType:'json' ,
@@ -147,6 +148,9 @@ var app = new Vue({
          */
         register:function(){
             var that = this ;
+
+            that.msg_login_success_show = false ;
+
             var $name = $("#register_user").val() ;
             var $pwd = $("#register_pwd").val() ;
             var $pwd2 = $("#register_pwd2").val() ;
@@ -165,22 +169,22 @@ var app = new Vue({
                 data:$data ,
                 dataType:'json' ,
                 success:function(res){
-                    if( res['code'] == 10000 )
+                    console.log(res) ;
+                    if( res.code == 10000 )
                     {
+                        that.msg_login_success_show = true ;
+
                         that.Msg_footer_link = $user_person_url ;
-                        that.Msg_head = '注册' ;
-                        that.Msg_body = res['msg'] ;
-                        that.Msg_footer = '确认' ;
                         $("#loginMsgModel").modal('show') ;
                     }
                     else
                     {
-                        that.Msg_head = '注册' ;
-                        that.Msg_body = res['msg'] ;
-                        that.Msg_footer = '确认' ;
-                        that.Msg_footer_link = "#loginMsgModel" ;
-                        $("#loginMsgModel").modal('show') ;
+                        that.Msg_footer_link = "" ;
                     }
+                    that.Msg_head = '注册' ;
+                    that.Msg_body = res['msg'] ;
+                    that.Msg_footer = '确认' ;
+                    $("#loginMsgModel").modal('show') ;
                 }
             }) ;
         } ,
@@ -194,6 +198,9 @@ var app = new Vue({
          */
         phoneRegister:function(){
             var that = this ;
+
+            that.msg_login_success_show = false ;
+
             var $tel = $("#register_name_stroe").val() ;
             var $code = $("#register_code_stroe").val() ;
             var $name = $("#register_nameStore").val() ;
@@ -208,23 +215,20 @@ var app = new Vue({
                 data:$data ,
                 dataType:'json' ,
                 success:function(res){
-                    if( res['code'] == 10000 )
+                    if( res.code == 10000 )
                     {
-                        that.Msg_footer_link = $user_person_url ;
-                        that.Msg_head = '注册' ;
-                        that.Msg_body = res['msg'] ;
-                        that.Msg_footer = '确认' ;
-                        that.Msg_footer_link = "#loginMsgModel" ;
-                        $("#loginMsgModel").modal('show') ;
+                        that.msg_login_success_show = true ;
+
+                        that.Msg_footer_link = $store_jump ;
                     }
                     else
                     {
-                        that.Msg_head = '注册' ;
-                        that.Msg_body = res['msg'] ;
-                        that.Msg_footer = '确认' ;
-                        that.Msg_footer_link = "#loginMsgModel" ;
-                        $("#loginMsgModel").modal('show') ;
+                        that.Msg_footer_link = "" ;
                     }
+                    that.Msg_head = '注册' ;
+                    that.Msg_body = res['msg'] ;
+                    that.Msg_footer = '确认' ;
+                    $("#loginMsgModel").modal('show') ;
                 }
             }) ;
         }
