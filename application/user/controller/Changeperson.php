@@ -15,6 +15,19 @@ class Changeperson extends Controller
     public function index(){
         $res='';
         $result=unserialize(Session::get('loginData'));
-        return $this->fetch('index',$result);
+        if(empty($result)){
+            //错误页面的默认跳转页面是返回前一页，通常不需要设置
+            $this->error('非法进入');
+        }
+        else{
+            //获取用户信息
+            $user_uid=$result['user_uid'];
+            $where=['user_uid'=>$user_uid];
+            $res = Db('user_user')->where($where)->find() ;
+
+            //用户有登录将登录用户信息传入
+            $res=$this->fetch('index',$res);
+        }
+        return $res;
     }
 }
