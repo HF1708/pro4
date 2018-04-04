@@ -38,7 +38,7 @@ class Order  extends Controller
             ["store_shotel a","b.huId=a.hId"]
         ];
         $where=["a.store_id"=>$storeID];
-        $re=DB::table("store_hotel_order")->alias('b')->join($join)->where($where)->select();
+        $re=DB::table("store_hotelorder")->alias('b')->join($join)->where($where)->select();
         $count=count($re);
         $arr['code']=0;
         $arr['msg']="";

@@ -29,6 +29,7 @@
 
     layui.use('table', function(){
         var table = layui.table;
+        console.log(2212)
         //第一个实例
         table.render({
             elem: '#demo'
@@ -40,8 +41,8 @@
                 ,{field: 'hName', title: '酒店名称', width:280, fixed: 'left'}
                 ,{field: 'hPrice', title: '价格', width:80, sort: true}
                 ,{field: 'hAddress', title: '详细地址', width:180}
-                ,{field: 'orderstate', title: '订单状态', width:180,toolbar: '#barState'}
-                ,{field: 'oper', title: '操作', width:180,toolbar: '#barOper'}
+                ,{field: 'orderstate', title: '订单状态', width:180,toolbar:'#barState'}
+                ,{field: 'oper', title: '操作', width:180,toolbar:'#barOper'}
             ]]
         });
         //监听工具条
@@ -112,7 +113,6 @@
 
 </script>
 <script type="text/html" id="barState">
-    <!-- 这里同样支持 laytpl 语法，如： -->
     {{#  if(d.orderstate =='0'){ }}
     <span>未支付</span>
     {{#  } else if(d.orderstate =='1') { }}
@@ -123,23 +123,19 @@
 </script>
 <script type="text/html" id="barOper">
     {{#  if(d.orderstate =='0'){ }}
-        <a class="layui-btn layui-btn-xs" lay-event="cancel">取消订单</a>
+    <a class="layui-btn layui-btn-xs" lay-event="cancel">取消订单</a>
     {{#  } else if(d.orderstate =='1') { }}
-        <a class="layui-btn layui-btn-xs" lay-event="use">使用</a>
-        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="refund">退款</a>
+    <a class="layui-btn layui-btn-xs" lay-event="use">使用</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="refund">退款</a>
     {{#  } else if(d.orderstate =='2') { }}
     <!--<a class="layui-btn layui-btn-xs" lay-event="up">退款</a>-->
     {{#  } else {}}
 
     {{#  } }}
-    <!--<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>-->
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
 </script>
-<script type="text/html" id="barInfo">
-    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="info">查看详情</a>
-</script>
-<script>
 
-</script>
+
 
 
 </html>
