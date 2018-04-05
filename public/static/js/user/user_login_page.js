@@ -15,7 +15,9 @@ var app = new Vue({
         Msg_footer:'确认' ,
         Msg_footer_link:$user_person_url ,
         msg_footer_button_exit:'loginMsgModel_exit' ,
-        msg_login_success_show:false
+        msg_login_success_show:false ,
+        code_msg_user:"请正确输入验证码" ,
+        code_msg_user_show:false
 
     } ,
     methods: {
@@ -141,7 +143,6 @@ var app = new Vue({
                 name : $name ,
                 code : $code
             } ;
-            console.log($data) ;
             $.ajax({
                 url:$user_login_phone_url_1 ,
                 type:'post' ,
@@ -164,6 +165,27 @@ var app = new Vue({
                     $("#loginMsgModel").modal('show') ;
                 }
             }) ;
+        } ,
+        /**
+         * 功能描述：
+         * 参数：
+         * QQUser：
+         * 返回：
+         * 作者：yonjin L
+         * 时间：18-4-5
+         */
+        code_verification:function(e)
+        {
+            var that = this ;
+            $data = ($(e.target).val()) ;
+            if( $data.length < 4 )
+            {
+                that.code_msg_user_show = true ;
+            }
+            else
+            {
+                that.code_msg_user_show = false ;
+            }
         }
 
     }

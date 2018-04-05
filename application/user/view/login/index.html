@@ -7,34 +7,7 @@
 		<script src="__JS__/jquery.min.js"></script>
 		 <!-- Custom Theme files -->
 		<link href="__CSS__/style.css" rel='stylesheet' type='text/css' />
-		<style type="text/css">
-			.flex-center{
-				display:flex ;
-			}
-			.empty{
-				height: 20px ;
-			}
-			.btn-modal{
-				background-color:rgba(0,0,0,0.5) !important;
-				width:30% !important;
-				color:#ffffff !important;
-			}
-			.make-reserve input[type="button"] {
-				background: #3b3b3b;
-				color: #FFF;
-				padding: 1em 1.5em;
-				display: inline-block;
-				border: none;
-				transition: 0.5s all;
-				-webkit-transition: 0.5s all;
-				-moz-transition: 0.5s all;
-				-ms-transition: 0.5s all;
-				margin-top: 1.5em;
-			}
-			.make-reserve input[type="button"]:hover{
-				background:#DDD177;
-			}
-		</style>
+		<link href="__CSS__/user/login.css" rel='stylesheet' type='text/css' />
    		 <!-- Custom Theme files -->
    		 <!---- start-smoth-scrolling---->
 		<script type="text/javascript" src="__JS__/move-top.js"></script>
@@ -147,9 +120,10 @@
 													<div class="clearfix"> </div>
 													<!----->
 													<div class="i-name">
-														<div class="i-name-left">
+														<div class="i-name-left" >
 															<span>验证码</span>
-															<input type="text" placeholder="请输入验证码" id="login_code" maxlength="4" />
+															<input type="text" @change="code_verification(event)" placeholder="请输入验证码" id="login_code" maxlength="4" />
+															<p class="help-block text-warning" v-show="code_msg_user_show" >{{code_msg_user}}</p>
 														</div>
 													</div>
 													<div class="clearfix"> </div>
