@@ -1,0 +1,32 @@
+.flex-center{
+    display:flex ;
+}
+.empty{
+    height: 20px ;
+}
+.btn-modal{
+    background-color:rgba(0,0,0,0.5) !important;
+    width:30% !important;
+    color:#ffffff !important;
+}
+.make-reserve input[type="button"] {
+    background: #3b3b3b;
+    color: #FFF;
+    padding: 1em 1.5em;
+    display: inline-block;
+    border: none;
+    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -ms-transition: 0.5s all;
+    margin-top: 1.5em;
+}
+.make-reserve input[type="button"]:hover{
+    background:#DDD177;
+}
+
+
+.msg-login{
+
+}
+
