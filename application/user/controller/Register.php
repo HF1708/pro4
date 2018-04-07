@@ -294,7 +294,58 @@ class Register extends Controller
     {
 
         $that = new \user() ;
-        $that->getData("type","","") ;
+        $type = $that->getData("type","loginMsg","DARA_TYPE_ERROR") ;
+        // 失焦验证
+        switch($type)
+        {
+            // 用户名
+            case "userName":
+                // 用户名
+                $name = $that->getData("name","loginMsg","ACCOUNT_NAME_EMPTY") ;
+                $res = $that->ifData1($name,$type) ;
+                if( strcmp($res,'f1')==0 )
+                {
+                    $where = [
+                        "user_uid" => $name
+                    ] ;
+                    // 用户名是否已存在
+                    $userEmp = Db("user_user")->where($where)->find() ;
+                    // 用户名是否已存在
+                    if( !empty($userEmp) )
+                    {
+                        // 用户名已存在
+                        $returnJson = [
+                            'code' => 10003 ,
+                            'msg' => config('loginMsg')['ACCOUNT_REPEAT'] ,
+                            'data' => []
+                        ] ;
+                        echo json_encode($returnJson) ;
+                        exit ;
+                    }
+
+                    $that->returnJson("loginMsg","DATA_SUCCESS","",10000) ;
+                }
+                else
+                {
+                    // 数据异常
+                    $that->returnJson("loginMsg","DATA_SUCCESS","",10002) ;
+                }
+                break ;
+            // 手机号码
+            case "userPhone":
+                // 手机号码
+                $phone = $that->getData("phone","loginMsg","PHONE_EMPTY") ;
+                /*
+                 * 手机号码是否合法
+                 */
+                // 不合法返回信息
+                if( !$that->checkMobileValidity($phone) )
+                {
+                    $that->returnJson("loginMsg","PHONE_ERROR") ;
+                }
+                $that->returnJson("loginMsg","DATA_SUCCESS","",10000) ;
+                break ;
+        }
 
     }
 

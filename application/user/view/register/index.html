@@ -176,7 +176,7 @@
 												<div class="empty" v-show="!msg_login_user_name_show"></div>
 												<div class="i-name">
 													<div class="i-name-left">
-														<input type="password"  placeholder="再次输入" id="register_pwd2" maxlength="32"  />
+														<input type="password" @blur="blur_user_pwd2" placeholder="再次输入" id="register_pwd2" maxlength="32"  />
 														<p v-show="msg_login_user_pwd2_show">{{msg_login_user_pwd2}}</p>
 													</div>
 												</div>
@@ -185,7 +185,7 @@
 												<div class="empty"></div>
 												<div class="i-name">
 													<div class="i-name-left" style="margin-right:0 ;" >
-														<input type="text" placeholder="请输入手机号码" id="register_name_user" onkeypress="return event.keyCode>=48&&event.keyCode<=57" ng-pattern="/[^a-zA-Z]/" maxlength="11" />
+														<input type="text" @blur="blur_user_phone" placeholder="请输入手机号码" id="register_name_user" onkeypress="return event.keyCode>=48&&event.keyCode<=57" ng-pattern="/[^a-zA-Z]/" maxlength="11" />
 														<p v-show="msg_login_user_phone_show">{{msg_login_user_phone}}</p>
 													</div>
 													<div class="i-name-left" style="margin-left:10px ;position:relative ;" >

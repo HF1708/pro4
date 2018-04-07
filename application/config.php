@@ -250,9 +250,10 @@ return [
         'SUCCESS' => '恭喜你，登录成功' ,
         "SUCCESS_USER_DATA" => "获取用户数据成功" ,
         "SUCCESS_USER_OUT" => "获取用户数据失败" ,
-        'ACCOUNT_EMPTY' => '用户密码不能为空，请重新输入' ,
-        'ACCOUNT_ERROR' => '用户密码错误，请重新输入' ,
-        'ACCOUNT_REPEAT' => '用户名已存在，请重新输入' ,
+        'ACCOUNT_EMPTY' => '用户密码不能为空' ,
+        'ACCOUNT_ERROR' => '用户密码错误' ,
+        'ACCOUNT_REPEAT' => '用户名已存在' ,
+        'ACCOUNT_NAME_EMPTY' => '用户名不能为空' ,
         'CODE_EMPTY' => '验证码不能为空' ,
         'CODE_ERROR' => '验证码输入错误' ,
         'CODE_SEND' => '验证码已发送' ,
@@ -264,7 +265,8 @@ return [
         'PHONE_CODE_ERROR' => '手机号码或者验证码错误' ,
         "ERROR_USER_DATA" => "用户未登录" ,
         "SUCCESS_SEARCH_DATA" => "获取数据成功" ,
-        "DATA_SUCCESS" => "数据正常"
+        "DATA_SUCCESS" => "数据正常" ,
+        "DARA_TYPE_ERROR"=>"数据类型异常"
     ] ,
     // 注册返回消息配置
     "registerMsg" => [
