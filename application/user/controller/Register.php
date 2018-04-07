@@ -287,5 +287,16 @@ class Register extends Controller
         echo json_encode($returnJson) ;
     }
 
+    /**
+     * 失焦验证
+     */
+    public function blurUser()
+    {
+
+        $that = new \user() ;
+        $that->getData("type","","") ;
+
+    }
+
 
 }

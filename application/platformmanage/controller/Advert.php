@@ -265,4 +265,13 @@ class Advert extends Controller
         $that->returnJson("loginMsg","SUCCESS_SEARCH_DATA",$seatch_2,10000) ;
     }
 
+    /**
+     *  功能描述: 获取广告
+     *  参数：无
+     *  返回：无
+     *  作者:yonjin L
+     *  时间：18-4-4
+     **/
+
+
 }
