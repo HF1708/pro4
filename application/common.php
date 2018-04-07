@@ -37,6 +37,36 @@ use Qiniu\Storage\UploadManager ;
 class user{
 
     /**
+     * 功能描述：判断数据是否为字母+数字
+     * 参数：待判断的数据,返回的信息类型、返回的信息内容、返回码
+     * QQUser：
+     * 返回：处理完的字符串
+     * 作者：yonjin L
+     * 时间：18-4-1
+     */
+    public function ifData1($data=null,$type)
+    {
+        switch($type)
+        {
+            // 用户名判断
+            case "userName":
+                // 第一位数为字母
+                if( !preg_match("/^[a-zA-Z]{1}$/",$data[0]) )
+                {
+                    return "f2" ;
+                }
+                // 其余数为字母+数字
+                if( !preg_match("/^[a-zA-Z0-9]{1,16}$/",$data) )
+                {
+                    return "f2" ;
+                }
+                return 'f1' ;
+                break ;
+        }
+
+    }
+
+    /**
      * 功能描述：判断post数据是否存在,为空返回报错信息
      * 参数：待判断的数据,返回的信息类型、返回的信息内容、返回码
      * QQUser：

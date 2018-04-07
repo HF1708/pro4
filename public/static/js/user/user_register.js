@@ -34,6 +34,68 @@ var app = new Vue({
 
     } ,
     methods: {
+        
+        /**
+         * 功能描述：手机号码失焦验证
+         * 参数：
+         * QQUser：
+         * 返回：
+         * 作者：yonjin L
+         * 时间：18-4-7
+         */
+        blur_user_phone:function(e)
+        {
+            var that = this ;
+            $data = {
+                phone:($(e.target).val()) ,
+                type:"userPhone"
+            } ;
+            $.ajax({
+                url:$blur_user_name_url ,
+                type:"post" ,
+                data:$data ,
+                dataType:"json" ,
+                success:function(res){
+                    if( res.code == 10000 )
+                    {
+                        // 隐藏提示
+                        that.msg_login_user_phone_show = false ;
+                    }
+                    else
+                    {
+                        // 用户名格式异常
+                        that.msg_login_user_phone_show = true ;
+                        that.msg_login_user_phone = res.msg ;
+                    }
+                }
+            }) ;
+        } ,
+        /**
+         * 功能描述：用户密码失焦验证
+         * 参数：
+         * QQUser：
+         * 返回：
+         * 作者：yonjin L
+         * 时间：18-4-7
+         */
+        blur_user_pwd2:function(e)
+        {
+            var that = this ;
+            $pwd = $("#register_pwd").val() ;
+            $pwd2 = ($(e.target).val()) ;
+            // 密码是否相同
+            if( $pwd != $pwd2 )
+            {
+                // 不同
+                that.msg_login_user_pwd2_show = true ;
+                that.msg_login_user_pwd2 = "两次输入密码不同" ;
+            }
+            else
+            {
+                // 相同
+                that.msg_login_user_pwd2_show = false ;
+            }
+        } ,
         /**
          * 功能描述：用户名失焦验证
          * 参数：
@@ -44,6 +106,7 @@ var app = new Vue({
          */
         blur_user_name:function(e)
         {
+            var that = this ;
             $data = {
                 name:($(e.target).val()) ,
                 type:"userName"
@@ -54,11 +117,25 @@ var app = new Vue({
                 data:$data ,
                 dataType:"json" ,
                 success:function(res){
-                   console.log(123) ;
-                    console.log(res) ;
+                    if( res.code == 10000 )
+                    {
+                        // 隐藏提示
+                        that.msg_login_user_name_show = false ;
+                    }
+                    else if( res.code == 10002 )
+                    {
+                        // 用户名格式异常
+                        that.msg_login_user_name_show = true ;
+                        that.msg_login_user_name = "用户名格式错误" ;
+                    }
+                    else
+                    {
+                        // 用户名格式异常
+                        that.msg_login_user_name_show = true ;
+                        that.msg_login_user_name = res.msg ;
+                    }
                 }
-            })
-            // 判断用户名是否已存在
+            }) ;
         } ,
         /**
          * 功能描述：发送短信验证码给用户/店家
@@ -89,11 +166,11 @@ var app = new Vue({
                 dataType:'json' ,
                 success:function(res){
                     if( that.shortJudgeUser == 'T' ) {
-                        that.setMsgTime(type) ;
+                        if( res.code == 10000 ) that.setMsgTime(type) ;
                     }
                     else if( that.shortJudgeStore == 'T' )
                     {
-                        that.setMsgTime(type) ;
+                        if( res.code == 10000 ) that.setMsgTime(type) ;
                     }
                     else
                     {
@@ -172,7 +249,7 @@ var app = new Vue({
                     }
                 }
 
-            }, 10) ;
+            }, 1000) ;
         } ,
         /**
          * 功能描述：用户注册
