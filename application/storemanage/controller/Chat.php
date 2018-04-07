@@ -29,17 +29,27 @@ class Chat extends Controller
         $userNamw=$res['store_name'];
         $id=$res['store_id'];
         echo '{
-  "code": 0
-  ,"msg": ""
-  ,"data": {
-    "mine": {
-      "username": "'.$userNamw.'"
-      ,"id":"store_'.$id.'"
-      ,"status": "online"
-      ,"sign": ""
-      ,"avatar": "http://cdn.firstlinkapp.com/upload/2016_6/1465575923433_33812.jpg"
+              "code": 0
+              ,"msg": ""
+              ,"data": {
+                "mine": {
+                  "username": "'.$userNamw.'"
+                  ,"id":"store_'.$id.'"
+                  ,"status": "online"
+                  ,"sign": ""
+                  ,"avatar": "http://cdn.firstlinkapp.com/upload/2016_6/1465575923433_33812.jpg"
+                }
+               }
+            }';
     }
-   }
-}';
+    /**
+     *  *  功能描述:显示平台客服聊天界面
+     *  参数：无
+     *  返回：无
+     *  作者:qingtian Y
+     *  时间：18-4-7
+     **/
+    public function pingtai(){
+        return $this->fetch();
     }
 }
