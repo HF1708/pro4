@@ -1,9 +1,6 @@
-
 var wsModule = require( "ws" );
-
 var Server = wsModule.Server;
 var server = new Server( {port:8888} );
-
 var socketList = [] ;
 var useList = [] ;
 // 引入redis模块

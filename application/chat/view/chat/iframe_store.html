@@ -6,7 +6,6 @@
 <title>LayIM 3.x PC版本地演示</title>
 
 <link rel="stylesheet" href="__STATIC__/layui/css/layui.css">
-    <script src="__JS__/jquery.min.js"></script>
 <style>
 html{background-color: #333;}
 </style>
@@ -15,7 +14,6 @@ html{background-color: #333;}
 
 
 <script src="__STATIC__/layui/layui.js"></script>
-
 <script>
     ws = new WebSocket( "ws://localhost:8888" ) ;
 // if(!/^http(s*):\/\//.test(location.href)){
@@ -42,7 +40,7 @@ layui.use('layim', function(layim){
 
     //初始化接口
     init: {
-      url: '{:url("storemanage/Chat/getList")}'
+      url: '{:url("chat/Chat/getUser_store")}'
       ,data: {}
     }
     
@@ -94,11 +92,11 @@ layui.use('layim', function(layim){
     //,minRight: '90px' //聊天面板最小化时相对浏览器右侧距离
     ,initSkin: '5.jpg' //1-5 设置初始背景
     //,skin: ['aaa.jpg'] //新增皮肤
-    ,isfriend: false //是否开启好友
+//    ,isfriend: false //是否开启好友
     ,isgroup: false //是否开启群组
     //,min: true //是否始终最小化主面板，默认false
 //    ,notice: true //是否开启桌面消息提醒，默认false
-    ,voice: false //声音提醒，默认开启，声音文件为：default.wav
+    //,voice: false //声音提醒，默认开启，声音文件为：default.wav
     
     ,msgbox: layui.cache.dir + 'css/modules/layim/html/msgbox.html' //消息盒子页面地址，若不开启，剔除该项即可
     ,find: layui.cache.dir + 'css/modules/layim/html/find.html' //发现页面地址，若不开启，剔除该项即可
@@ -142,7 +140,7 @@ layui.use('layim', function(layim){
       insert('[pre class=layui-code]' + text + '[/pre]'); //将内容插入到编辑器
     });
   });
-
+  
   //监听layim建立就绪
   layim.on('ready', function(res){
 
@@ -167,13 +165,30 @@ layui.use('layim', function(layim){
 //      ,remark: "本人冲田杏梨将结束AV女优的工作"
 //    });
     
-
+    setTimeout(function(){
+      //接受消息（如果检测到该socket）
+      layim.getMessage({
+        username: "Hi"
+        ,avatar: "http://qzapp.qlogo.cn/qzapp/100280987/56ADC83E78CEC046F8DF2C5D0DD63CDE/100"
+        ,id: "10000111"
+        ,type: "friend"
+        ,content: "临时："+ new Date().getTime()
+      });
+      
+      /*layim.getMessage({
+        username: "贤心"
+        ,avatar: "http://tp1.sinaimg.cn/1571889140/180/40030060651/1"
+        ,id: "100001"
+        ,type: "friend"
+        ,content: "嗨，你好！欢迎体验LayIM。演示标记："+ new Date().getTime()
+      });*/
+      
+    }, 3000);
   });
 
   //监听发送消息
   layim.on('sendMessage', function(data){
     var To = data.to;
-      data.mine.type="store"
     console.log(data);
     ws.send(JSON.stringify(data));
 //    if(To.type === 'friend'){
@@ -228,33 +243,7 @@ layui.use('layim', function(layim){
 //      });
 //    }
 //  });
-    ws.onmessage = function( result )
-    {
-        var msgObj = JSON.parse( result.data ) ;
-        alert(22);
-        console.log(msgObj)
-        var username=msgObj.mine.username;
-        var avatar=msgObj.mine.avatar;
-        var id=msgObj.mine.id;
-        var type=msgObj.mine.type;
-        var content=msgObj.mine.content;
-        //接受消息（如果检测到该socket）
-        layim.getMessage({
-            username: username
-            ,avatar: avatar
-            ,id: id
-            ,type:"friend"
-            ,content: content
-        });
-
-        /*layim.getMessage({
-          username: "贤心"
-          ,avatar: "http://tp1.sinaimg.cn/1571889140/180/40030060651/1"
-          ,id: "100001"
-          ,type: "friend"
-          ,content: "嗨，你好！欢迎体验LayIM。演示标记："+ new Date().getTime()
-        });*/
-    } ;
+  
   
 
 });
@@ -269,16 +258,21 @@ layui.use('layim', function(layim){
 
 ws.onopen = function()
 {
-
-    $.get('{:url("storemanage/Chat/getList")}',function (res) {
-        res=JSON.parse(res);
-        var id=res.data.mine.id;
-        var data={mine:{"id":id}}
-        ws.send( ( JSON.stringify(data) ) ) ;
-    })
-
+    ws.send( sendData( 'hf170809','server','ss' ,'hello' ) ) ;
 } ;
-
+ws.onmessage = function( result )
+{
+    var msgObj = JSON.parse( result.data ) ;
+    switch( msgObj.type )
+    {
+        case "ss" :
+            console.log('客户端接收的消息',msgObj) ;
+            break ;
+        case "message" :
+            console.log('客户端接收的消息啊',msgObj) ;
+            break ;
+    }
+} ;
 function sendData( sender ,rever ,type ,content )
 {
     if( !sender )
@@ -299,9 +293,9 @@ function sendData( sender ,rever ,type ,content )
     }
     var msg = JSON.stringify( {
         sender:sender,
-        rever:rever
-        ,type: type
-        ,content:content,
+        rever:rever,
+        type:type,
+        content:content,
         msgtime:( new Date() ).getTime()
     });
     console.log( "客户端发送的消息" ,msg );
