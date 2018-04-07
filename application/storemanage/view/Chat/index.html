@@ -279,34 +279,6 @@ ws.onopen = function()
 
 } ;
 
-function sendData( sender ,rever ,type ,content )
-{
-    if( !sender )
-    {
-        console.log( "客户端错误的发送者" ,sender ) ;
-    }
-    if( !rever )
-    {
-        console.log( "客户端错误的发送者" ,rever ) ;
-    }
-    if( !type )
-    {
-        console.log( "客户端错误的发送者" ,type ) ;
-    }
-    if( !content )
-    {
-        console.log( "客户端错误的发送者" ,content ) ;
-    }
-    var msg = JSON.stringify( {
-        sender:sender,
-        rever:rever
-        ,type: type
-        ,content:content,
-        msgtime:( new Date() ).getTime()
-    });
-    console.log( "客户端发送的消息" ,msg );
-    return msg;
-}
 </script>
 </body>
 </html>

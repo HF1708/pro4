@@ -14,11 +14,9 @@ server.on( "connection" ,function( socket ){
     socket.on( "message" ,function( data ){
         var msgObj = JSON.parse( data );
         console.log(msgObj)
-        console.log(msgObj.mine.id)
         List[msgObj.mine.id] = socket ;
-        console.log(List.length)
         if(msgObj.to!=undefined){
-            console.log(2233);
+
             sendMsg(List,msgObj)
         }
 
@@ -44,11 +42,11 @@ function sendMsg(List,MSG) {
 
     for(key in List)
     {
-        console.log(881);
+
         var otherSocket = List[key];
         if(otherSocket!=undefined && otherSocket.readyState == wsModule.OPEN  && otherSocket == List[MSG.to.id] )
         {
-            console.log(888);
+
             otherSocket.send(JSON.stringify(MSG));
         }
     }
