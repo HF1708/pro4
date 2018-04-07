@@ -155,9 +155,46 @@ class Chat extends Controller
             echo json_encode($data) ;
         }
     }
-
-
-
+    /**
+     * 功能描述：显示 用户与商家聊天界面
+     * 参数：
+     * QQUser：
+     * 返回：聊天对象数据
+     * 作者：Qingtian Y
+     * 时间：18-4-7
+     */
+    public function iframe_store()
+    {
+        $res = $this->fetch() ;
+        return $res ;
+    }
+    /**
+     * 功能描述：获取发起聊天的用户
+     * 参数：
+     * QQUser：
+     * 返回：聊天对象数据
+     * 作者：Qingtian Y
+     * 时间：18-4-7
+     */
+    public function getUser(){
+        $res = unserialize(Session::get('loginData')) ;
+        $userNamw=$res['user_name'];
+        $id=$res['user_id'];
+        $image = $res['user_image'] ;
+        echo '{
+          "code": 0
+          ,"msg": ""
+          ,"data": {
+            "mine": {
+              "username": "'.$userNamw.'"
+              ,"id": "user_'.$id.'"
+              ,"status": "online"
+              ,"sign": ""
+              ,"avatar":"'.$image.'"
+            }
+           }
+        }';
+    }
 }
 
 
