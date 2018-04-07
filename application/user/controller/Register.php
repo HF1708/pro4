@@ -161,41 +161,40 @@ class Register extends Controller
             "store_apply_time" => date('Y-m-d H:i:s',time())
         ] ;
 
-
-
-        // 手机号码是否为空
-        $that->emptyData($tel,'loginMsg','PHONE_EMPTY') ;
-
-        // 验证码是否为空
-        $that->emptyData($code,'loginMsg','CODE_EMPTY') ;
-
         // 店名是否为空
-        $that->emptyData($name,'registerMsg','REGISTER_STORE_NAME_EMPTY') ;
-
-        // 是否为发送验证码的手机号
-        if( strcmp($sessionPhone,$tel)!=0 )
-        {
-            $returnJson = [
-                'code' => 10001 ,
-                'msg' => config('registerMsg')['PHONE_ALIKE'] ,
-                'data' => []
-            ] ;
-            echo json_encode($returnJson) ;
-            exit ;
-        }
-
+        $that->emptyData($name,'registerMsg','REGISTER_STORE_NAME_EMPTY',"",10003) ;
         // 店名是否相同
         $where = [
             "store_name" => $name
         ] ;
         $resStoreName = Db("store_info")->where($where)->find() ;
-        $that->issetData( "store_info" ,$where ,"registerMsg" ,'STORE_EXISTS' ) ;
+        $that->issetData( "store_info" ,$where ,"registerMsg" ,'STORE_EXISTS',"",10003 ) ;
 
+        // 手机号码是否为空
+        $that->emptyData($tel,'loginMsg','PHONE_EMPTY') ;
+        // 是否为发送验证码的手机号
+        if( strcmp($sessionPhone,$tel)!=0 )
+        {
+            $returnJson = [
+                'code' => 10001 ,
+                'msg' => config('loginMsg')['PHONE_NUMBER_ERROR'] ,
+                'data' => []
+            ] ;
+            echo json_encode($returnJson) ;
+            exit ;
+        }
         // 绑定的手机是否存在
         $where = [
             "store_phone" => $sessionPhone
         ] ;
         $that->issetData( "store_info" ,$where ,"registerMsg" ,'PHONE_EXISTS' ) ;
+
+        // 验证码是否为空
+        $that->emptyData($code,'loginMsg','CODE_EMPTY',"",10002) ;
+        // 验证码是否错误
+        $sessionName = $tel."loginCode" ;
+        $codeSet2 = Session::get($sessionName) ;
+        $that->strcmpData($code,$codeSet2,"loginMsg","CODE_ERROR","",10002) ;
 
         // 填入注册信息
         $res = Db("store_info")->insert($data) ;
@@ -343,6 +342,18 @@ class Register extends Controller
                 {
                     $that->returnJson("loginMsg","PHONE_ERROR") ;
                 }
+                $that->returnJson("loginMsg","DATA_SUCCESS","",10000) ;
+                break ;
+            // 店名
+            case "storeName":
+                // 获取店名，并判断是否为空
+                $name = $that->getData("name","registerMsg","REGISTER_STORE_NAME_EMPTY") ;
+                // 店名是否相同
+                $where = [
+                    "store_name" => $name
+                ] ;
+                $that->issetData( "store_info" ,$where ,"registerMsg" ,'STORE_EXISTS' ) ;
+                // 返回正确信息
                 $that->returnJson("loginMsg","DATA_SUCCESS","",10000) ;
                 break ;
         }

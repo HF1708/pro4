@@ -263,6 +263,7 @@ return [
         'PHONE_EMPTY' => '手机号码为空' ,
         'PHONE_ERROR' => '手机号码格式错误' ,
         'PHONE_CODE_ERROR' => '手机号码或者验证码错误' ,
+        'PHONE_NUMBER_ERROR' => '手机号码错误' ,
         "ERROR_USER_DATA" => "用户未登录" ,
         "SUCCESS_SEARCH_DATA" => "获取数据成功" ,
         "DATA_SUCCESS" => "数据正常" ,
