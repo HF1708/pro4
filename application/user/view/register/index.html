@@ -197,7 +197,7 @@
 												<div class="empty" v-show="!msg_login_user_phone_show"></div>
 												<div class="i-name">
 													<div class="i-name-left" style="width:50%" >
-														<input type="text" placeholder="请输入短信验证码" id="register_code_user"  />
+														<input @blur="blur_user_code" type="text" placeholder="请输入短信验证码" id="register_code_user" maxlength="4" />
 														<p v-show="msg_login_user_code_show">{{msg_login_user_code}}</p>
 													</div>
 												</div>
@@ -225,7 +225,8 @@
 												<div class="clearfix"> </div>
 												<div class="i-name">
 													<div class="i-name-left" style="margin-right:0 ;" >
-														<input type="text" placeholder="请输入商店名字" id="register_nameStore" maxlength="12" />
+														<input @blur="blur_store_name" type="text" placeholder="请输入商店名字" id="register_nameStore" maxlength="12" />
+														<p v-show="msg_login_store_name_show">{{msg_login_store_name}}</p>
 													</div>
 												</div>
 												<div class="clearfix"> </div>
@@ -237,29 +238,25 @@
 												<div class="clearfix"> </div>
 												<div class="i-name">
 													<div class="i-name-left" style="margin-right:0 ;" >
-														<input type="text" placeholder="请输入手机号码" id="register_name_stroe" onkeypress="return event.keyCode>=48&&event.keyCode<=57" ng-pattern="/[^a-zA-Z]/" maxlength="11" />
+														<input @blur="blur_store_phone" type="text" placeholder="请输入手机号码" id="register_name_stroe" onkeypress="return event.keyCode>=48&&event.keyCode<=57" ng-pattern="/[^a-zA-Z]/" maxlength="11" />
+														<p v-show="msg_login_store_phone_show">{{msg_login_store_phone}}</p>
 													</div>
 													<div class="i-name-left" style="margin-left:10px ;position:relative ;" >
 														<button type="button" class="btn btn-default pull-left" v-show="shortShowStore"  @click="getPhoneMsg('store')" >{{shortMsgStore}}</button>
 														<div class="btn-modal btn btn-default" v-show="!shortShowStore" >{{shortMsgStore}}</div>
 													</div>
 												</div>
-
 												<!--<div class="i-name-left">-->
 												<!--<button type="button" class="btn btn-default" @click="getPhone()" >{{shortMsg}}</button>-->
 												<!--</div>-->
 
 												<div class="clearfix"> </div>
 												<!----->
-												<div class="empty"></div>
+												<div class="empty" v-show="!msg_login_store_phone_show"></div>
 												<div class="i-name">
 													<div class="i-name-left">
-														<input type="text" placeholder="请输入短信验证码" id="register_code_stroe"  />
-													</div>
-												</div>
-												<div class="i-name">
-													<div class="i-name-left">
-
+														<input @blur="blur_store_code" type="text" placeholder="请输入短信验证码" id="register_code_stroe" maxlength="4" />
+														<p v-show="msg_login_store_code_show">{{msg_login_store_code}}</p>
 													</div>
 												</div>
 												<!----->
