@@ -36,7 +36,7 @@ class Login extends Controller
         if( empty($code) )
         {
             $returnJson = [
-                'code' => 10001 ,
+                'code' => 10002 ,
                 'msg' => config('loginMsg')['CODE_EMPTY'] ,
                 'data' => []
             ] ;
@@ -47,7 +47,7 @@ class Login extends Controller
         if( empty($name) || empty($pwd)  )
         {
             $returnJson = [
-                'code' => 10001 ,
+                'code' => 10002 ,
                 'msg' => config('loginMsg')['ACCOUNT_EMPTY'] ,
                 'data' => []
             ] ;
@@ -63,7 +63,7 @@ class Login extends Controller
         if( !captcha_check($code) )
         {
             $returnJson = [
-                'code' => 10001 ,
+                'code' => 10002 ,
                 'msg' => config('loginMsg')['CODE_ERROR'] ,
                 'data' => []
             ] ;
@@ -138,12 +138,12 @@ class Login extends Controller
         /*
         * 验证码为空
         */
-        $that->emptyData($code,'loginMsg','CODE_EMPTY') ;
+        $that->emptyData($code,'loginMsg','CODE_EMPTY',"",10002) ;
 
         /*
        * 验证码是否正确
        */
-        $that->strcmpData($code,$codeSet2,'loginMsg','CODE_ERROR') ;
+        $that->strcmpData($code,$codeSet2,'loginMsg','CODE_ERROR',"",10002) ;
 
         /*
          * 手机号码是否一致
@@ -177,7 +177,7 @@ class Login extends Controller
             exit ;
         }
 
-        echo json_encode($returnJson) ;
+        $that->returnJson("loginMsg","PHONE_CODE_ERROR") ;
     }
 
     /**
@@ -198,10 +198,18 @@ class Login extends Controller
         ] ;
         $tel = input("?post.tel") ? input("post.tel") : '' ;
         // 手机号码是否为空
-        $that->emptyData($tel,'loginMsg','PHONE_EMPTY') ;
+        $that->emptyData($tel,'loginMsg','PHONE_EMPTY',"",10002) ;
+        /*
+         * 手机号码是否合法
+         */
+        // 不合法返回信息
+        if( !$that->checkMobileValidity($tel) )
+        {
+            $that->returnJson("loginMsg","PHONE_ERROR",'',10002) ;
+        }
 
         // 设置验证码
-        $code = 'qwertyuioplkjhgfdsazxcvbnm1234567890';
+        $code = 'qwertyuioplkjhgfdsazxcvbnm1234567890' ;
         $codeSet = '' ;
         for( $i = 0;$i < 4;$i++ )
         {
@@ -292,7 +300,8 @@ class Login extends Controller
                 }
                 $data = [
                     "name" =>  $res['user_name'] ,
-                    "image" =>  $image
+                    "image" =>  $image ,
+                    "state" => 'user'
                 ] ;
             }
             else if( strcmp($res['userType'],'store')==0 )
@@ -308,7 +317,8 @@ class Login extends Controller
                 }
                 $data = [
                     "name" =>  $res['store_name'] ,
-                    "image" =>  $image
+                    "image" =>  $image,
+                    "state" => 'store'
                 ] ;
             }
             else if( strcmp($res['userType'],'server')==0 )
@@ -353,6 +363,35 @@ class Login extends Controller
             // 返回未登录信息
             $msg->returnJson("loginMsg","SUCCESS_USER_OUT") ;
         }
+    }
+    /**
+     * 功能描述：手机号码格式验证
+     * 参数：
+     * QQUser：
+     * 返回：
+     * 作者：yonjin L
+     * 时间：18-4-7
+     */
+    public function phoneNumber()
+    {
+        $that = new \user() ;
+
+        $phone = $that->getData("phone",'loginMsg','PHONE_EMPTY',"post",10002) ;
+
+
+        /*
+         * 手机号码是否合法
+         */
+        // 不合法返回信息
+        if( !$that->checkMobileValidity($phone) )
+        {
+            $that->returnJson("loginMsg","PHONE_ERROR",'',10002) ;
+        }
+
+
+        // 返回正确信息
+        $that->returnJson("loginMsg","DATA_SUCCESS","",10000) ;
+
     }
 
 }

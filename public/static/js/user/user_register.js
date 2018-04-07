@@ -20,10 +20,46 @@ var app = new Vue({
         Msg_footer:'确认' ,
         Msg_footer_link:'#' ,
         msg_footer_button_exit:'loginMsgModel_exit' ,
-        msg_login_success_show:false
+        msg_login_success_show:false ,
+        msg_login_user_name:"用户名不能为空" ,
+        msg_login_user_name_show:false ,
+        msg_login_user_pwd:"密码不能为空" ,
+        msg_login_user_pwd_show:false ,
+        msg_login_user_pwd2:"密码不能为空" ,
+        msg_login_user_pwd2_show:false ,
+        msg_login_user_phone:"手机号码不能为空" ,
+        msg_login_user_phone_show:false ,
+        msg_login_user_code:"验证码不能为空" ,
+        msg_login_user_code_show:false
 
     } ,
     methods: {
+        /**
+         * 功能描述：用户名失焦验证
+         * 参数：
+         * QQUser：
+         * 返回：
+         * 作者：yonjin L
+         * 时间：18-4-7
+         */
+        blur_user_name:function(e)
+        {
+            $data = {
+                name:($(e.target).val()) ,
+                type:"userName"
+            } ;
+            $.ajax({
+                url:$blur_user_name_url ,
+                type:"post" ,
+                data:$data ,
+                dataType:"json" ,
+                success:function(res){
+                   console.log(123) ;
+                    console.log(res) ;
+                }
+            })
+            // 判断用户名是否已存在
+        } ,
         /**
          * 功能描述：发送短信验证码给用户/店家
          * 参数：
@@ -198,9 +234,7 @@ var app = new Vue({
          */
         phoneRegister:function(){
             var that = this ;
-
             that.msg_login_success_show = false ;
-
             var $tel = $("#register_name_stroe").val() ;
             var $code = $("#register_code_stroe").val() ;
             var $name = $("#register_nameStore").val() ;

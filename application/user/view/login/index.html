@@ -158,7 +158,7 @@
 													<div class="clearfix"> </div>
 													<div class="i-name">
 														<div class="i-name-left" style="margin-right:0 ;" >
-															<input type="text" placeholder="请输入手机号码" id="register_name" onkeypress="return event.keyCode>=48&&event.keyCode<=57" ng-pattern="/[^a-zA-Z]/" maxlength="11" />
+															<input type="text" placeholder="请输入手机号码" id="register_name" @blur="phone_number" onkeypress="return event.keyCode>=48&&event.keyCode<=57" ng-pattern="/[^a-zA-Z]/" maxlength="11" />
 														</div>
 														<div class="i-name-left" style="margin-left:10px ;position:relative ;" >
 															<button type="button" class="btn btn-default" v-show="shortShow"  @click="getPhoneMsg()" >{{shortMsg}}</button>
@@ -171,20 +171,17 @@
 													<!--</div>-->
 
 													<div class="clearfix"> </div>
+													<div v-show="code_msg_phone_number_show">{{code_msg_phone_number}}</div>
 													<!----->
 													<div class="empty"></div>
 													<div class="i-name">
 														<div class="i-name-left">
-															<input type="text" placeholder="请输入短信验证码" id="register_code"  />
-														</div>
-													</div>
-													<div class="i-name">
-														<div class="i-name-left">
-
+															<input type="text" placeholder="请输入短信验证码" id="register_code" maxlength="4"  />
 														</div>
 													</div>
 													<!----->
 													<div class="clearfix"> </div>
+													<div v-show="code_msg_phone_show">{{code_msg_phone}}</div>
 													<div class="i-textarea">
 													</div>
 													<input type="button" @click="phoneLogin()" value="登录" />
@@ -320,6 +317,10 @@
 		 店家手机登录的url
 		 */
 		var $user_login_phone_url_1 = "{:url('user/Login/phoneLogin')}" ;
+		/*
+		手机号码失焦验证
+		*/
+		var $phone_number_blur = "{:url('user/Login/phoneNumber')}" ;
 
 
 

@@ -17,7 +17,11 @@ var app = new Vue({
         msg_footer_button_exit:'loginMsgModel_exit' ,
         msg_login_success_show:false ,
         code_msg_user:"请正确输入验证码" ,
-        code_msg_user_show:false
+        code_msg_user_show:false ,
+        code_msg_phone:"请正确输入验证码" ,
+        code_msg_phone_show:false ,
+        code_msg_phone_number:"" ,
+        code_msg_phone_number_show:false
 
     } ,
     methods: {
@@ -58,6 +62,7 @@ var app = new Vue({
                         // 验证码成功发送，则提示
                         if( res.code == 10000 )
                         {
+                            that.code_msg_phone_number_show = false ;
                             that.shortTimeMsg = 60 ;
                             that.shortMsg = "60秒后重发" ;
                             that.shortJudge = 'F' ;
@@ -77,7 +82,11 @@ var app = new Vue({
                         }
                         else
                         {
-                            alert(res.msg) ;
+                            if( res.code == 10002 )
+                            {
+                                that.code_msg_phone_number_show = true ;
+                                that.code_msg_phone_number = res.msg ;
+                            }
                         }
                     }
                 })
@@ -111,16 +120,26 @@ var app = new Vue({
                 data:$data ,
                 dataType:'json' ,
                 success:function(res){
-                    console.log(res) ;
+
+                    that.code_msg_user_show = false ;
                     if( res.code == 10000 )
                     {
+
                         that.msg_login_success_show = true ;
+                        $("#loginMsgModel").modal('show') ;
+
+                    }
+                    else if( res.code == 10002 )
+                    {
+                        that.code_msg_user_show = true ;
+                        that.code_msg_user = res.msg ;
                     }
                     else
                     {
+
                         that.Msg_footer_link = "" ;
                     }
-                    $("#loginMsgModel").modal('show') ;
+                    //$("#loginMsgModel").modal('show') ;
                 }
             }) ;
         } ,
@@ -149,11 +168,18 @@ var app = new Vue({
                 data:$data ,
                 dataType:'json' ,
                 success:function(res){
+                    that.code_msg_phone_show = false ;
                     if( res.code == 10000 )
                     {
                         // 商家登录成功跳转
                         that.Msg_footer_link = $store_jump ;
                         that.msg_login_success_show = true ;
+                    }
+                    else if( res.code == 10002 )
+                    {
+                        that.code_msg_phone_show = true ;
+                        that.code_msg_phone = res.msg ;
+                        return ;
                     }
                     else
                     {
@@ -167,7 +193,7 @@ var app = new Vue({
             }) ;
         } ,
         /**
-         * 功能描述：
+         * 功能描述：短信验证码输入是否合法
          * 参数：
          * QQUser：
          * 返回：
@@ -180,12 +206,44 @@ var app = new Vue({
             $data = ($(e.target).val()) ;
             if( $data.length < 4 )
             {
+                that.code_msg_user = "请正确输入验证码" ;
                 that.code_msg_user_show = true ;
             }
             else
             {
                 that.code_msg_user_show = false ;
             }
+        } ,
+        /**
+         * 功能描述：手机格式的失焦验证
+         * 参数：
+         * QQUser：
+         * 返回：
+         * 作者：yonjin L
+         * 时间：18-4-7
+         */
+        phone_number:function(e)
+        {
+            var that = this ;
+            //$phone_number_blur
+            $data = {
+                phone:$(e.target).val()
+            } ;
+            $.ajax({
+                url:$phone_number_blur ,
+                type:"post" ,
+                data:$data ,
+                dataType:"json" ,
+                success:function(res)
+                {
+                    that.code_msg_phone_show = false ;
+                    if( res.code == 10002 )
+                    {
+                        that.code_msg_phone_number_show = true ;
+                        that.code_msg_phone_number = res.msg ;
+                    }
+                }
+            }) ;
         }
 
     }

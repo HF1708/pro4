@@ -253,16 +253,18 @@ return [
         'ACCOUNT_EMPTY' => '用户密码不能为空，请重新输入' ,
         'ACCOUNT_ERROR' => '用户密码错误，请重新输入' ,
         'ACCOUNT_REPEAT' => '用户名已存在，请重新输入' ,
-        'CODE_EMPTY' => '验证码不能为空，请重新输入' ,
+        'CODE_EMPTY' => '验证码不能为空' ,
         'CODE_ERROR' => '验证码输入错误' ,
         'CODE_SEND' => '验证码已发送' ,
         'UPDATA_SUCCESS' => '数据更新成功' ,
         'UPDATA_ERROR' => '数据更新失败' ,
         'PHONE_NO_EXISTS' => '手机号码不存在,请确认后输入' ,
-        'PHONE_EMPTY' => '手机号码为空,请重新输入' ,
-        'PHONE_ERROR' => '手机号码格式错误,请重新输入' ,
+        'PHONE_EMPTY' => '手机号码为空' ,
+        'PHONE_ERROR' => '手机号码格式错误' ,
+        'PHONE_CODE_ERROR' => '手机号码或者验证码错误' ,
         "ERROR_USER_DATA" => "用户未登录" ,
         "SUCCESS_SEARCH_DATA" => "获取数据成功" ,
+        "DATA_SUCCESS" => "数据正常"
     ] ,
     // 注册返回消息配置
     "registerMsg" => [

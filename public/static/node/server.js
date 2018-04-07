@@ -26,7 +26,7 @@ server.on( "connection" ,function( socket ){
 					'ss' ,
 					{msg:'没有内容'}
 				)) ;
-			break;
+			break ;
 			// 对话
 			case 'message' :
 				// 消息存到数据库再发消息给用户

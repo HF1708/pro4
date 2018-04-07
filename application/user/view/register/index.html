@@ -158,23 +158,26 @@
 											<form>
 												<div class="clearfix"> </div>
 												<div class="i-name">
-													<div class="i-name-left">
+													<div class="i-name-left " style="width:50%" >
 														<span>用户名</span>
-														<input type="text" placeholder="请输入用户名" id="register_user" maxlength="20" value="tests"  />
+														<input @blur="blur_user_name" type="text" placeholder="请输入用户名" id="register_user" maxlength="20" value="tests"  />
+														<p v-show="msg_login_user_name_show">{{msg_login_user_name}}</p>
 													</div>
 												</div>
-												<div class="clearfix"> </div>
+												<div class="clearfix"></div>
 												<div class="i-name">
 													<div class="i-name-left">
 														<span>密码</span>
 														<input type="password"  placeholder="请输入密码" id="register_pwd" maxlength="32" value="123456" />
+														<p v-show="msg_login_user_pwd_show">{{msg_login_user_pwd}}</p>
 													</div>
 												</div>
-												<div class="clearfix"> </div>
-												<div class="empty"></div>
+												<div class="clearfix"></div>
+												<div class="empty" v-show="!msg_login_user_name_show"></div>
 												<div class="i-name">
 													<div class="i-name-left">
 														<input type="password"  placeholder="再次输入" id="register_pwd2" maxlength="32"  />
+														<p v-show="msg_login_user_pwd2_show">{{msg_login_user_pwd2}}</p>
 													</div>
 												</div>
 												<div class="clearfix"> </div>
@@ -183,21 +186,19 @@
 												<div class="i-name">
 													<div class="i-name-left" style="margin-right:0 ;" >
 														<input type="text" placeholder="请输入手机号码" id="register_name_user" onkeypress="return event.keyCode>=48&&event.keyCode<=57" ng-pattern="/[^a-zA-Z]/" maxlength="11" />
+														<p v-show="msg_login_user_phone_show">{{msg_login_user_phone}}</p>
 													</div>
 													<div class="i-name-left" style="margin-left:10px ;position:relative ;" >
 														<button type="button" class="btn btn-default pull-left" v-show="shortShowUser"  @click="getPhoneMsg('user')"  >{{shortMsgUser}}</button>
-														<div class="btn-modal btn btn-default" v-show="!shortShowUser" >{{shortMsgUser}}</div>
+														<button type="button" class="btn btn-default pull-left" v-show="!shortShowUser" >{{shortMsgUser}}</button>
 													</div>
 												</div>
 												<div class="clearfix"> </div>
-												<div class="empty"></div>
+												<div class="empty" v-show="!msg_login_user_phone_show"></div>
 												<div class="i-name">
-													<div class="i-name-left">
+													<div class="i-name-left" style="width:50%" >
 														<input type="text" placeholder="请输入短信验证码" id="register_code_user"  />
-													</div>
-												</div>
-												<div class="i-name">
-													<div class="i-name-left">
+														<p v-show="msg_login_user_code_show">{{msg_login_user_code}}</p>
 													</div>
 												</div>
 												<div class="clearfix"> </div>
@@ -394,6 +395,13 @@
 	 */
 	var $chat_url = "{:url('chat/Chat/index')}" ;
 
+	// 失焦验证
+	/*
+	用户名
+	 */
+	var $blur_user_name_url = "{:url('user/Register/blurUser')}" ;
+
+	//end 失焦验证
 </script>
 <script type="text/javascript" src="__JS__/user/user_login.js"></script>
 <script type="text/javascript" src="__JS__/user/user_register.js"></script>

@@ -56,17 +56,34 @@ new Vue({
 
                     if( res.code == 10000 )
                     {
+                        if( res.data['state'] == "user" )
+                        {
+                            $("#user_login_url").empty().append('<div class="dropdown"  id="dropdownMenu2"  >'+
+                                '<button href="'+$user_person_url+'"  class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'+
+                                '<img style="width:30px ;height:30px ;" src="'+res.data["image"]+'" /><span>'+res.data["name"]+'</span>'+
+                                '<span class="caret"></span>'+
+                                '</button>'+
+                                '<ul class="dropdown-menu" id="dropdownMenu2-ul" aria-labelledby="dropdownMenu2">'+
+                                '<li><a href="'+$user_person_url+'">个人中心</a></li>'+
+                                '<li><a href="'+$chat_url+'">联系客服</a></li>'+
+                                '</ul>'+
+                                '</div>') ;
+                        }
+                        else if( res.data['state'] == "store" )
+                        {
+                            $("#user_login_url").empty().append('<div class="dropdown"  id="dropdownMenu2"  >'+
+                                '<button href="'+$user_person_url+'"  class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'+
+                                '<img style="width:30px ;height:30px ;" src="'+res.data["image"]+'" /><span>'+res.data["name"]+'</span>'+
+                                '<span class="caret"></span>'+
+                                '</button>'+
+                                '<ul class="dropdown-menu" id="dropdownMenu2-ul" aria-labelledby="dropdownMenu2">'+
+                                '<li><a href="'+$store_jump+'">个人中心</a></li>'+
+                                '<li><a href="'+$chat_url+'">联系客服</a></li>'+
+                                '</ul>'+
+                                '</div>') ;
+                        }
                         //$("#user_login_url").empty().append("<a href="+$user_person_url+" ><img style='width:30px ;height:30px ;' src="+res.data['image']+" /><span>"+res.data['name']+"</span></a>") ;
-                        $("#user_login_url").empty().append('<div class="dropdown"  id="dropdownMenu2"  >'+
-                        '<button href="'+$user_person_url+'"  class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'+
-                        '<img style="width:30px ;height:30px ;" src="'+res.data["image"]+'" /><span>'+res.data["name"]+'</span>'+
-                        '<span class="caret"></span>'+
-                        '</button>'+
-                        '<ul class="dropdown-menu" id="dropdownMenu2-ul" aria-labelledby="dropdownMenu2">'+
-                        '<li><a href="'+$user_person_url+'">个人中心</a></li>'+
-                        '<li><a href="'+$chat_url+'">联系客服</a></li>'+
-                        '</ul>'+
-                        '</div>') ;
+
                         $("#user_register_url").empty().append("<a href='#' >退出</a>").children("a").eq(0).click(function(){
                             $.ajax({
                                 url:$user_login_out ,

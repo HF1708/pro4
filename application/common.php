@@ -44,12 +44,12 @@ class user{
      * 作者：yonjin L
      * 时间：18-4-1
      */
-    public function getData( $dataName ,$msgTitle ,$msgBody,$method="post" )
+    public function getData( $dataName ,$msgTitle ,$msgBody,$method="post",$code=10001 )
     {
         $getData = input("?".$method.".".$dataName) ? input($method.".".$dataName):"" ;
 
         // 为空返回报错消息
-        $this->emptyData($getData,$msgTitle ,$msgBody) ;
+        $this->emptyData($getData,$msgTitle ,$msgBody,"",$code) ;
 
         return $getData ;
 
