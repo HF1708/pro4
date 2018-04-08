@@ -120,6 +120,7 @@ var app = new Vue({
                 data:$data ,
                 dataType:'json' ,
                 success:function(res){
+                    console.log(res) ;
                     that.code_msg_user_show = false ;
                     if( res.code == 10000 )
                     {

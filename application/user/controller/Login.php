@@ -77,8 +77,9 @@ class Login extends Controller
         $res = Db('user_user')->where($where)->find() ;
 
         // 用户是否被锁了
-        if( !strcmp($res['user_state'],config("locking","user"))==0 )
+        if( !($res['user_state'])  )
         {
+            Session::delete('loginData',serialize($res)) ;
             // 被锁了
             $that->returnJson("loginMsg","USER_LOCKING","",10003) ;
             exit ;
