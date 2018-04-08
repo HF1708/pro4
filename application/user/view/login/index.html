@@ -158,7 +158,7 @@
 													<div class="clearfix"> </div>
 													<div class="i-name">
 														<div class="i-name-left" style="margin-right:0 ;" >
-															<input type="text" placeholder="请输入手机号码" id="register_name" @blur="phone_number" onkeypress="return (event.which?event.which:event.keyCode)>=48&&(event.which?event.which:event.keyCode)<=57" ng-pattern="/[^a-zA-Z]/" maxlength="11" />
+															<input type="text" placeholder="请输入手机号码" id="register_name" @blur="phone_number" onkeypress="return ((event.which?event.which:event.keyCode)>=48&&(event.which?event.which:event.keyCode)<=57)|| (event.which?event.which:event.keyCode) == 8 " ng-pattern="/[^a-zA-Z]/" maxlength="11" />
 														</div>
 														<div class="i-name-left" style="margin-left:10px ;position:relative ;" >
 															<button type="button" class="btn btn-default" v-show="shortShow"  @click="getPhoneMsg()" >{{shortMsg}}</button>
