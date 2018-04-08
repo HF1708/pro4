@@ -80,7 +80,7 @@
                             <button class="layui-btn"  @click="seeAdvert(event)" set_adv_id="{$user.store_adv_id}" >查看</button>
                         </div>
                     </th>
-                    <th>{$user.advert_state}</th>
+                    <th class="set_state_advert" >{$user.advert_state}</th>
                     <th>
                         <div class="layui-hide layui-show-md-block">
                             <button class="layui-btn" set_adv_id="{$user.store_adv_id}" setClass="pass" @click="examineAdv(event)" >审核通过</button>

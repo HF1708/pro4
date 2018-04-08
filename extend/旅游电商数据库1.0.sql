@@ -117,20 +117,20 @@ foreign key(store_id) references `store_info`(store_id)
 ALTER TABLE `store_advert` ADD UNIQUE INDEX `sdaa` (`store_adv_name`) USING BTREE ;
 
 insert into store_advert(store_adv_name,store_adv_url,store_adv_link,store_id)values
-("广告1","https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'13255917292') ;
+("广告1","http://p6gnb5g93.bkt.clouddn.com/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'1') ;
 insert into store_advert(store_adv_name,store_adv_url,store_adv_link,store_id)values
-("广告2","https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'13255917292') ;
+("广告2","http://p6gnb5g93.bkt.clouddn.com/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'1') ;
 
 insert into store_advert(store_adv_name,store_adv_url,store_adv_link,store_id)values
-("广告3","https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'13255917292') ;
+("广告3","http://p6gnb5g93.bkt.clouddn.com/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'1') ;
 insert into store_advert(store_adv_name,store_adv_url,store_adv_link,store_id)values
-("广告4","https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'13255917292') ;
+("广告4","http://p6gnb5g93.bkt.clouddn.com/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'1') ;
 
 
 insert into store_advert(store_adv_name,store_adv_url,store_adv_link,store_id)values
-("广告5","https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'13255917292') ;
+("广告5","http://p6gnb5g93.bkt.clouddn.com/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'1') ;
 insert into store_advert(store_adv_name,store_adv_url,store_adv_link,store_id)values
-("广告6","https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'13255917292') ;
+("广告6","http://p6gnb5g93.bkt.clouddn.com/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'1') ;
 
 
 
@@ -166,7 +166,7 @@ create table if not exists backstage_user
 (
 	user_id int primary key auto_increment ,
 	user_uid char(8) , -- 例：hf170809
-	user_password char(20) ,
+	user_password char(32) ,
 	user_name char(10)
 ) ;
 
@@ -174,7 +174,7 @@ create table if not exists backstage_user
 ALTER TABLE `backstage_user` ADD INDEX `sad` (`user_uid`,`user_password`) USING BTREE ;
 
 insert into backstage_user(user_uid,user_password,user_name) values
-('hf170809','123456',"测试客服") ;
+('hf170809',md5('123456'),"测试客服") ;
 
 -- -----------------------------------邱萍--------------------------------------------
 

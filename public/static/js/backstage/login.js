@@ -39,6 +39,7 @@ var login = new Vue({
                 type:"post" ,
                 dataType:"json" ,
                 success:function(res){
+                    console.log(res) ;
                     if( res.code == 10000 )
                     {
                         that.out_login_show = true ;
@@ -51,8 +52,6 @@ var login = new Vue({
                         that.user_name = "登录" ;
                         that.defaultImage =  defaultImage ;
                     }
-
-                    console.log(res) ;
                     if( res.data['setJump'] == "N" )
                     {
                         window.location.href=login_page ;

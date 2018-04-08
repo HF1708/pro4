@@ -46,11 +46,16 @@ class Advert extends Controller
                     $list = Db("store_advert")->alias('a')->join('store_info w', 'a.store_id = w.store_id')->where('store_adv_name','like','%'.$seatch.'%')->where($where)->paginate(5);
                 }
             }
+//            else
+//            {
+//                $list = Db("store_advert")->alias('a')->join('store_info w', 'a.store_id = w.store_id')->paginate(5);
+//            }
         }
         else
         {
+            echo"asd" ;
             $list = Db("store_advert")->alias('a')->join('store_info w', 'a.store_id = w.store_id')->paginate(5);
-     }
+        }
 
         // 获取分页显示
         $this->assign('list', $list) ;
