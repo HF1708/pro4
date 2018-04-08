@@ -8,20 +8,20 @@ var navs = [{
 	"icon" : "icon-text",
 	"href" : AdvertUrl,
 	"spread" : false
-},{
-    "title" : "发布商品",
-    "icon" : "icon-jlk",
-    "href" : "",
-    "spread" : false
 }, {
 	"title" : "用户管理",
 	"icon" : "icon-text",
 	"href" : UserbgUrl,
 	"spread" : false
 },{
-	"title" : "404页面",
+	"title" : "员工管理",
 	"icon" : "&#xe61c;",
-	"href" : "page/404.html",
+	"href" : staffUrl,
+	"spread" : false
+},{
+	"title" : "角色管理",
+	"icon" : "&#xe61c;",
+	"href" : RoleUrl,
 	"spread" : false
 },{
 	"title" : "客服聊天",
