@@ -231,6 +231,10 @@ return [
         // 是否使用 setcookie
         'setcookie' => true,
     ],
+    // 用户是否被锁定
+    "locking" =>[
+        "user" => 1 , // 没被锁
+    ] ,
 
     //分页配置
     'paginate'               => [
@@ -267,7 +271,8 @@ return [
         "ERROR_USER_DATA" => "用户未登录" ,
         "SUCCESS_SEARCH_DATA" => "获取数据成功" ,
         "DATA_SUCCESS" => "数据正常" ,
-        "DARA_TYPE_ERROR"=>"数据类型异常"
+        "DARA_TYPE_ERROR"=>"数据类型异常" ,
+        "USER_LOCKING"=>"用户被锁定,无法登陆"
     ] ,
     // 注册返回消息配置
     "registerMsg" => [

@@ -123,8 +123,8 @@ var app = new Vue({
                     that.code_msg_user_show = false ;
                     if( res.code == 10000 )
                     {
-
-                        that.msg_login_success_show = true ;
+                        that.Msg_body='登录成功';
+                        that.msg_login_success_show=true ;
                         $("#loginMsgModel").modal('show') ;
 
                     }
@@ -132,6 +132,12 @@ var app = new Vue({
                     {
                         that.code_msg_user_show = true ;
                         that.code_msg_user = res.msg ;
+                    }
+                    else if( res.code == 10003 )
+                    {
+                        that.Msg_body=res.msg;
+                        that.msg_login_success_show=false ;
+                        $("#loginMsgModel").modal('show') ;
                     }
                     else
                     {

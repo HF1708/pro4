@@ -23,6 +23,9 @@ class Login extends Controller
      */
     public function login()
     {
+
+        $that = new \user() ;
+
         $returnJson = [
             'code' => 10001 ,
             'msg' => config('loginMsg')['ACCOUNT_ERROR'] ,
@@ -72,10 +75,18 @@ class Login extends Controller
         }
         // 是否存在用户
         $res = Db('user_user')->where($where)->find() ;
+
+        // 用户是否被锁了
+        if( !strcmp($res['user_state'],config("locking","user"))==0 )
+        {
+            // 被锁了
+            $that->returnJson("loginMsg","USER_LOCKING","",10003) ;
+            exit ;
+        }
+
         if( !empty($res) )
         {
             $res['userType'] = "user" ;
-
             // 登录成功 存储数据到redis
             /*$redis = new \Redis() ;
             $redis->connect('127.0.0.1',6379) ;
@@ -287,7 +298,7 @@ class Login extends Controller
         if( Session::has('loginData') )
         {
             $res = unserialize(Session::get('loginData')) ;
-            if( strcmp($res['userType'],'user')==0 && strcmp($res['user_state'],1)==0  )
+            if( strcmp($res['userType'],'user')==0 && strcmp($res['user_state'],config("locking","user"))==0 )
             {
                 // 没头像用默认
                 if( empty($res['user_image']) )
@@ -304,7 +315,7 @@ class Login extends Controller
                     "state" => 'user'
                 ] ;
             }
-            else if( strcmp($res['userType'],'store')==0  && strcmp($res['user_state'],1)==0 )
+            else if( strcmp($res['userType'],'store')==0 )
             {
                 // 没头像用默认
                 if( empty($res['store_image']) )
