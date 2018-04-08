@@ -83,6 +83,9 @@ new Vue({
                                 '</div>') ;
                         }
                         //$("#user_login_url").empty().append("<a href="+$user_person_url+" ><img style='width:30px ;height:30px ;' src="+res.data['image']+" /><span>"+res.data['name']+"</span></a>") ;
+                        $("img").error(function(){
+                            $(this).attr('src', "#");
+                        });
 
                         $("#user_register_url").empty().append("<a href='#' >退出</a>").children("a").eq(0).click(function(){
                             $.ajax({

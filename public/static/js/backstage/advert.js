@@ -25,7 +25,7 @@ var vue = new Vue({
         advert_pic_url:"http://p6gnb5g93.bkt.clouddn.com/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg" ,
         advert_show:false ,
         seeLoading:false  ,
-        setState:[{name:"T",state:"上架"},{name:"F",state:"未审核"},{name:"S",state:"锁定"}]
+        setState:[{T:"上架",F:"未审核",S:"锁定"}]
     } ,
     methods:{
         /**
@@ -187,16 +187,46 @@ var vue = new Vue({
                     }
                 }
             }) ;
-        }
+        } ,
+        /**
+         * 功能描述：修改显示状态
+         * 参数：
+         * QQUser：
+         * 返回：
+         * 作者：yonjin L
+         * 时间：18-4-4
+         */
+        setStateAdvert:function()
+        {
+            var that = this ;
+            // 修改显示状态
+            for(var i = 0;i < $(".set_state_advert").length;i++ )
+            {
+                $set = ($($(".set_state_advert")[i])) ;
+                $idx = $set.text() ;
+                switch($idx)
+                {
+                    case "T":
+                        $set.text(that.setState[0].T) ;
+                        break ;
+                    case "S":
+                        $set.text(that.setState[0].S) ;
+                        break ;
+                    case "F":
+                        $set.text(that.setState[0].F) ;
+                        break ;
+                }
 
+            }
+        }
     } ,
     mounted:function(){
-        this.setSeeSearct() ;
-        console.log($($(".set_state_advert")[0]).text()) ;
-        for(var i = 0;i < $(".set_state_advert").length;i++ )
-        {
-            
-        }
+        var that = this ;
+        that.setSeeSearct() ;
+
+        that.setStateAdvert() ;
+
+
     }
 }) ;
 
