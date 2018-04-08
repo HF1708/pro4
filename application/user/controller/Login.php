@@ -287,7 +287,7 @@ class Login extends Controller
         if( Session::has('loginData') )
         {
             $res = unserialize(Session::get('loginData')) ;
-            if( strcmp($res['userType'],'user')==0 )
+            if( strcmp($res['userType'],'user')==0 && strcmp($res['user_state'],1)==0  )
             {
                 // 没头像用默认
                 if( empty($res['user_image']) )
@@ -304,7 +304,7 @@ class Login extends Controller
                     "state" => 'user'
                 ] ;
             }
-            else if( strcmp($res['userType'],'store')==0 )
+            else if( strcmp($res['userType'],'store')==0  && strcmp($res['user_state'],1)==0 )
             {
                 // 没头像用默认
                 if( empty($res['store_image']) )
