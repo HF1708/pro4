@@ -53,7 +53,7 @@ new Vue({
                 type:"post" ,
                 dataType:"json" ,
                 success:function(res){
-
+                    console.log(res) ;
                     if( res.code == 10000 )
                     {
                         if( res.data['state'] == "user" )

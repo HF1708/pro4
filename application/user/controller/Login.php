@@ -329,6 +329,12 @@ class Login extends Controller
                 // 并直接退出
                 exit ;
             }
+            else
+            {
+                // 返回未登录信息
+                $msg->returnJson("loginMsg","ERROR_USER_DATA") ;
+                exit ;
+            }
 
             // 返回用户信息
             $msg->returnJson("loginMsg","SUCCESS_USER_DATA",$data,10000) ;
