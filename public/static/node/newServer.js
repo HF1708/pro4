@@ -42,12 +42,26 @@ function sendMsg(List,MSG) {
 
     for(key in List)
     {
-
-        var otherSocket = List[key];
-        if(otherSocket!=undefined && otherSocket.readyState == wsModule.OPEN  && otherSocket == List[MSG.to.id] )
-        {
-
-            otherSocket.send(JSON.stringify(MSG));
-        }
+        console.log("接收的消息::::") ;
+        var type = MSG.mine['type']+"_"+MSG.to['type'] ;
+        var content = [] ;
+        content['setPut'] = "asdf" ;
+        content['message'] = MSG.mine['content'] ;
+        content['type'] = type ;
+        console.log(content.message) ;
+        var otherSocket = List[key] ;
+        //if(otherSocket!=undefined && otherSocket.readyState == wsModule.OPEN  && otherSocket == List[MSG.to.id] )
+        //{
+        //    otherSocket.send(JSON.stringify(MSG));
+        //}
+        chat.setChatStoreUserData(MSG.mine['id'],MSG.to['id'],content,function(flag){
+            //var otherSocket = List[key] ;
+            if(otherSocket!=undefined && otherSocket.readyState == wsModule.OPEN  && otherSocket == List[MSG.to.id] )
+            {
+                otherSocket.send(JSON.stringify(MSG));
+            }
+        }) ;
     }
 }
+
+

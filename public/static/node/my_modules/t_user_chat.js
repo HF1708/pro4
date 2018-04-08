@@ -25,7 +25,7 @@ t_useChat.prototype.setChatStoreUserData = function( user_uid_1 ,user_uid_2,cont
 	var that = this ;
 	// 判断是否为游客
 	// 游客不存
-	if( content['setPut'] == '游客123' )
+	if( content.setPut == '游客123' )
 	{
 		callback( false ) ;
 		return ;
@@ -33,14 +33,14 @@ t_useChat.prototype.setChatStoreUserData = function( user_uid_1 ,user_uid_2,cont
 	// 非游客存
 	var type = '' ;
 	var obj = '' ;
-	console.log("content:"+content) ;
-	that.setChatType(content['type'],function(types,object){
+	console.log("content_type:"+content.type) ;
+	that.setChatType(content.type,function(types,object){
 		type = types ;
 		obj = object ;
 		var sql = "insert into user_chat( user_uid ,user_chat_char_two_id ,user_chat_type ,user_chat_obj ,user_chat_content ,user_chat_time )VALUES"+
 			"(? ,? ,? ,? ,? ,now()) ;" ;
 		console.log("asdfljkasdjflkdsaf------",type,obj) ;
-		that.adapter( sql ,[ user_uid_1,user_uid_2,type,obj,content['message'] ] ,function( err ){
+		that.adapter( sql ,[ user_uid_1,user_uid_2,type,obj,content.message ] ,function( err ){
 			if( err )
 			{
 				callback( true ) ;

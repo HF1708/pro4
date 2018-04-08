@@ -79,16 +79,18 @@
 			<div class="top-header">
 				<div class="container">
 					<div class="logo">
-						<a href="index.html"><span>T</span>ourister<span>...</span></a>
+						<a href="{:url('index/index/index')}"><span>去野</span>Journey<span>...</span></a>
 					</div>
 					<!----start-top-nav---->
-					<nav class="top-nav" id="login-register">
+					<nav class="top-nav"id="login-register">
 						<ul class="top-nav">
-							<li><a href="index.html">Our Story</a></li>
-							<li><a href="menu.html">Menu</a></li>
-							<li class="active"><a href="reservation.html">Reservations</a></li>
-							<li><user-login></user-login></li>
-							<li><user-register></user-register></li>
+							<li class="active"><a href="{:url('index/index/index')}">首页home</a>
+							<li><a href="{:url('attractions/attractions/attractions')}">目的地locations</a>
+							<li><a href="{:url('story/story/story')}">遊記notes</a>
+							<li>
+								<user-login></user-login>
+							<li>
+								<user-register></user-register>
 						</ul>
 						<a href="#" id="pull"><img src="__STATIC__/images/nav-icon.png" title="menu" /></a>
 					</nav>

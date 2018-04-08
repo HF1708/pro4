@@ -82,29 +82,31 @@
 	<body>
 	<div id="myApp">
 		<div>
-			<!----- start-header---->
-			<div id="home" class="header">
-				<div class="top-header">
-					<div class="container">
-						<div class="logo">
-							<a href="index.html"><span>去野</span>Journey<span>...</span></a>
-						</div>
-						<!----start-top-nav---->
-						<nav class="top-nav">
-							<ul class="top-nav">
-								<li class="active"><a href="index.html">首页home</a></li>
-								<li><a href="menu.html">目的地locations</a></li>
-								<li><a href="reservation.html">故事story</a></li>
-								<li><a href="news.html"> 登录</a></li>
-								<li><a href="reviews.html">注册</a></li>
-							</ul>
-							<a href="#" id="pull"><img src="__STATIC__/images/nav-icon.png" title="menu" /></a>
-						</nav>
-						<div class="clearfix"> </div>
-					</div>
-				</div>
-			</div>
-			<!----- //End-header---->
+            <!----- start-header---->
+            <div id="home" class="header">
+                <div class="top-header">
+                    <div class="container">
+                        <div class="logo">
+                            <a href="{:url('index/index/index')}"><span>去野</span>Journey<span>...</span></a>
+                        </div>
+                        <!----start-top-nav---->
+                        <nav class="top-nav"id="login-register">
+                            <ul class="top-nav">
+                                <li class="active"><a href="{:url('index/index/index')}">首页home</a>
+                                <li><a href="{:url('attractions/attractions/attractions')}">目的地locations</a>
+                                <li><a href="{:url('story/story/story')}">遊記notes</a>
+                                <li>
+                                    <user-login></user-login>
+                                <li>
+                                    <user-register></user-register>
+                            </ul>
+                            <a href="#" id="pull"><img src="__STATIC__/images/nav-icon.png" title="menu" /></a>
+                        </nav>
+                        <div class="clearfix"> </div>
+                    </div>
+                </div>
+            </div>
+            <!----- //End-header---->
 			<!----- menu-page ----->
 			<div class="container-fluid">
 
@@ -171,13 +173,13 @@
 
                         layim.chat({
                             name: '商家客服'
-                            , type: 'friend'
+                            , type: 'store'
                             , avatar: 'http://tva3.sinaimg.cn/crop.0.0.180.180.180/7f5f6861jw1e8qgp5bmzyj2050050aa8.jpg'
                             , id: "store_1"
                         });
                         layim.chat({
                             name: '平台客服'
-                            ,type: 'firend'
+                            ,type: 'server'
                             ,
                             avatar: 'http://tva1.sinaimg.cn/crop.219.144.555.555.180/0068iARejw8esk724mra6j30rs0rstap.jpg'
                             ,
@@ -209,7 +211,7 @@
                         ws.onmessage = function( result )
                         {
                             var msgObj = JSON.parse( result.data ) ;
-                            console.log(msgObj)
+                            console.log(msgObj) ;
                             var username=msgObj.mine.username;
                             var avatar=msgObj.mine.avatar;
                             var id=msgObj.mine.id;
@@ -245,17 +247,17 @@
                         //监听发送消息
                         layim.on('sendMessage', function (data) {
                             var To = data.to;
-                            data.mine.type="user"
+                            data.mine.type="user" ;
                             console.log(data);
                             ws.send(JSON.stringify(data));
                         });
-                    })
+                    }) ;
                     ws.onopen = function()
                     {
                         $.get('{:url("chat/Chat/getUser")}',function (res) {
-                            res=JSON.parse(res);
-                            var id=res.data.mine.id;
-                            var data={mine:{"id":id}}
+                            res=JSON.parse(res) ;
+                            var id=res.data.mine.id ;
+                            var data={mine:{"id":id}} ;
                             ws.send( ( JSON.stringify(data) ) ) ;
                         })
 
@@ -325,7 +327,36 @@
 	<script type="text/javascript" src="__JS__/bootstrap.min.js"></script>
 	<script type="text/javascript" src="__JS__/vue.min.js"></script>
 	<script>
+        /*
+         个人中心的url
+         */
+        var $user_person_url = "{:url('user/Person/index')}" ;
+        /*
+         登录页面的url
+         */
+        var $login_jump = "{:url('user/Login/index')}" ;
+        /*
+         注册页面的url
+         */
+        var $register_jump = "{:url('user/Register/index')}" ;
+        /*
+         是否已登录
+         */
+        var $user_login_already = "{:url('user/Login/userLoginAlready')}" ;
+        /*
+         退出登录的url
+         */
+        var $user_login_out = "{:url('user/Login/outLogin')}" ;
+        /*
+         跳转商家的url
+         */
+        var $store_jump = "{:url('storemanage/index/index')}" ;
+        /*
+         聊天界面
+         */
+        var $chat_url = "{:url('chat/Chat/index')}" ;
 	</script>
+    <script type="text/javascript" src="__JS__/user/user_login.js"></script>
 <script>
 
 </script>
