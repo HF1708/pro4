@@ -121,7 +121,7 @@ class Register extends Controller
             $getData = Db("user_user")->where("user_id",$id)->find() ;
 
             $getData['userType'] = "user" ;
-            Session::set('loginData',serialize($getData));
+            Session::set('loginData',serialize($getData)) ;
             $returnJson = [
                 'code' => 10000 ,
                 'msg' => config('registerMsg')['SUCCESS'] ,
