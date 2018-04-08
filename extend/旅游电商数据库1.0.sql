@@ -160,20 +160,6 @@ create table if not exists user_chat
 ALTER TABLE `user_chat` ADD INDEX `user_chat_1` (`user_uid`,`user_chat_char_two_id`) USING BTREE ;
 
 -- -----------------------------------后台---------------------------------------------
--- 权限表
-create table if not exists backstage_jurisdiction(
-	id SMALLINT PRIMARY KEY not null auto_increment,
-	name VARCHAR(5),
-	fid SMALLINT,
-	url text
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
--- 角色表
-create table if not exists backstage_role(
-	id SMALLINT PRIMARY KEY not null auto_increment,
-	roleName text,
-	info text
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 -- 员工管理表
 drop table if exists backstage_user ;
 create table if not exists backstage_user
@@ -181,81 +167,8 @@ create table if not exists backstage_user
 	user_id int primary key auto_increment ,
 	user_uid char(8) , -- 例：hf170809
 	user_password char(32) ,
-<<<<<<< HEAD
-	user_name char(10),
-	roleID 	SMALLINT,
-	userState  enum('F','T') default 'T' , -- 员共锁定 F ;
-	foreign key(roleID) references backstage_role(id)
-=======
 	user_name char(10)
->>>>>>> ly
 ) ;
-INSERT into backstage_role (id,roleName,info) 
-VALUES(1,"超级管理员","系统管理员"),
-(2,"经理","添加员工查看报表等"),
-(3,"客服","客服人员"),
-(4,"普通业务员","处理日常业务");
-insert into backstage_user(user_uid,user_password,user_name,userState,roleID)
-VALUES("admin",MD5(1234),"超级管理员","T",1);
-insert into backstage_jurisdiction (id,name,fid,url) VALUES
-(1,"总权限",0,"index.php?c=Index&a=showIndex"),
-(2,"系统管理",1,"index.php?c=Index&a=showIndex"),
-(3,"商品管理",1,"index.php?c=Index&a=showIndex"),
-(4,"订单管理",1,"index.php?c=Index&a=showIndex"),
-(5,"用户管理",2,"index.php?c=UserMgt&a=showUserMgt"),
-(6,"角色管理",2,"index.php?c=RoleM&a=showRoleM"),
-(7,"商品录入",3,"index.php?c=GoodsInput&a=showGoodsInput"),
-(8,"商品信息",3,"index.php?c=GoodsInfo&a=showGoodsInfo"),
-(9,"未支付订单",4,"index.php?c=Order&a=showUnpaiyOrder"),
-(10,"已支付订单",4,"index.php?c=Order&a=showPaidOrder"),
-(11,"员工管理",2,"index.php?c=StaffMgt&a=showStaffMgt"),
-(12,"报表统计",1,"index.php?c=Index&a=showIndex"),
-(13,"用户统计",12,"index.php?c=Statement&a=showStatementUser"),
-(14,"销售统计",12,"index.php?c=Statement&a=showStatementSell")
-;
-create table if not exists backstage_roleJurisdiction(
-	roleID SMALLINT not null ,
-	jurisdictionID SMALLINT not null,
-	primary key(roleID,jurisdictionID),
-	foreign key(roleID) references backstage_role(id),
-	foreign key(jurisdictionID) references backstage_jurisdiction(id)	
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
-INSERT INTO backstage_roleJurisdiction(roleID,jurisdictionID) VALUES
-(1,2),
-(1,3),
-(1,4),
-(1,5),
-(1,6),
-(1,7),
-(1,8),
-(1,9),
-(1,10),
-(1,13),
-(1,14),
-(1,11),
-(2,2),
-(2,3),
-(2,4),
-(2,5),
-(2,7),
-(2,8),
-(2,9),
-(2,10),
-(2,11),
-(2,13),
-(2,14),
-(3,2),
-(3,3),
-(3,4),
-(3,9),
-(3,10),
-(4,2),
-(4,3),
-(4,4),
-(4,7),
-(4,8),
-(4,9),
-(4,10);
 
 -- 添加账号密码的符合索引(联合索引)
 ALTER TABLE `backstage_user` ADD INDEX `sad` (`user_uid`,`user_password`) USING BTREE ;
@@ -492,7 +405,7 @@ if not EXISTS  user_story(
 	title VARCHAR(32),															 -- 故事标题	
 	userId int, --  用户ID
 	FOREIGN KEY (userId) REFERENCES user_user(user_id),	
- 	state enum("1","0"),    -- 游记审核状态
+ 	state enum("1","0");    -- 游记审核状态
 	content VARCHAR(500)   													 -- 故事内容	
 	
 );
