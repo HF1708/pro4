@@ -178,40 +178,30 @@ insert into backstage_user(user_uid,user_password,user_name) values
 
 -- -----------------------------------邱萍--------------------------------------------
 
-
-
-
-
+-- 酒店表
 -- 酒店表
 create table if not exists store_shotel(
 	hId int not null auto_increment primary key,-- 酒店ID
 	hName varchar(50) not null , -- 酒店名字
 	hImg varchar(50),-- 封面 图片ID
-	hRoomNumber TINYINT,-- 酒店总房间数
-	provinceID int(11),
-	cityID int(11),
-	townID int(11),
-	grade VARCHAR(8),
-	hAddress varchar(50),-- 酒店详细地址 （待优化）
+	hRoomNumber TINYINT,-- 酒店房间
+	hAddress varchar(50),-- 酒店地址 （待优化）
 	hPrice int, -- 价格
 	store_id int,
-	upTime datetime,
-	textarea VARCHAR(500),
-		foreign key(provinceID) references `hy_area`(id), 
-	foreign key(cityID) references `hy_area`(id), 
-	foreign key(townID) references `hy_area`(id),
+	putaway enum("上架","下架"),
+	audit enum("1","0"),
 	foreign key(store_id) references store_info(store_id)  -- 酒店属于的商家ID
 ) ;
 
-insert into store_shotel(hId,hName,hImg,hRoomNumber,hAddress,hPrice,store_id)values
-(9001,'厦门香格里拉大酒店','hotel1.jpg',20,'观音山国际商务区台东路168号',1009,''),
-(9002,'厦门海悦山庄酒店','hotel2.jpg',20,'思明区环岛南路3999号(紧邻环岛路,国家会计学院旁)',810,''),
-(9003,'厦门海景千禧大酒店','hotel3.jpg',20,'镇海路12号之8号 (近中山路商业步行街, 轮渡码头和和平码头)',790,''),
-(9004,'厦门瑞颐大酒店 ','hotel4.jpg',20,'思明区鹭江道12号(鼓浪屿对面,近轮渡码头, 中山路商业步行街)',879,''),
-(9005,'厦门五缘湾凯悦酒店','hotel5.jpg',20,'湖里区日圆二里5号',909,''),
-(9006,'厦门喜来登酒店','hotel6.jpg',20,' 思明区嘉禾路386-1号(近SM城市广场)',709,''),
-(9007,'厦门磐基皇冠假日酒店 ','hotel7.jpg',20,'思明区嘉禾路199号(近明发商业广场)',755,''),
-(9008,'厦门马哥孛罗东方大酒店','hotel8.jpg',20,' 思明区湖滨北建业路8号(近白鹭洲公园,筼筜湖畔)',709,'');
+insert into store_shotel(hId,hName,hImg,hRoomNumber,hAddress,hPrice,store_id,	putaway,audit)values
+(9001,'厦门香格里拉大酒店','hotel1.jpg',20,'观音山国际商务区台东路168号',1009,'','上架','1'),
+(9002,'厦门海悦山庄酒店','hotel2.jpg',20,'思明区环岛南路3999号(紧邻环岛路,国家会计学院旁)',810,'','上架','1'),
+(9003,'厦门海景千禧大酒店','hotel3.jpg',20,'镇海路12号之8号 (近中山路商业步行街, 轮渡码头和和平码头)',790,'','上架','1'),
+(9004,'厦门瑞颐大酒店 ','hotel4.jpg',20,'思明区鹭江道12号(鼓浪屿对面,近轮渡码头, 中山路商业步行街)',879,'','下架','0'),
+(9005,'厦门五缘湾凯悦酒店','hotel5.jpg',20,'湖里区日圆二里5号',909,'','下架','0'),
+(9006,'厦门喜来登酒店','hotel6.jpg',20,' 思明区嘉禾路386-1号(近SM城市广场)',709,'','下架','0'),
+(9007,'厦门磐基皇冠假日酒店 ','hotel7.jpg',20,'思明区嘉禾路199号(近明发商业广场)',755,'','下架','0'),
+(9008,'厦门马哥孛罗东方大酒店','hotel8.jpg',20,' 思明区湖滨北建业路8号(近白鹭洲公园,筼筜湖畔)',709,'','下架','0');
 
 
 
@@ -415,7 +405,7 @@ if not EXISTS  user_story(
 	title VARCHAR(32),															 -- 故事标题	
 	userId int, --  用户ID
 	FOREIGN KEY (userId) REFERENCES user_user(user_id),	
-	
+ 	state enum("1","0");    -- 游记审核状态
 	content VARCHAR(500)   													 -- 故事内容	
 	
 );

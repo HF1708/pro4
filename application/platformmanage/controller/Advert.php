@@ -31,9 +31,7 @@ class Advert extends Controller
             // 获取session中的搜索条件
             $seatch_2 =  cookie('search') ;
             $seatch = input("?post.seartch_advert")? input("post.seartch_advert"):(Session::has('search_advert')?Session::get('search_advert'):"") ;
-<<<<<<< HEAD
             $list = Db("store_advert")->alias('a')->join('store_info w', 'a.store_id = w.store_id')->where('store_adv_name','like','%'.$seatch.'%')->paginate(5);
-=======
             if(!empty($seatch_2))
             {
                 if( strcmp($seatch_2,"A")==0 )
@@ -48,17 +46,11 @@ class Advert extends Controller
                     $list = Db("store_advert")->alias('a')->join('store_info w', 'a.store_id = w.store_id')->where('store_adv_name','like','%'.$seatch.'%')->where($where)->paginate(5);
                 }
             }
-
->>>>>>> 6c46a3f2f048cfeff6f95bfbc74e522aa9dab62c
         }
         else
         {
             $list = Db("store_advert")->alias('a')->join('store_info w', 'a.store_id = w.store_id')->paginate(5);
-<<<<<<< HEAD
-
-=======
->>>>>>> 6c46a3f2f048cfeff6f95bfbc74e522aa9dab62c
-        }
+     }
 
         // 获取分页显示
         $this->assign('list', $list) ;

@@ -26,7 +26,6 @@ class Orderbg extends Controller
         $join=[
             ['store_hotel_order a','a.huId=b.hId']
         ];
-
         $where=[];
         $where['hName']=['like',"%".$search."%"];
         $getorder=DB::table('store_shotel')->alias('b')->join($join)->where($where)->paginate(4);

@@ -8,6 +8,7 @@
 
 namespace app\platformmanage\controller;
 use think\Controller;
+use think\Db;
 
 class Userbg extends Controller
 {
@@ -20,6 +21,16 @@ class Userbg extends Controller
      **/
     public function index()
     {
+
+        $join=[
+            ['user_user a','a.user_id=b.userId']
+        ];
+        $where=[];
+        $getUser=DB::table('user_story')->alias('b')->join($join)->where($where)->paginate(5);
+        $page = $getUser->render();
+        $this->assign('page', $page);
+        $this->assign('alluser', $getUser);
         return $this->fetch();
     }
 }
+

@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>订单管理</title>
+    <title>用户管理</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -19,16 +19,13 @@
 </head>
 <body class="childrenBody">
 <div  id="myApp" >
-    <form method="post" action="{:url('platformmanage/Orderbg/orderbg')}" >
+    <form method="post" action="{:url('platformmanage/Userbg/userbg')}" >
         <blockquote class="layui-elem-quote news_search">
             <div class="layui-inline">
                 <div class="layui-input-inline">
                     <input type="text" value="" placeholder="请输入关键字" name="seartch_advert" class="layui-input search_input">
                 </div>
-                <button type="submit" class="layui-btn search_btn">订单查询</button>
-            </div>
-            <div class="layui-inline">
-                <div class="layui-form-mid layui-word-aux">本页面刷新后除新添加的链接外所有操作无效，关闭页面所有数据重置</div>
+                <button type="submit" class="layui-btn search_btn">查询</button>
             </div>
         </blockquote>
     </form>
@@ -36,7 +33,7 @@
         <table class="layui-table">
             <colgroup>
                 <col width="50">
-                <col width="30%">
+                <col>
                 <col>
                 <col>
                 <col>
@@ -46,29 +43,43 @@
             </colgroup>
             <thead>
             <tr>
-                <th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose" id="allChoose1"></th>
-                <th style="text-align:left;">订单ID</th>
-                <th>订单名称</th>
-                <th>下单时间</th>
-                <th>订单状态</th>
-                <th>支付时间</th>
-                <th>下单用户</th>
+                <th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose" id="allChoose"></th>
+                <th style="text-align:left;">用户ID</th>
+                <th>用户头像</th>
+                <th>用户名字</th>
+                <th>用户Email</th>
+                <th>用户电话</th>
+                <th>用户发布时间</th>
+                <th>用户发布信息</th>
+                <th>用户审核状态</th>
+                <th>操作</th>
             </tr>
             </thead>
+            {volist name="alluser" id="vo"}
             <tbody class="links_content">
             <tr>
-                <th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose" id="allChoose"></th>
-                <th style="text-align:left;">热尔</th>
-                <th>热</th>
-                <th>热</th>
-                <th>热</th>
-                <th>热</th>
-                <th>热</th>
+                <th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose" id="allChoose1"></th>
+                <th style="text-align:left;">{$vo.user_id}</th>
+                <th><img src="__STATIC__/images/{$vo.user_image}" title="dish-name" /></th>
+                <th>{$vo.user_name}</th>
+                <th>{$vo.user_email}</th>
+                <th>{$vo.user_phone}</th>
+                <th>{$vo.user_time}</th>
+                <th>{$vo.user_msg}</th>
+                <th>{$vo.state}</th>
+                <th>
+                    <div class="layui-hide layui-show-md-block">
+                        <button class="layui-btn" setClass="pass" userid="{$vo.user_id}" onclick="audit(this)">手动审核</button>
+                    </div>
+                </th>
             </tr>
             </tbody>
+            {/volist}
         </table>
+        {$page}
     </div>
-
+    <div id="page">
+    </div>
 </div>
 </body>
 <script src="__STATIC__/layui/layui.js"></script>
@@ -76,13 +87,48 @@
     layui.use('element', function(){
         var element = layui.element;
     });
+    // 酒店上架
+    // function goup(obj){
+    //     var state=$(obj).attr("state");
+    //     console.log(state);
+    //     if(state=='上架'){
+    //         alert("您已经上架过了该酒店，请选择别的酒店上架！");
+    //     }else{
+    //         if(confirm('确定上架酒店？')){
+    //             var hotelid=$(obj).attr("go");
+    //             console.log(hotelid);
+    //             $.ajax({
+    //                 url:'{:url("platformmanage/Hotelbg/upstate")}',
+    //                 data:{
+    //                     nowhotelid:hotelid
+    //                 },
+    //                 type:"post",
+    //                 datatype:"",
+    //                 succsess:function(res){
+    //                     alert('上架成功！');
+    //                     console.log(232);
+    //                     console.log(res);
+    //                     window.location.href='{:url("platformmanage/Hotelbg/hotelbg")}';
+    //                 }
+    //             })
+    //         }
+    //     }
+    //
+    // }
+    function audit(obj){
+        var nowuserid=$(obj).attr('userid');
+        $.ajax({
+            url:"",
+            data:{},
+            type:"",
+            datatype:"",
+            success:function(res){
+
+        }
+        });
+    }
 </script>
 <script type="text/javascript" src="__JS__/vue.min.js"></script>
 <script type="text/javascript" src="__JS__/jquery.min.js"></script>
-<script>
-    // var url = "{:url('platformmanage/index/main')}" ;
-    // // 广告的请求
-    // var advertSetDataUrl = "{:url('platformmanage/Advert/setExamine')}" ;
-</script>
-<script type="text/javascript" src="__JS__/platform/orderbg.js"></script>
+<script type="text/javascript" src="__JS__/platform/platform.js"></script>
 </html>

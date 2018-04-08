@@ -20,12 +20,20 @@
 <body class="childrenBody">
 <div  id="myApp" >
     <form method="post" action="{:url('platformmanage/Hotelbg/hotelbg')}" >
+        <blockquote class="layui-elem-quote news_search">
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <input type="text" value="" placeholder="请输入关键字" name="seartch_advert" class="layui-input search_input">
+                </div>
+                <button type="submit" class="layui-btn search_btn">查询</button>
+            </div>
+        </blockquote>
     </form>
     <div class="layui-form links_list">
         <table class="layui-table">
             <colgroup>
                 <col width="50">
-                <col width="30%">
+                <col>
                 <col>
                 <col>
                 <col>
@@ -42,6 +50,8 @@
                 <th>房间总数</th>
                 <th>酒店地址</th>
                 <th>酒店价格</th>
+                <th>审核状态</th>
+                <th>上下架状态</th>
                 <th>操作</th>
                 <th>操作</th>
             </tr>
@@ -56,6 +66,8 @@
                 <th>{$vo.hRoomNumber}间</th>
                 <th>{$vo.hAddress}</th>
                 <th>{$vo.hPrice}元</th>
+                <th>{$vo.putaway}</th>
+                <th>{$vo.audit}</th>
                 <th>
                     <div class="layui-hide layui-show-md-block">
                         <button class="layui-btn" setClass="pass">自动审核</button>
@@ -64,9 +76,16 @@
                 </th>
                 <th>
                     <div class="layui-hide layui-show-md-block">
-                        <button class="layui-btn" setClass="pass1">酒店上架</button>
-                        <button class="layui-btn" setClass="pass1">酒店下架</button>
+                        <if condition="$vo.putaway neq '上架'">
+                            <button class="layui-btn" setClass="pass1" if go="{$vo.hId}" onclick="goup(this)">酒店上架</button>
+                            <else /><button class="layui-btn" setClass="pass1" dowm="{$vo.hId}"  onclick="godown(this)">酒店下架</button>
+                        </if>
                     </div>
+
+                    <!--<div class="layui-hide layui-show-md-block">-->
+                        <!--<button class="layui-btn" setClass="pass1" if go="{$vo.hId}" onclick="goup(this)">酒店上架</button>-->
+                        <!--<button class="layui-btn" setClass="pass1" dowm="{$vo.hId}"  onclick="godown(this)">酒店下架</button>-->
+                    <!--</div>-->
                 </th>
             </tr>
             </tbody>
@@ -82,17 +101,56 @@
 <script>
     layui.use('element', function(){
         var element = layui.element;
-
-        //…
     });
+    // 酒店上架
+    function goup(obj){
+        var state=$(obj).attr("state");
+        console.log(state);
+        if(state=='上架'){
+         alert("您已经上架过了该酒店，请选择别的酒店上架！");
+        }else{
+            if(confirm('确定上架酒店？')){
+            var hotelid=$(obj).attr("go");
+             console.log(hotelid);
+            $.ajax({
+                url:'{:url("platformmanage/Hotelbg/upstate")}',
+                data:{
+                    nowhotelid:hotelid
+                },
+                type:"post",
+                datatype:"",
+                succsess:function(res){
+                    alert('上架成功！');
+                    console.log(232);
+                    console.log(res);
+                    window.location.href='{:url("platformmanage/Hotelbg/hotelbg")}';
+                }
+            })
+        }
+        }
+
+    }
+    // 酒店下架
+    function godown(obj){
+        if(confirm("确定要下架")){
+            var hotelid=$(obj).attr('dowm');
+            $.ajax({
+                url:"{:url('platformmanage/Hotelbg/downstate')}",
+                data:{
+                  nowhotelid:hotelid
+                },
+                type:"post",
+                datatype:"",
+                success:function(res){
+
+                }
+            })
+
+        }
+    }
+
 </script>
 <script type="text/javascript" src="__JS__/vue.min.js"></script>
 <script type="text/javascript" src="__JS__/jquery.min.js"></script>
-<script>
-    var url = "{:url('platformmanage/index/main')}" ;
-    // 广告的请求
-    var advertSetDataUrl = "{:url('platformmanage/Advert/setExamine')}" ;
-
-</script>
 <script type="text/javascript" src="__JS__/platform/platform.js"></script>
 </html>
