@@ -405,7 +405,7 @@ if not EXISTS  user_story(
 	title VARCHAR(32),															 -- 故事标题	
 	userId int, --  用户ID
 	FOREIGN KEY (userId) REFERENCES user_user(user_id),	
- 	state enum("1","0");    -- 游记审核状态
+ 	state enum("1","0"),    -- 游记审核状态
 	content VARCHAR(500)   													 -- 故事内容	
 	
 );

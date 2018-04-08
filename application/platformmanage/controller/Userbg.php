@@ -21,7 +21,6 @@ class Userbg extends Controller
      **/
     public function index()
     {
-
         $join=[
             ['user_user a','a.user_id=b.userId']
         ];
