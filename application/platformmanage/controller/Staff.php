@@ -21,4 +21,12 @@ class Staff extends Controller
     public function index(){
         return $this->fetch();
     }
+    /**
+     *  *  功能描述:显示员工管理界面
+     *  参数：无
+     *  返回：无
+     *  作者:Qingtian Y
+     *  时间：18-4-8
+     **/
+
 }
