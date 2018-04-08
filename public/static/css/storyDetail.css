@@ -19,3 +19,8 @@
 #notes_con p{
     text-indent:2em;
 }
+#notes_con img{
+    width:80%;
+    height:65%;
+    margin-top:3%;
+}

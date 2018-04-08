@@ -101,7 +101,8 @@ var app = new Vue({
          获取聊天对象
          */
 
-        that.ws = new WebSocket( "ws://localhost:8888" ) ;
+        //that.ws = new WebSocket( "ws://47.93.193.212:8888" ) ;
+        that.ws = new WebSocket( "ws://127.0.0.1:8888" ) ;
         that.ws.onopen = function()
         {
             that.ws.send( sendData( that.chat_one, that.chat_two ,'ss' ,'hello' ) ) ;

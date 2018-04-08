@@ -7,34 +7,7 @@
 		<script src="__JS__/jquery.min.js"></script>
 		 <!-- Custom Theme files -->
 		<link href="__CSS__/style.css" rel='stylesheet' type='text/css' />
-		<style type="text/css">
-			.flex-center{
-				display:flex ;
-			}
-			.empty{
-				height: 20px ;
-			}
-			.btn-modal{
-				background-color:rgba(0,0,0,0.5) !important;
-				width:30% !important;
-				color:#ffffff !important;
-			}
-			.make-reserve input[type="button"] {
-				background: #3b3b3b;
-				color: #FFF;
-				padding: 1em 1.5em;
-				display: inline-block;
-				border: none;
-				transition: 0.5s all;
-				-webkit-transition: 0.5s all;
-				-moz-transition: 0.5s all;
-				-ms-transition: 0.5s all;
-				margin-top: 1.5em;
-			}
-			.make-reserve input[type="button"]:hover{
-				background:#DDD177;
-			}
-		</style>
+		<link href="__CSS__/user/login.css" rel='stylesheet' type='text/css' />
    		 <!-- Custom Theme files -->
    		 <!---- start-smoth-scrolling---->
 		<script type="text/javascript" src="__JS__/move-top.js"></script>
@@ -147,9 +120,10 @@
 													<div class="clearfix"> </div>
 													<!----->
 													<div class="i-name">
-														<div class="i-name-left">
+														<div class="i-name-left" >
 															<span>验证码</span>
-															<input type="text" placeholder="请输入验证码" id="login_code" maxlength="4" />
+															<input type="text" @change="code_verification(event)" placeholder="请输入验证码" id="login_code" maxlength="4" />
+															<p class="help-block text-warning" v-show="code_msg_user_show" >{{code_msg_user}}</p>
 														</div>
 													</div>
 													<div class="clearfix"> </div>
@@ -184,7 +158,7 @@
 													<div class="clearfix"> </div>
 													<div class="i-name">
 														<div class="i-name-left" style="margin-right:0 ;" >
-															<input type="text" placeholder="请输入手机号码" id="register_name" onkeypress="return event.keyCode>=48&&event.keyCode<=57" ng-pattern="/[^a-zA-Z]/" maxlength="11" />
+															<input type="text" placeholder="请输入手机号码" id="register_name" @blur="phone_number" onkeypress="return event.keyCode>=48&&event.keyCode<=57" ng-pattern="/[^a-zA-Z]/" maxlength="11" />
 														</div>
 														<div class="i-name-left" style="margin-left:10px ;position:relative ;" >
 															<button type="button" class="btn btn-default" v-show="shortShow"  @click="getPhoneMsg()" >{{shortMsg}}</button>
@@ -197,20 +171,17 @@
 													<!--</div>-->
 
 													<div class="clearfix"> </div>
+													<div v-show="code_msg_phone_number_show">{{code_msg_phone_number}}</div>
 													<!----->
 													<div class="empty"></div>
 													<div class="i-name">
 														<div class="i-name-left">
-															<input type="text" placeholder="请输入短信验证码" id="register_code"  />
-														</div>
-													</div>
-													<div class="i-name">
-														<div class="i-name-left">
-
+															<input type="text" placeholder="请输入短信验证码" id="register_code" maxlength="4"  />
 														</div>
 													</div>
 													<!----->
 													<div class="clearfix"> </div>
+													<div v-show="code_msg_phone_show">{{code_msg_phone}}</div>
 													<div class="i-textarea">
 													</div>
 													<input type="button" @click="phoneLogin()" value="登录" />
@@ -311,7 +282,8 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal" >退出</button>
-						<a :href="Msg_footer_link" class="btn btn-default" >{{Msg_footer}}</a>
+						<a :href="Msg_footer_link" v-show="msg_login_success_show" class="btn btn-default" >{{Msg_footer}}</a>
+						<a :href="Msg_footer_link" v-show="!msg_login_success_show"  class="btn btn-default" data-dismiss="modal" >{{Msg_footer}}</a>
 					</div>
 				</div>
 			</div>
@@ -320,6 +292,9 @@
 	</div>
 
 
+	<!--<div id="chat_con">-->
+		<!--<chat_con></chat_con>-->
+	<!--</div>-->
 
 	
 </body>
@@ -342,6 +317,10 @@
 		 店家手机登录的url
 		 */
 		var $user_login_phone_url_1 = "{:url('user/Login/phoneLogin')}" ;
+		/*
+		手机号码失焦验证
+		*/
+		var $phone_number_blur = "{:url('user/Login/phoneNumber')}" ;
 
 
 
@@ -370,9 +349,14 @@
 		跳转商家的url
 		 */
 		var $store_jump = "{:url('storemanage/index/index')}" ;
+		/*
+		聊天界面
+		 */
+		var $chat_url = "{:url('chat/Chat/index')}" ;
 
 	</script>
 	<script type="text/javascript" src="__JS__/user/user_login_page.js"></script>
 	<script type="text/javascript" src="__JS__/user/user_login.js"></script>
+	<script type="text/javascript" src="__JS__/user/chatCon.js"></script>
 </html>
 

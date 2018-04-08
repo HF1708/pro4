@@ -23,4 +23,14 @@ var navs = [{
 	"icon" : "&#xe631;",
 	"href" : applyAdUrl,
 	"spread" : false
+},{
+	"title" : "客服",
+	"icon" : "&#xe631;",
+	"href" : chatUrl,
+	"spread" : false
+},{
+	"title" : "平台客服",
+	"icon" : "&#xe631;",
+	"href" : pingtaiUrl,
+	"spread" : false
 }]

@@ -53,13 +53,17 @@
 						<a href="index.html"><span>去野</span>Journey<span>...</span></a>
 					</div>
 					<!----start-top-nav---->
-					<nav class="top-nav">
+					<nav class="top-nav" id="login-register">
 						<ul class="top-nav">
 							<li class="active"><a href="{:url('index/index/index')}">首页home</a></li>
 							<li><a href="menu.html">目的地locations</a></li>
 							<li><a href="{:url('story/story/story')}">遊記notes</a></li>
-							<li><a href="news.html"> 登录</a></li>
-							<li><a href="reviews.html">注册</a></li>
+							<li>
+								<user-login></user-login>
+							</li>
+							<li>
+								<user-register></user-register>
+							</li>
 						</ul>
 						<a href="#" id="pull"><img src="__STATIC__/images/nav-icon.png" title="menu" /></a>
 					</nav>
@@ -82,8 +86,7 @@
 			<div class="News-page">
 				<div class="container">
 					<h2><span> </span>&nbsp;&nbsp;&nbsp;&nbsp;遊記Notes &nbsp;<span> </span></h2>
-					<p>Travel Latest-Notes </p>
-					<a href="{:url('story/publish/publish')}" class="news-btn" href="#"><i></i>写遊記</a>
+					<a onclick="publichNotes()" class="news-btn" href="#"><i></i>写遊記</a>
 					<!----- recent-news ----->
 					<div class="recent-news">
 						<div class="recent-news-grid" style="cursor:pointer" onclick="window.open('{:url(\'story/storydetail/storydetail\')}')">
@@ -338,9 +341,39 @@
 			<!----- footer ----->
 	
 </body>
+	<script type="text/javascript" src="__JS__/vue.min.js"></script>
+	<script type="text/javascript" src="__JS__/bootstrap.min.js"></script>
 	<script type="text/javascript">
+		//跳转遊記详情页面
 		var storydetailUrl="{:url('story/storydetail/storydetail')}";
-	</script>
+        //是否已登录
+        var $user_login_already = "{:url('user/Login/userLoginAlready')}" ;
+		//发表遊記
+		var publishnotesUrl="{:url('story/publish/publish')}";
+        /*
+     个人中心的url
+     */
+        var $user_person_url = "{:url('user/Person/index')}" ;
+        /*
+        /*
+        登录页面的url
+         */
+        var $login_jump = "{:url('user/Login/index')}" ;
+        /*
+        注册页面的url
+         */
+        var $register_jump = "{:url('user/Register/index')}" ;
+        /*
+        是否已登录
+         */
+        var $user_login_already = "{:url('user/Login/userLoginAlready')}" ;
+        /*
+            退出登录的url
+             */
+        var $user_login_out = "{:url('user/Login/outLogin')}" ;
+</script>
     <script src="__JS__/story/story.js" type="text/javascript"></script>
+	<script type="text/javascript" src="__JS__/user/user_login_page.js"></script>
+	<script type="text/javascript" src="__JS__/user/user_login.js"></script>
 </html>
 

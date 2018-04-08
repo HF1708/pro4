@@ -3,9 +3,10 @@
 function Redis()
 {
     //引入redis
-    var redis = require("redis");
+    var redis = require("redis") ;
     //创建redis客户端
     this.client = redis.createClient("6379", "127.0.0.1") ;
+    //this.client = redis.createClient("6379", "47.93.193.212") ;
 
     this.setData('redis','link','redis连接成功') ;
     this.getData('redis','link',function(rows){

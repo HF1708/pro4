@@ -31,7 +31,26 @@ class Chat extends Controller
 
     }
 
-
+    public function getList(){
+        $res = unserialize(Session::get('loginData')) ;
+//        var_dump($res);
+        $userNamw=$res['user_name'];
+        $id=$res['user_id'];
+        $image=$res['user_image'];
+        echo '{
+              "code": 0
+              ,"msg": ""
+              ,"data": {
+                "mine": {
+                  "username": "'.$userNamw.'"
+                  ,"id":"pingtai"
+                  ,"status": "online"
+                  ,"sign": ""
+                  ,"avatar": "'.$image.'"
+                }
+               }
+            }';
+    }
 
 }
 

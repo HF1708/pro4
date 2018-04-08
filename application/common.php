@@ -27,14 +27,44 @@
 // 1. 发送curl请求
 //
 //引用七牛CDN工具包
-use qiniu\Auth;
+use qiniu\Auth ;
 //引用七牛 上传类
-use Qiniu\Storage\UploadManager;
+use Qiniu\Storage\UploadManager ;
 
 
 
 
 class user{
+
+    /**
+     * 功能描述：判断数据是否为字母+数字
+     * 参数：待判断的数据,返回的信息类型、返回的信息内容、返回码
+     * QQUser：
+     * 返回：处理完的字符串
+     * 作者：yonjin L
+     * 时间：18-4-1
+     */
+    public function ifData1($data=null,$type)
+    {
+        switch($type)
+        {
+            // 用户名判断
+            case "userName":
+                // 第一位数为字母
+                if( !preg_match("/^[a-zA-Z]{1}$/",$data[0]) )
+                {
+                    return "f2" ;
+                }
+                // 其余数为字母+数字
+                if( !preg_match("/^[a-zA-Z0-9]{1,16}$/",$data) )
+                {
+                    return "f2" ;
+                }
+                return 'f1' ;
+                break ;
+        }
+
+    }
 
     /**
      * 功能描述：判断post数据是否存在,为空返回报错信息
@@ -44,12 +74,12 @@ class user{
      * 作者：yonjin L
      * 时间：18-4-1
      */
-    public function getData( $dataName ,$msgTitle ,$msgBody,$method="post" )
+    public function getData( $dataName ,$msgTitle ,$msgBody,$method="post",$code=10001 )
     {
         $getData = input("?".$method.".".$dataName) ? input($method.".".$dataName):"" ;
 
         // 为空返回报错消息
-        $this->emptyData($getData,$msgTitle ,$msgBody) ;
+        $this->emptyData($getData,$msgTitle ,$msgBody,"",$code) ;
 
         return $getData ;
 
@@ -154,6 +184,7 @@ class user{
             'msg' => config($msgTitle)[$msgBody] ,
             'data' => $content
         ]) ;
+        exit ;
     }
 
     /**
@@ -242,6 +273,33 @@ class user{
             exit ;
         }
     }
+
+
+    // 手机号验证
+    function checkMobileValidity($mobilephone){
+        $exp = "/^13[0-9]{1}[0-9]{8}$|15[012356789]{1}[0-9]{8}$|18[012356789]{1}[0-9]{8}$|14[57]{1}[0-9]$/";
+        if(preg_match($exp,$mobilephone)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    // 手机号码归属地(返回: 如 广东移动)
+    function  checkMobilePlace($mobilephone){
+        $url = "http://tcc.taobao.com/cc/json/mobile_tel_segment.htm?tel=".$mobilephone."&t=".time() ;
+        $curl = new curl() ;
+        $content = $curl->curlHttp($url) ;
+        $p = substr($content, 56, 4) ;
+        $mo = substr($content, 81, 4) ;
+        return $str = $this->conv2utf8($p).$this->conv2utf8($mo) ;
+    }
+// 转换字符串编码为 UTF8
+    function conv2utf8($text){
+        return mb_convert_encoding($text,'UTF-8','ASCII,GB2312,GB18030,GBK,UTF-8');
+    }
+
+
 }
 
 

@@ -1,0 +1,470 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>聊天</title>
+		<link href="__CSS__/bootstrap.css" rel='stylesheet' type='text/css' />
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="__JS__/jquery.min.js"></script>
+		 <!-- Custom Theme files -->
+		<link href="__CSS__/style.css" rel='stylesheet' type='text/css' />
+		<style type="text/css">
+			/*聊天头像*/
+			.img_header_2{
+				width:45px ;
+				height:45px ;
+			}
+			/*清除内外补白*/
+			.clearMarginPadding{
+				margin:0 ;
+				padding:0 ;
+			}
+			/*聊天会话容器*/
+			.chatCon{
+				height: 350px ;
+				padding:5px ;
+				border-left: 1px solid #d4d3d2 ;
+				overflow:scroll ;
+			}
+			/*发送聊天内容容器*/
+			.sendChatCon{
+				min-height: 100px;
+				border:1px solid #d5d5e5 ;
+			}
+			/*使聊天内容靠右*/
+			.sendConRight{
+				display:flex ;
+				justify-content:flex-end ;
+			}
+			/*发送消息*/
+			.sendMsg{
+				position:absolute;
+				bottom:0 ;
+				right:0 ;
+			}
+		</style>
+   		 <!-- Custom Theme files -->
+   		 <!---- start-smoth-scrolling---->
+		<script type="text/javascript" src="__JS__/move-top.js"></script>
+		<script type="text/javascript" src="__JS__/easing.js"></script>
+		<script type="text/javascript">
+			jQuery(document).ready(function($) {
+				$(".scroll").click(function(event){		
+					event.preventDefault();
+					$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+				});
+			});
+		</script>
+		 <!---- start-smoth-scrolling---->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+
+		<!----start-top-nav-script---->
+		<script>
+			$(function() {
+				var pull 		= $('#pull');
+					menu 		= $('nav ul');
+					menuHeight	= menu.height();
+				$(pull).on('click', function(e) {
+					e.preventDefault();
+					menu.slideToggle();
+				});
+				$(window).resize(function(){
+	        		var w = $(window).width();
+	        		if(w > 320 && menu.is(':hidden')) {
+	        			menu.removeAttr('style');
+	        		}
+	    		});
+			});
+		</script>
+		<!----//End-top-nav-script---->
+	</head>
+	<body>
+	<div id="myApp">
+		<div>
+			<!----- start-header---->
+			<div id="home" class="header">
+				<div class="top-header">
+					<div class="container">
+						<div class="logo">
+							<a href="index.html"><span>去野</span>Journey<span>...</span></a>
+						</div>
+						<!----start-top-nav---->
+						<nav class="top-nav">
+							<ul class="top-nav">
+								<li class="active"><a href="index.html">首页home</a></li>
+								<li><a href="menu.html">目的地locations</a></li>
+								<li><a href="reservation.html">故事story</a></li>
+								<li><a href="news.html"> 登录</a></li>
+								<li><a href="reviews.html">注册</a></li>
+							</ul>
+							<a href="#" id="pull"><img src="__STATIC__/images/nav-icon.png" title="menu" /></a>
+						</nav>
+						<div class="clearfix"> </div>
+					</div>
+				</div>
+			</div>
+			<!----- //End-header---->
+			<!----- menu-page ----->
+			<div class="reservation">
+				<!------ menu-header ----->
+				<!------ menuheader ----->
+				<div class="clearfix"> </div>
+				<div class="empty"></div>
+				<!----- reservation ---->
+				<div class="container" >
+					<div class="col-sm-2">
+					</div>
+					<div class="col-sm-8">
+						<div class="row" style="border:1px solid #999;" >
+							<div class="row"></div>
+							<div class="row clearMarginPadding">
+								<div class="col-sm-3 hidden-sm hidden-xs reviews-people" style="" >
+									<div v-for="(val,key) in chat_obj" >
+										<img class="img_header_2" :src="val.chat_image" />{{val.chat_title}}
+									</div>
+
+								</div>
+								<div class="col-sm-9  ">
+									<div class="row chatCon " id="chat" >
+										<div  v-for="(val,key) in chat_data">
+											<div class="media"  v-if="val.chat_login!=login" >
+												<div class="media-left media-middle ">
+													<a class="reviews-people" href="#">
+														<img class="img_header_2 media-object pull-left" :src="val.chat_image"  alt="...">
+													</a>
+												</div>
+												<div class="media-body">
+													<h4 class="media-heading">{{val.chat_title}}</h4>
+													<br />
+													<div>{{val.chat_con}}</div>
+												</div>
+											</div>
+											<div class="media sendConRight"  v-else  >
+												<div class="media-body">
+													<h4 class="media-heading pull-right">{{val.chat_title}}</h4>
+													<div class="clearfix"> </div>
+													<br />
+													<div class="">{{val.chat_con}}</div>
+												</div>
+												<div class="media-left media-middle ">
+													<a class="reviews-people" href="#">
+														<img class="img_header_2 media-object pull-left" :src="val.chat_image"  alt="...">
+													</a>
+												</div>
+											</div>
+										</div>
+
+									</div>
+
+									<div class="row" style="position:relative;">
+										<div class="sendChatCon" contenteditable="true" id="message" >sad</div>
+										<button class="btn btn-primary sendMsg" @click="sendMsg()" type="button"  >发送</button>
+									</div>
+
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="col-sm-2"></div>
+				</div>
+
+			</div>
+
+
+
+			<!----- fearuted-diesh ----->
+			<!----- End-Menu-page ----->
+			<!----- footer ----->
+			<div class="footer">
+				<div class="container">
+					<div class="footer-grids">
+						<div class="col-md-3 footer-grid">
+							<p>
+								<span>关于我们</span>
+								<span>关于去野</span>
+								<span><a class="line" href="{:url('store/Application/storeEnter')}">商家入驻</a></span>
+								<span>联系我们</span>
+							</p>
+						</div>
+						<div class="col-md-3 footer-grid">
+							<p>
+								<span>China tourister</span>
+								<span>68, rue  de la Couronne</span>
+								<span>75002 PARIS</span>
+								<span>718-749-1714</span>
+							</p>
+						</div>
+						<div class="col-md-3 footer-grid">
+							<ul>
+								<span>友情链接</span>
+								<li><a href="https://zh.airbnb.com">Airbnb爱彼迎</a></li>
+								<li><a href="http://www.booking.com">缤客</a></li>
+								<li><a href="http://www.mafengwo.cn/">马蜂窝</a></li>
+							</ul>
+						</div>
+						<div class="col-md-3 footer-grid copy-right">
+							<p>Copyright &copy; 2018.去野All rights reserved.</p>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+				</div>
+			</div>
+			<!----- footer ----->
+		</div>
+		<!-- 模态框 -->
+		<div class="modal fade" id="loginMsgModel" data-backdrop="static"  >
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="btn btn-default close" data-dismiss="modal" >
+							<span class="glyphicon">×</span>
+						</button>
+						{{Msg_head}}
+					</div>
+					<div class="modal-body">
+						{{Msg_body}}
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal" >退出</button>
+						<a :href="Msg_footer_link" class="btn btn-default" >{{Msg_footer}}</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--end 模态框 -->
+	</div>
+
+
+
+
+</body>
+	<script type="text/javascript" src="__JS__/bootstrap.min.js"></script>
+	<script type="text/javascript" src="__JS__/vue.min.js"></script>
+	<script>
+
+
+	</script>
+<script>
+	$('.carousel').carousel({
+		interval: 5000 // in milliseconds
+	}) ;
+	$(".modal-backdrop").remove() ;
+//	$("#loginMsgModel").modal('show') ;
+	var app = new Vue({
+		el:"#myApp" ,
+		data: {
+			Msg_head:'登录' ,
+			Msg_body:'登录成功' ,
+			Msg_footer:'确认' ,
+			Msg_footer_link:'#' ,
+			msg_footer_button_exit:'loginMsgModel_exit' ,
+			chat_one:'游客123' ,
+			chat_one_title:'' ,
+			chat_one_image:'' ,
+			chat_two:'hf170809' ,
+			chat_two_title:'' ,
+			chat_two_image:'' ,
+			chat_type: 'store_user' ,
+			chat_obj:'' ,
+			chat_data:[] ,
+			login:'' ,
+			ws: ''
+
+		} ,
+		methods: {
+			/**
+			 * 功能描述：发送聊天内容
+			 * 参数：
+			 * QQUser：
+			 * 返回：
+			 * 作者：yonjin L
+			 * 时间：18-3-28
+			 */
+			sendMsg: function()
+			{
+				var that = this ;
+				var msg = $("#message").text() ;
+
+				$data = {
+					message : msg ,
+					time : nowDdate() ,
+					type : that.chat_type ,
+					setPut:that.chat_one ,
+					chat_login:that.login ,
+					chat_image: that.chat_one_image
+				} ;
+				$data_2 = {
+					chat_con:msg ,
+					chat_title:that.chat_one ,
+					chat_image:that.chat_one_image ,
+					chat_login:that.login
+				} ;
+				that.chat_data.push($data_2) ;
+				that.ws.send( sendData( that.chat_one ,that.chat_two ,'message' ,$data ) ) ;
+				var div = document.getElementById('chat') ;
+				div.scrollTop = div.scrollHeight ;
+				setTimeout(function(){div.scrollTop = div.scrollHeight} , 50) ;
+			}
+		} ,
+		mounted:function(){
+			var that = this ;
+			/*
+			 获取聊天记录
+			 */
+			// 获取聊天对象
+			$.ajax({
+				url:"{:url('chat/chat/setChatTwo')}" ,
+				type:'post' ,
+				dataType:'json' ,
+				data:{chatTwo:'hf170809',chatType:'server'} ,
+				success:function(res){
+					that.login = res.login ;
+					that.chat_type = res.chat_type ;
+
+					that.chat_one=res.user ;
+
+					// 为游客123
+					if( res.user == '游客123' )
+					{
+						that.chat_one=res.user ;
+						that.chat_one_title = res.chat_one_title ;
+						that.chat_one_image = res.chat_one_img ;
+						that.chat_two_title = res.chat_two_title ;
+						that.chat_two_image = res.chat_two_img ;
+					}
+					else
+					{
+						// 不是游客123 发消息给redis确认位置
+						that.chat_one_title = res.chat_one_title ;
+						that.chat_one_image = res.chat_one_img+"" ;
+						that.chat_two_title = res.chat_two_title ;
+						that.chat_two_image = res.chat_two_img+"" ;
+					}
+
+				}
+			}) ;
+			/*
+				获取聊天对象
+			*/
+
+			that.ws = new WebSocket( "ws://localhost:8888" ) ;
+			that.ws.onopen = function()
+			{
+				that.ws.send( sendData( that.chat_one, that.chat_two ,'ss' ,'hello' ) ) ;
+			} ;
+			that.ws.onmessage = function( result )
+			{
+				var msgObj = JSON.parse( result.data ) ;
+				switch( msgObj.type )
+				{
+					case "ss" :
+						console.log('客户端接收的消息',msgObj) ;
+						break ;
+					case "message" :
+						console.log('客户端接收的消息啊',msgObj) ;
+						$data = {
+							chat_con:msgObj.content['content'] ,
+							chat_title:msgObj.rever ,
+							chat_image:msgObj.content['image'] ,
+							chat_login:msgObj.content['login']
+						} ;
+						if( that.chat_obj.length==0 )
+						{
+							that.chat_obj = [{
+								chat_title:msgObj.rever ,
+								chat_image:msgObj.content['image']
+							}] ;
+						}
+
+						for( var i = 0 ;i < that.chat_obj.length;i++ )
+						{
+							if( that.chat_obj[i].chat_title != msgObj.rever )
+							{
+								that.chat_obj = [{
+									chat_title:msgObj.rever ,
+									chat_image:msgObj.content['image']
+								}] ;
+							}
+						}
+							
+						that.chat_two = msgObj.rever ;
+						that.chat_data.push($data) ;
+						var div = document.getElementById('chat') ;
+						div.scrollTop = div.scrollHeight ;
+						setTimeout(function(){div.scrollTop = div.scrollHeight} , 50) ;
+						break ;
+				}
+			} ;
+
+		}
+	}) ;
+
+	/**
+	 * 功能描述：小于10的时分秒前加零
+	 * 参数：
+	 * QQUser：
+	 * 返回：当前时间
+	 * 作者：yonjin L
+	 * 时间：18-3-28
+	 */
+	function p(s) {
+		return s < 10 ? '0' + s: s;
+	}
+	/**
+	 * 功能描述：获取当前时间
+	 * 参数：
+	 * QQUser：
+	 * 返回：当前时间
+	 * 作者：yonjin L
+	 * 时间：18-3-28
+	 */
+	function nowDdate()
+	{
+		var myDate = new Date();
+		//获取当前年
+		var year=myDate.getFullYear();
+		//获取当前月
+		var month=myDate.getMonth()+1;
+		//获取当前日
+		var date=myDate.getDate();
+		var h=myDate.getHours();       //获取当前小时数(0-23)
+		var m=myDate.getMinutes();     //获取当前分钟数(0-59)
+		var s=myDate.getSeconds();
+		var now=year+'-'+p(month)+"-"+p(date)+" "+p(h)+':'+p(m)+":"+p(s);
+		return now ;
+	}
+	function sendData( sender ,rever ,type ,content )
+	{
+		if( !sender )
+		{
+			console.log( "客户端错误的发送者" ,sender ) ;
+		}
+		if( !rever )
+		{
+			console.log( "客户端错误的发送者" ,rever ) ;
+		}
+		if( !type )
+		{
+			console.log( "客户端错误的发送者" ,type ) ;
+		}
+		if( !content )
+		{
+			console.log( "客户端错误的发送者" ,content ) ;
+		}
+		var msg = JSON.stringify( {
+			sender:sender,
+			rever:rever,
+			type:type,
+			content:content,
+			msgtime:( new Date() ).getTime()
+		});
+		console.log( "客户端发送的消息" ,msg );
+		return msg;
+	}
+
+
+
+</script>
+</html>
+

@@ -1,9 +1,6 @@
-
 var wsModule = require( "ws" );
-
 var Server = wsModule.Server;
 var server = new Server( {port:8888} );
-
 var socketList = [] ;
 var useList = [] ;
 // 引入redis模块
@@ -26,7 +23,7 @@ server.on( "connection" ,function( socket ){
 					'ss' ,
 					{msg:'没有内容'}
 				)) ;
-			break;
+			break ;
 			// 对话
 			case 'message' :
 				// 消息存到数据库再发消息给用户

@@ -142,4 +142,6 @@ class Index extends Controller
             $msg->returnJson("loginMsg","UPDATA_ERROR",$data) ;
         }
     }
+
+
 }

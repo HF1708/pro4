@@ -7,6 +7,7 @@
 		<script src="__JS__/jquery.min.js"></script>
 		 <!-- Custom Theme files -->
 		<link href="__CSS__/style.css" rel='stylesheet' type='text/css' />
+		<link rel="stylesheet" href="__STATIC__/layui/css/layui.css">
 		<style type="text/css">
 			/*聊天头像*/
 			.img_header_2{
@@ -89,13 +90,13 @@
 							<a href="index.html"><span>去野</span>Journey<span>...</span></a>
 						</div>
 						<!----start-top-nav---->
-						<nav class="top-nav" id="login-register">
+						<nav class="top-nav">
 							<ul class="top-nav">
-								<li><a href="index.html">Our Story</a></li>
-								<li><a href="menu.html">Menu</a></li>
-								<li class="active"><a href="reservation.html">Reservations</a></li>
-								<li><user-login></user-login></li>
-								<li><user-register></user-register></li>
+								<li class="active"><a href="index.html">首页home</a></li>
+								<li><a href="menu.html">目的地locations</a></li>
+								<li><a href="reservation.html">故事story</a></li>
+								<li><a href="news.html"> 登录</a></li>
+								<li><a href="reviews.html">注册</a></li>
 							</ul>
 							<a href="#" id="pull"><img src="__STATIC__/images/nav-icon.png" title="menu" /></a>
 						</nav>
@@ -105,134 +106,215 @@
 			</div>
 			<!----- //End-header---->
 			<!----- menu-page ----->
-			<div class="reservation">
-				<!------ menu-header ----->
-				<!------ menuheader ----->
-				<div class="clearfix"> </div>
-				<div class="empty"></div>
-				<!----- reservation ---->
-				<div class="container" >
-					<div class="col-sm-2">
-					</div>
-					<div class="col-sm-8">
-						<div class="row" style="border:1px solid #999;" >
-							<div class="row"></div>
-							<div class="row clearMarginPadding">
-								<div class="col-sm-3 hidden-sm hidden-xs reviews-people" style="" >
-									<div v-for="(val,key) in chat_obj" >
-										<img class="img_header_2" :src="val.chat_image" />{{val.chat_title}}
-									</div>
+			<div class="container-fluid">
 
-								</div>
-								<div class="col-sm-9  ">
-									<div class="row chatCon " id="chat" >
-										<div  v-for="(val,key) in chat_data">
-											<div class="media"  v-if="val.chat_login!=login" >
-												<div class="media-left media-middle ">
-													<a class="reviews-people" href="#">
-														<img class="img_header_2 media-object pull-left" :src="val.chat_image"  alt="...">
-													</a>
-												</div>
-												<div class="media-body">
-													<h4 class="media-heading">{{val.chat_title}}</h4>
-													<br />
-													<div>{{val.chat_con}}</div>
-												</div>
-											</div>
-											<div class="media sendConRight"  v-else  >
-												<div class="media-body">
-													<h4 class="media-heading pull-right">{{val.chat_title}}</h4>
-													<div class="clearfix"> </div>
-													<br />
-													<div class="">{{val.chat_con}}</div>
-												</div>
-												<div class="media-left media-middle ">
-													<a class="reviews-people" href="#">
-														<img class="img_header_2 media-object pull-left" :src="val.chat_image"  alt="...">
-													</a>
-												</div>
-											</div>
-										</div>
+				<script src="__STATIC__/layui/layui.js"></script>
+				<script>
+                    ws = new WebSocket( "ws://localhost:8888" ) ;
+                    // if(!/^http(s*):\/\//.test(location.href)){
+                    //   alert('请部署到localhost上查看该演示');
+                    // }
+                    layui.use('layim', function(layim) {
+                        //基础配置
+                        layim.config({
 
-									</div>
+                            //初始化接口
+                            init: {
+                                url:'{:url("chat/Chat/getUser")}'
+                                , data: {}
+                            }
 
-									<div class="row" style="position:relative;">
-										<div class="sendChatCon" contenteditable="true" id="message" >sad</div>
-										<button class="btn btn-primary sendMsg" @click="sendMsg()" type="button"  >发送</button>
-									</div>
+                            //查看群员接口
+                            , members: {
+                                url: 'json/getMembers.json'
+                                , data: {}
+                            }
 
-								</div>
-							</div>
-						</div>
+                            //上传图片接口
+                            , uploadImage: {
+                                url: '/upload/image' //（返回的数据格式见下文）
+                                , type: '' //默认post
+                            }
 
-					</div>
-					<div class="col-sm-2"></div>
-				</div>
+                            //上传文件接口
+                            , uploadFile: {
+                                url: '/upload/file' //（返回的数据格式见下文）
+                                , type: '' //默认post
+                            }
 
+                            //扩展工具栏
+                            , tool: [{
+                                alias: 'code'
+                                , title: '代码'
+                                , icon: '&#xe64e;'
+                            }]
+
+                            // , brief: true //是否简约模式（若开启则不显示主面板）
+
+                            //,title: 'WebIM' //自定义主面板最小化时的标题
+                            //,right: '100px' //主面板相对浏览器右侧距离
+                            //,minRight: '90px' //聊天面板最小化时相对浏览器右侧距离
+                            , initSkin: '5.jpg' //1-5 设置初始背景
+                            //,skin: ['aaa.jpg'] //新增皮肤
+//    ,isfriend: false //是否开启好友
+                            , isgroup: false //是否开启群组
+                            ,min: true //是否始终最小化主面板，默认false
+//    ,notice: true //是否开启桌面消息提醒，默认false
+                            , voice: false //声音提醒，默认开启，声音文件为：default.wav
+
+                            , msgbox: layui.cache.dir + 'css/modules/layim/html/msgbox.html' //消息盒子页面地址，若不开启，剔除该项即可
+                            , find: layui.cache.dir + 'css/modules/layim/html/find.html' //发现页面地址，若不开启，剔除该项即可
+                            , chatLog: layui.cache.dir + 'css/modules/layim/html/chatLog.html' //聊天记录页面地址，若不开启，剔除该项即可
+
+                        });
+
+                        layim.chat({
+                            name: '商家客服'
+                            , type: 'friend'
+                            , avatar: 'http://tva3.sinaimg.cn/crop.0.0.180.180.180/7f5f6861jw1e8qgp5bmzyj2050050aa8.jpg'
+                            , id: "store_1"
+                        });
+                        layim.chat({
+                            name: '平台客服'
+                            ,type: 'firend'
+                            ,
+                            avatar: 'http://tva1.sinaimg.cn/crop.219.144.555.555.180/0068iARejw8esk724mra6j30rs0rstap.jpg'
+                            ,
+                            id: "pingtai"
+                        });
+                        layim.setChatMin();
+
+                        //监听在线状态的切换事件
+                        layim.on('online', function (data) {
+                            //console.log(data);
+                        });
+
+                        //监听签名修改
+                        layim.on('sign', function (value) {
+                            //console.log(value);
+                        });
+
+                        //监听自定义工具栏点击，以添加代码为例
+                        layim.on('tool(code)', function (insert) {
+                            layer.prompt({
+                                title: '插入代码'
+                                , formType: 2
+                                , shade: 0
+                            }, function (text, index) {
+                                layer.close(index);
+                                insert('[pre class=layui-code]' + text + '[/pre]'); //将内容插入到编辑器
+                            });
+                        });
+                        ws.onmessage = function( result )
+                        {
+                            var msgObj = JSON.parse( result.data ) ;
+                            console.log(msgObj)
+                            var username=msgObj.mine.username;
+                            var avatar=msgObj.mine.avatar;
+                            var id=msgObj.mine.id;
+                            var type=msgObj.mine.type;
+                            var content=msgObj.mine.content;
+                            //接受消息（如果检测到该socket）
+                            layim.getMessage({
+                                username: username
+                                ,avatar: avatar
+                                ,id: id
+                                ,type: "friend"
+                                ,content: content
+                            });
+
+                            /*layim.getMessage({
+                              username: "贤心"
+                              ,avatar: "http://tp1.sinaimg.cn/1571889140/180/40030060651/1"
+                              ,id: "100001"
+                              ,type: "friend"
+                              ,content: "嗨，你好！欢迎体验LayIM。演示标记："+ new Date().getTime()
+                            });*/
+                        } ;
+                        //监听layim建立就绪
+                        layim.on('ready', function (res) {
+
+                            //console.log(res.mine);
+
+//    layim.msgbox(5); //模拟消息盒子有新消息，实际使用时，一般是动态获得
+
+
+                        });
+
+                        //监听发送消息
+                        layim.on('sendMessage', function (data) {
+                            var To = data.to;
+                            data.mine.type="user"
+                            console.log(data);
+                            ws.send(JSON.stringify(data));
+                        });
+                    })
+                    ws.onopen = function()
+                    {
+                        $.get('{:url("chat/Chat/getUser")}',function (res) {
+                            res=JSON.parse(res);
+                            var id=res.data.mine.id;
+                            var data={mine:{"id":id}}
+                            ws.send( ( JSON.stringify(data) ) ) ;
+                        })
+
+                    };
+                    ws.onmessage = function(result)
+                    {
+                        var msgObj = JSON.parse( result.data ) ;
+                        switch( msgObj.type )
+                        {
+                            case "ss" :
+                                console.log('客户端接收的消息',msgObj) ;
+                                break ;
+                            case "message" :
+                                console.log('客户端接收的消息啊',msgObj) ;
+                                break ;
+                        }
+                    }
+				</script>
 			</div>
-
-
 
 			<!----- fearuted-diesh ----->
 			<!----- End-Menu-page ----->
 			<!----- footer ----->
-			<div class="footer">
-				<div class="container">
-					<div class="footer-grids">
-						<div class="col-md-3 footer-grid">
-							<p>
-								<span>关于我们</span>
-								<span>关于去野</span>
-								<span><a class="line" href="{:url('store/Application/storeEnter')}">商家入驻</a></span>
-								<span>联系我们</span>
-							</p>
-						</div>
-						<div class="col-md-3 footer-grid">
-							<p>
-								<span>China tourister</span>
-								<span>68, rue  de la Couronne</span>
-								<span>75002 PARIS</span>
-								<span>718-749-1714</span>
-							</p>
-						</div>
-						<div class="col-md-3 footer-grid">
-							<ul>
-								<span>友情链接</span>
-								<li><a href="https://zh.airbnb.com">Airbnb爱彼迎</a></li>
-								<li><a href="http://www.booking.com">缤客</a></li>
-								<li><a href="http://www.mafengwo.cn/">马蜂窝</a></li>
-							</ul>
-						</div>
-						<div class="col-md-3 footer-grid copy-right">
-							<p>Copyright &copy; 2018.去野All rights reserved.</p>
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-				</div>
-			</div>
+			<!--<div class="footer">-->
+				<!--<div class="container">-->
+					<!--<div class="footer-grids">-->
+						<!--<div class="col-md-3 footer-grid">-->
+							<!--<p>-->
+								<!--<span>关于我们</span>-->
+								<!--<span>关于去野</span>-->
+								<!--<span><a class="line" href="{:url('store/Application/storeEnter')}">商家入驻</a></span>-->
+								<!--<span>联系我们</span>-->
+							<!--</p>-->
+						<!--</div>-->
+						<!--<div class="col-md-3 footer-grid">-->
+							<!--<p>-->
+								<!--<span>China tourister</span>-->
+								<!--<span>68, rue  de la Couronne</span>-->
+								<!--<span>75002 PARIS</span>-->
+								<!--<span>718-749-1714</span>-->
+							<!--</p>-->
+						<!--</div>-->
+						<!--<div class="col-md-3 footer-grid">-->
+							<!--<ul>-->
+								<!--<span>友情链接</span>-->
+								<!--<li><a href="https://zh.airbnb.com">Airbnb爱彼迎</a></li>-->
+								<!--<li><a href="http://www.booking.com">缤客</a></li>-->
+								<!--<li><a href="http://www.mafengwo.cn/">马蜂窝</a></li>-->
+							<!--</ul>-->
+						<!--</div>-->
+						<!--<div class="col-md-3 footer-grid copy-right">-->
+							<!--<p>Copyright &copy; 2018.去野All rights reserved.</p>-->
+						<!--</div>-->
+						<!--<div class="clearfix"> </div>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</div>-->
 			<!----- footer ----->
 		</div>
-		<!-- 模态框 -->
-		<div class="modal fade" id="loginMsgModel" data-backdrop="static"  >
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="btn btn-default close" data-dismiss="modal" >
-							<span class="glyphicon">×</span>
-						</button>
-						{{Msg_head}}
-					</div>
-					<div class="modal-body">
-						{{Msg_body}}
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal" >退出</button>
-						<a :href="Msg_footer_link" class="btn btn-default" >{{Msg_footer}}</a>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!--end 模态框 -->
+
 	</div>
 
 
@@ -242,34 +324,9 @@
 	<script type="text/javascript" src="__JS__/bootstrap.min.js"></script>
 	<script type="text/javascript" src="__JS__/vue.min.js"></script>
 	<script>
-		/*
-		 获取聊天对象
-		 */
-		var $chat_obj_url = "{:url('chat/chat/setChatTwo')}" ;
-
-		/*
-		 个人中心的url
-		 */
-		var $user_person_url = "{:url('user/Person/person')}" ;
-		/*
-		 登录页面的url
-		 */
-		var $login_jump = "{:url('user/Login/index')}" ;
-		/*
-		 注册页面的url
-		 */
-		var $register_jump = "{:url('user/Register/index')}" ;
-		/*
-		 是否已登录
-		 */
-		var $user_login_already = "{:url('user/Login/userLoginAlready')}" ;
-		/*
-		 退出登录的url
-		 */
-		var $user_login_out = "{:url('user/Login/outLogin')}" ;
-
 	</script>
-	<script type="text/javascript" src="__JS__/user/chat.js"></script>
-	<script type="text/javascript" src="__JS__/user/user_login.js"></script>
+<script>
+
+</script>
 </html>
 
