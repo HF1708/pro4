@@ -29,6 +29,12 @@ var navs = [{
     "href" : OrderbgUrl,
     "spread" : false
 },{
+    "title" : "遊記管理",
+    "icon" : "icon-text;",
+    "href" : NotesUrl,
+    "spread" : false
+},
+	{
 	"title" : "404页面",
 	"icon" : "&#xe61c;",
 	"href" : "page/404.html",
