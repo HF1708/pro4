@@ -15,5 +15,14 @@ class Story extends Controller
     {
         return $this->fetch();
     }
-
+    /**
+     *  *  功能描述：获取游记
+     *  参数：无
+     *  返回：查询结果
+     *  作者:min H
+     *  时间：18-4-3
+     **/
+    public function getNotes(){
+        
+    }
 }

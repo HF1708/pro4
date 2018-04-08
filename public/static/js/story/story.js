@@ -3,8 +3,8 @@ $(".recent-news-grid").click(function (){
 });
 /**
  *  *  功能描述：写遊記（判断用户是否已登录）
- *  参数：id
- *  返回：用户信息
+ *  参数：无
+ *  返回：无
  *  作者:min H
  *  时间：18-3-30
  **/
@@ -13,6 +13,8 @@ function publichNotes(){
         $code=JSON.parse(res).code;
         if($code==10000){
             window.location.href=publishnotesUrl;
+        }else{
+            alert("您好，请先登录");
         }
     })
 }
@@ -23,16 +25,16 @@ var vue=new Vue({
         notes:[]
     },
     methods:{
-        getUser:function () {
-            this.user=[];
-            $.ajaxSetup({
-                async: false
-            });
-            $.post(getUserUrl,{"id":id},function (res) {
-                var userArr=JSON.parse(res);
-                this.city=userArr;
-            }.bind(this))
-        },
+        // getUser:function () {
+        //     this.user=[];
+        //     $.ajaxSetup({
+        //         async: false
+        //     });
+        //     $.post(getUserUrl,function (res) {
+        //         var userArr=JSON.parse(res);
+        //         this.city=userArr;
+        //     }.bind(this))
+        // },
         getNotes:function () {
             this.notes=[];
             $.ajaxSetup({
