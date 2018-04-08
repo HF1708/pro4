@@ -24,6 +24,16 @@ var navs = [{
 	"href" : UserbgUrl,
 	"spread" : false
 }, {
+    "title" : "员工管理",
+    "icon" : "icon-text",
+    "href" : staffUrl,
+    "spread" : false
+},, {
+    "title" : "角色管理",
+    "icon" : "icon-text",
+    "href" : RoleUrl,
+    "spread" : false
+},, {
     "title" : "订单管理",
     "icon" : "icon-text",
     "href" : OrderbgUrl,
