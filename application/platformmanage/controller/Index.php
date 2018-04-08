@@ -45,7 +45,7 @@ class Index extends Controller
         // 开始登录
         $where = [
            "user_uid" =>  $user ,
-           "user_password" =>  $password
+           "user_password" =>  md5($password)
         ] ;
         $res = Db("backstage_user")->where($where)->find() ;
         // 判断是否存在用户
@@ -58,6 +58,7 @@ class Index extends Controller
             // 2.存入SESSION
         Session::set('loginData',serialize($res)) ;
 
+//        echo "asd" ;
         return $this->fetch("index") ;
 
     }

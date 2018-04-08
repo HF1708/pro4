@@ -22,9 +22,10 @@ var vue = new Vue({
         advert_name:"广告名" ,
         advert_store:"广告发布商" ,
         advert_link:"www.baidu.com" ,
-        advert_pic_url:"https://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg" ,
+        advert_pic_url:"http://p6gnb5g93.bkt.clouddn.com/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg" ,
         advert_show:false ,
-        seeLoading:false 
+        seeLoading:false  ,
+        setState:[{name:"T",state:"上架"},{name:"F",state:"未审核"},{name:"S",state:"锁定"}]
     } ,
     methods:{
         /**
@@ -190,9 +191,12 @@ var vue = new Vue({
 
     } ,
     mounted:function(){
-        console.log("go to mounted") ;
         this.setSeeSearct() ;
-
+        console.log($($(".set_state_advert")[0]).text()) ;
+        for(var i = 0;i < $(".set_state_advert").length;i++ )
+        {
+            
+        }
     }
 }) ;
 
