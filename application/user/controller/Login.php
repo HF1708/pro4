@@ -77,9 +77,8 @@ class Login extends Controller
         $res = Db('user_user')->where($where)->find() ;
 
         // 用户是否被锁了
-        if( !($res['user_state'])  )
+        if( !($res['user_state']) )
         {
-            Session::delete('loginData',serialize($res)) ;
             // 被锁了
             $that->returnJson("loginMsg","USER_LOCKING","",10003) ;
             exit ;
@@ -88,6 +87,7 @@ class Login extends Controller
         if( !empty($res) )
         {
             $res['userType'] = "user" ;
+
             // 登录成功 存储数据到redis
             /*$redis = new \Redis() ;
             $redis->connect('127.0.0.1',6379) ;
@@ -299,8 +299,16 @@ class Login extends Controller
         if( Session::has('loginData') )
         {
             $res = unserialize(Session::get('loginData')) ;
-            if( strcmp($res['userType'],'user')==0 && strcmp($res['user_state'],config("locking","user"))==0 )
+
+            if( strcmp($res['userType'],'user')==0 )
             {
+                // 被锁定了
+                if(  !($res['user_state'])  )
+                {
+                    // 被锁了
+                    $msg->returnJson("loginMsg","USER_LOCKING") ;
+                    exit ;
+                }
                 // 没头像用默认
                 if( empty($res['user_image']) )
                 {

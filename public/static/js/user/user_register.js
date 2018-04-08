@@ -186,21 +186,57 @@ var app = new Vue({
                 data:$data ,
                 dataType:'json' ,
                 success:function(res){
+                    console.log(res) ;
+                    // 初始化提示
+                    that.msg_login_user_phone_show = false ;
+                    that.msg_login_user_name_show = false ;
+                    that.msg_login_user_pwd_show = false ;
+                    that.msg_login_user_code_show = false ;
+                    that.msg_login_user_pwd2_show = false ;
                     if( res.code == 10000 )
                     {
                         that.msg_login_success_show = true ;
-
                         that.Msg_footer_link = $user_person_url ;
+                        that.Msg_head = '注册' ;
+                        that.Msg_body = res['msg'] ;
+                        that.Msg_footer = '确认' ;
                         $("#loginMsgModel").modal('show') ;
                     }
-                    else
+                        // 手机
+                    else if( res.code == 10001 )
                     {
-                        that.Msg_footer_link = "" ;
+                        that.msg_login_user_phone_show = true ;
+                        that.msg_login_user_phone = res.msg ;
                     }
-                    that.Msg_head = '注册' ;
-                    that.Msg_body = res['msg'] ;
-                    that.Msg_footer = '确认' ;
-                    $("#loginMsgModel").modal('show') ;
+                        // 用户名
+                    else if( res.code == 10002 )
+                    {
+                        that.msg_login_user_name_show = true ;
+                        that.msg_login_user_name = res.msg ;
+                    }
+                        // 密码1
+                    else if( res.code == 10003 )
+                    {
+                        that.msg_login_user_pwd_show = true ;
+                        that.msg_login_user_pwd = res.msg ;
+                    }
+                        // 验证码
+                    else if( res.code == 10004 )
+                    {
+                        that.msg_login_user_code_show = true ;
+                        that.msg_login_user_code = res.msg ;
+                    }
+                        // 密码1密码2是否相同
+                    else if( res.code == 10005 )
+                    {
+                        that.msg_login_user_pwd2_show = true ;
+                        that.msg_login_user_pwd2 = "密码不同" ;
+                    }
+                    //else
+                    //{
+                    //    that.Msg_footer_link = "" ;
+                    //}
+
                 }
             }) ;
         } ,
@@ -229,16 +265,20 @@ var app = new Vue({
                 data:$data ,
                 dataType:'json' ,
                 success:function(res){
+                    // 隐藏提示
+                    that.msg_login_store_phone_show = false ;
+                    that.msg_login_store_name_show = false ;
+                    that.msg_login_store_code_show = false ;
                     if( res.code == 10000 )
                     {
                         that.msg_login_success_show = true ;
 
                         that.Msg_footer_link = $store_jump ;
 
-                        // 隐藏提示
-                        that.msg_login_store_phone_show = false ;
-                        that.msg_login_store_name_show = false ;
-                        that.msg_login_store_code_show = false ;
+                        that.Msg_head = '注册' ;
+                        that.Msg_body = res['msg'] ;
+                        that.Msg_footer = '确认' ;
+                        $("#loginMsgModel").modal('show') ;
 
                     }
                     //店名
@@ -258,7 +298,7 @@ var app = new Vue({
                         that.msg_login_store_code = res.msg ;
                         that.msg_login_store_code_show = true ;
                     }
-                        // 手机号码错误
+                    // 手机号码错误
                     else if( res.code == 10001 )
                     {
                         that.Msg_footer_link = "" ;
@@ -270,10 +310,6 @@ var app = new Vue({
                     {
                         that.Msg_footer_link = "" ;
                     }
-                    that.Msg_head = '注册' ;
-                    that.Msg_body = res['msg'] ;
-                    that.Msg_footer = '确认' ;
-                    $("#loginMsgModel").modal('show') ;
                 }
             }) ;
         } ,
@@ -288,9 +324,9 @@ var app = new Vue({
         blur_store_code:function(e){
             var that = this ;
             $code = ($(e.target).val()) ;
-            if( $code.length < 4 )
+            if( $code.length < 4 && $code.length != 0 )
             {
-                that.msg_login_store_code = "验证码长度不足" ;
+                that.msg_login_store_code = "验证码太短" ;
                 that.msg_login_store_code_show = true ;
 
             }

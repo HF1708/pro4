@@ -38,6 +38,41 @@ class Register extends Controller
             "user_phone" => $phone ,
             "user_time" => time()
         ] ;
+
+
+        // 用户名是否为空
+        if( empty($name) )
+        {
+            $returnJson = [
+                'code' => 10002 ,
+                'msg' => config('loginMsg')['ACCOUNT_EMPTY'] ,
+                'data' => []
+            ] ;
+            echo json_encode($returnJson) ;
+            exit ;
+        }
+        // 密码是否为空
+        if( empty($pwd)  )
+        {
+            $returnJson = [
+                'code' => 10003 ,
+                'msg' => config('loginMsg')['ACCOUNT_EMPTY'] ,
+                'data' => []
+            ] ;
+            echo json_encode($returnJson) ;
+            exit ;
+        }
+        // 密码是否相同
+        if( strcmp($pwd,$pwd2)!=0 )
+        {
+            $returnJson = [
+                'code' => 10005 ,
+                'msg' => config('registerMsg')['PASSWORD_TWO_ERROR'] ,
+                'data' => []
+            ] ;
+            echo json_encode($returnJson) ;
+            exit ;
+        }
         // 获取session缓存中的手机号码
         $sessionPhone = SESSION::get($phone) ;
         // 手机号码是否为空
@@ -57,19 +92,7 @@ class Register extends Controller
         {
             $returnJson = [
                 'code' => 10001 ,
-                'msg' => config('loginMsg')['ACCOUNT_ERROR'] ,
-                'data' => []
-            ] ;
-            echo json_encode($returnJson) ;
-            exit ;
-        }
-
-        // 用户名或密码是否为空
-        if( empty($name) || empty($pwd)  )
-        {
-            $returnJson = [
-                'code' => 10001 ,
-                'msg' => config('loginMsg')['ACCOUNT_EMPTY'] ,
+                'msg' => config('loginMsg')['CODE_NOT_SEND'] ,
                 'data' => []
             ] ;
             echo json_encode($returnJson) ;
@@ -79,24 +102,18 @@ class Register extends Controller
         if( empty($code) )
         {
             $returnJson = [
-                'code' => 10001 ,
+                'code' => 10004 ,
                 'msg' => config('loginMsg')['CODE_EMPTY'] ,
                 'data' => []
             ] ;
             echo json_encode($returnJson) ;
             exit ;
         }
-        // 密码是否相同
-        if( strcmp($pwd,$pwd2)!=0 )
-        {
-            $returnJson = [
-                'code' => 10001 ,
-                'msg' => config('registerMsg')['PASSWORD_TWO_ERROR'] ,
-                'data' => []
-            ] ;
-            echo json_encode($returnJson) ;
-            exit ;
-        }
+        // 验证码是否错误
+        $sessionName = $phone."loginCode" ;
+        $codeSet2 = Session::get($sessionName) ;
+        $that->strcmpData($code,$codeSet2,"loginMsg","CODE_ERROR","",10004) ;
+
         $where = [
             "user_uid" => $name
         ] ;
@@ -106,7 +123,7 @@ class Register extends Controller
         if( !empty($userEmp) )
         {
             $returnJson = [
-                'code' => 10001 ,
+                'code' => 10002 ,
                 'msg' => config('loginMsg')['ACCOUNT_REPEAT'] ,
                 'data' => []
             ] ;

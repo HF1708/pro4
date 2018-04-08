@@ -272,7 +272,8 @@ return [
         "SUCCESS_SEARCH_DATA" => "获取数据成功" ,
         "DATA_SUCCESS" => "数据正常" ,
         "DARA_TYPE_ERROR"=>"数据类型异常" ,
-        "USER_LOCKING"=>"用户被锁定,无法登陆"
+        "USER_LOCKING"=>"用户被锁定,无法登陆" ,
+        "CODE_NOT_SEND"=>"验证码未发送"
     ] ,
     // 注册返回消息配置
     "registerMsg" => [

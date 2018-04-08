@@ -78,7 +78,7 @@ var app = new Vue({
                                     that.shortShow = true ;
                                     clearInterval(setTimeInterval) ;
                                 }
-                            }, 10) ;
+                            }, 1000) ;
                         }
                         else
                         {
