@@ -55,6 +55,18 @@ class Hotelbg extends Controller
         $updatestate=db('store_shotel')->where($where)->update(['putaway'=>'下架']);
 
     }
+    /**
+     *  *  功能描述:酒店管理的审核
+     *  参数：$hotelid
+     *  返回：无
+     *  作者:邱萍
+     *  时间：18-4-08
+     **/
+    public function hotelaudit(){
+       $hotelid=input('?post.nowhotelid') ?input('post.nowhotelid'):'';
+        $updateaudit=db('store_shotel')->where('hId',$hotelid)->update(['atdit'=>1]);
+        echo 1;
+    }
 
 
 }

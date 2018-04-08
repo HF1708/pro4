@@ -70,22 +70,20 @@
                 <th>{$vo.audit}</th>
                 <th>
                     <div class="layui-hide layui-show-md-block">
-                        <button class="layui-btn" setClass="pass">自动审核</button>
-                        <button class="layui-btn" setClass="pass">手动审核</button>
+                        {if condition="$vo.audit eq '1'"}
+                            <button class="layui-btn">审核成功</button>
+                        {else/}
+                        <button class="layui-btn" audit="{$vo.hId}" onclick="audit(this)">审核</button>
+                        {/if}
                     </div>
                 </th>
                 <th>
                     <div class="layui-hide layui-show-md-block">
-                        <if condition="$vo.putaway neq '上架'">
-                            <button class="layui-btn" setClass="pass1" if go="{$vo.hId}" onclick="goup(this)">酒店上架</button>
-                            <else /><button class="layui-btn" setClass="pass1" dowm="{$vo.hId}"  onclick="godown(this)">酒店下架</button>
-                        </if>
+                        {if condition="$vo.putaway eq '上架'"}
+                            <input type="button" value="酒店下架" class="layui-btn"  go="{$vo.hId}"onclick="godown(this) ">
+                            {else /}<button class="layui-btn"  dowm="{$vo.hId}" onclick="goup(this) ">酒店上架</button>
+                        {/if}
                     </div>
-
-                    <!--<div class="layui-hide layui-show-md-block">-->
-                        <!--<button class="layui-btn" setClass="pass1" if go="{$vo.hId}" onclick="goup(this)">酒店上架</button>-->
-                        <!--<button class="layui-btn" setClass="pass1" dowm="{$vo.hId}"  onclick="godown(this)">酒店下架</button>-->
-                    <!--</div>-->
                 </th>
             </tr>
             </tbody>
@@ -104,12 +102,7 @@
     });
     // 酒店上架
     function goup(obj){
-        var state=$(obj).attr("state");
-        console.log(state);
-        if(state=='上架'){
-         alert("您已经上架过了该酒店，请选择别的酒店上架！");
-        }else{
-            if(confirm('确定上架酒店？')){
+        if(confirm('确定上架酒店？')){
             var hotelid=$(obj).attr("go");
              console.log(hotelid);
             $.ajax({
@@ -127,8 +120,6 @@
                 }
             })
         }
-        }
-
     }
     // 酒店下架
     function godown(obj){
@@ -148,7 +139,27 @@
 
         }
     }
+    //酒店审核
+    function audit(obj){
+        if(confirm('确定要审核通过该酒店？')){
+            var audit=$(obj).attr('atdit');
+            $.ajax({
+                url:":url('platformmanage/Hotelbg/hotelaudit')",
+                data:{
+                    nowhotelid: audit
+                },
+                type:"post",
+                dattype:"",
+                success:function(res){
+                    alert(res);
+                    if(res==1){
 
+                    }
+                }
+            })
+
+        }
+    }
 </script>
 <script type="text/javascript" src="__JS__/vue.min.js"></script>
 <script type="text/javascript" src="__JS__/jquery.min.js"></script>
