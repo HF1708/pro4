@@ -1,0 +1,38 @@
+<!--pages/qy/qy.wxml-->
+
+<!-- 搜索 -->
+
+<view style="background-color:#ddd177 ;padding:20rpx 0;" >
+  <navigator url="/pages/search/search" class="searchs" >
+    <icon type="search" size="20" color="{{item}}"/>搜索
+  </navigator>
+</view>
+
+<!--end 搜索 -->
+
+<!-- 内容 -->
+<view class="page_content" >
+  <!-- 可移动区域 -->
+  <view class="section section_gap">
+    <view class="section__title">
+      <text class="page__title">推荐 </text>
+      <text class="page__con">POPULAR</text>
+    </view>
+    <scroll-view scroll-x="true" style=" white-space: nowrap; display: flex" >
+      <view  class="bc">1</view>
+      <view  class="bc">2</view>
+      <view  class="bc">3</view>
+      <view  class="bc">4</view>
+    </scroll-view>
+  </view>
+  <!--end 可移动区域 -->
+</view>
+<!--end 内容 -->
+
+<view class="page_content" >
+
+  <view>
+  <text class="page__title">推荐</text>
+  </view>
+
+</view>

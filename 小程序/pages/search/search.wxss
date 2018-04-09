@@ -1,0 +1,15 @@
+/* pages/search/search.wxss */
+
+/* 搜索 */
+.searchs{
+  /* width:100rpx ; */
+  border:2rpx solid #c2c2c2 ;
+  padding:10rpx ;
+  margin:0 25rpx 0 25rpx ;
+  border-radius:20rpx ;
+  text-align:center ;
+  font-size:30rpx ;
+  background-color:#fff ;
+  color:#c2c2c2 ;
+}
+
