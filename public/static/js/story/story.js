@@ -39,8 +39,12 @@ var story=new Vue({
          *  时间：18-3-30
          **/
         storydetail:function(){
-            $sid=$('')
-        }
+            $sid=$('.recent-news-grid').attr('sid');
+            $.post(setstory,{'sid':$sid},function(){
+                window.open(storydetailUrl);
+            })
+
+        },
         // getUser:function () {
         //     this.user=[];
         //     $.ajaxSetup({

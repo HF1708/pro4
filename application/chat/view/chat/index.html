@@ -117,6 +117,14 @@
                     // if(!/^http(s*):\/\//.test(location.href)){
                     //   alert('请部署到localhost上查看该演示');
                     // }
+                    // 获取get参数
+                    function getQueryString(name) {
+                        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+                        var r = window.location.search.substr(1).match(reg);
+                        if (r != null) return unescape(r[2]); return 1;
+                    }
+
+                    var $store = "store_"+getQueryString("id") ;
                     layui.use('layim', function(layim) {
                         //基础配置
                         layim.config({
@@ -169,14 +177,14 @@
                             , find: layui.cache.dir + 'css/modules/layim/html/find.html' //发现页面地址，若不开启，剔除该项即可
                             , chatLog: layui.cache.dir + 'css/modules/layim/html/chatLog.html' //聊天记录页面地址，若不开启，剔除该项即可
 
-                        });
+                        }) ;
 
                         layim.chat({
                             name: '商家客服'
                             , type: 'friend'
                             , avatar: 'http://tva3.sinaimg.cn/crop.0.0.180.180.180/7f5f6861jw1e8qgp5bmzyj2050050aa8.jpg'
-                            , id: "store_1"
-                        });
+                            , id: $store
+                        }) ;
                         layim.chat({
                             name: '平台客服'
                             ,type: 'firend'
@@ -211,7 +219,7 @@
                         ws.onmessage = function( result )
                         {
                             var msgObj = JSON.parse( result.data ) ;
-                            console.log(msgObj)
+                            console.log(msgObj) ;
                             var username=msgObj.mine.username;
                             var avatar=msgObj.mine.avatar;
                             var id=msgObj.mine.id;
@@ -247,21 +255,23 @@
                         //监听发送消息
                         layim.on('sendMessage', function (data) {
                             var To = data.to;
-                            data.mine.type="user"
-                            console.log(data);
+                            data.mine.type="user" ;
                             ws.send(JSON.stringify(data));
                         });
-                    })
+                    }) ;
+
                     ws.onopen = function()
                     {
                         $.get('{:url("chat/Chat/getUser")}',function (res) {
                             res=JSON.parse(res);
                             var id=res.data.mine.id;
-                            var data={mine:{"id":id}}
+                            var data={mine:{"id":id}} ;
                             ws.send( ( JSON.stringify(data) ) ) ;
+
                         })
 
                     };
+
                     ws.onmessage = function(result)
                     {
                         var msgObj = JSON.parse( result.data ) ;
@@ -327,7 +337,6 @@
 	<script type="text/javascript" src="__JS__/bootstrap.min.js"></script>
 	<script type="text/javascript" src="__JS__/vue.min.js"></script>
 	<script>
-
 
 
         /*
