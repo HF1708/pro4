@@ -90,7 +90,7 @@
 						<a @click="publishNotes()" class="news-btn" href="#"><i></i>写遊記</a>
 						<!----- recent-news ----->
 						<div v-for="value in notes" class="recent-news">
-							<div id="{{value.sid}}" class="recent-news-grid" style="cursor:pointer" @click=storydetail()>
+							<div sid="{value.sid}" class="recent-news-grid" style="cursor:pointer" @click=storydetail()>
 								<div class="recent-news-grid-left">
 									<a href="{:url('story/storydetail/storydetail')}"><img src="__STATIC__/images/d1.jpg" title="name" /></a>
 								</div>
