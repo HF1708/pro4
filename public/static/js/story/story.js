@@ -40,7 +40,10 @@ var story=new Vue({
          **/
         storydetail:function(){
             $sid=$('.recent-news-grid').attr('sid');
-            console.log($sid);
+            $.post(setstory,{'sid':$sid},function(){
+                window.open(storydetailUrl);
+            })
+
         },
         // getUser:function () {
         //     this.user=[];

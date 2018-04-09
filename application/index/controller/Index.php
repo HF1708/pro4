@@ -13,6 +13,9 @@ class Index extends Controller
      **/
     public function index()
     {
+        $allHotel=db('store_shotel')->where([])->select();
+        //导出酒店数组到页面
+        $this->assign("allhotel",$allHotel);
         return $this->fetch();
     }
 

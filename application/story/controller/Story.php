@@ -1,6 +1,7 @@
 <?php
 namespace app\story\controller;
 use think\Controller;
+use think\Session;
 
 class Story extends Controller
 {
@@ -26,5 +27,20 @@ class Story extends Controller
         $getnotes=db('user_story')->select();
         $notes=json_encode($getnotes);
         return $notes;
+    }
+    /**
+     *  *  功能描述：当前点击的游记id存入session
+     *  参数：无
+     *  返回：无
+     *  作者:min H
+     *  时间：18-4-09
+     **/
+    public function setStory(){
+        $sid=input('?post.sid')?input('sid'):"";
+        if(Session::has('sid')){
+            Session::delete('sid');
+        }else{
+            Session::set('sid',$sid);
+        }
     }
 }
