@@ -69,15 +69,14 @@ class Posttrade extends Controller
 //                echo $info->getFilename();
 
                 //获取表单提交数据
-                $store_id=1;
+                $res = unserialize(Session::get('loginData')) ;
+                $store_id = $res['store_id'] ;
                 $hotelName=input("?post.hotelName")?input("post.hotelName"):"";
                 $corporation_province=input("?post.corporation_province")?input("post.corporation_province"):"";
                 $corporation_city=input("?post.corporation_city")?input("post.corporation_city"):"";
-                $corporation_province=input("?post.corporation_province")?input("post.corporation_province"):"";
                 $site=input("?post.site")?input("post.site"):"";
                 $roomNumber=input("?post.roomNumber")?input("post.roomNumber"):"";
                 $roomPrice=input("?post.roomPrice")?input("post.roomPrice"):"";
-                $corporation_grade=input("?post.corporation_grade")?input("post.corporation_grade"):"";
                 $corporation_grade=input("?post.hotel_textarea")?input("post.hotel_textarea"):"";
                 $corporation_town=input("?post.corporation_town")?input("post.corporation_town"):"";
                 $hotel_textarea=input("?post.hotel_textarea")?input("post.hotel_textarea"):"";

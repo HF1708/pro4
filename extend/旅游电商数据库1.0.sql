@@ -213,14 +213,14 @@ insert into backstage_jurisdiction (id,name,fid,url) VALUES
 (13,"用户统计",12,"index.php?c=Statement&a=showStatementUser"),
 (14,"销售统计",12,"index.php?c=Statement&a=showStatementSell")
 ;
-create table if not exists backstage_roleJurisdiction(
+create table if not exists backstage_rolejurisdiction(
 	roleID SMALLINT not null ,
 	jurisdictionID SMALLINT not null,
 	primary key(roleID,jurisdictionID),
 	foreign key(roleID) references backstage_role(id),
 	foreign key(jurisdictionID) references backstage_jurisdiction(id)	
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
-INSERT INTO backstage_roleJurisdiction(roleID,jurisdictionID) VALUES
+INSERT INTO backstage_rolejurisdiction(roleID,jurisdictionID) VALUES
 (1,2),
 (1,3),
 (1,4),
