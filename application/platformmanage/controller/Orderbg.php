@@ -24,11 +24,11 @@ class Orderbg extends Controller
     {
         $search=input('?post.input_search')?input('post.input_search'):'';
         $join=[
-            ['store_hotel_order a','a.huId=b.hId']
+            ['store_hotelorder a','a.huId=b.hId']
         ];
         $where=[];
         $where['hName']=['like',"%".$search."%"];
-        $getorder=DB::table('store_shotel')->alias('b')->join($join)->where($where)->paginate(4);
+        $getorder=DB::table('store_shotel')->alias('b')->join($join)->where($where)->paginate(5);
         // 获取分页显示
         $page = $getorder->render();
         $this->assign('order',$getorder);

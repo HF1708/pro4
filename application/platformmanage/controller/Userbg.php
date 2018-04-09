@@ -44,6 +44,7 @@ class Userbg extends Controller
         }
 
     }
+
     /**
      *  *  功能描述:用户的解锁
      *  参数：$userid
@@ -59,6 +60,7 @@ class Userbg extends Controller
         }
 
     }
+
     /**
      *  *  功能描述:添加用户
      *  参数：无
@@ -74,6 +76,7 @@ class Userbg extends Controller
         }
 
     }
+
     /**
      *  *  功能描述:删除用户
      *  参数：$userid
@@ -82,13 +85,14 @@ class Userbg extends Controller
      *  时间：18-4-08
      **/
     public function userdelect(){
-        $userid=input('?post.nowuserid') ?input('post.nowuserid'):'';
+        $userid=input('?post.delectid') ?input('post.delectid'):'';
         $delect=db('user_user')->where('user_id',$userid)->delete();
         if($delect){
             echo 1;
         }
 
     }
+
     /**
      *  *  功能描述:修改用户
      *  参数：$userid
@@ -97,7 +101,7 @@ class Userbg extends Controller
      *  时间：18-4-08
      **/
     public function change(){
-        $userid=input('?post.nowuserid') ?input('post.nowuserid'):'';
+        $userid=input('?post.changeid') ?input('post.changeid'):'';
         $change=db('user_user')->where('user_id',$userid)->update(['user_state'=>1]);
         if($change){
             echo 1;

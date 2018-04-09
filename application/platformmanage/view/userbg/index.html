@@ -84,7 +84,10 @@
                     </div>
                 </th>
                 <th><input type="button" class="layui-btn" delectid="{$vo.user_id}" onclick="delect(this)" value="删除"></th>
-                <th><input type="button" class="layui-btn" changeid="{$vo.user_id}" onclick="change(this)" value="修改"></th>
+                <th>
+                    <input type="button" class="layui-btn" changeid="{$vo.user_id}" onclick="change(this)" value="修改">
+
+                </th>
             </tr>
             </tbody>
             {/volist}
@@ -93,6 +96,63 @@
     </div>
     <div id="page">
     </div>
+    <form class="layui-form" style="width:100%;border: 1px solid #e3e3e3;display: none;">
+        <div class="layui-form-item">
+            <label class="layui-form-label">登录名</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input userName" lay-verify="required" placeholder="请输入登录名">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">邮箱</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input userEmail" lay-verify="email" placeholder="请输入邮箱">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">性别</label>
+                <div class="layui-input-block userSex">
+                    <input type="radio" name="sex" value="男" title="男" checked>
+                    <input type="radio" name="sex" value="女" title="女">
+                    <input type="radio" name="sex" value="保密" title="保密">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">会员等级</label>
+                <div class="layui-input-block">
+                    <select name="userGrade" class="userGrade" lay-filter="userGrade">
+                        <option value="0">注册会员</option>
+                        <option value="1">中级会员</option>
+                        <option value="2">高级会员</option>
+                        <option value="3">超级会员</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">会员状态</label>
+                <div class="layui-input-block">
+                    <select name="userStatus" class="userStatus" lay-filter="userStatus">
+                        <option value="0">正常使用</option>
+                        <option value="1">限制用户</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">站点描述</label>
+            <div class="layui-input-block">
+                <textarea placeholder="请输入站点描述" class="layui-textarea linksDesc"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit="" lay-filter="addUser">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+
 </div>
 </body>
 <script src="__STATIC__/layui/layui.js"></script>
@@ -192,21 +252,23 @@
     }
     //修改用户
     function change(obj){
-       var changeid=$(obj).attr('changeid');
-        $.ajax({
-            url:"{:url('platformmanage/Userbg/userchange')}",
-            data:{
-                changeid:changeid
-            },
-            type:"post",
-            datatype:"",
-            success:function(res){
-                if (res == 1) {
-                    var page = getQueryString("page");
-                    window.location.href = '{:url("platformmanage/Userbg/index")}?page=' + page;
+        if(confirm('开始修改用户?')){
+            var changeid=$(obj).attr('changeid');
+            $.ajax({
+                url:"{:url('platformmanage/Userbg/change')}",
+                data:{
+                    changeid:changeid
+                },
+                type:"post",
+                datatype:"",
+                success:function(res){
+                    if (res == 1) {
+                        var page = getQueryString("page");
+                        window.location.href = '{:url("platformmanage/Userbg/index")}?page=' + page;
+                    }
                 }
-            }
-        })
+            })
+        }
     }
 </script>
 <script type="text/javascript" src="__JS__/vue.min.js"></script>
