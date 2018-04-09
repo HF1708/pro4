@@ -40,7 +40,7 @@ var navs = [{
     "spread" : false
 },{
     "title" : "遊記管理",
-    "icon" : "icon-text;",
+    "icon" : "icon-text",
     "href" : NotesUrl,
     "spread" : false
 },

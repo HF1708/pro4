@@ -2044,16 +2044,6 @@ input:focus{
 #publish{
 	margin-left:10%;
 }
-/*#edit{*/
-	/*float:left;*/
-	/*width:50%;*/
-	/*height:500px;*/
-	/*border:1px solid #fff;*/
-	/*margin-left:5%;*/
-	/*margin-top:2%;*/
-	/*border-radius:10px;*/
-	/*box-shadow:10px 5px 10px 5px gray*/
-/*}*/
-/*#edit:focus{*/
-	/*outline-style: none;*/
-/*}*/
+.banner img{
+	display: inline-block;
+}
