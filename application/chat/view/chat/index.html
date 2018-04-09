@@ -219,7 +219,7 @@
                         ws.onmessage = function( result )
                         {
                             var msgObj = JSON.parse( result.data ) ;
-                            console.log(msgObj)
+                            console.log(msgObj) ;
                             var username=msgObj.mine.username;
                             var avatar=msgObj.mine.avatar;
                             var id=msgObj.mine.id;
@@ -255,21 +255,23 @@
                         //监听发送消息
                         layim.on('sendMessage', function (data) {
                             var To = data.to;
-                            data.mine.type="user"
-                            console.log(data);
+                            data.mine.type="user" ;
                             ws.send(JSON.stringify(data));
                         });
-                    })
+                    }) ;
+
                     ws.onopen = function()
                     {
                         $.get('{:url("chat/Chat/getUser")}',function (res) {
                             res=JSON.parse(res);
                             var id=res.data.mine.id;
-                            var data={mine:{"id":id}}
+                            var data={mine:{"id":id}} ;
                             ws.send( ( JSON.stringify(data) ) ) ;
+
                         })
 
                     };
+
                     ws.onmessage = function(result)
                     {
                         var msgObj = JSON.parse( result.data ) ;
@@ -335,7 +337,6 @@
 	<script type="text/javascript" src="__JS__/bootstrap.min.js"></script>
 	<script type="text/javascript" src="__JS__/vue.min.js"></script>
 	<script>
-
 
 
         /*
