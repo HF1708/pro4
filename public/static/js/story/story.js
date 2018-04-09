@@ -1,7 +1,6 @@
 $(".recent-news-grid").click(function (){
     window.open(storydetailUrl);
 });
-
 var story=new Vue({
     el:'#app',
     data:{
@@ -21,7 +20,7 @@ var story=new Vue({
          *  作者:min H
          *  时间：18-3-30
          **/
-        publichNotes:function(){
+        publishNotes:function(){
             $.get($user_login_already,function(res){
                 $code=JSON.parse(res).code;
                 if($code==10000){
@@ -31,6 +30,16 @@ var story=new Vue({
                     $("#loginMsgModel").modal('show') ;
                 }
             })
+        },
+        /**
+         *  *  功能描述：写遊記（判断用户是否已登录）
+         *  参数：无
+         *  返回：无
+         *  作者:min H
+         *  时间：18-3-30
+         **/
+        storydetail:function(){
+            $sid=$('')
         }
         // getUser:function () {
         //     this.user=[];
@@ -42,21 +51,20 @@ var story=new Vue({
         //         this.city=userArr;
         //     }.bind(this))
         // },
-        // getNotes:function () {
-        //     this.notes=[];
-        //     $.ajaxSetup({
-        //         async: false
-        //     });
-        //     $.post(getNotesUrl,function (res) {
-        //         this.notes=JSON.parse(res);
-        //
-        //         console.log(this.notes);
-        //     }.bind(this))
-        // }
+        getNotes:function () {
+            this.notes=[];
+            $.ajaxSetup({
+                async: false
+            });
+            $.post(getNotesUrl,function (res) {
+                this.notes=JSON.parse(res);
+                // console.log(this.notes);
+
+            }.bind(this))
+        }
     },
     mounted:function(){
-        console.log(88888888888888888888)
-        console.log(this.notes)
+        this.getNotes();
     },
     beforeUpdate: function () {
 
