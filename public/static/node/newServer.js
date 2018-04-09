@@ -54,13 +54,16 @@ function sendMsg(List,MSG) {
         //{
         //    otherSocket.send(JSON.stringify(MSG));
         //}
-        chat.setChatStoreUserData(MSG.mine['id'],MSG.to['id'],content,function(flag){
-            //var otherSocket = List[key] ;
-            if(otherSocket!=undefined && otherSocket.readyState == wsModule.OPEN  && otherSocket == List[MSG.to.id] )
-            {
+        //console.log(List[MSG.to.id]) ;
+        if(otherSocket!=undefined && otherSocket.readyState == wsModule.OPEN  && otherSocket == List[MSG.to.id] )
+        {
+            chat.setChatStoreUserData(MSG.mine['id'],MSG.to['id'],content,function(flag){
+                //var otherSocket = List[key] ;
                 otherSocket.send(JSON.stringify(MSG));
-            }
-        }) ;
+                //return ;
+            });
+            break ;
+        }
     }
 }
 

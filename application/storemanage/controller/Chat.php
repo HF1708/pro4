@@ -26,8 +26,8 @@ class Chat extends Controller
     public function getList(){
         $res = unserialize(Session::get('loginData')) ;
 //        var_dump($res);
-        $userNamw=$res['store_name'];
-        $id=$res['store_id'];
+        $userNamw=$res['store_name'] ;
+        $id=$res['store_id'] ;
         echo '{
               "code": 0
               ,"msg": ""
