@@ -9,6 +9,7 @@ namespace app\platformmanage\controller;
 use think\Controller;
 
 
+
 class Notesbg extends Controller
 {
     /**
@@ -21,12 +22,12 @@ class Notesbg extends Controller
     public function notesbg()
     {
         $search=input('?post.input_search')?input('post.input_search'):'';
-        $join=[
-            ['store_hotel_order a','a.huId=b.hId']
-        ];
+//        $join=[
+//            ['store_hotel_order a','a.huId=b.hId']
+//        ];
         $where=[];
-        $where['hName']=['like',"%".$search."%"];
-        $getnotes=DB::table('user_story')->alias('b')->join($join)->where($where)->paginate(4);
+        $where['title']=['like',"%".$search."%"];
+        $getnotes=DB::table('user_story')->where($where)->paginate(4);
         // 获取分页显示
         $page = $getnotes->render();
         $this->assign('notes',$getnotes);
@@ -34,7 +35,20 @@ class Notesbg extends Controller
         return $this->fetch() ;
 
     }
-
+    /**
+     *  *  功能描述:审核游记内容
+     *  参数：无
+     *  返回：无
+     *  作者:min H
+     *  时间：18-4-9
+     **/
+    public function notesAudit(){
+        $hotelid=input('?post.nowhotelid') ?input('post.nowhotelid'):'';
+        $updateaudit=db('store_shotel')->where('hId',$hotelid)->update(['audit'=>1]);
+        if($updateaudit) {
+            echo 1;
+        }
+    }
 
 }
 

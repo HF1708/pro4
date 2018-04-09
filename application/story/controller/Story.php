@@ -23,6 +23,8 @@ class Story extends Controller
      *  时间：18-4-3
      **/
     public function getNotes(){
-        
+        $getnotes=db('user_story')->select();
+        $notes=json_encode($getnotes);
+        return $notes;
     }
 }
