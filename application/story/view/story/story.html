@@ -57,7 +57,7 @@
 						<nav class="top-nav" id="login-register">
 							<ul class="top-nav">
 								<li class="active"><a href="{:url('index/index/index')}">首页home</a></li>
-								<li><a href="menu.html">目的地locations</a></li>
+								<li><a href="{:url('store/hotel/hotel')}">酒店Hotel</a></li>
 								<li><a href="{:url('story/story/story')}">遊記notes</a></li>
 								<li>
 									<user-login></user-login>
@@ -90,9 +90,9 @@
 						<a @click="publishNotes()" class="news-btn" href="#"><i></i>写遊記</a>
 						<!----- recent-news ----->
 						<div v-for="value in notes" class="recent-news">
-							<div sid="{value.sid}" class="recent-news-grid" style="cursor:pointer" @click=storydetail()>
+							<div :sid='value.sid' class="recent-news-grid" style="cursor:pointer" @click=storydetail()>
 								<div class="recent-news-grid-left">
-									<a href="{:url('story/storydetail/storydetail')}"><img src="__STATIC__/images/d1.jpg" title="name" /></a>
+									<a href=""><img src="__STATIC__/images/d1.jpg" title="name" /></a>
 								</div>
 								<div class="recent-news-grid-right">
 									<h2>{{value.title}}</h2>
@@ -369,6 +369,8 @@
 	<script type="text/javascript">
 		//跳转遊記详情页面
 		var storydetailUrl="{:url('story/storydetail/storydetail')}";
+		//当前点击的游记存入session
+		var setstory="{:url('story/story/setStory')}";
         //是否已登录
         var $user_login_already = "{:url('user/Login/userLoginAlready')}" ;
 		//发表遊記

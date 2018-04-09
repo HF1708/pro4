@@ -1,6 +1,7 @@
 <?php
 namespace app\story\controller;
 use think\Controller;
+use think\Session;
 
 class Storydetail extends Controller
 {
@@ -13,9 +14,12 @@ class Storydetail extends Controller
      **/
     public function storyDetail()
     {
-        $where=['sid'=>1];
+        $sid=Session::get('sid');
+        $where=['sid'=>$sid];
         $getnotes=db('user_story')->where($where)->select();
         $title=$getnotes[0]['title'];
+        $userId=$getnotes[0]['userId'];
+        $author=db('user')->where($userId)->select();
         $this->assign('title',$title);
         return $this->fetch();
     }
