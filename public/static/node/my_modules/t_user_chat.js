@@ -103,6 +103,8 @@ t_useChat.prototype.setChatType = function( type ,callback)
 		case "server_server":
 			callback("F","T") ;
 			break ;
+		default:
+			callback("F","T") ;
 	}
 
 } ;
