@@ -47,24 +47,36 @@
             <thead>
             <tr>
                 <th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose" id="allChoose1"></th>
-                <th style="text-align:left;">订单ID</th>
-                <th>订单名称</th>
-                <th>下单时间</th>
-                <th>订单状态</th>
-                <th>支付时间</th>
-                <th>下单用户</th>
+                <th style="text-align:left;">遊記ID</th>
+                <th>遊記标题</th>
+                <th>用户ID</th>
+                <th>发表时间</th>
+                <th>遊記状态</th>
+                <th>操作</th>
+                <th>操作</th>
             </tr>
             </thead>
             {volist name="notes" id="vo"}
             <tbody class="links_content">
             <tr>
                 <th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose" id="allChoose"></th>
-                <th style="text-align:left;">{$vo.huId}</th>
-                <th>{$vo.hName}</th>
-                <th>{$vo.hoTime}</th>
+                <th style="text-align:left;">{$vo.sid}</th>
+                <th>{$vo.title}</th>
+                <th>{$vo.userId}</th>
+                <th>{$vo.edittime}</th>
                 <th>{$vo.state}</th>
-                <th>{$vo.paytime}</th>
-                <th>{$vo.user_id}</th>
+                <th>
+                    <input type="button" class="layui-btn" delectid="{$vo.sid}" value="查看遊記">
+                </th>
+                <th>
+                    <div class="layui-hide layui-show-md-block">
+                        {if condition="$vo.state eq '1'"}
+                        <button class="layui-btn">审核成功</button>
+                        {else/}
+                        <button class="layui-btn" audit="{$vo.sid}" onclick="audit(this)">审核</button>
+                        {/if}
+                    </div>
+                </th>
             </tr>
             </tbody>
             {/volist}
@@ -81,17 +93,27 @@
     layui.use('element', function(){
         var element = layui.element;
     });
-    //
-    // var orderArr={$order};
-    // console.log(orderArr);
-    // orderArr  ={};
-    //订单管理
-    var OrderbgUrl="{:url('platformmanage/Orderbg/orderbg')}";
-    // function search(){
-    //     var inputsearch=$('#input_search').val();
-    //     console.log(inputsearch);
-    //     window.location.href='{:url("platformmanage/Orderbg/orderbg")}?inputsearch='+inputsearch;
-    // }
+    //游记审核
+    function audit(obj){
+        if(confirm('确定要审核通过该遊記？')){
+            var audit=$(obj).attr('audit');
+            $.ajax({
+                url:"{:url('platformmanage/Notesbg/notesAudit')}",
+                data:{
+                    nowhotelid: audit
+                },
+                type:"post",
+                dattype:"",
+                success:function(res){
+                    // console.log(res);
+                    if(res==1){
+                        var page=getQueryString("page");
+                        window.location.href='{:url("platformmanage/Hotelbg/hotelbg")}?page='+page;
+                    }
+                }
+            })
+
+        }
+    }
 </script>
-<script type="text/javascript" src="__JS__/platform/orderbg.js"></script>
 </html>

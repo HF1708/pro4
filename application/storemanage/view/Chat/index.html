@@ -273,7 +273,8 @@ ws.onopen = function()
     $.get('{:url("storemanage/Chat/getList")}',function (res) {
         res=JSON.parse(res);
         var id=res.data.mine.id;
-        var data={mine:{"id":id}}
+        id="store_2" ;
+        var data={mine:{"id":id}} ;
         ws.send( ( JSON.stringify(data) ) ) ;
     })
 

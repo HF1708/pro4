@@ -223,13 +223,16 @@
                     $.get('{:url("storemanage/Chat/getList")}',function (res) {
                         res=JSON.parse(res);
                         var id=res.data.mine.id;
-                        var data={mine:{"id":id}}
+                        id="store_1" ;
+                        var data={mine:{"id":id}} ;
                         ws.send( ( JSON.stringify(data) ) ) ;
                     })
 
                 };
                 ws.onmessage = function(result)
                 {
+//                    console.log("平台") ;
+//                    console.log(result) ;
                     var msgObj = JSON.parse( result.data ) ;
                     switch( msgObj.type )
                     {

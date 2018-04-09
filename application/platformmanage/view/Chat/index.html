@@ -174,7 +174,7 @@
         //监听发送消息
         layim.on('sendMessage', function(data){
             var To = data.to;
-            data.mine.type="pingtai"
+            data.mine.type="pingtai" ;
             console.log(data);
             ws.send(JSON.stringify(data));
 //    if(To.type === 'friend'){
@@ -232,7 +232,7 @@
         ws.onmessage = function( result )
         {
             var msgObj = JSON.parse( result.data ) ;
-            console.log(msgObj)
+            console.log(msgObj) ;
             var username=msgObj.mine.username;
             var avatar=msgObj.mine.avatar;
             var id=msgObj.mine.id;

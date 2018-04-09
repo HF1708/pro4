@@ -13,7 +13,7 @@ class Storydetail extends Controller
      **/
     public function storyDetail()
     {
-        $where=['sid'=>3];
+        $where=['sid'=>1];
         $getnotes=db('user_story')->where($where)->select();
         $title=$getnotes[0]['title'];
         $this->assign('title',$title);
@@ -42,7 +42,7 @@ class Storydetail extends Controller
     public function getNotes(){
 //        $id=input('?post.id')?input('id'):"";
 //        $where=['userId'=>$id];
-        $where=['sid'=>3];
+        $where=['sid'=>1];
         $getnotes=db('user_story')->where($where)->select();
 //        $this->assign('getnotes',$getnotes);
         echo json_encode($getnotes);
