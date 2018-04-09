@@ -241,9 +241,6 @@ create table if not exists store_hotel_order(
 create table if not exists store_hotel_order(
 >>>>>>> qp
 =======
-create table if not exists store_hotelOrder(
->>>>>>> yqt
-=======
 =======
 >>>>>>> 6c46a3f2f048cfeff6f95bfbc74e522aa9dab62c
 create table if not exists store_hotelorder(
