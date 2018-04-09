@@ -53,7 +53,6 @@ new Vue({
                 type:"post" ,
                 dataType:"json" ,
                 success:function(res){
-                    console.log(res) ;
                     if( res.code == 10000 )
                     {
                         if( res.data['state'] == "user" )
@@ -78,14 +77,13 @@ new Vue({
                                 '</button>'+
                                 '<ul class="dropdown-menu" id="dropdownMenu2-ul" aria-labelledby="dropdownMenu2">'+
                                 '<li><a href="'+$store_jump+'">个人中心</a></li>'+
-                                '<li><a href="'+$chat_url+'">联系客服</a></li>'+
                                 '</ul>'+
                                 '</div>') ;
                         }
                         //$("#user_login_url").empty().append("<a href="+$user_person_url+" ><img style='width:30px ;height:30px ;' src="+res.data['image']+" /><span>"+res.data['name']+"</span></a>") ;
-                        $("img").error(function(){
-                            $(this).attr('src', "#");
-                        });
+                        //$("img").error(function(){
+                            //$(this).attr('src', "#");
+                        //});
 
                         $("#user_register_url").empty().append("<a href='#' >退出</a>").children("a").eq(0).click(function(){
                             $.ajax({
