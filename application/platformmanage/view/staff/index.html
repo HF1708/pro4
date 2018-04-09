@@ -19,14 +19,54 @@
     </style>
 </head>
 <body class="childrenBody">
-<input class="layui-btn layui-btn-primary" value="创建员工" type="button" style="margin: 15px">
-<div>
-    
-</div>
-<div>
-    <table id="demo" lay-filter="hotel" ></table>
-</div>
 
+<div id="myapp">
+    <input class="layui-btn layui-btn-primary" value="创建员工" type="button" style="margin: 15px" v-show="showCreatBtn" @click="showBox">
+    <input class="layui-btn layui-btn-primary" value="返回" type="button" style="margin: 15px" v-show="backBtn" @click="hideBox">
+    <div v-show="showCreatBox">
+        <form class="layui-form" action="{:url('platformmanage/staff/addStaff')}" method="post">
+            <div class="user_left">
+                <div class="layui-form-item">
+                    <label class="layui-form-label" >登录名</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="user_uid" pattern="^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$" oninvalid="setCustomValidity('不能含有特殊字符'); " required="" oninput="setCustomValidity('')"  lay-verify="required" maxlength="12" class="layui-input ">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">员工名字</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="user_name" maxlength="6" lay-verify="required" class="layui-input ">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">用户组</label>
+                    <div class="layui-input-block">
+                        <select  name="roleID"  class="layui-select" >
+                                {volist name="role" id="vo"}
+                            <option value="{$vo.id}">
+                                {$vo.roleName}
+                            </option>
+                                {/volist}
+                        </select>
+                    </div>
+                </div>
+            </div>
+                <div class="layui-form-item" style="margin-left: 5%;">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit="" lay-filter="changeUser">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+        <div class="layui-container">
+            提示：员工默认密码为123456，拿到员工账号请立即更改密码
+        </div>
+    </div>
+
+    <div v-show="showIndex">
+        <table id="demo" lay-filter="staff" ></table>
+    </div>
+</div>
 
 
 </body>
@@ -36,24 +76,23 @@
 
     layui.use('table', function(){
         var table = layui.table;
-        console.log(2212)
         //第一个实例
         table.render({
             elem: '#demo'
             ,height: 315
-            ,url: '{:url("storemanage/Order/hotelOrderData")}' //数据接口
+            ,url: '{:url("platformmanage/Staff/staffData")}' //数据接口
             ,page: true //开启分页
             ,cols: [[ //表头
-                {field: 'hoId', title: '订单ID', width:80, fixed: 'left'}
-                ,{field: 'hName', title: '酒店名称', width:280, fixed: 'left'}
-                ,{field: 'hPrice', title: '价格', width:80, sort: true}
-                ,{field: 'hAddress', title: '详细地址', width:180}
-                ,{field: 'orderstate', title: '订单状态', width:180,toolbar:'#barState'}
+                {field: 'user_id', title: '用户ID', width:80, fixed: 'left', sort: true}
+                ,{field: 'user_uid', title: '登录名', width:180, fixed: 'left'}
+                ,{field: 'user_name', title: '用户名', width:180}
+                ,{field: 'roleName', title: '用户组', width:180}
+                ,{field: 'userState', title: '用户状态', width:180,toolbar:'#barState'}
                 ,{field: 'oper', title: '操作', width:180,toolbar:'#barOper'}
             ]]
         });
         //监听工具条
-        table.on('tool(hotel)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+        table.on('tool(staff)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
 
             var data = obj.data; //获得当前行数据
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
@@ -61,9 +100,10 @@
             if(layEvent === 'info'){ //查看
                 layer.alert('');
                 //do somehing
-            } else if(layEvent === 'cancel'){ //取消订单
-                layer.confirm('确定取消订单吗', function(index){
-                    $.post("{:url('storemanage/Order/cancel')}",{"hoId":obj.data.hoId},function (res) {
+            } else if(layEvent === 'lock'){ //锁定用户
+
+                layer.confirm('确定锁定该员工吗', function(index){
+                    $.post("{:url('platformmanage/Staff/lock')}",{"id":obj.data.user_id,"userState":"F"},function (res) {
                         var msg=JSON.parse(res);
                         if(msg.code==10000){
                             layer.alert('操作成功');
@@ -71,16 +111,16 @@
                             layer.alert('操作失败');
                         }
                         table.reload('demo', {
-                            url: '{:url("storemanage/Order/hotelOrderData")}'
+                            url: '{:url("platformmanage/Staff/staffData")}'
                             ,where: {} //设定异步数据接口的额外参数
                             //,height: 300
                         });
                     });
                     layer.close(index);
                 });
-            } else if(layEvent === 'use'){ //使用
-                layer.confirm('确定使用吗', function(index){
-                    $.post("{:url('storemanage/Order/useOrder')}",{"hoId":obj.data.hoId},function (res) {
+            } else if(layEvent === 'unlock'){ //解锁员工
+                layer.confirm('确定解锁该员工吗', function(index){
+                    $.post("{:url('platformmanage/Staff/lock')}",{"id":obj.data.user_id,"userState":"T"},function (res) {
                         var msg=JSON.parse(res);
                         if(msg.code==10000){
                             layer.alert('操作成功');
@@ -88,16 +128,16 @@
                             layer.alert('操作失败');
                         }
                         table.reload('demo', {
-                            url: '{:url("storemanage/Order/hotelOrderData")}'
+                            url: '{:url("platformmanage/Staff/staffData")}'
                             ,where: {} //设定异步数据接口的额外参数
                             //,height: 300
                         });
                     });
                     layer.close(index);
                 });
-            }else if(layEvent === 'refund'){ //退款
-                layer.confirm('确定退款吗', function(index){
-                    $.post("{:url('storemanage/Order/refund')}",{"hoId":obj.data.hoId},function (res) {
+            }else if(layEvent === 'del'){ //删除员工
+                layer.confirm('确定删除该员工吗', function(index){
+                    $.post("{:url('platformmanage/Staff/delStaff')}",{"id":obj.data.user_id},function (res) {
                         var msg=JSON.parse(res);
                         if(msg.code==10000){
                             layer.alert('操作成功');
@@ -105,7 +145,7 @@
                             layer.alert('操作失败');
                         }
                         table.reload('demo', {
-                            url: '{:url("storemanage/Order/hotelOrderData")}'
+                            url: '{:url("platformmanage/Staff/staffData")}'
                             ,where: {} //设定异步数据接口的额外参数
                             //,height: 300
                         });
@@ -120,29 +160,23 @@
 
 </script>
 <script type="text/html" id="barState">
-    {{#  if(d.orderstate =='0'){ }}
-    <span>未支付</span>
-    {{#  } else if(d.orderstate =='1') { }}
-    <span>已支付</span>
+    {{#  if(d.userState =='T'){ }}
+    <span>使用</span>
     {{#  } else {}}
-    <span>失效</span>
+    <span>锁定</span>
     {{#  } }}
 </script>
 <script type="text/html" id="barOper">
-    {{#  if(d.orderstate =='0'){ }}
-    <a class="layui-btn layui-btn-xs" lay-event="cancel">取消订单</a>
-    {{#  } else if(d.orderstate =='1') { }}
-    <a class="layui-btn layui-btn-xs" lay-event="use">使用</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="refund">退款</a>
-    {{#  } else if(d.orderstate =='2') { }}
-    <!--<a class="layui-btn layui-btn-xs" lay-event="up">退款</a>-->
+    {{#  if(d.userState =='T'&& d.user_id !='1'){ }}
+    <a class="layui-btn layui-btn-xs" lay-event="lock">锁定</a>
+    {{#  } else if(d.userState =='F') { }}
+    <a class="layui-btn layui-btn-xs" lay-event="unlock">解锁</a>
     {{#  } else {}}
-
     {{#  } }}
-    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    {{#  if(d.user_id !='1'){ }}
+        <a class="layui-btn layui-btn-xs" lay-event="del">删除员工</a>
+    {{#  } }}
 </script>
-
-
-
+<script type="text/javascript" src="__JS__/addStaff.js"></script>
 
 </html>
