@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>订单管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="__STATIC__/layui/css/layui.css" media="all" />
+    <link rel="stylesheet" href="__CSS__/bootstrap.min.css" media="all" />
+    <link rel="stylesheet" href="__STATIC__/css/font_eolqem241z66flxr.css" media="all" />
+    <style type="text/css">
+        .layui-table td, .layui-table th{ text-align: center; }
+        .layui-table td{ padding:5px; }
+    </style>
+</head>
+<body class="childrenBody">
+<div>
+    <form method="post" action="{:url('platformmanage/Notesbg/notesrbg')}" >
+        <blockquote class="layui-elem-quote news_search">
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <input type="text" id="input_search" placeholder="请输入关键字" name="input_search" class="layui-input search_input">
+                </div>
+                <button type="submit" class="layui-btn search_btn">订单查询</button>
+            </div>
+            <div class="layui-inline">
+                <div class="layui-form-mid layui-word-aux">本页面刷新后除新添加的链接外所有操作无效，关闭页面所有数据重置</div>
+            </div>
+        </blockquote>
+    </form>
+    <div class="layui-form links_list">
+        <table class="layui-table">
+            <colgroup>
+                <col width="50">
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col width="13%">
+            </colgroup>
+            <thead>
+            <tr>
+                <th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose" id="allChoose1"></th>
+                <th style="text-align:left;">订单ID</th>
+                <th>订单名称</th>
+                <th>下单时间</th>
+                <th>订单状态</th>
+                <th>支付时间</th>
+                <th>下单用户</th>
+            </tr>
+            </thead>
+            {volist name="notes" id="vo"}
+            <tbody class="links_content">
+            <tr>
+                <th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose" id="allChoose"></th>
+                <th style="text-align:left;">{$vo.huId}</th>
+                <th>{$vo.hName}</th>
+                <th>{$vo.hoTime}</th>
+                <th>{$vo.state}</th>
+                <th>{$vo.paytime}</th>
+                <th>{$vo.user_id}</th>
+            </tr>
+            </tbody>
+            {/volist}
+        </table>
+    </div>
+    {$page};
+</div>
+</body>
+<script src="__STATIC__/layui/layui.js"></script>
+<script type="text/javascript"></script>
+<script type="text/javascript" src="__JS__/vue.min.js"></script>
+<script type="text/javascript" src="__JS__/jquery.min.js"></script>
+<script>
+    layui.use('element', function(){
+        var element = layui.element;
+    });
+    //
+    // var orderArr={$order};
+    // console.log(orderArr);
+    // orderArr  ={};
+    //订单管理
+    var OrderbgUrl="{:url('platformmanage/Orderbg/orderbg')}";
+    // function search(){
+    //     var inputsearch=$('#input_search').val();
+    //     console.log(inputsearch);
+    //     window.location.href='{:url("platformmanage/Orderbg/orderbg")}?inputsearch='+inputsearch;
+    // }
+</script>
+<script type="text/javascript" src="__JS__/platform/orderbg.js"></script>
+</html>

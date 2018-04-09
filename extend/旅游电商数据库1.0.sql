@@ -398,32 +398,35 @@ if not EXISTS  home_banner(
 	path VARCHAR(32)																-- banner路径
 );
 
--- 故事
+-- 游记
 CREATE TABLE
 if not EXISTS  user_story(
-	sid INT auto_increment PRIMARY KEY,              -- 故事id								 							 -- 故事图片路径（外键）
-	title VARCHAR(32),															 -- 故事标题	
+	sid INT auto_increment PRIMARY KEY,              -- 游记id
+	title VARCHAR(32),															 -- 游记标题
 	userId int, --  用户ID
 	FOREIGN KEY (userId) REFERENCES user_user(user_id),	
  	state enum("1","0");    -- 游记审核状态
-	content VARCHAR(500)   													 -- 故事内容	
+	content VARCHAR(500)   													 -- 游记内容
 	
 );
--- 故事图片表
+INSERT INTO `qdm181738524_db`.`user_story` (`sid`, `title`, `userId`, `state`, `edittime`, `content`) VALUES ('1', 'dsfdsfsdafds', '1', '1', NULL, '&lt;p&gt;adsfdsfdf fddf&lt;img class=&quot;fr-fin&quot; data-fr-image-preview=&quot;false&quot; alt=&quot;Image title&quot; src=&quot;http://p6gnb5g93.bkt.clouddn.com/1.jpg&quot; width=&quot;300&quot;&gt;&lt;/p&gt;');
+
+-- 游记图片表
 CREATE TABLE
 if not EXISTS  user_story_img(
-	id INT auto_increment PRIMARY KEY,							 -- 故事图片id
-	path text,																 -- 故事图片路径
-	sid INT,																				 -- 故事id（外键）
+	id INT auto_increment PRIMARY KEY,							 -- 游记图片id
+	path text,																 -- 游记图片路径
+	sid INT,																				 -- 游记id（外键）
 	FOREIGN KEY(sid) REFERENCES user_story(sid)  				 -- 外键
 );
 
--- 故事评论表
+-- 游记评论表
 CREATE TABLE
 if not EXISTS  user_story_comment(
-	id INT auto_increment PRIMARY KEY,							 -- 故事评论id
+	id INT auto_increment PRIMARY KEY,							 -- 游记评论id
 	review VARCHAR(150),															 -- 评论内容
-	sid INT,																				 -- 故事id（外键）
+	time datetime,                                    -- 评论时间
+	sid INT,																				 -- 游记id（外键）
 	userId int,
 	FOREIGN KEY (userId) REFERENCES user_user(user_id),
 	FOREIGN KEY(sid) REFERENCES user_story(sid) 					 -- 外键
