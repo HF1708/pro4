@@ -1,0 +1,13 @@
+{
+  "pages": [
+    "pages/register/register",
+    "pages/index/index",
+    "pages/logs/logs"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#ddd177",
+    "navigationBarTitleText": "去野旅游网",
+    "navigationBarTextStyle": "#303030"
+  }
+}
