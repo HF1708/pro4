@@ -24,7 +24,7 @@ class Orderbg extends Controller
     {
         $search=input('?post.input_search')?input('post.input_search'):'';
         $join=[
-            ['store_hotel_order a','a.huId=b.hId']
+            ['store_hotelorder a','a.huId=b.hId']
         ];
         $where=[];
         $where['hName']=['like',"%".$search."%"];

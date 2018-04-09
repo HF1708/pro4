@@ -171,6 +171,75 @@ create table if not exists backstage_user
 	user_name char(10)
 ) ;
 
+=======
+INSERT into backstage_role (id,roleName,info) 
+VALUES(1,"超级管理员","系统管理员"),
+(2,"经理","添加员工查看报表等"),
+(3,"客服","客服人员"),
+(4,"普通业务员","处理日常业务");
+insert into backstage_user(user_uid,user_password,user_name,userState,roleID)
+VALUES("admin",MD5(1234),"超级管理员","T",1);
+insert into backstage_jurisdiction (id,name,fid,url) VALUES
+(1,"总权限",0,"index.php?c=Index&a=showIndex"),
+(2,"系统管理",1,"index.php?c=Index&a=showIndex"),
+(3,"商品管理",1,"index.php?c=Index&a=showIndex"),
+(4,"订单管理",1,"index.php?c=Index&a=showIndex"),
+(5,"用户管理",2,"index.php?c=UserMgt&a=showUserMgt"),
+(6,"角色管理",2,"index.php?c=RoleM&a=showRoleM"),
+(7,"商品录入",3,"index.php?c=GoodsInput&a=showGoodsInput"),
+(8,"商品信息",3,"index.php?c=GoodsInfo&a=showGoodsInfo"),
+(9,"未支付订单",4,"index.php?c=Order&a=showUnpaiyOrder"),
+(10,"已支付订单",4,"index.php?c=Order&a=showPaidOrder"),
+(11,"员工管理",2,"index.php?c=StaffMgt&a=showStaffMgt"),
+(12,"报表统计",1,"index.php?c=Index&a=showIndex"),
+(13,"用户统计",12,"index.php?c=Statement&a=showStatementUser"),
+(14,"销售统计",12,"index.php?c=Statement&a=showStatementSell")
+;
+create table if not exists backstage_rolejurisdiction(
+	roleID SMALLINT not null ,
+	jurisdictionID SMALLINT not null,
+	primary key(roleID,jurisdictionID),
+	foreign key(roleID) references backstage_role(id),
+	foreign key(jurisdictionID) references backstage_jurisdiction(id)	
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+INSERT INTO backstage_rolejurisdiction(roleID,jurisdictionID) VALUES
+(1,2),
+(1,3),
+(1,4),
+(1,5),
+(1,6),
+(1,7),
+(1,8),
+(1,9),
+(1,10),
+(1,13),
+(1,14),
+(1,11),
+(2,2),
+(2,3),
+(2,4),
+(2,5),
+(2,7),
+(2,8),
+(2,9),
+(2,10),
+(2,11),
+(2,13),
+(2,14),
+(3,2),
+(3,3),
+(3,4),
+(3,9),
+(3,10),
+(4,2),
+(4,3),
+(4,4),
+(4,7),
+(4,8),
+(4,9),
+(4,10);
+>>>>>>> yqt
+
 -- 添加账号密码的符合索引(联合索引)
 ALTER TABLE `backstage_user` ADD INDEX `sad` (`user_uid`,`user_password`) USING BTREE ;
 
@@ -228,24 +297,12 @@ create table if not exists store_hotelcomment(
 );
 
 -- 订单表
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+
+
+
+
 create table if not exists store_hotelorder(
-=======
-create table if not exists store_hotel_order(
->>>>>>> qp
-=======
-create table if not exists store_hotel_order(
->>>>>>> qp
-=======
-create table if not exists store_hotelOrder(
->>>>>>> yqt
-=======
-=======
->>>>>>> 6c46a3f2f048cfeff6f95bfbc74e522aa9dab62c
+
 create table if not exists store_hotelorder(
 	hoId int not null auto_increment primary key,
 	huId int,-- 酒店ID
@@ -257,9 +314,9 @@ create table if not exists store_hotelorder(
 	FOREIGN KEY (user_id) REFERENCES user_user(user_id)
 );
 
-INSERT INTO `qdm181738524_db`.`store_hotel_order`( `huId`, `hoTime`, `paytime`, `orderstate`, `user_id`) VALUES ( 9001, '2018-04-02 15:14:35', '0000-00-00 00:00:00', '0', 1);
-INSERT INTO `qdm181738524_db`.`store_hotel_order`( `huId`, `hoTime`, `paytime`, `orderstate`, `user_id`) VALUES ( 9001, '2018-04-02 15:14:35', '0000-00-00 00:00:00', '1', 1);INSERT INTO `qdm181738524_db`.`store_hotelorder`( `huId`, `hoTime`, `paytime`, `orderstate`, `user_id`) VALUES ( 9001, '2018-04-02 15:14:35', '0000-00-00 00:00:00', '0', 1);
-INSERT INTO `qdm181738524_db`.`store_hotel_order`( `huId`, `hoTime`, `paytime`, `orderstate`, `user_id`) VALUES ( 9001, '2018-04-02 15:14:35', '0000-00-00 00:00:00', '2', 1);
+INSERT INTO `qdm181738524_db`.`store_hotelorder`( `huId`, `hoTime`, `paytime`, `orderstate`, `user_id`) VALUES ( 9001, '2018-04-02 15:14:35', '0000-00-00 00:00:00', '0', 1);
+INSERT INTO `qdm181738524_db`.`store_hotelorder`( `huId`, `hoTime`, `paytime`, `orderstate`, `user_id`) VALUES ( 9001, '2018-04-02 15:14:35', '0000-00-00 00:00:00', '1', 1);INSERT INTO `qdm181738524_db`.`store_hotelorder`( `huId`, `hoTime`, `paytime`, `orderstate`, `user_id`) VALUES ( 9001, '2018-04-02 15:14:35', '0000-00-00 00:00:00', '0', 1);
+INSERT INTO `qdm181738524_db`.`store_hotelorder`( `huId`, `hoTime`, `paytime`, `orderstate`, `user_id`) VALUES ( 9001, '2018-04-02 15:14:35', '0000-00-00 00:00:00', '2', 1);
 
 
 
