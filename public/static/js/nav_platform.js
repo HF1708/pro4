@@ -9,11 +9,6 @@ var navs = [{
 	"href" : AdvertUrl,
 	"spread" : false
 },{
-    "title" : "发布商品",
-    "icon" : "icon-jlk",
-    "href" : "",
-    "spread" : false
-},{
     "title" : "酒店管理",
     "icon" : "icon-text",
     "href" : HotelbgUrl,

@@ -15,6 +15,12 @@
     <style type="text/css">
         .layui-table td, .layui-table th{ text-align: center; }
         .layui-table td{ padding:5px; }
+        .layui-form-item{
+            width: 40%;
+            height: 50%;
+            float: left;
+        }
+
     </style>
 </head>
 <body class="childrenBody">
@@ -35,7 +41,7 @@
         </blockquote>
     </form>
     <div class="layui-form links_list">
-        <table class="layui-table">
+        <table class="layui-table" id="table">
             <colgroup>
                 <col width="50">
                 <col>
@@ -94,65 +100,32 @@
         </table>
         {$page}
     </div>
-    <div id="page">
+        <div id="form" style="width:100%;border: 1px solid #e3e3e3;display: none">
+            <h3  style="text-align: center">用户信息修改</h3>
+            <div class="layui-form-item" >
+                <label class="layui-form-label">用户名</label>
+                <div class="layui-input-block">
+                    <input type="text" class="layui-input userEmail" lay-verify="email" placeholder="请输入邮箱">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">邮箱</label>
+                <div class="layui-input-block">
+                    <input type="text" class="layui-input userEmail" lay-verify="email" placeholder="请输入邮箱">
+                </div>
+            </div>
+            <div class="layui-form-item">
+            <div class="layui-form-item">
+                    <label class="layui-form-label">电话</label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input userEmail" lay-verify="email" placeholder="请输入邮箱">
+                    </div>
+                </div>
+            <div class="layui-form-item">
+                <button class="layui-btn" lay-filter="addUser" id="updatesubmit(this)">立即提交</button>
+            </div>
+        </div>
     </div>
-    <form class="layui-form" style="width:100%;border: 1px solid #e3e3e3;display: none;">
-        <div class="layui-form-item">
-            <label class="layui-form-label">登录名</label>
-            <div class="layui-input-block">
-                <input type="text" class="layui-input userName" lay-verify="required" placeholder="请输入登录名">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">邮箱</label>
-            <div class="layui-input-block">
-                <input type="text" class="layui-input userEmail" lay-verify="email" placeholder="请输入邮箱">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <div class="layui-inline">
-                <label class="layui-form-label">性别</label>
-                <div class="layui-input-block userSex">
-                    <input type="radio" name="sex" value="男" title="男" checked>
-                    <input type="radio" name="sex" value="女" title="女">
-                    <input type="radio" name="sex" value="保密" title="保密">
-                </div>
-            </div>
-            <div class="layui-inline">
-                <label class="layui-form-label">会员等级</label>
-                <div class="layui-input-block">
-                    <select name="userGrade" class="userGrade" lay-filter="userGrade">
-                        <option value="0">注册会员</option>
-                        <option value="1">中级会员</option>
-                        <option value="2">高级会员</option>
-                        <option value="3">超级会员</option>
-                    </select>
-                </div>
-            </div>
-            <div class="layui-inline">
-                <label class="layui-form-label">会员状态</label>
-                <div class="layui-input-block">
-                    <select name="userStatus" class="userStatus" lay-filter="userStatus">
-                        <option value="0">正常使用</option>
-                        <option value="1">限制用户</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">站点描述</label>
-            <div class="layui-input-block">
-                <textarea placeholder="请输入站点描述" class="layui-textarea linksDesc"></textarea>
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <div class="layui-input-block">
-                <button class="layui-btn" lay-submit="" lay-filter="addUser">立即提交</button>
-                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-            </div>
-        </div>
-    </form>
-
 </div>
 </body>
 <script src="__STATIC__/layui/layui.js"></script>
@@ -251,8 +224,14 @@
         }
     }
     //修改用户
-    function change(obj){
-        if(confirm('开始修改用户?')){
+    function change(){
+        if(confirm('确定要修改用户信息？')){
+            $('#form').show();
+            $('#table').hide();
+        }
+    }
+    function updatesubmit(obj){
+        if(confirm('确定提交修改信息？')){
             var changeid=$(obj).attr('changeid');
             $.ajax({
                 url:"{:url('platformmanage/Userbg/change')}",
@@ -270,6 +249,7 @@
             })
         }
     }
+
 </script>
 <script type="text/javascript" src="__JS__/vue.min.js"></script>
 <script type="text/javascript" src="__JS__/jquery.min.js"></script>

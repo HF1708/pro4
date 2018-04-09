@@ -101,7 +101,7 @@ $(function() {
             <!----start-top-nav---->
             <nav class="top-nav">
                 <ul class="top-nav">
-                    <li><a href="index.html">首页</a></li>
+                    <li class="active"><a href="{:url('index/index/index')}">首页home</a></li>
                     <li><a href="{:url('store/hotel/hotel')}">酒店</a></li>
                     <li><a href="reservation.html">Reservations</a></li>
                     <li class="active"><a href="news.html">酒店详情</a></li>
@@ -121,11 +121,12 @@ $(function() {
             <h1><span>Tourister</span> News</h1>
         </div>
     </div>
+    {volist name="nowHotel" id="vo"}
     <!------ 酒店面包屑导航 ----->
-    <div class="container topHotel">首页>酒店>酒店详情>威尼斯酒店</div>
+    <div class="container topHotel">首页>酒店>酒店详情>{$vo.hName}</div>
+    <a href="{:url('chat/chat/index')}?hId={$vo.hId}" style="position: fixed;top: 300px; right: 10px;"><img src="__STATIC__/images/servier.jpg" alt=""></a>
     <!----- 酒店详情内容 ---->
     <div class="container hdAll">
-        {volist name="nowHotel" id="vo"}
             <div style="background-color: #eee; width: 1153px;  height: 75px;">
             <h2><span> </span>&nbsp;&nbsp;&nbsp;& {$vo.hName}&nbsp;<span> </span></h2>
             <h4><span>酒店地址：{$vo.hAddress}</span></h4>
@@ -152,12 +153,13 @@ $(function() {
                     </div>
                     <div class="clearfix"></div>
                     <div class="item-info-left">
-                        <input id="bye_hotel" class="book_btn" type="button" value="立即预定">
+                        <input id="bye_hotel" style="margin-left: 20px" class="book_btn" type="button" value="立即预定">
+                        收藏：<img onclick="collect(this)" hid="{$vo.hId}" style="width: 40px;height: 40px;" src="__STATIC__/images/souchang.png" alt="">
                     </div>
                 </div>
             </div>
         </div>
-        {/volist}
+    {/volist}
         <div><img src="" alt=""></div>
     </div>
     <!----- 酒店小图片轮播 ----->
@@ -189,16 +191,6 @@ $(function() {
                             <div class="item-pic">
                                 <img src="__STATIC__/images/d1.jpg" title="dish-name" style="height: 100px" />
                             </div>
-                            <div class="item-info">
-                                <div class="item-info-left">
-                                    <h4>Fugiat nulla sint</h4>
-                                    <span class="item-rate"> </span>
-                                </div>
-                                <div class="item-info-right">
-                                    <label>$130</label>
-                                </div>
-                                <div class="clearfix"> </div>
-                            </div>
                         </div>
                     </div>
                     <!----->
@@ -206,16 +198,6 @@ $(function() {
                         <div class="item-grid">
                             <div class="item-pic">
                                 <img src="__STATIC__/images/d2.jpg" title="dish-name" style="height: 100px"/>
-                            </div>
-                            <div class="item-info">
-                                <div class="item-info-left">
-                                    <h4>Daute irure dolor</h4>
-                                    <span class="item-rate"> </span>
-                                </div>
-                                <div class="item-info-right">
-                                    <label>$124</label>
-                                </div>
-                                <div class="clearfix"> </div>
                             </div>
                         </div>
                     </div>
@@ -225,16 +207,6 @@ $(function() {
                             <div class="item-pic">
                                 <img src="__STATIC__/images/d3.jpg" title="dish-name" style="height: 100px"/>
                             </div>
-                            <div class="item-info">
-                                <div class="item-info-left">
-                                    <h4>Officia deserunt mollit</h4>
-                                    <span class="item-rate"> </span>
-                                </div>
-                                <div class="item-info-right">
-                                    <label>$160</label>
-                                </div>
-                                <div class="clearfix"> </div>
-                            </div>
                         </div>
                     </div>
                     <!----->
@@ -242,16 +214,6 @@ $(function() {
                         <div class="item-grid">
                             <div class="item-pic">
                                 <img src="__STATIC__/images/d4.jpg" title="dish-name" style="height: 100px"/>
-                            </div>
-                            <div class="item-info">
-                                <div class="item-info-left">
-                                    <h4>Pim minim veniam</h4>
-                                    <span class="item-rate"> </span>
-                                </div>
-                                <div class="item-info-right">
-                                    <label>$117</label>
-                                </div>
-                                <div class="clearfix"> </div>
                             </div>
                         </div>
                     </div>
@@ -261,16 +223,6 @@ $(function() {
                             <div class="item-pic">
                                 <img src="__STATIC__/images/d1.jpg" title="dish-name" style="height: 100px"/>
                             </div>
-                            <div class="item-info">
-                                <div class="item-info-left">
-                                    <h4>Fugiat nulla sint</h4>
-                                    <span class="item-rate"> </span>
-                                </div>
-                                <div class="item-info-right">
-                                    <label>$130</label>
-                                </div>
-                                <div class="clearfix"> </div>
-                            </div>
                         </div>
                     </div>
                     <!----->
@@ -278,16 +230,6 @@ $(function() {
                         <div class="item-grid">
                             <div class="item-pic">
                                 <img src="__STATIC__/images/d2.jpg" title="dish-name" style="height: 100px"/>
-                            </div>
-                            <div class="item-info">
-                                <div class="item-info-left">
-                                    <h4>Daute irure dolor</h4>
-                                    <span class="item-rate"> </span>
-                                </div>
-                                <div class="item-info-right">
-                                    <label>$124</label>
-                                </div>
-                                <div class="clearfix"> </div>
                             </div>
                         </div>
                     </div>
@@ -297,16 +239,6 @@ $(function() {
                             <div class="item-pic">
                                 <img src="__STATIC__/images/d3.jpg" title="dish-name" style="height: 100px"/>
                             </div>
-                            <div class="item-info">
-                                <div class="item-info-left">
-                                    <h4>Officia deserunt mollit</h4>
-                                    <span class="item-rate"> </span>
-                                </div>
-                                <div class="item-info-right">
-                                    <label>$160</label>
-                                </div>
-                                <div class="clearfix"> </div>
-                            </div>
                         </div>
                     </div>
                     <!----->
@@ -314,16 +246,6 @@ $(function() {
                         <div class="item-grid">
                             <div class="item-pic">
                                 <img src="__STATIC__/images/d4.jpg" title="dish-name" style="height: 100px"/>
-                            </div>
-                            <div class="item-info">
-                                <div class="item-info-left">
-                                    <h4>Pim minim veniam</h4>
-                                    <span class="item-rate"> </span>
-                                </div>
-                                <div class="item-info-right">
-                                    <label>$117</label>
-                                </div>
-                                <div class="clearfix"> </div>
                             </div>
                         </div>
                     </div>
@@ -347,6 +269,7 @@ $(function() {
             <div id="myTabContent" class="tab-content">
                 <div class="tab-pane fade in active" id="home1">
                     <p>酒店详情介绍</p>
+                    <div>白金五星级标准的地中海国际酒店气派超然，雄踞商业及休闲中心地带，俯瞰广州城，大家风范，舍我其谁.四百余间超豪华客房均配有最豪华的布艺、家具和设施，以浓重而不失活泼的色调、奔放且大气的布局、近似自然优美的线条，给每一位客人豪华舒适、至尊至贵的体验.</div>
                 </div>
                 <div class="tab-pane fade" id="ios">
                     <p>评论内容</p>
@@ -365,6 +288,7 @@ $(function() {
         </div>
     </div>
 </div>
+
 <!----- 页脚 ----->
 <div class="footer">
     <div class="container">
@@ -426,16 +350,41 @@ $(function() {
 
     });
     $('#bye_hotel').click(function(){
-        $.ajax({
-            url:'{:url("store/Hoteldetail/add_order")}?hId='+hId,
-            data:{},
-            type:'get',
-        success:function(res){
-
+        if(confirm("确定要购买？")){
+            $.ajax({
+                url:'{:url("store/Hoteldetail/add_order")}?hId='+hId,
+                data:{},
+                type:'get',
+            success:function(res){
+                if(res==1){
+                    alert('下单成功！');
+                    var page=getQueryString("page");
+                    window.location.href='{:url("store/Hoteldetail/hoteldetail")}?page='+page;
+                }
+            }
+            });
         }
-        });
-    })
-
+    });
+    function collect(obj ){
+        if(confirm("确定加入收藏")){
+            var hid=$(obj).attr('hid');
+            $.ajax({
+               url:"{:url('store/Hoteldetail/collect')}",
+               data:{
+                   hid:hid
+               },
+               datatype:"",
+               type:"post",
+               success:function(res){
+                   if(res==1){
+                       alert('收藏成功！');
+                       var page=getQueryString("page");
+                       window.location.href='{:url("store/Hoteldetail/hoteldetail")}?page='+page;
+                   }
+               }
+            })
+        }
+    }
     </script>
 </html>
 

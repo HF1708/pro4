@@ -227,6 +227,28 @@ create table if not exists store_hotelcomment(
 		FOREIGN KEY (userId) REFERENCES user_user(user_id)
 );
 
+insert  into  store_hotelcomment  (hcId,hId,hcContent,hcTime,userId,commentTo)VALUES
+(1000,9001,'这家酒店很好！','2018-04-01',1001,'');
+
+
+-- 酒店收藏表
+create table if not exists store_hotelcollect(
+		hscId int not null auto_increment primary key,
+		hId int, -- 酒店ID
+		hscTime varchar (200),-- 收藏时间
+		userId int not null ,-- 用户ID
+		hsc_state enum("1","0"),-- 收藏状态
+		FOREIGN KEY (hId) REFERENCES store_shotel(hId),
+		FOREIGN KEY (userId) REFERENCES user_user(user_id)
+);
+
+insert  into  store_hotelcollect (hscId,hId,hscTime,userId,	hsc_state)VALUES
+(1000,9001,'2018-04-01',1001,1);
+
+
+
+
+
 -- 订单表
 <<<<<<< HEAD
 <<<<<<< HEAD

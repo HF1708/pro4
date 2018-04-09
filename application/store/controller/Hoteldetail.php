@@ -78,8 +78,34 @@ class Hoteldetail extends Controller
         $state=0;
         //$user=session::get('loginData');
         $user=1001;
-        $data=['huId'=>$hid,'hoTime'=>$time,'user_id'=>$user,'state'=>$state];
-        $add_order=db('store_hotelOrder')->insert($data);
-
+        $data=['huId'=>$hid,'hoTime'=>$time,'user_id'=>$user,'orderstate'=>$state];
+        $add_order=db('store_hotelorder')->insert($data);
+        if($add_order){
+            echo 1;
+        }
     }
+
+    /**
+     *  功能描述：酒店收藏
+     *  参数：无
+     *  返回：无
+     *  作者:邱萍
+     *  时间：18-04-09
+     **/
+    public function collect(){
+        $hid=input('?get.hId')?input('get.hId'):"";
+        $time=date('Y/m/d H:i:s', time());
+        $state=1;
+        //$user=session::get('loginData');
+        $user=1001;
+        $data=['hId'=>$hid,'hscTime'=>$time,'userId'=>$user,'hsc_state'=>$state];
+        $add_order=db('store_hotelcollect')->insert($data);
+        if($add_order){
+            echo 1;
+        }
+    }
+
+
+
+
 }
