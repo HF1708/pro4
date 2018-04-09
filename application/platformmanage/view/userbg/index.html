@@ -19,13 +19,18 @@
 </head>
 <body class="childrenBody">
 <div  id="myApp" >
-    <form method="post" action="{:url('platformmanage/Userbg/userbg')}" >
+    <form method="post" action="{:url('platformmanage/Userbg/index')}" >
         <blockquote class="layui-elem-quote news_search">
             <div class="layui-inline">
                 <div class="layui-input-inline">
                     <input type="text" value="" placeholder="请输入关键字" name="seartch_advert" class="layui-input search_input">
                 </div>
                 <button type="submit" class="layui-btn search_btn">查询</button>
+            </div>
+            <div class="layui-inline"  id="putStateExamine">
+                <div>
+                    <input type="button" class="layui-btn" onclick="adduser()" value="添加">
+                </div>
             </div>
         </blockquote>
     </form>
@@ -53,6 +58,8 @@
                 <th>用户发布信息</th>
                 <th>用户审核状态</th>
                 <th>操作</th>
+                <th>操作</th>
+                <th>操作</th>
             </tr>
             </thead>
             {volist name="alluser" id="vo"}
@@ -60,18 +67,24 @@
             <tr>
                 <th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose" id="allChoose1"></th>
                 <th style="text-align:left;">{$vo.user_id}</th>
-                <th><img src="__STATIC__/images/{$vo.user_image}" title="dish-name" /></th>
+                <th><img src="{$vo.user_image}" title="dish-name" /></th>
                 <th>{$vo.user_name}</th>
                 <th>{$vo.user_email}</th>
                 <th>{$vo.user_phone}</th>
                 <th>{$vo.user_time}</th>
                 <th>{$vo.user_msg}</th>
-                <th>{$vo.state}</th>
+                <th>{$vo.user_state}</th>
                 <th>
                     <div class="layui-hide layui-show-md-block">
-                        <button class="layui-btn" setClass="pass" userid="{$vo.user_id}" onclick="audit(this)">手动审核</button>
+                        {if condition="$vo.user_state eq '1'"}
+                        <button class="layui-btn" lockid="{$vo.user_id}" onclick="lock(this)">锁定</button>
+                        {else/}
+                        <button class="layui-btn" lockid="{$vo.user_id}" onclick="unlock(this)">解锁</button>
+                        {/if}
                     </div>
                 </th>
+                <th><input type="button" class="layui-btn" delectid="{$vo.user_id}" onclick="delect(this)" value="删除"></th>
+                <th><input type="button" class="layui-btn" changeid="{$vo.user_id}" onclick="change(this)" value="修改"></th>
             </tr>
             </tbody>
             {/volist}
@@ -87,45 +100,113 @@
     layui.use('element', function(){
         var element = layui.element;
     });
-    // 酒店上架
-    // function goup(obj){
-    //     var state=$(obj).attr("state");
-    //     console.log(state);
-    //     if(state=='上架'){
-    //         alert("您已经上架过了该酒店，请选择别的酒店上架！");
-    //     }else{
-    //         if(confirm('确定上架酒店？')){
-    //             var hotelid=$(obj).attr("go");
-    //             console.log(hotelid);
-    //             $.ajax({
-    //                 url:'{:url("platformmanage/Hotelbg/upstate")}',
-    //                 data:{
-    //                     nowhotelid:hotelid
-    //                 },
-    //                 type:"post",
-    //                 datatype:"",
-    //                 succsess:function(res){
-    //                     alert('上架成功！');
-    //                     console.log(232);
-    //                     console.log(res);
-    //                     window.location.href='{:url("platformmanage/Hotelbg/hotelbg")}';
-    //                 }
-    //             })
-    //         }
-    //     }
-    //
-    // }
-    function audit(obj){
-        var nowuserid=$(obj).attr('userid');
+    //获取url的参数
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]);
+        return null;
+    }
+    //用户锁定
+    function lock(obj){
+        if(confirm('确定要锁定该用户？')) {
+            var lockid = $(obj).attr('lockid');
+             console.log(lockid);
+            $.ajax({
+                url: "{:url('platformmanage/Userbg/userlock')}",
+                data: {
+                    nowuserid: lockid
+                },
+                type: "post",
+                dattype: "",
+                success: function (res) {
+                    // console.log(res);
+                    if (res == 1) {
+                        var page = getQueryString("page");
+                        window.location.href = '{:url("platformmanage/Userbg/index")}?page=' + page;
+                    }
+                }
+            })
+        }
+    }
+    //用户解锁
+    function unlock(obj){
+        if(confirm('确定要解锁该用户？')) {
+            var lockid = $(obj).attr('lockid');
+            console.log(lockid);
+            $.ajax({
+                url: "{:url('platformmanage/Userbg/userunlock')}",
+                data: {
+                    nowuserid: lockid
+                },
+                type: "post",
+                dattype: "",
+                success: function (res) {
+                    // console.log(res);
+                    if (res == 1) {
+                        var page = getQueryString("page");
+                        window.location.href = '{:url("platformmanage/Userbg/index")}?page=' + page;
+                    }
+                }
+            })
+        }
+
+    }
+    //添加用户
+    function adduser(){
         $.ajax({
-            url:"{:url('platformmanage/Hotelbg/downstate')}",
-            data:{},
-            type:"",
+            url: "{:url('platformmanage/Userbg/useradd')}",
+            data: {
+                delectid: delectid
+            },
+            type: "post",
+            datatype: "",
+            success: function (res) {
+                if (res == 1) {
+                    var page = getQueryString("page");
+                    window.location.href = '{:url("platformmanage/Userbg/index")}?page=' + page;
+                }
+            }
+        })
+    }
+    //删除用户
+    function delect(obj){
+        if(confirm('确定要删除该用户？')){
+           var delectid=$(obj).attr('delectid');
+           $.ajax({
+               url:"{:url('platformmanage/Userbg/userdelect')}",
+               data:{
+                   delectid:delectid
+               },
+               type:"post",
+               datatype:"",
+               success:function(res){
+                   if (res == 1) {
+                       var page = getQueryString("page");
+                       alert('删除成功！');
+                       window.location.href = '{:url("platformmanage/Userbg/index")}?page=' + page;
+                   }
+               }
+           })
+        }
+    }
+    //修改用户
+    function change(obj){
+       var changeid=$(obj).attr('changeid');
+        $.ajax({
+            url:"{:url('platformmanage/Userbg/userchange')}",
+            data:{
+                changeid:changeid
+            },
+            type:"post",
             datatype:"",
             success:function(res){
-
-        }
-        });
+                if (res == 1) {
+                    var page = getQueryString("page");
+                    window.location.href = '{:url("platformmanage/Userbg/index")}?page=' + page;
+                }
+            }
+        })
     }
 </script>
 <script type="text/javascript" src="__JS__/vue.min.js"></script>

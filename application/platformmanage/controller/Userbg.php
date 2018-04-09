@@ -21,15 +21,89 @@ class Userbg extends Controller
      **/
     public function index()
     {
-        $join=[
-            ['user_user a','a.user_id=b.userId']
-        ];
         $where=[];
-        $getUser=DB::table('user_story')->alias('b')->join($join)->where($where)->paginate(5);
+        $getUser=DB::table('user_user')->where($where)->paginate(5);
         $page = $getUser->render();
         $this->assign('page', $page);
         $this->assign('alluser', $getUser);
         return $this->fetch();
     }
+
+    /**
+     *  *  功能描述:用户的锁定
+     *  参数：$userid
+     *  返回：无
+     *  作者:邱萍
+     *  时间：18-4-08
+     **/
+    public function userlock(){
+        $userid=input('?post.nowuserid') ?input('post.nowuserid'):'';
+        $lock=db('user_user')->where('user_id',$userid)->update(['user_state'=>0]);
+        if($lock){
+            echo 1;
+        }
+
+    }
+    /**
+     *  *  功能描述:用户的解锁
+     *  参数：$userid
+     *  返回：无
+     *  作者:邱萍
+     *  时间：18-4-08
+     **/
+    public function userunlock(){
+        $userid=input('?post.nowuserid') ?input('post.nowuserid'):'';
+        $unlock=db('user_user')->where('user_id',$userid)->update(['user_state'=>1]);
+        if($unlock){
+            echo 1;
+        }
+
+    }
+    /**
+     *  *  功能描述:添加用户
+     *  参数：无
+     *  返回：无
+     *  作者:邱萍
+     *  时间：18-4-08
+     **/
+    public function useradd(){
+        $userid=input('?post.nowuserid') ?input('post.nowuserid'):'';
+        $adduser=db('user_user')->where('user_id',$userid)->update(['user_state'=>1]);
+        if($adduser){
+            echo 1;
+        }
+
+    }
+    /**
+     *  *  功能描述:删除用户
+     *  参数：$userid
+     *  返回：无
+     *  作者:邱萍
+     *  时间：18-4-08
+     **/
+    public function userdelect(){
+        $userid=input('?post.nowuserid') ?input('post.nowuserid'):'';
+        $delect=db('user_user')->where('user_id',$userid)->delete();
+        if($delect){
+            echo 1;
+        }
+
+    }
+    /**
+     *  *  功能描述:修改用户
+     *  参数：$userid
+     *  返回：无
+     *  作者:邱萍
+     *  时间：18-4-08
+     **/
+    public function change(){
+        $userid=input('?post.nowuserid') ?input('post.nowuserid'):'';
+        $change=db('user_user')->where('user_id',$userid)->update(['user_state'=>1]);
+        if($change){
+            echo 1;
+        }
+
+    }
+
 }
 

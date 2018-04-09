@@ -40,7 +40,9 @@ class Hotelbg extends Controller
         $hotelid=input("?post.nowhotelid")?input("post.nowhotelid"):"";
         $where=['hId'=>$hotelid];
         $updatestate=db('store_shotel')->where($where)->update(['putaway'=>'上架']);
-        echo '上架成功！';
+        if($updatestate){
+            echo 1;
+        }
     }
     /**
      *  *  功能描述:酒店管理的下架
@@ -53,7 +55,9 @@ class Hotelbg extends Controller
         $hotelid=input("?post.nowhotelid")?input("post.nowhotelid"):"";
         $where=['hId'=>$hotelid];
         $updatestate=db('store_shotel')->where($where)->update(['putaway'=>'下架']);
-
+        if($updatestate){
+            echo 1;
+        }
     }
     /**
      *  *  功能描述:酒店管理的审核
@@ -64,9 +68,11 @@ class Hotelbg extends Controller
      **/
     public function hotelaudit(){
        $hotelid=input('?post.nowhotelid') ?input('post.nowhotelid'):'';
-        $updateaudit=db('store_shotel')->where('hId',$hotelid)->update(['atdit'=>1]);
-        echo 1;
-    }
+        $updateaudit=db('store_shotel')->where('hId',$hotelid)->update(['audit'=>1]);
+        if($updateaudit){
+            echo 1;
+        }
 
+    }
 
 }

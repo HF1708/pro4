@@ -52,6 +52,7 @@ create table if not exists user_user
 	user_sex enum("男",'女') default'男' ,
 	user_birthday date default"1995-11-22",
 	user_time datetime ,
+	user_state enum("1","0") default'1',
 	user_msg varchar(100) 
 ) ;
 -- 添加账号的唯一索引
@@ -61,10 +62,10 @@ ALTER TABLE `user_user` ADD INDEX `sad` (`user_uid`,`user_password`) USING BTREE
 -- 添加账号密码的符合索引(查询索引)/手机邮箱
 -- ALTER TABLE `user_user` ADD INDEX `sad1` (`user_email`) USING BTREE ;
 -- ALTER TABLE `user_user` ADD INDEX `sad2` (`user_phone`) USING BTREE ;
-insert into user_user( user_uid ,user_name ,user_password ,user_email ,user_phone ,user_image ,user_msg ,user_time )values
-( 'test' , '测试用', md5('123456'), '', '15324488756', 'http://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg', 'test',now()  ) ;
-insert into user_user( user_uid ,user_name ,user_password ,user_email ,user_phone ,user_image ,user_msg ,user_time )values
-( 'tests' , '测试用', md5('123456'), '', '15324488756', 'http://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg', 'test',now()  ) ;
+insert into user_user( user_uid ,user_name ,user_password ,user_email ,user_phone ,user_image ,user_msg ,user_time,user_sex,user_state )values
+( 'test' , '测试用', md5('123456'), '', '15324488756', 'http://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg', 'test',now(),"男",0 ) ;
+insert into user_user( user_uid ,user_name ,user_password ,user_email ,user_phone ,user_image ,user_msg ,user_time,user_sex,user_state )values
+( 'tests' , '测试用', md5('123456'), '', '15324488756', 'http://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg', 'test',now(),"女",1  ) ;
 
 
 -- 商家信息表
