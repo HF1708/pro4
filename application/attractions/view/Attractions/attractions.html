@@ -193,5 +193,34 @@
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="__JS__/jquery.min.js"></script>
 <script src="__JS__/bootstrap.min.js"></script>
+<script type="text/javascript">
+    /*
+     个人中心的url
+     */
+    var $user_person_url = "{:url('user/Person/index')}" ;
+    /*
+    /*
+    登录页面的url
+     */
+    var $login_jump = "{:url('user/Login/index')}" ;
+    /*
+    注册页面的url
+     */
+    var $register_jump = "{:url('user/Register/index')}" ;
+    /*
+    是否已登录
+     */
+    var $user_login_already = "{:url('user/Login/userLoginAlready')}" ;
+    /*
+    退出登录的url
+     */
+    var $user_login_out = "{:url('user/Login/outLogin')}" ;
+    /*
+     聊天界面
+     */
+    var $chat_url = "{:url('chat/Chat/index')}" ;
+
+</script>
+<script type="text/javascript" src="__JS__/user/user_login.js"></script>
 </html>
 
