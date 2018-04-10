@@ -19,8 +19,15 @@ class Storydetail extends Controller
         $getnotes=db('user_story')->where($where)->select();
         $title=$getnotes[0]['title'];
         $userId=$getnotes[0]['userId'];
-        $author=db('user')->where($userId)->select();
+        $time=$getnotes[0]['edittime'];
+        $where1=['user_id'=>$userId];
+        $user=db('user_user')->where($where1)->select();
+        $author=$user[0]['user_name'];
+        $headimg=$user[0]['user_image'];
         $this->assign('title',$title);
+        $this->assign('author',$author);
+        $this->assign('time',$time);
+        $this->assign('headimg',$headimg);
         return $this->fetch();
     }
     /**

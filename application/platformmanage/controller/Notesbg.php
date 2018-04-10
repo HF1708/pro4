@@ -7,7 +7,7 @@
  */
 namespace app\platformmanage\controller;
 use think\Controller;
-
+use think\db;
 
 
 class Notesbg extends Controller
@@ -27,7 +27,7 @@ class Notesbg extends Controller
 //        ];
         $where=[];
         $where['title']=['like',"%".$search."%"];
-        $getnotes=DB::table('user_story')->where($where)->paginate(4);
+        $getnotes=db('user_story')->where($where)->paginate(4);
         // 获取分页显示
         $page = $getnotes->render();
         $this->assign('notes',$getnotes);

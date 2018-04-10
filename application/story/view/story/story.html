@@ -85,23 +85,26 @@
 				<div class="clearfix"> </div>
 				<!----- reservation ---->
 				<div class="News-page">
+					<div>
 					<div class="container">
 						<h2><span> </span>&nbsp;&nbsp;&nbsp;&nbsp;遊記Notes &nbsp;<span> </span></h2>
 						<a @click="publishNotes()" class="news-btn" href="#"><i></i>写遊記</a>
 						<!----- recent-news ----->
 						<div v-for="value in notes" class="recent-news">
+							{volist name="notes" id="vo"}
 							<div :sid='value.sid' class="recent-news-grid" style="cursor:pointer" @click=storydetail()>
 								<div class="recent-news-grid-left">
 									<a href=""><img src="__STATIC__/images/d1.jpg" title="name" /></a>
 								</div>
 								<div class="recent-news-grid-right">
-									<h2>{{value.title}}</h2>
+									<h2>{$vo.title}</h2>
 									<p>要说南京这座城市，虽然没有那么四季分明，但一年四季都有它独特的样子，自然我最爱的还是春天。</p>
 									<p>春天是相机最忙的季节，三月中旬的时候南京便成了花的海洋。南京最出名的赏花地莫过于鸡鸣寺的樱花大道，明孝陵的梅花山或者是南理工的二月兰，但每个地方在晴好的周末都会被汹涌的人流包围，那阵势俨然成了“花赏人”。</p>
 									<p></p>
 								</div>
 								<div class="clearfix"> </div>
 							</div>
+							{/volist}
 							<div class="recent-news-grid">
 								<div class="recent-news-grid-left">
 									<a href="#"><img src="__STATIC__/images/d2.jpg" title="name" /></a>
@@ -126,6 +129,8 @@
 							<a class="news-btn" href="#">View all News</a>
 						</div>
 						<!----- recent-news ----->
+					</div>
+						{$page}
 					</div>
 				<!----- fearuted-diesh ----->
 				<div class="fearuted-diesh">
