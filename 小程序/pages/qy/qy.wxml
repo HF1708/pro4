@@ -10,7 +10,39 @@
 
 <!--end 搜索 -->
 
-<!-- 内容 -->
+<!-- 内容 推荐-->
+<view class="page_content" >
+  <!-- 可移动区域 -->
+  <view class="section section_gap">
+    <view class="section__title">
+      <text class="page__title">推荐 </text>
+      <text class="page__con">POPULAR</text>
+    </view>
+    <scroll-view scroll-x="true" class="bc" >
+        <view class="weui-flex">
+            <view class="weui-flex__item">
+              <view class="bc_1"></view>
+              <view class="bc_2">阿斯顿发生大空间大发大水发大水发二娃发送到发</view>
+            </view>
+            <view class="weui-flex__item">
+              <view class="bc_1"></view>
+              <view class="bc_2">发送到个人阿范德萨注册</view>
+            </view>
+            <view class="weui-flex__item">
+              <view class="bc_1"></view>
+              <view class="bc_2">第三次发的复杂性出单费</view>
+            </view>
+            <view class="weui-flex__item">
+              <view class="bc_1"></view>
+              <view class="bc_2">sad</view>
+            </view>
+        </view>
+    </scroll-view>
+  </view>
+  <!--end 可移动区域 -->
+</view>
+<!--end 内容 -->
+<!-- 内容 景点-->
 <view class="page_content" >
   <!-- 可移动区域 -->
   <view class="section section_gap">
@@ -28,11 +60,7 @@
   <!--end 可移动区域 -->
 </view>
 <!--end 内容 -->
-
-<view class="page_content" >
-
-  <view>
-  <text class="page__title">推荐</text>
-  </view>
-
-</view>
+<!-- 内容 酒店-->
+<!--end 内容 -->
+<!-- 内容 美食-->
+<!--end 内容 -->
