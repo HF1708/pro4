@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/qy/qy",
     "pages/register/register",
+    "pages/qy/qy",
     "pages/index/index",
     "pages/logs/logs",
     "pages/search/search"
