@@ -1,5 +1,4 @@
 <!--pages/qy/qy.wxml-->
-<import src="/wxParse/wxParse.wxml"/>   
 
 <!-- 搜索 -->
 
@@ -12,20 +11,31 @@
 <!--end 搜索 -->
 
 <!-- 内容 推荐-->
-<view class="page_content" wx:for="{{qy}}" wx:for-index="idx" wx:for-item="itemName" >
-    <view class="section__title">
-      <text class="page__title">{{itemName.name}} </text>
-      <text class="page__con">{{itemName.msg}}</text>
+<view class="page_content" wx:for="{{qy}}" wx:for-index="idx" wx:for-item="itemName"  >
+    
+    <view class="weui-flex">
+        <view class="weui-flex__item">
+          <view class="placeholder">
+            <view class="section__title">
+              <text class="page__title">{{itemName.name}} </text>
+              <text class="page__con">{{itemName.msg}}</text>
+            </view>
+          </view>
+        </view>
+        <view class="weui-flex__item page_all">
+          <navigator class="placeholder" url="{{itemName.url}}" >全部</navigator>
+        </view>
     </view>
   <!-- 可移动区域 -->
   <view class="section section_gap">
-    <scroll-view scroll-x="true" class="bc" style="width:{{itemName.sub.length/3}}00% ;overflow:hidden;white-space:nowrap; " >
+    <scroll-view scroll-x="true" class="bc" style="width:{{100|Int}}% ;overflow:hidden;white-space:nowrap; " >
         <view class="img">
-            <view  style="overflow:visible ;"  wx:for="{{itemName.sub}}" wx:for-index="i" wx:for-item="item" >
+            <view  style="overflow:visible ;display: inline-block ; "  wx:for="{{itemName.sub}}" wx:for-index="i" wx:for-item="item" >
               <view class="bc_1">
-                <image src="{{item.src}}" mode='aspectFit' ></image>
+                <image src="{{item.src}}" mode='widthFix' ></image>
+                <view class="bc_2 bc_msg ">{{item.msg}}</view>
               </view>
-              <view class="bc_2">{{itemName.sub.length}}</view>
+              
             </view>
         </view>
     </scroll-view>
@@ -33,3 +43,5 @@
   <!--end 可移动区域 -->
 </view>
 <!--end 内容 -->
+
+<view bindtap="more" class="more" >加载更多...</view>
