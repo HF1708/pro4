@@ -3,13 +3,22 @@
 /* 搜索 */
 .searchs{
   /* width:100rpx ; */
+  width:70% ;
   border:2rpx solid #c2c2c2 ;
-  padding:10rpx ;
-  margin:0 25rpx 0 25rpx ;
-  border-radius:20rpx ;
+   padding:10rpx ; 
+  margin:0 5% ;
+  border-radius:10rpx ;
   text-align:center ;
   font-size:30rpx ;
   background-color:#fff ;
   color:#c2c2c2 ;
+  display:inline-block;
+  vertical-align:middle ;
+}
+
+.back{
+  width:15% ;
+  display:inline-block;
+  vertical-align:middle ;
 }
 

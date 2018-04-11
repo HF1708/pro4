@@ -22,15 +22,29 @@
     "list": [
       {
         "pagePath": "pages/qy/qy" ,
-        "text": "主页"
+        "iconPath":"images/home.png" ,
+        "selectedIconPath":"images/homeHL.png" ,
+        "text": "主页" 
       },
       {
         "pagePath": "pages/register/register" ,
+<<<<<<< HEAD
         "text": "我的"
       } ,
       {
         "pagePath": "pages/notes/notes",
         "text": "遊記"
+=======
+        "iconPath": "images/my.png",
+        "selectedIconPath": "images/myHL.png",
+        "text": "个人中心" 
+      } ,
+      {
+        "pagePath": "pages/logs/logs" ,
+        "iconPath": "images/notes.png" ,
+        "selectedIconPath": "images/notesHL.png",
+        "text": "游记" 
+>>>>>>> master
       }
     ]
   }

@@ -15,12 +15,29 @@ Page({
   onLoad: function (options) {
     var that = this ;
     console.log(qy.init) ;
+    var $data = [] ;
+    for(var i = 0; i < qy.init.length-1;i++)
+    {
+      $data[i]=(qy.init[i]) ;
+    }
     that.setData({
-      qy: qy.init
+      qy: $data
     }) ;
-    
   },
-
+  /**
+   * 
+   */
+  more:function(){
+    console.log("加载更多") ;
+    var that = this;
+    var $data = that.data.qy;
+    for (var i = $data.length; i < qy.init.length; i++) {
+      $data[i] = (qy.init[i]);
+    }
+    that.setData({
+      qy: $data
+    });
+  } ,
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
