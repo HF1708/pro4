@@ -11,5 +11,20 @@
     "navigationBarBackgroundColor": "#ddd177",
     "navigationBarTitleText": "去野旅游网",
     "navigationBarTextStyle": "#303030"
+  },
+  "tabBar": {
+    "color": "#bbbbbb",
+    "selectedColor": "#fe6f73",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/qy/qy" ,
+        "text": "主页"
+      },
+      {
+        "pagePath": "pages/register/register" ,
+        "text": "个人中心"
+      }
+    ]
   }
 }
