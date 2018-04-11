@@ -2,7 +2,7 @@
 
 <view class="page ">
    <view class="head-box">
-    <image src="/images/reg.png"></image>
+    <image src="/images/reg.png" mode='widthFix' ></image>
     <view class="head-box-text-top">短信验证码登录</view>
     <view class="head-box-text">如手机号未注册，验证后将自动注册</view>
    </view>
@@ -14,8 +14,8 @@
       </view>
       <view class="ad_popError" wx:if="{{popErrorMsg}}">{{popErrorMsg}}</view>
       <view class="cont">
-         <input class="cont-input"  type='number' placeholder="请输入验证码"  maxlength='4'/>
-         <view class='cont-ver-text' bindtap="getCode" >获取验证码</view>
+         <input class="cont-input" type='number' placeholder="请输入验证码" bindinput='getCodeA' maxlength='4'/>
+         <view class='cont-ver-text'   bindtap="getCode">{{getCodeBnt}}</view>
       </view>
       <view class="descLine">
         <image src="/images/hook.png" class="descImg"/>
