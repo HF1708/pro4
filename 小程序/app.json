@@ -24,6 +24,10 @@
       {
         "pagePath": "pages/register/register" ,
         "text": "个人中心"
+      } ,
+      {
+        "pagePath": "pages/qy/qy",
+        "text": "游记"
       }
     ]
   }
