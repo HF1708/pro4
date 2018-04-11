@@ -68,9 +68,17 @@ class Userbg extends Controller
      *  作者:邱萍
      *  时间：18-4-08
      **/
-    public function useradd(){
-        $userid=input('?post.nowuserid') ?input('post.nowuserid'):'';
-        $adduser=db('user_user')->where('user_id',$userid)->update(['user_state'=>1]);
+    public function add(){
+        $id=input('?post.id') ?input('post.id'):'';
+        $name=input('?post.name') ?input('post.name'):'';
+        $pwd=input('?post.pwd') ?input('post.pwd'):'';
+        $phone=input('?post.phone') ?input('post.phone'):'';
+        $sex=input('?post.sex') ?input('post.sex'):'';
+        $email=input('?post.email') ?input('post.email'):'';
+        $image=input('?post.image') ?input('post.image'):'';
+        $birthday=input('?post.birthday') ?input('post.birthday'):'';
+        $data=['user_uid'=>$id,'user_name'=>$name,'user_password'=>$pwd,'user_email'=>$email,'user_phone'=>$phone,'user_sex'=>$sex,'user_image'=>$image];
+        $adduser=db('user_user')->insert($data);
         if($adduser){
             echo 1;
         }
@@ -102,11 +110,15 @@ class Userbg extends Controller
      **/
     public function change(){
         $userid=input('?post.changeid') ?input('post.changeid'):'';
-        $change=db('user_user')->where('user_id',$userid)->update(['user_state'=>1]);
+        $name=input('?post.name') ?input('post.name'):'';
+        $pwd=input('?post.pwd') ?input('post.pwd'):'';
+        $phone=input('?post.phone') ?input('post.phone'):'';
+        $data=['user_name'=>$name,'user_password'=>$pwd,'user_phone'=>$phone];
+        $change=db('user_user')->where('user_uid',$userid)->update($data);
+        var_dump($change);
         if($change){
             echo 1;
         }
-
     }
 
 }

@@ -19,6 +19,12 @@
             width: 40%;
             height: 50%;
             float: left;
+            margin-left: 500px;
+            margin-top: 50px;
+        }
+        .layui-form-label{
+            width:100px;
+
         }
 
     </style>
@@ -40,8 +46,8 @@
             </div>
         </blockquote>
     </form>
-    <div class="layui-form links_list">
-        <table class="layui-table" id="table">
+    <div class="layui-form links_list" id="table">
+        <table class="layui-table" >
             <colgroup>
                 <col width="50">
                 <col>
@@ -72,7 +78,7 @@
             <tbody class="links_content">
             <tr>
                 <th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose" id="allChoose1"></th>
-                <th style="text-align:left;">{$vo.user_id}</th>
+                <th style="text-align:left;">{$vo.user_uid}</th>
                 <th><img src="{$vo.user_image}" title="dish-name" /></th>
                 <th>{$vo.user_name}</th>
                 <th>{$vo.user_email}</th>
@@ -83,15 +89,15 @@
                 <th>
                     <div class="layui-hide layui-show-md-block">
                         {if condition="$vo.user_state eq '1'"}
-                        <button class="layui-btn" lockid="{$vo.user_id}" onclick="lock(this)">锁定</button>
+                        <button class="layui-btn" lockid="{$vo.user_uid}" onclick="lock(this)">锁定</button>
                         {else/}
-                        <button class="layui-btn" lockid="{$vo.user_id}" onclick="unlock(this)">解锁</button>
+                        <button class="layui-btn" lockid="{$vo.user_uid}" onclick="unlock(this)">解锁</button>
                         {/if}
                     </div>
                 </th>
-                <th><input type="button" class="layui-btn" delectid="{$vo.user_id}" onclick="delect(this)" value="删除"></th>
+                <th><input type="button" class="layui-btn" delectid="{$vo.user_uid}" onclick="delect(this)" value="删除"></th>
                 <th>
-                    <input type="button" class="layui-btn" changeid="{$vo.user_id}" onclick="change(this)" value="修改">
+                    <input type="button" class="layui-btn" changeid="{$vo.user_uid}" onclick="change(this)" value="修改">
 
                 </th>
             </tr>
@@ -100,32 +106,89 @@
         </table>
         {$page}
     </div>
-        <div id="form" style="width:100%;border: 1px solid #e3e3e3;display: none">
-            <h3  style="text-align: center">用户信息修改</h3>
-            <div class="layui-form-item" >
-                <label class="layui-form-label">用户名</label>
-                <div class="layui-input-block">
-                    <input type="text" class="layui-input userEmail" lay-verify="email" placeholder="请输入邮箱">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">邮箱</label>
-                <div class="layui-input-block">
-                    <input type="text" class="layui-input userEmail" lay-verify="email" placeholder="请输入邮箱">
-                </div>
-            </div>
-            <div class="layui-form-item">
-            <div class="layui-form-item">
-                    <label class="layui-form-label">电话</label>
-                    <div class="layui-input-block">
-                        <input type="text" class="layui-input userEmail" lay-verify="email" placeholder="请输入邮箱">
-                    </div>
-                </div>
-            <div class="layui-form-item">
-                <button class="layui-btn" lay-filter="addUser" id="updatesubmit(this)">立即提交</button>
+    <div id="form" style="width:100%;border: 1px solid #e3e3e3;display: none">
+        <h3  style="text-align: center">用户信息修改</h3>
+        <div class="layui-form-item" >
+            <label class="layui-form-label">新用户名</label>
+            <div class="layui-input-block">
+                <input type="text"  onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')"  class="layui-input userEmail" lay-verify="email" id="newname" placeholder="请输入新的用户名">
+                <span style="color: red" id="Checkname"></span>
             </div>
         </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">新密码</label>
+            <div class="layui-input-block">
+                <input type="password" onkeyup="value=value.replace(/\D/g,'')" class="layui-input userEmail" lay-verify="email" id="newpwd" placeholder="请输入新的密码">
+                <span style="color: red" id="Checkpwd"></span>
+            </div>
+        </div>
+        <div class="layui-form-item">
+                <label class="layui-form-label">新电话</label>
+                <div class="layui-input-block">
+                    <input type="text"onkeyup="value=value.replace(/\D/g,'')"  class="layui-input userEmail" lay-verify="email" id="newphone" placeholder="请输入新的手机号码">
+                    <span style="color: red" id="Checkphone"></span>
+                </div>
+            </div>
+        <div class="layui-form-item">
+            <button class="layui-btn" style="margin-left: 345px" lay-filter="addUser" onclick="updatesubmit(this)">立即提交</button>
+        </div>
     </div>
+    <div id="addform" style="width:100%;border: 1px solid #e3e3e3;display: none">
+        <h3  style="text-align: center">添加用户</h3>
+        <div class="layui-form-item" >
+            <label class="layui-form-label">新用户名</label>
+            <div class="layui-input-block">
+                <input type="text"  onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')"  class="layui-input userEmail" lay-verify="email" id="newname1" placeholder="请输入新的用户名">
+                <span style="color: red" >只能输入中文</span>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">新密码</label>
+            <div class="layui-input-block">
+                <input type="password" onkeyup="value=value.replace(/\D/g,'')" class="layui-input userEmail" lay-verify="email" id="newpwd1" placeholder="请输入新的密码">
+                <span style="color: red">只能输入数字</span>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">新电话</label>
+            <div class="layui-input-block">
+                <input type="text"onkeyup="value=value.replace(/\D/g,'')"  class="layui-input userEmail" lay-verify="email" id="newphone1" placeholder="请输入新的手机号码">
+                <span style="color: red">只能输入数字</span>
+            </div>
+        </div>
+        <div class="layui-form-item" >
+            <label class="layui-form-label">新用户ID</label>
+            <div class="layui-input-block">
+                <input type="text"   onkeyup="value=value.replace(/[^\a-\z\A-\Z]/g,'')"  class="layui-input userEmail" lay-verify="email" id="userid" placeholder="请输入新的用户id">
+                <span style="color: red" >只能输入英文</span>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户Email</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input userEmail" lay-verify="email" id="email" placeholder="请输入新的邮箱">
+                <span style="color: red"></span>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户性别</label>
+            <div class="layui-input-block">
+                <input type="text"  class="layui-input userEmail" lay-verify="email" id="sex" placeholder="请输入用户性别">
+                <span style="color: red"></span>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户头像</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input userEmail" lay-verify="email" id="image" placeholder="请输入用户头像信息">
+                <span style="color: red"></span>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <button class="layui-btn" style="margin-left: 345px" lay-filter="addUser" onclick="addsubmit()">立即提交</button>
+        </div>
+    </div>
+
 </div>
 </body>
 <script src="__STATIC__/layui/layui.js"></script>
@@ -187,20 +250,45 @@
     }
     //添加用户
     function adduser(){
-        $.ajax({
-            url: "{:url('platformmanage/Userbg/useradd')}",
-            data: {
-                delectid: delectid
-            },
-            type: "post",
-            datatype: "",
-            success: function (res) {
-                if (res == 1) {
-                    var page = getQueryString("page");
-                    window.location.href = '{:url("platformmanage/Userbg/index")}?page=' + page;
+        $('#addform').show();
+        $('#table').hide();
+    }
+    function  addsubmit(){
+        $('#addform').hide();
+        $('#table').show();
+        if(confirm('确定提交新增用户信息？')){
+            $('#form').hide();
+            $('#table').show();
+            var id=$('#userid').val();
+            var name=$('#newname1').val();
+            var pwd=$('#newpwd1').val();
+            var phone=$('#newphone1').val();
+            var email=$('#email').val();
+            var sex=$('#sex').val();
+            var image=$('#image').val();
+            $.ajax({
+                url:"{:url('platformmanage/Userbg/add')}",
+                data:{
+                    id:id,
+                    name:name,
+                    pwd:pwd,
+                    phone:phone,
+                    sex:sex,
+                    email:email,
+                    image:image
+                },
+                type:"post",
+                datatype:"",
+                success:function(res){
+                    if (res == 1) {
+                        var page = getQueryString("page");
+                        alert('添加用户成功');
+                        window.location.href = '{:url("platformmanage/Userbg/index")}?page=' + page;
+                    }
                 }
-            }
-        })
+            })
+        }
+
     }
     //删除用户
     function delect(obj){
@@ -232,23 +320,72 @@
     }
     function updatesubmit(obj){
         if(confirm('确定提交修改信息？')){
+            $('#form').hide();
+            $('#table').show();
             var changeid=$(obj).attr('changeid');
+            var name=$('#newname').val();
+            var pwd=$('#newpwd').val();
+            var phone=$('#newphone').val();
+            console.log(name,pwd);
             $.ajax({
                 url:"{:url('platformmanage/Userbg/change')}",
                 data:{
-                    changeid:changeid
+                    changeid:changeid,
+                    name:name,
+                    pwd:pwd,
+                    phone:phone
                 },
                 type:"post",
                 datatype:"",
                 success:function(res){
                     if (res == 1) {
                         var page = getQueryString("page");
+                        alert('修改基本信息成功');
                         window.location.href = '{:url("platformmanage/Userbg/index")}?page=' + page;
                     }
                 }
             })
         }
     }
+
+    // //输入框正则
+    // $('#newname').blur(function(){
+    //     var name=$('#newname').val();
+    //      if(isChinaName(name)==false){
+    //             $('#Checkname').text('用户名请用2-4位中文字母');
+    //         }
+    // })
+    //
+    // $('#newpwd').blur(function(){
+    //     var pwd=$('#newpwd').val();
+    //     if(isPwd(pwd)==false){
+    //         $('#Checkpwd').text('密码请输入6-10位字母、数字或“_”');
+    //     }
+    // })
+    //
+    // $('#newphone').blur(function(){
+    //     var phone=$('#newphone').val();
+    //     if(isphone(phone)==false){
+    //         $('#Checkphone').text('请输入正确的手机号码');
+    //     }
+    // })
+    //
+    // //正则表达式
+    // //6-10位字母、数字或“_”
+    // function isPwd(pwd) {
+    //     var pattern = /^[a-zA-Z0-9_]{3,6}$/;
+    //     return pattern.test(pwd);
+    // }
+    // // 验证中文名称
+    // function isChinaName(name) {
+    //     var pattern = /^[\u4E00-\u9FA5]{2,4}$/;
+    //     return pattern.test(name);
+    // }
+    // //电话号码正则
+    // function isphone(phone){
+    //     var pattern =/^1[3|4|5|8]\d{9}$/;
+    //     return pattern.test(phone);
+    // }
 
 </script>
 <script type="text/javascript" src="__JS__/vue.min.js"></script>
