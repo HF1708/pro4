@@ -14,15 +14,15 @@ class Notes extends  Controller
 {
     /**
      * 功能描述：小程序获取游记
-     * 参数：
-     *
-     * 返回：验证码
-     * 作者：Qingtian Y
+     * 参数：无
+     * 返回：游记数组
+     * 作者：min H
      * 时间：18-4-10
      */
     public function getNotes(){
-        $notes=db('user_story')->select();
-        echo 4444;
+        //获取游记列表
+        $getnotes=db('user_story a')->join('user_user b','a.userId=b.user_id')->select();
+        $notes=json_encode($getnotes);
         echo $notes;
     }
 
