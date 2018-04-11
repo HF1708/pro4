@@ -2,7 +2,7 @@
 namespace app\story\controller;
 use think\Controller;
 use think\Session;
-
+use think\paginator;//分页
 class Story extends Controller
 {
     /**
@@ -14,6 +14,11 @@ class Story extends Controller
      **/
     public function story()
     {
+        $getnotes=db('user_story')->paginate(3);
+        // 获取分页显示
+        $page = $getnotes->render();
+        $this->assign('notes',$getnotes);
+        $this->assign('page',$page);
         return $this->fetch();
     }
     /**

@@ -1,0 +1,9 @@
+<!--pages/search/search.wxml-->
+<!-- 搜索 -->
+
+<view style="background-color:#ddd177 ;padding:20rpx 0;" >
+  <input type="text" confirm-type="search" class="searchs" bindinput="search" ></input>
+  <navigator class="back" open-type="navigateBack" >取消</navigator>
+</view>
+
+<!--end 搜索 -->

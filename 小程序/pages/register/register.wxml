@@ -1,1 +1,31 @@
-<!--pages/register.wxml-->
+<!--pages/register/register.wxml-->
+
+<view class="page ">
+   <view class="head-box">
+    <image src="/images/reg.png" mode='widthFix' ></image>
+    <view class="head-box-text-top">短信验证码登录</view>
+    <view class="head-box-text">如手机号未注册，验证后将自动注册</view>
+   </view>
+<form bindsubmit="formSubmit">
+   <view class="cont-box">
+      <view class="cont">
+          <view class='cont-phone-text'>+86</view>
+          <input class="cont-input" bindinput='getMobile' type='number' maxlength='11' placeholder="请输入手机号" name="mobile" />
+      </view>
+      <view class="ad_popError" wx:if="{{popErrorMsg}}">{{popErrorMsg}}</view>
+      <view class="cont">
+         <input class="cont-input" type='number' placeholder="请输入验证码" bindinput='getCodeA' maxlength='4'/>
+         <view class='cont-ver-text'   bindtap="getCode">{{getCodeBnt}}</view>
+      </view>
+      <view class="descLine">
+        <image src="/images/hook.png" class="descImg"/>
+        <view class="descText"> 我已阅读并同意去野旅游网的<span class="colorText">《使用条款》</span>和<span class="colorText">《去野旅游网隐私权政策》</span></view>
+      </view>
+      <view class="descLine">
+        <image src="/images/hook.png" class="descImg"/>
+        <view class="descText"> 同意收到优惠促销及通知</view>
+      </view>
+  </view>
+  <button class="btn-box"  form-type='submit' bindtap="userinfotap">登录</button>
+</form>
+</view>

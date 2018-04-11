@@ -1,0 +1,78 @@
+/* pages/qy/qy.wxss */
+
+/* 搜索 */
+.searchs{
+  /* width:100rpx ; */
+  border:2rpx solid #c2c2c2 ;
+  padding:10rpx ;
+  margin:0 25rpx 0 25rpx ;
+  border-radius:20rpx ;
+  text-align:center ;
+  font-size:30rpx ;
+  background-color:#fff ;
+  color:#c2c2c2 ;
+}
+/* 内容容器 */
+.page_content{
+  /* height:400rpx ; */
+  height:100% ;
+  padding:20rpx ;
+
+}
+/* 标题 */
+.page__title{
+  font-size:41rpx ;
+}
+/* 提示 */
+.page__con{
+  font-size:25rpx ;
+  color:#c2c2c2 ;
+}
+/* 全部 */
+.page_all{
+  display:flex ;
+  justify-content: flex-end ;
+  align-items:flex-end ;
+  font-size:25rpx ;
+  color:#c2c2c2 ;
+  text-align:left ; 
+}
+
+/* 滚动框 */
+.bc{
+   white-space: nowrap;
+   display:flex ; 
+}
+
+/* 图片 */
+.bc_1 image{
+   width: 300rpx; 
+    /* height: 200rpx;   */
+   background-color:#000 ;
+   margin:0 10rpx ;
+
+}
+.bc_1 {
+  display:flex ;
+  flex-direction:column  ;
+  justify-content: flex-end ;
+}
+/* 图片简介 */
+.bc_2{
+  width:300rpx ;
+  font-size:32rpx ;
+  white-space: pre-line;
+  padding:0 20rpx ;
+}
+/* 图片介绍 */
+.bc_msg{
+  font-size:25rpx ;
+}
+
+/* 加载更多 */
+.more{
+  padding:20rpx ;
+  text-align:center ;
+  color:#fff ;
+  background-color:#ddd177 ;
+}
