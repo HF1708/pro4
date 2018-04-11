@@ -2,6 +2,7 @@
 namespace app\data\controller;
 use think\Controller;
 use think\captcha ;
+use think\Db;
 use \think\Session ;
 
 class Data extends Controller
@@ -15,6 +16,11 @@ class Data extends Controller
      * 作者：yonjin L
      * 时间：18-4-10
      */
+    function getRecommend()
+    {
+        $res = Db("user_story")->select() ;
+        echo json_encode($res) ;
+    }
 
     /**
      * 功能描述：获取

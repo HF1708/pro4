@@ -1,18 +1,24 @@
 // pages/qy/qy.js
+var qy = require("../../utils/qy");
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    qy:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var that = this ;
+    console.log(qy.init) ;
+    that.setData({
+      qy: qy.init
+    }) ;
+    
   },
 
   /**
