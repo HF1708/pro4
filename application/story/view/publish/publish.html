@@ -340,8 +340,11 @@
 	<script src="__JS__/font_size.min.js"></script>
 	<script src="__JS__/block_styles.min.js"></script>
 	<script src="__JS__/video.min.js"></script>
-    <script src="__JS__/file_upload.min.js"></script>
+
 	<script type="text/javascript">
+		//游记上传照片
+		var fileUploadUrl="{:url('story/publish/uploadImg')}";
+		//发表游记
         var publishUrl="{:url('story/publish/publishStory')}";
         /*
          个人中心的url
@@ -369,6 +372,7 @@
 		 */
         var $chat_url = "{:url('chat/Chat/index')}" ;
 	</script>
+	<script src="__JS__/file_upload.min.js"></script>
     <script src="__JS__/story/publish.js"></script>
 	<script type="text/javascript" src="__JS__/user/user_login_page.js"></script>
 	<script type="text/javascript" src="__JS__/user/user_login.js"></script>
