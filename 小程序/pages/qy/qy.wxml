@@ -1,14 +1,15 @@
 <!--pages/qy/qy.wxml-->
 
 <!-- 搜索 -->
-
 <view style="background-color:#ddd177 ;padding:20rpx 0;" >
   <navigator url="/pages/search/search" class="searchs" >
     <icon type="search" size="20" color="{{item}}"/>搜索
   </navigator>
 </view>
-
 <!--end 搜索 -->
+
+<dialog id='dialog' setName="旅游" ></dialog>
+
 
 <!-- 内容 推荐-->
 <view class="page_content" wx:for="{{qy}}" wx:for-index="idx" wx:for-item="itemName"  >

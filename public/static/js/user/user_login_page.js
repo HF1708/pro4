@@ -106,6 +106,7 @@ var app = new Vue({
             // 防止店家登录后有点用登录
             // 先关闭链接按钮
             that.msg_login_success_show = false ;
+            that.code_msg_user_show = false ;
             var $name = $("#login_user").val() ;
             var $pwd = $("#login_pwd").val() ;
             var $code = $("#login_code").val() ;
@@ -121,7 +122,6 @@ var app = new Vue({
                 dataType:'json' ,
                 success:function(res){
                     console.log(res) ;
-                    that.code_msg_user_show = false ;
                     if( res.code == 10000 )
                     {
                         that.Msg_body='登录成功';

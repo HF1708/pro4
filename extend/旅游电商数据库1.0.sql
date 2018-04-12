@@ -3,6 +3,26 @@
 -- use travel;
 -- 
 
+
+-- 福州景点表
+
+drop table if exists user_locations ;
+create table if not exists user_locations(
+	user_local_id int primary key auto_increment ,
+	user_local_name char(80),
+	user_local_image varchar(150) default '/images/location.png' ,
+	user_local_lng decimal(10,7) ,
+	user_local_lat decimal(10,7) 
+) ;
+insert into user_locations(user_local_name,user_local_lng,user_local_lat)values
+("三坊七巷","26.085262","119.296521") ,
+("福州国家森林公园","26.151599","119.298170") ,
+("罗源湾海洋世界","26.454919","119.605757") ,
+("石竹山","25.596900","119.198687") ,
+("贵安新天地休闲旅游度假区","26.238888","119.404639") ,
+("永泰天门山","25.821833","119.018601") ,
+("旗山森林人家旅游区","25.967513","119.123110") ;
+
 #地区表
 
 -- ----------------------------

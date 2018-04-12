@@ -3,7 +3,7 @@ var qy = [
   {
     "name" : "推荐" ,
     "msg":"POPULAR" ,
-    "url":"" ,
+    "url":"/pages/qy/qy" ,
     "sub" :[
       {
         "name": "张家界",

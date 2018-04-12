@@ -1,13 +1,14 @@
 // pages/qy/qy.js
 var qy = require("../../utils/qy");
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    qy:[]
-  },
+    qy:[] 
+  } ,
 
   /**
    * 生命周期函数--监听页面加载
@@ -23,9 +24,17 @@ Page({
     that.setData({
       qy: $data
     }) ;
+
+
   },
+
   /**
-   * 
+   * 功能描述：加载更多
+     * 参数：
+     * QQUser：
+     * 返回：推荐数据
+     * 作者：yonjin L
+     * 时间：18-4-11
    */
   more:function(){
     console.log("加载更多") ;
@@ -36,13 +45,13 @@ Page({
     }
     that.setData({
       qy: $data
-    });
+    }) ;
   } ,
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+    
   },
 
   /**

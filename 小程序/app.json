@@ -1,10 +1,11 @@
 {
   "pages": [
-    "pages/register/register",
     "pages/qy/qy",
+    "pages/register/register",
     "pages/index/index",
     "pages/logs/logs",
-    "pages/search/search"
+    "pages/search/search",
+    "pages/map/map"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -18,22 +19,22 @@
     "backgroundColor": "#ffffff",
     "list": [
       {
-        "pagePath": "pages/qy/qy" ,
-        "iconPath":"images/home.png" ,
-        "selectedIconPath":"images/homeHL.png" ,
-        "text": "主页" 
+        "pagePath": "pages/qy/qy",
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/homeHL.png",
+        "text": "主页"
       },
       {
-        "pagePath": "pages/register/register" ,
+        "pagePath": "pages/register/register",
         "iconPath": "images/my.png",
         "selectedIconPath": "images/myHL.png",
-        "text": "个人中心" 
-      } ,
+        "text": "个人中心"
+      },
       {
-        "pagePath": "pages/logs/logs" ,
-        "iconPath": "images/notes.png" ,
+        "pagePath": "pages/logs/logs",
+        "iconPath": "images/notes.png",
         "selectedIconPath": "images/notesHL.png",
-        "text": "游记" 
+        "text": "游记"
       }
     ]
   }
