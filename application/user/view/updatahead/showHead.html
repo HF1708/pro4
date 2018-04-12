@@ -3,13 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <title>上传头像</title>
+    <style type="text/css">
+        #yl{ width:200px; height:200px; background-image:url(http://p6gnb5g93.bkt.clouddn.com/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg); background-size:200px 200px;}
+        #file{ width:200px; height:200px; float:left; opacity:0;}
+    </style>
 </head>
 <body>
-<form action="{:url('/user/updatahead/upload')}" enctype="multipart/form-data" method="post">
-    <img src="{$user_image}"><br>
-    <input type="file" name="file" /> <br>
-    <input type="submit" value="上传" />
+<form id="sc" action="{:url('/user/updatahead/upload')}" method="post" enctype="multipart/form-data" target="shangchuan">
+
+    <input type="hidden" name="tp" value="{$user_image}" id="tp" />
+
+    <div id="yl">
+        <input type="file" name="file" id="file" onchange="document.getElementById('sc').submit()" />
+    </div>
+
 </form>
 
+<iframe style="display:none" name="shangchuan" id="shangchuan">
+</iframe>
+<!--<form action="{:url('/user/updatahead/upload')}" enctype="multipart/form-data" method="post" target="shangchuan">
+    <img src="{$user_image}"><br>
+    <input type="file" name="file" /> <br>
+    <input type="submit" value="确认上传" />
+</form>-->
+
 </body>
+<script type="text/javascript">
+    //显示用户原始头像
+    showHead();
+    function showHead() {
+        url=document.getElementById("tp").value;
+        var div = document.getElementById("yl");
+        div.style.backgroundImage = "url("+url+")";
+
+    }
+
+    //回调函数,调用该方法传一个文件路径，该变背景图
+    function showimg(url)
+    {
+        var div = document.getElementById("yl");
+        div.style.backgroundImage = "url("+url+")";
+
+        document.getElementById("tp").value = url;
+    }
+
+</script>
+
 </html>
