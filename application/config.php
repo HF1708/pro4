@@ -246,8 +246,8 @@ return [
     // 用户
     // 商家
     "default" =>[
-       "IMAGE_USER" => "http://p6gnb5g93.bkt.clouddn.com/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg" ,
-        "IMAGE_STORE" => "http://p6gnb5g93.bkt.clouddn.com/member_270x210.jpg" ,
+        "IMAGE_USER" => "http://p6gnb5g93.bkt.clouddn.com/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg" ,
+        "IMAGE_STORE" => "http://p6gnb5g93.bkt.clouddn.com/member_270x210.jpg"
     ] ,
     // 登录返回消息配置
     "loginMsg" => [
