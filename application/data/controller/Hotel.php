@@ -18,4 +18,17 @@ class Hotel extends  Controller
         $allHotel=db('store_shotel')->select();
         echo json_encode($allHotel) ;
     }
+    /**
+     * 功能描述：酒店详情页
+     * 参数：
+     * 返回：当前点击的酒店
+     * 作者：邱萍
+     * 时间：18-4-12
+     */
+    public function hoteldeteil(){
+        $hid=input('?get.hid')?input('get.hid'):'';
+        $Hoteldeteil=db('store_shotel')->where(['hId'=>$hid])->select();
+        echo json_encode($Hoteldeteil) ;
+    }
+
 }
