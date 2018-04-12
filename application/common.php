@@ -131,7 +131,7 @@ class user{
      */
     public function uploadImage($file)
     {
-
+        $that = $this ;
         $key = $file['name'] ;
         $filePath = $file['tmp_name'] ;
 
@@ -158,8 +158,16 @@ class user{
 
         // 调用 UploadManager 的 putFile 方法进行文件的上传。
         list($ret, $err) = $uploadMgr->putFile($token, $key, $filePath);
-        if ($err !== null) {
-            return($err);
+        if ($err !== null ) {
+            $key = mt_rand(0,100000000).$file['name'] ;
+            list($ret, $er) = $uploadMgr->putFile($token, $key, $filePath);
+            if ($er !== null ) {
+                return($er);
+            } else {
+                $url = $that->unicode_decode($ret['key']) ;
+                $http_url = "http://p6gnb5g93.bkt.clouddn.com/".$key ;
+                return $http_url ;
+            }
         } else {
             $url = $this->unicode_decode($ret['key']) ;
             $http_url = "http://p6gnb5g93.bkt.clouddn.com/".$key ;

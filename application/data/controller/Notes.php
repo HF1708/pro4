@@ -25,5 +25,14 @@ class Notes extends  Controller
         $notes=json_encode($getnotes);
         echo $notes;
     }
+    public function getItem(){
+        $sid=input('?get.sid')?input('get.sid'):"";
+        $where=[
+            'sid'=>$sid
+        ];
+        $getitem=db('user_story a')->join('user_user b','a.userId=b.user_id')->where($where)->select();
+        $item=json_encode($getitem);
+        echo $item;
+    }
 
 }
