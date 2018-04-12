@@ -109,7 +109,7 @@ Page({
       if(this.data.code == mobileCode&&this.data.mobile == mobile){
         var _this=this;
         wx.request({
-          url: 'http://47.93.193.212/data/User/login',
+          url: 'http://www.qqy.fun/data/User/login',
           method: "POST",
           data: { "mobile": mobile},
           header: { 'content-type': 'application/x-www-form-urlencoded' },
@@ -121,7 +121,7 @@ Page({
                 data: data,
                 success: function (res) {
                   wx.redirectTo({
-                    url: '../qy/qy'
+                    url: '../person/person'
                   })
                 }
               })

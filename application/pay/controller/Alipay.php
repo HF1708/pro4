@@ -5,7 +5,9 @@
  * Date: 2018/4/11
  * Time: 11:22
  */
+namespace app\pay\controller;
 use think\Controller;
+use \think\Loader;
 class Alipay extends Controller
 {
     /**
@@ -16,7 +18,18 @@ class Alipay extends Controller
      * 时间：18-4-10
      */
     public function index(){
-        $AlipayClient alipayClient = new DefaultAlipayClient(URL,APP_ID,APP_PRIVATE_KEY,FORMAT,CHARSET,ALIPAY_PUBLIC_KEY,SIGN_TYPE);
+//        Loader::import('alipaydemo.index', EXTEND_PATH);
 
+       return $this->fetch();
+
+    }
+    public function notify_url(){
+        Loader::import('alipaydemo.notify_url', EXTEND_PATH);
+    }
+    public function return_url(){
+        Loader::import('alipaydemo.return_url', EXTEND_PATH);
+    }
+    public function pagepay(){
+        Loader::import('alipaydemo.pagepay.pagepay', EXTEND_PATH);
     }
 }
