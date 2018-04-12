@@ -35,22 +35,21 @@
   </view> -->
   <view class="P_order_P" wx:if="{{orderOrBusiness=='order'}}">  
    <scroll-view class="orderPage-sideBar2" bindscrolltolower="lower" scroll-y="true" style="height:400px;width:320px;overflow-y:scroll">
-      <block wx:for="{{arr3}}" wx:key="">
-        <view class="menuList menuList2" bindtap="toFoodDetail">
-          <image src="{{item.img}}"></image>
+      <block wx:for="{{hotel}}"wx:for-index="idx" wx:for-item="itemName" >
+        <view class="menuList menuList2" data-postId="{{itemName.hId}}" bindtap="toHoteilDetail" >
+          <image src="http://p6gnb5g93.bkt.clouddn.com/{{itemName.hImg}}"></image>
           <view class="P_message">
-            <view>{{item.name}}</view>
-            <view class="P_small">{{item.message}}</view>
-            <view class="P_small" catchtap="donothing">{{item.message2}}</view>
+            <view>{{itemName.hName}}</view>
+            <view class="P_small">地址：{{itemName.hAddress}}</view>
+            <view class="P_small" catchtap="donothing">房间数：{{itemName.hRoomNumber}}间</view>
             <view class="P_bottom" catchtap="donothing">
               <view>
-                <text class="price">¥{{item.price}} </text>
-                <text class="line_t">¥{{item.price}}</text> 
+                <text class="price">¥{{itemName.hPrice}}元 </text>
               </view>
               <view catchtap="noTo">
                 <text class="iconfont icon-reduce" data-id="{{index}}" bindtap="reduce2" wx:if="{{item.message3===''}}"></text>
                 <text class="iconfont icon-reduce" data-id="{{index}}" bindtap="reduce" wx:if="{{item.message3!==''}}"></text>
-                <text> {{item.num}} </text>
+                <text> 0 </text>
                 <text class="iconfont icon-add" data-id="{{index}}" bindtap="add2"  wx:if="{{item.message3===''}}"></text>
                 <text class="iconfont icon-add" data-id="{{index}}" bindtap="add"  wx:if="{{item.message3!==''}}"></text>
               </view>
