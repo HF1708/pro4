@@ -431,8 +431,14 @@ $(function() {
             data:{},
             type:'get',
         success:function(res){
-
-        }
+                var msg=JSON.parse(res);
+                console.log(msg);
+                if(msg.code==1008){
+                    alert(msg.msg)
+                }else if(msg.code==1000){
+                    window.location.
+                }
+            }
         });
     })
 

@@ -76,10 +76,16 @@ class Hoteldetail extends Controller
         $hid=input('?get.hId')?input('get.hId'):"";
         $time=date('Y/m/d H:i:s', time());
         $state=0;
-        //$user=session::get('loginData');
-        $user=1001;
-        $data=['huId'=>$hid,'hoTime'=>$time,'user_id'=>$user,'state'=>$state];
-        $add_order=db('store_hotelOrder')->insert($data);
+        $user=session::get('loginData');
+        if(empty($user)){
+            $arr['code']=1008;
+            $arr['msg']="未登录";
+            $arr['data']=[];
+            echo json_encode($arr);
+            exit();
+        }
 
+        $data=['huId'=>$hid,'hoTime'=>$time,'user_id'=>$user,'orderstate'=>$state];
+        $add_order=db('store_hotelorder')->insert($data);
     }
 }
