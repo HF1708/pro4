@@ -7,6 +7,8 @@
     "pages/logs/logs",
     "pages/search/search",
     "pages/item/item" ,
+    "pages/person/person",
+    "pages/changeIntro/changeIntro",
     "pages/map/map"
   ],
   "window": {
