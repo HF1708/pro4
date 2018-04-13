@@ -1,83 +1,16 @@
 //index.js
 
-
-
 var app = getApp()
-
-// Page({
-
-//   /**
-//    * 页面的初始数据
-//    */
-//   data: {
-    
-//   },
-
-//   /**
-//    * 生命周期函数--监听页面加载
-//    */
-//   onLoad: function (options) {
-    
-//   },
-
-//   /**
-//    * 生命周期函数--监听页面初次渲染完成
-//    */
-//   onReady: function () {
-    
-//   },
-
-//   /**
-//    * 生命周期函数--监听页面显示
-//    */
-//   onShow: function () {
-    
-//   },
-
-//   /**
-//    * 生命周期函数--监听页面隐藏
-//    */
-//   onHide: function () {
-    
-//   },
-
-//   /**
-//    * 生命周期函数--监听页面卸载
-//    */
-//   onUnload: function () {
-    
-//   },
-
-//   /**
-//    * 页面相关事件处理函数--监听用户下拉动作
-//    */
-//   onPullDownRefresh: function () {
-    
-//   },
-
-//   /**
-//    * 页面上拉触底事件的处理函数
-//    */
-//   onReachBottom: function () {
-    
-//   },
-
-//   /**
-//    * 用户点击右上角分享
-//    */
-//   onShareAppMessage: function () {
-    
-//   }
-// })
-
 Page({
+    /**
+   * 页面的初始数据
+   */
   data: {
     pageType: 1,
     // index
     userInfo: {},
-    // open: false,   //是否打开红包
-    // page: true,   //红包是否显示 
     orderOrBusiness: 'order',
+
     // buycar
     totalMoney: 0,
     chooseAll: false,
@@ -100,27 +33,27 @@ Page({
     // me
     img: ''
   },
-
-  onLoad: function () {
-    var that = this
-    wx.getLocation({
-      type: 'gcj02',
-      success: function (res) {
-        var latitude = res.latitude
-        var longitude = res.longitude
-        wx.request({
-          url: 'http://api.map.baidu.com/geocoder/v2/?ak=LClVsCTaW2aH8MzuviP1YMymrHWOIVvg&coordtype=gcj02ll&location=' + latitude + ',' + longitude + '&output=json&pois=0',
+    /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function () {    
+    var that = this;
+    // 显示酒店页面
+      wx.request({
+        url: 'https://www.qqy.fun/data/Hotel/gethotel',
           method: "get",
+          dataType:'json',
+          header:{'content-type':'application/x-www-form-urlencoded'},
           success: function (res) {
-            var address = res.data.result.formatted_address;
-            address = address.split('省')[1].split('市')[1];
+            console.log(res.data);
             that.setData({
-              map_address: address
+              hotel:res.data
             }) 
-            console.log(that.data.map_address)
+            console.log(that.data.hotel);
+          },
+          fail:function(err){
+            console.log(err)
           }
-        })
-      }
     })
     app.getUserInfo(function (userInfo) {
       that.setData({
@@ -138,7 +71,7 @@ Page({
   },
   turnMenu: function(e) {
     var type = e.target.dataset.index;
-    console.log(type)
+    // console.log(type)
     this.setData({
       orderType: type
     })
@@ -210,7 +143,7 @@ Page({
     wx.scanCode({
       onlyFromCamera: true,
       success: (res) => {
-        console.log(res);
+        // console.log(res);
         that.setData({
           restaurant: true
         })
@@ -223,9 +156,14 @@ Page({
       }
     })
   },
-  toFoodDetail: function() {
+  //酒店详情跳转
+  toHoteilDetail: function(event) {
+    console.log('hahh')
+    console.log(event)
+    let postId = event.currentTarget.dataset.postid;
+    console.log(postId)
     wx.navigateTo({
-      url: '../detail/detail',
+      url: '../detail/detail?hId=' + postId,
     })
   },
   reduce: function (e) {
