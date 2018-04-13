@@ -9,7 +9,8 @@
     "pages/search/search",
     "pages/item/item" ,
     "pages/changeIntro/changeIntro",
-    "pages/map/map"
+    "pages/map/map" ,
+    "pages/hotel/hotel"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -29,7 +30,7 @@
         "text": "主页"
       },
       {
-        "pagePath": "pages/logs/logs" ,
+        "pagePath": "pages/hotel/hotel" ,
         "text": "酒店" ,
         "iconPath": "images/my.png",
         "selectedIconPath": "images/myHL.png"

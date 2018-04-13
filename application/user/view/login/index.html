@@ -284,7 +284,7 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal" >退出</button>
-						<a :href="Msg_footer_link" v-show="msg_login_success_show" class="btn btn-default" >{{Msg_footer}}</a>
+						<a href="javascript:history.go(-1) ;" v-show="msg_login_success_show" class="btn btn-default" >{{Msg_footer}}</a>
 						<a :href="Msg_footer_link" v-show="!msg_login_success_show"  class="btn btn-default" data-dismiss="modal" >{{Msg_footer}}</a>
 					</div>
 				</div>

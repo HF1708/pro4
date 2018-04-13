@@ -25,7 +25,7 @@
           </view>
         </view>
         <view class="weui-flex__item page_all">
-          <navigator class="placeholder" open-type="navigate" url="{{itemName.url}}" >全部</navigator>
+            <navigator class="placeholder" open-type="switchTab" url="{{itemName.url}}" >全部</navigator>
         </view>
     </view>
   <!-- 可移动区域 -->
@@ -33,11 +33,12 @@
     <scroll-view scroll-x="true" class="bc" style="width:{{100|Int}}% ;overflow:hidden;white-space:nowrap; " >
         <view class="img">
             <view  style="overflow:visible ;display: inline-block ; "  wx:for="{{itemName.sub}}" wx:for-index="i" wx:for-item="item" >
-              <view class="bc_1">
-                <image src="{{item.src}}" mode='widthFix' ></image>
+            <navigator url="{{itemName.url}}?id={{i}}" open-type="switchTab"  >
+                <view class="bc_1">
+                  <image src="{{item.src}}" mode='widthFix' ></image>
                 <view class="bc_2 bc_msg ">{{item.msg}}</view>
               </view>
-              
+            </navigator>
             </view>
         </view>
     </scroll-view>
