@@ -102,7 +102,7 @@ Page({
     wx.showToast({
       title: '登录中...',
       icon: 'loading',
-      duration: 10000
+      duration: 5000
     })
     var mobileCode =wx.getStorageSync('code')
     var mobile = wx.getStorageSync('mobile')
@@ -120,7 +120,7 @@ Page({
                 key: 'user',
                 data: data,
                 success: function (res) {
-                  wx.redirectTo({
+                  wx.switchTab({
                     url: '../person/person'
                   })
                 }
@@ -142,6 +142,7 @@ Page({
           }
         })
       }else{
+        wx.hideToast();
         this.setData(
           { popErrorMsg: "验证码错误" }
         );
