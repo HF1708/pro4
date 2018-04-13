@@ -4,7 +4,6 @@ var qy = [
     "name" : "推荐" ,
     "msg":"POPULAR" ,
     "url":"/pages/notes/notes" ,
-    "opentype":"tarbar",
     "sub" :[
       {
         "name": "张家界",
@@ -41,8 +40,7 @@ var qy = [
   {
     "name": "酒店",
     "msg": "HOTEL",
-    "url": "../hotel/hotel",
-    "opentype": "tarbar",
+    "url": "pages/hoteil/hoteil",
     "sub": [
       {
         "name": "台北凯撒大饭店",
@@ -85,7 +83,6 @@ var qy = [
   "name": "游记",
   "msg": "TRAVELS",
   "url": "/pages/notes/notes",
-  "opentype": "tarbar",
   "sub": [
     {
       "name": "北海道",
