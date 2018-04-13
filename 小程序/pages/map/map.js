@@ -52,26 +52,35 @@ Component({
     var data = {
       name: this.properties.setName
     } ;
-
-    // 获取对应经纬度信息
-    wx.request({
-      url: 'https://www.qqy.fun/data/Data/getLL' , //仅为示例，并非真实的接口地址
-      data: data , 
-      method:"POST" ,
-      dataType:"json" ,
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
+    wx.getStorage({
+      //获取数据的key
+      key: 'user',
       success: function (res) {
-        that.setData({
-          markers: res.data
-        }) ;
-        that.mapCtx.includePoints({
-          padding: [10],
-          points: that.data.markers
+        console.log(res.data) ;
+
+        // 获取对应经纬度信息
+        wx.request({
+          url: 'https://www.qqy.fun/data/Data/getLL', //仅为示例，并非真实的接口地址
+          data: data,
+          method: "POST",
+          dataType: "json",
+          header: {
+            'content-type': 'application/json' // 默认值
+          },
+          success: function (res) {
+            that.setData({
+              markers: res.data
+            });
+            that.mapCtx.includePoints({
+              padding: [10],
+              points: that.data.markers
+            });
+          }
         });
       }
     }) ;
+    console.log("asdfs2131651f3");
+    
     /**
      * 获取用户位置信息
      */

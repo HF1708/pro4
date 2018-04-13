@@ -137,7 +137,7 @@ Page({
             wx.showToast({
               title: '登录成功',
               icon: 'success',
-              duration: 10000
+              duration: 1500
             })
           }
         })

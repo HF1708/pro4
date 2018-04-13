@@ -1,4 +1,6 @@
 
+
+
 <view class='userInfo'>
   头像区域
   <image src="{{headSrc}}" class="myHead"></image>
