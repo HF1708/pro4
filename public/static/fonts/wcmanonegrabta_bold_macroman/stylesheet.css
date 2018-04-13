@@ -2,7 +2,8 @@
     font-family: 'wc_mano_negra_btabold';
     src: url('WCManoNegraBoldBta-webfont.eot');
     src: url('WCManoNegraBoldBta-webfont.eot?#iefix') format('embedded-opentype'),
-         url('WCManoNegraBoldBta-webfont.woff') format('woff'),
+         /*url('WCManoNegraBoldBta-webfont.woff') format('woff'),*/
+         url('http://p6gnb5g93.bkt.clouddn.com/WCManoNegraBoldBta-webfont.woff') format('woff'),
          url('WCManoNegraBoldBta-webfont.ttf') format('truetype'),
          url('WCManoNegraBoldBta-webfont.svg#wc_mano_negra_btabold') format('svg');
     font-weight: normal;
