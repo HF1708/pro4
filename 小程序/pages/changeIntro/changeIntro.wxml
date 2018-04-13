@@ -7,11 +7,11 @@
         </view>
         <view class="row">
             <text>邮箱：</text>
-            <input type="password" value="{{email}}" name="userPassword" placeholder="" />
+            <input type="text" value="{{email}}" name="eamil" placeholder="" />
         </view>
         <view class="row">
             <text>电话：</text>
-            <input type="password" value="{{phone}}" name="userPassword" placeholder="" />
+            <input disabled='true' type="text" value="{{phone}}" name="phone" placeholder="" />
         </view>
         <view class="row">
             <button type="primary" size="mini" form-type="submit">修改</button>
