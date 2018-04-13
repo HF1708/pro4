@@ -13,9 +13,8 @@
     <!---- start-smoth-scrolling---->
     <script type="text/javascript" src="__STATIC__/js/move-top.js"></script>
     <script type="text/javascript" src="__STATIC__/js/easing.js"></script>
-    <script type="text/javascript" src="__STATIC__/js/vue.min.js"></script>
+    <script type="text/javascript" src="__JS__/vue.min.js"></script>
     <script type="text/javascript" src="__STATIC__/js/vue-resource.min.js"></script>
-    <script type="text/javascript" src="__STATIC__/js/bootstrap.js"></script>
     <link href="__STATIC__/css/bootstrap.min.css" rel="stylesheet">
     <link href="__STATIC__/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="all" href="__STATIC__/css/daterangepicker-bs3.css" />
@@ -121,28 +120,33 @@
     <!----//End-top-nav-script---->
 </head>
 <body>
+<div id="app">
     <!----- 酒店导航栏---->
     <div id="home" class="header">
-    <div class="top-header">
-        <div class="container">
-            <div class="logo">
-                <a href="index.html"><span>酒店</span>预订<span>...</span></a>
+        <div class="top-header">
+            <div class="container">
+                <div class="logo">
+                    <a href="index.html"><span>去野</span>Journey<span>...</span></a>
+                </div>
+                <!----start-top-nav---->
+                <nav class="top-nav" id="login-register">
+                    <ul class="top-nav">
+                        <li class="active"><a href="{:url('index/index/index')}">首页home</a></li>
+                        <li><a href="{:url('store/hotel/hotel')}">酒店Hotel</a></li>
+                        <li><a href="{:url('story/story/story')}">遊記notes</a></li>
+                        <li>
+                            <user-login></user-login>
+                        </li>
+                        <li>
+                            <user-register></user-register>
+                        </li>
+                    </ul>
+                    <a href="#" id="pull"><img src="__STATIC__/images/nav-icon.png" title="menu" /></a>
+                </nav>
+                <div class="clearfix"> </div>
             </div>
-            <!----nav导航栏---->
-            <nav class="top-nav">
-                <ul class="top-nav">
-                    <li class="active"><a href="{:url('index/index/index')}">首页home</a></li>
-                    <li class="active"><a href="menu.html">酒店</a></li>
-                    <li><a href="reservation.html">Reservations</a></li>
-                    <li><a href="news.html"> News</a></li>
-                    <li><a href="reviews.html">Reviews</a></li>
-                </ul>
-                <a href="#" id="pull"><img src="__STATIC__/images/nav-icon.png" title="menu" /></a>
-            </nav>
-            <div class="clearfix"> </div>
         </div>
     </div>
-</div>
     <!-----酒店内容区域 ----->
     <div class="menu-page">
         <!------ 酒店logo图片 ----->
@@ -367,6 +371,7 @@
         </div>
     </div>
 </div>
+</div>
 </body>
 <script type="text/javascript">
     // 日历插件
@@ -383,7 +388,7 @@
         hideCityInput: '#city',
         hideProvinceInput: '#province',
         callback: function(city_id){
-            alert(city_id);
+
         }
     });
     cityPicker.init();
@@ -413,5 +418,44 @@
     }
 
 </script>
+<script type="text/javascript">
+    //跳转遊記详情页面
+    var storydetailUrl="{:url('story/storydetail/storydetail')}";
+    //当前点击的游记存入session
+    var setstory="{:url('story/story/setStory')}";
+    //是否已登录
+    var $user_login_already = "{:url('user/Login/userLoginAlready')}" ;
+    //发表遊記
+    var publishnotesUrl="{:url('story/publish/publish')}";
+    //获取遊記
+    var getNotesUrl="{:url('story/story/getNotes')}";
+    /*
+     个人中心的url
+     */
+    var $user_person_url = "{:url('user/Person/index')}" ;
+    /*
+    登录页面的url
+     */
+    var $login_jump = "{:url('user/Login/index')}" ;
+    /*
+    注册页面的url
+     */
+    var $register_jump = "{:url('user/Register/index')}" ;
+    /*
+    是否已登录
+     */
+    var $user_login_already = "{:url('user/Login/userLoginAlready')}" ;
+    /*
+        退出登录的url
+         */
+    var $user_login_out = "{:url('user/Login/outLogin')}" ;
+    /*
+    聊天界面
+     */
+    var $chat_url = "{:url('chat/Chat/index')}" ;
+</script>
+<script type="text/javascript" src="__STATIC__/js/bootstrap.js"></script>
+<script type="text/javascript" src="__JS__/user/user_login_page.js"></script>
+<script type="text/javascript" src="__JS__/user/user_login.js"></script>
 </html>
 
