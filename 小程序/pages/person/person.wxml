@@ -1,3 +1,4 @@
+
 <view class='userInfo'>
   头像区域
   <image src="{{headSrc}}" class="myHead"></image>
@@ -16,3 +17,7 @@
    <view class="my-item">
     <navigator url="#" hover-class="navigator-hover">系统设置</navigator>
   </view>
+
+<!--pages/person/person.wxml-->
+
+
