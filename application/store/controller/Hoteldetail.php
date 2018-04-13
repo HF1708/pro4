@@ -85,11 +85,17 @@ class Hoteldetail extends Controller
             echo json_encode($arr);
             exit();
         }
-        $data=['huId'=>$hid,'hoTime'=>$time,'user_id'=>$user,'orderstate'=>$state,""=>$WIDout_trade_no];
-        $add_order=db('store_hotelorder')->insert($data);
-        if($add_order){
+        $data=['huId'=>$hid,'hoTime'=>$time,'user_id'=>$user,'orderstate'=>$state,'hoId'=>$WIDout_trade_no];
+        $re=$add_order=db('store_hotelorder')->insert($data);
+        if($re===1){
             $arr['code']=1000;
-            $arr['msg']="预定成功";
+            $arr['msg']="订单生成成功";
+            $arr['data']=[];
+            echo json_encode($arr);
+            exit();
+        }else{
+            $arr['code']=1001;
+            $arr['msg']="订单生成失败";
             $arr['data']=[];
             echo json_encode($arr);
             exit();
@@ -117,20 +123,26 @@ class Hoteldetail extends Controller
             echo json_encode($arr);
             exit();
         }
-        $data=['huId'=>$hid,'hoTime'=>$time,'user_id'=>$user,'orderstate'=>$state,"hoId"=>$WIDout_trade_no];
-        $re=$add_order=db('store_hotelorder')->insert($data);
-        if($re===1){
-            $arr['code']=1000;
-            $arr['msg']="订单生成成功";
-            $arr['data']=[];
-            echo json_encode($arr);
-            exit();
-        }else{
-            $arr['code']=1001;
-            $arr['msg']="订单生成失败";
-            $arr['data']=[];
-            echo json_encode($arr);
-            exit();
+
+
+
+
+
+
+
+
+
+
+
+        $hid=input('?get.hId')?input('get.hId'):"";
+        $time=date('Y/m/d H:i:s', time());
+        $state=1;
+        //$user=session::get('loginData');
+        $user=1001;
+        $data=['hId'=>$hid,'hscTime'=>$time,'userId'=>$user,'hsc_state'=>$state];
+        $add_order=db('store_hotelcollect')->insert($data);
+        if($add_order){
+            echo 1;
         }
     }
 

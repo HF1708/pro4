@@ -49,10 +49,10 @@ if($result) {//验证成功
     $re=db("store_hotelorder")->where("hoId",$out_trade_no)->update($data);
     if($re){
         echo "<script>   window.opener=null;
-    window.close();</script>"
+    window.close();</script>";
     }else{
         echo "<script>   window.opener=null;
-    window.close();</script>"
+    window.close();</script>";
     }
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
