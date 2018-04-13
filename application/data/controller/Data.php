@@ -59,14 +59,21 @@ class Data extends Controller
      */
     function getTravelsLL()
     {
+        $that = new \user() ;
+
+        $id = $that->getData('user_id',"loginMsg","DARA_TYPE_ERROR") ;
         $field = [
-            'user_local_id' => "id" ,
-            'user_local_lat' => "latitude" ,
-            'user_local_lng' => "longitude",
-            'user_local_name'=>'name' ,
-            "user_local_image" => "iconPath"
+            'a.user_local_id' => "id" ,
+            'a.user_local_lat' => "latitude" ,
+            'a.user_local_lng' => "longitude",
+            'a.user_local_name'=>'name' ,
+            "a.user_local_image" => "iconPath"
         ] ;
-        $res = Db("user_locations")->field($field)->select() ;
+        $where = [
+            "w.userId" => $id
+        ] ;
+        $res = Db("user_locations")->alias('a')->field($field)
+            ->join('user_story w','a.user_local_id = w.user_local_id')->where($where)->select() ;
 
 
         return $res ;

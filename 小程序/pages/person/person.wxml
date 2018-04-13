@@ -1,5 +1,5 @@
 
-
+<dialog id='dialog' setName="旅游" ></dialog>
 
 <view class='userInfo'>
   头像区域
