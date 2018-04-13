@@ -85,16 +85,42 @@ Page({
   },
   //提交表单
   formSubmit:function(e){
-    //console.log(e.detail.value);
-    data=e.detail.value
-    wx.request({
-      url: 'http://www.qqy.fun/data/User/login',
-      data: data,
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
+    wx.showModal({
+      title: '提示',
+      content: '确定要修改个人信息吗？',
       success: function (res) {
-        console.log(res.data)
+        if (res.confirm) {
+          console.log(e.detail.value);
+          var data = e.detail.value
+          wx.request({
+            url: 'http://www.qqy.fun/data/changeuser/changeUser',
+            data: data,
+            method: "POST",
+            header: {
+              'content-type': 'application/json' // 默认值
+            },
+            success: function (res) {
+              if(res.data==1){
+                wx.showToast({
+                  title: '修改成功',
+                  icon: 'success',
+                  duration: 2000
+                })
+              }
+              else{
+                wx.showToast({
+                  title: '修改失败',
+                  icon: 'success',
+                  image:'/images/fail.png',
+                  duration: 2000
+                })
+              }
+              console.log(res)
+            }
+          })
+        } else if (res.cancel) {
+          //console.log('用户点击取消')
+        }
       }
     })
   }
