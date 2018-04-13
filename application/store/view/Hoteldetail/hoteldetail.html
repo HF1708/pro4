@@ -344,14 +344,15 @@
             success:function(res){
                 $allconment=JSON.parse(res);
                 $('#commentall').append('<div class="user_msg">'+$allconment.data.userId+'</div><div style="content_msg">'+$allconment.data.hcContent+'</div><div style="float: right">'+$allconment.data.hcTime+'</div></br>');
+
             }
 
         })
 
     });
-    $('#bye_hotel').click(function(){
 
-        if(confirm("确定要购买？")){
+    $('#bye_hotel').click(function(){
+        if(confirm("确定预定？")){
             $.ajax({
                 url:'{:url("store/Hoteldetail/add_order")}?hId='+hId,
                 data:{},
@@ -362,7 +363,8 @@
                     if(msg.code==1008){
                         alert(msg.msg)
                     }else if(msg.code==1000){
-                        window.location.
+
+                        window.location.href='{:url("pay/alipay/index")}?hId='+hId;
                     }
                 }
             });
