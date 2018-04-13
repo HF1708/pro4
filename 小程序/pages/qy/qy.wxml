@@ -24,7 +24,7 @@
           </view>
         </view>
         <view class="weui-flex__item page_all">
-          <navigator class="placeholder" url="{{itemName.url}}" >全部</navigator>
+          <navigator class="placeholder" open-type="navigate" url="{{itemName.url}}" >全部</navigator>
         </view>
     </view>
   <!-- 可移动区域 -->

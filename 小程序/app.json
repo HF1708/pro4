@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/register/register",
+    "pages/person/person" ,
     "pages/notes/notes",
     "pages/qy/qy",
     "pages/index/index",
@@ -33,7 +34,7 @@
         "selectedIconPath": "images/myHL.png"
       } ,
       {
-        "pagePath": "pages/notes/notes",
+        "pagePath": "pages/person/person",
         "iconPath": "images/my.png",
         "selectedIconPath": "images/myHL.png",
         "text": "个人中心"
