@@ -45,6 +45,7 @@ class Publish extends Controller
         //thinkphp内置了一个请求类，用于接收前端发送过来的数据，可以统一进行过滤
         $title=input('?post.title')?input('post.title'):"";
         $content=input('?post.content')?input('post.content'):"";
+        $time=input('?post.time')?input('post.time'):"";
         //判断标题和内容是否为空，如果为空退出
         if(empty($title)||empty($content)){
             $returnJson=[
@@ -60,7 +61,9 @@ class Publish extends Controller
             $where=[
                 'userId'=>$userId,
                 'title'=>$title,
-                'content'=>$content
+                'content'=>$content,
+                'state'=>0,
+                'edittime'=>$time
             ];
             $result=db('user_story')->insert($where);
 //            var_dump($result);

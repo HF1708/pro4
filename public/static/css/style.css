@@ -2047,3 +2047,7 @@ input:focus{
 .banner img{
 	display: inline-block;
 }
+#photo img{
+	width:100%;
+	height:auto;
+}
