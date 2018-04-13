@@ -120,7 +120,7 @@ Page({
                 key: 'user',
                 data: data,
                 success: function (res) {
-                  wx.switchTab({
+                  wx.reLaunch({
                     url: '../person/person'
                   })
                 }
