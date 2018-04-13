@@ -14,6 +14,7 @@
  * 该页面可在本机电脑测试
  * 可放入HTML等美化页面的代码、商户业务逻辑程序代码
  */
+
 require_once("config.php");
 require_once 'pagepay/service/AlipayTradeService.php';
 
@@ -41,10 +42,19 @@ if($result) {//验证成功
 	//支付宝交易号
 	$trade_no = htmlspecialchars($_GET['trade_no']);
 		
-	echo "验证成功<br />支付宝交易号：".$trade_no;
+//	echo "验证成功<br />支付宝交易号：".$trade_no;
 
 	//——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
-	
+    $data=["alipaytransactionID"=>$trade_no,"orderstate"=>1];
+    $re=db("store_hotelorder")->where("hoId",$out_trade_no)->update($data);
+    if($re){
+        echo "<script>   window.opener=null;
+    window.close();</script>"
+    }else{
+        echo "<script>   window.opener=null;
+    window.close();</script>"
+    }
+
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
 else {

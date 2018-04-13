@@ -353,21 +353,15 @@
 
     $('#bye_hotel').click(function(){
         if(confirm("确定预定？")){
-            $.ajax({
-                url:'{:url("store/Hoteldetail/add_order")}?hId='+hId,
-                data:{},
-                type:'get',
-                success:function(res){
-                    var msg=JSON.parse(res);
-                    console.log(msg);
-                    if(msg.code==1008){
-                        alert(msg.msg)
-                    }else if(msg.code==1000){
-
-                        window.location.href='{:url("pay/alipay/index")}?hId='+hId;
-                    }
+            $.get("{:url('user/Login/islogin')}",function (res) {
+                var msg=JSON.parse(res);
+                if(msg.code==1008){
+                    alert("未登录 请先登录");
+                }else if(msg.code==1000) {
+                    window.location.href = '{:url("pay/alipay/index")}?hId=' + hId;
                 }
-            });
+            })
+
         }
     });
     function collect(obj ){

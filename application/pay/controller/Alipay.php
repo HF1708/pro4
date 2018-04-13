@@ -8,6 +8,8 @@
 namespace app\pay\controller;
 use think\Controller;
 use \think\Loader;
+use \think\Db;
+
 class Alipay extends Controller
 {
     /**

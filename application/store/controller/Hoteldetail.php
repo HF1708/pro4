@@ -74,6 +74,7 @@ class Hoteldetail extends Controller
      **/
     public function add_order(){
         $hid=input('?get.hId')?input('get.hId'):"";
+        $WIDout_trade_no=input('?get.WIDout_trade_no')?input('get.WIDout_trade_no'):"";
         $time=date('Y/m/d H:i:s', time());
         $state=0;
         $user=session::get('loginData');
@@ -84,7 +85,7 @@ class Hoteldetail extends Controller
             echo json_encode($arr);
             exit();
         }
-        $data=['huId'=>$hid,'hoTime'=>$time,'user_id'=>$user,'orderstate'=>$state];
+        $data=['huId'=>$hid,'hoTime'=>$time,'user_id'=>$user,'orderstate'=>$state,""=>$WIDout_trade_no];
         $add_order=db('store_hotelorder')->insert($data);
         if($add_order){
             $arr['code']=1000;
@@ -104,8 +105,9 @@ class Hoteldetail extends Controller
      **/
     public function collect(){
         $hid=input('?get.hId')?input('get.hId'):"";
+        $WIDout_trade_no=input('?get.WIDout_trade_no')?input('get.WIDout_trade_no'):"";
         $time=date('Y/m/d H:i:s', time());
-        $state=1;
+        $state=0;
 
         $user=session::get('loginData');
         if(empty($user)){
@@ -115,10 +117,21 @@ class Hoteldetail extends Controller
             echo json_encode($arr);
             exit();
         }
-
-        $data=['huId'=>$hid,'hoTime'=>$time,'user_id'=>$user,'orderstate'=>$state];
-        $add_order=db('store_hotelorder')->insert($data);
-
+        $data=['huId'=>$hid,'hoTime'=>$time,'user_id'=>$user,'orderstate'=>$state,"hoId"=>$WIDout_trade_no];
+        $re=$add_order=db('store_hotelorder')->insert($data);
+        if($re===1){
+            $arr['code']=1000;
+            $arr['msg']="订单生成成功";
+            $arr['data']=[];
+            echo json_encode($arr);
+            exit();
+        }else{
+            $arr['code']=1001;
+            $arr['msg']="订单生成失败";
+            $arr['data']=[];
+            echo json_encode($arr);
+            exit();
+        }
     }
 
 
