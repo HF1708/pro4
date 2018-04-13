@@ -14,6 +14,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    /**
+     * 判断用户是否已登录
+     */
+    (!wx.getStorageSync('user'))?( wx.navigateTo({ url: "/pages/register/register" }) ):"" ;
+    // end 
+
   },
 
   /**
