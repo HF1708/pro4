@@ -5,7 +5,7 @@ Page({
    */
   data: {
     headSrc: 'http://p6gnb5g93.bkt.clouddn.com/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg' ,
-    uName:'姓名'
+    uName:'游客'
   },
 
   /**
@@ -18,7 +18,7 @@ Page({
     (!wx.getStorageSync('user'))?( wx.navigateTo({ url: "/pages/register/register" }) ):"" ;
     // end 
 
-    //判断是否登录
+    //获取登录者信息
     var that=this;
     wx.getStorage({
       key: 'user',
@@ -30,13 +30,13 @@ Page({
           uName:data.user_name
         });
         console.log(that.data);
-      },
-      //无登录者信息，跳转到登录页面
-      fail:function(res){
-        wx.redirectTo({
-          url: '../register/register'
-        })   
       }
+      //无登录者信息，跳转到登录页面
+     // fail:function(res){
+        //wx.redirectTo({
+         // url: '../register/register'
+        //})   
+      //}
     })
   },
 
