@@ -13,7 +13,26 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    //判断是否登录
+    var that = this;
+    wx.getStorage({
+      key: 'user',
+      success: function (res) {
+        var data = JSON.parse(res.data)[0];
+        console.log(data);
+        that.setData({
+          phone: data.user_phone,
+          nickName: data.user_name,
+          email:data.user_email
+        });
+      },
+      //无登录者信息，跳转到登录页面
+      fail: function (res) {
+        wx.wx.redirectTo({
+          url: '../register/register',
+        })
+      }
+    })
   },
 
   /**
@@ -63,5 +82,20 @@ Page({
    */
   onShareAppMessage: function () {
     
+  },
+  //提交表单
+  formSubmit:function(e){
+    //console.log(e.detail.value);
+    data=e.detail.value
+    wx.request({
+      url: 'http://www.qqy.fun/data/User/login',
+      data: data,
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        console.log(res.data)
+      }
+    })
   }
 })
