@@ -1,13 +1,15 @@
 {
   "pages": [
-    "pages/notes/notes",
-    "pages/register/register",
     "pages/qy/qy",
+    "pages/register/register",
+    "pages/person/person" ,
+    "pages/notes/notes",
     "pages/index/index",
     "pages/logs/logs",
     "pages/search/search",
-    
-    "pages/item/item"
+    "pages/item/item" ,
+    "pages/changeIntro/changeIntro",
+    "pages/map/map"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -21,30 +23,28 @@
     "backgroundColor": "#ffffff",
     "list": [
       {
-        "pagePath": "pages/qy/qy" ,
-        "iconPath":"images/home.png" ,
-        "selectedIconPath":"images/homeHL.png" ,
-        "text": "主页" 
+        "pagePath": "pages/qy/qy",
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/homeHL.png",
+        "text": "主页"
       },
       {
-        "pagePath": "pages/register/register" ,
-<<<<<<< HEAD
-        "text": "我的"
+        "pagePath": "pages/logs/logs" ,
+        "text": "酒店" ,
+        "iconPath": "images/my.png",
+        "selectedIconPath": "images/myHL.png"
       } ,
       {
         "pagePath": "pages/notes/notes",
-        "text": "遊記"
-=======
+        "text": "游记",
         "iconPath": "images/my.png",
-        "selectedIconPath": "images/myHL.png",
-        "text": "个人中心" 
+        "selectedIconPath": "images/myHL.png"
       } ,
       {
-        "pagePath": "pages/logs/logs" ,
-        "iconPath": "images/notes.png" ,
-        "selectedIconPath": "images/notesHL.png",
-        "text": "游记" 
->>>>>>> master
+        "pagePath": "pages/person/person",
+        "iconPath": "images/my.png",
+        "selectedIconPath": "images/myHL.png",
+        "text": "个人中心"
       }
     ]
   }

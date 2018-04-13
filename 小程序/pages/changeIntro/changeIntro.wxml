@@ -1,0 +1,22 @@
+<view>修改个人信息</view>
+<view class="container">
+    <form bindsubmit="formSubmit">
+        <view class="row">
+            <text>昵称：</text>
+            <input  type="text" value="{{nickName}}" name="userName" placeholder="" />
+        </view>
+        <view class="row">
+            <text>邮箱：</text>
+            <input type="text" value="{{email}}" name="eamil" placeholder="" />
+        </view>
+        <view class="row">
+            <text>电话：</text>
+            <input disabled='true' type="text" value="{{phone}}" name="phone" placeholder="" />
+        </view>
+        <view class="row">
+            <button type="primary" size="mini" form-type="submit">修改</button>
+            <button type="primary" size="mini"  form-type="reset">清空</button>
+        </view>
+
+    </form>
+</view>

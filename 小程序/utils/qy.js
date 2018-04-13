@@ -3,7 +3,7 @@ var qy = [
   {
     "name" : "推荐" ,
     "msg":"POPULAR" ,
-    "url":"" ,
+    "url":"/pages/notes/notes" ,
     "sub" :[
       {
         "name": "张家界",
@@ -38,46 +38,9 @@ var qy = [
     ]
   } ,
   {
-    "name": "景点",
-    "msg": "SPOTS",
-    "url": "",
-    "sub": [
-      {
-        "name": "张家界",
-        "msg": "张家界",
-        "src": "http://b2-q.mafengwo.net/s7/M00/F0/43/wKgB6lSvRPqAJ6zeAAZei_WNRM0840.png?imageMogr2%2Fthumbnail%2F%21640x400r%2Fgravity%2FCenter%2Fcrop%2F%21640x400%2Fquality%2F90"
-      } ,
-      {
-        "name": "甲米",
-        "msg": "甲米",
-        "src": "http://n2-q.mafengwo.net/s6/M00/F1/F1/wKgB4lKn7rWAAtCgAAMg7OwKFzk77.jpeg?imageMogr2%2Fthumbnail%2F%21640x400r%2Fgravity%2FCenter%2Fcrop%2F%21640x400%2Fquality%2F90"
-      },
-      {
-        "name": "无锡",
-        "msg": "无锡",
-        "src": "http://p2-q.mafengwo.net/s9/M00/AC/D4/wKgBs1fJUXqADbB7ABp5FRVe3u820.jpeg?imageMogr2%2Fthumbnail%2F%21640x400r%2Fgravity%2FCenter%2Fcrop%2F%21640x400%2Fquality%2F90"
-      },
-      {
-        "name": "扬州",
-        "msg": "扬州",
-        "src": "http://p2-q.mafengwo.net/s7/M00/B8/CA/wKgB6lSqVg-ATLvUAAdBOsTFNag300.png?imageMogr2%2Fthumbnail%2F%21640x400r%2Fgravity%2FCenter%2Fcrop%2F%21640x400%2Fquality%2F90"
-      },
-      {
-        "name": "华山",
-        "msg": "华山",
-        "src": "http://p4-q.mafengwo.net/s6/M00/64/36/wKgB4lNYkoKAE5P5AAUU3va0yvw77.jpeg?imageMogr2%2Fthumbnail%2F%21640x400r%2Fgravity%2FCenter%2Fcrop%2F%21640x400%2Fquality%2F90"
-      },
-      {
-        "name": "庐山",
-        "msg": "庐山",
-        "src": "http://n2-q.mafengwo.net/s6/M00/C1/DA/wKgB4lNo9Q6Ab6JrACUUAqjc0WA78.jpeg?imageMogr2%2Fthumbnail%2F%21640x400r%2Fgravity%2FCenter%2Fcrop%2F%21640x400%2Fquality%2F90"
-      } 
-    ]
-  } ,
-  {
     "name": "酒店",
     "msg": "HOTEL",
-    "url": "",
+    "url": "pages/hoteil/hoteil",
     "sub": [
       {
         "name": "台北凯撒大饭店",
@@ -119,7 +82,7 @@ var qy = [
   {
   "name": "游记",
   "msg": "TRAVELS",
-  "url": "",
+  "url": "/pages/notes/notes",
   "sub": [
     {
       "name": "北海道",
@@ -172,3 +135,42 @@ var qy = [
 module.exports = {
   init: qy
 }
+
+
+// {
+//   "name": "景点",
+//     "msg": "SPOTS",
+//       "url": "/pages/notes/notes",
+//         "sub": [
+//           {
+//             "name": "张家界",
+//             "msg": "张家界",
+//             "src": "http://b2-q.mafengwo.net/s7/M00/F0/43/wKgB6lSvRPqAJ6zeAAZei_WNRM0840.png?imageMogr2%2Fthumbnail%2F%21640x400r%2Fgravity%2FCenter%2Fcrop%2F%21640x400%2Fquality%2F90"
+//           },
+//           {
+//             "name": "甲米",
+//             "msg": "甲米",
+//             "src": "http://n2-q.mafengwo.net/s6/M00/F1/F1/wKgB4lKn7rWAAtCgAAMg7OwKFzk77.jpeg?imageMogr2%2Fthumbnail%2F%21640x400r%2Fgravity%2FCenter%2Fcrop%2F%21640x400%2Fquality%2F90"
+//           },
+//           {
+//             "name": "无锡",
+//             "msg": "无锡",
+//             "src": "http://p2-q.mafengwo.net/s9/M00/AC/D4/wKgBs1fJUXqADbB7ABp5FRVe3u820.jpeg?imageMogr2%2Fthumbnail%2F%21640x400r%2Fgravity%2FCenter%2Fcrop%2F%21640x400%2Fquality%2F90"
+//           },
+//           {
+//             "name": "扬州",
+//             "msg": "扬州",
+//             "src": "http://p2-q.mafengwo.net/s7/M00/B8/CA/wKgB6lSqVg-ATLvUAAdBOsTFNag300.png?imageMogr2%2Fthumbnail%2F%21640x400r%2Fgravity%2FCenter%2Fcrop%2F%21640x400%2Fquality%2F90"
+//           },
+//           {
+//             "name": "华山",
+//             "msg": "华山",
+//             "src": "http://p4-q.mafengwo.net/s6/M00/64/36/wKgB4lNYkoKAE5P5AAUU3va0yvw77.jpeg?imageMogr2%2Fthumbnail%2F%21640x400r%2Fgravity%2FCenter%2Fcrop%2F%21640x400%2Fquality%2F90"
+//           },
+//           {
+//             "name": "庐山",
+//             "msg": "庐山",
+//             "src": "http://n2-q.mafengwo.net/s6/M00/C1/DA/wKgB4lNo9Q6Ab6JrACUUAqjc0WA78.jpeg?imageMogr2%2Fthumbnail%2F%21640x400r%2Fgravity%2FCenter%2Fcrop%2F%21640x400%2Fquality%2F90"
+//           }
+//         ]
+// } ,

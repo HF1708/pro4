@@ -1,0 +1,17 @@
+<view class='userInfo'>
+  <image src="{{headSrc}}" class="myHead"></image>
+  <text class='userName'>{{uName}}</text>
+</view>
+<view style="height:20rpx;background: #eee;width:100%;"></view>
+ <view class="my-item">
+    <navigator open-type='switchTab'  url="../notes/notes" hover-class="navigator-hover">我的游记</navigator>
+  </view>
+  <view class="my-item">
+    <navigator url="#" hover-class="navigator-hover">我的消息</navigator>
+  </view>
+  <view class="my-item">
+    <navigator url= "../changeIntro/changeIntro" hover-class="navigator-hover">修改个人信息</navigator>
+  </view>
+   <view class="my-item">
+    <navigator url="#" hover-class="navigator-hover">系统设置</navigator>
+  </view>

@@ -102,14 +102,14 @@ Page({
     wx.showToast({
       title: '登录中...',
       icon: 'loading',
-      duration: 10000
+      duration: 5000
     })
     var mobileCode =wx.getStorageSync('code')
     var mobile = wx.getStorageSync('mobile')
       if(this.data.code == mobileCode&&this.data.mobile == mobile){
         var _this=this;
         wx.request({
-          url: 'http://47.93.193.212/data/User/login',
+          url: 'http://www.qqy.fun/data/User/login',
           method: "POST",
           data: { "mobile": mobile},
           header: { 'content-type': 'application/x-www-form-urlencoded' },
@@ -120,8 +120,8 @@ Page({
                 key: 'user',
                 data: data,
                 success: function (res) {
-                  wx.redirectTo({
-                    url: '../qy/qy'
+                  wx.switchTab({
+                    url: '../person/person'
                   })
                 }
               })
@@ -137,11 +137,12 @@ Page({
             wx.showToast({
               title: '登录成功',
               icon: 'success',
-              duration: 10000
+              duration: 1500
             })
           }
         })
       }else{
+        wx.hideToast();
         this.setData(
           { popErrorMsg: "验证码错误" }
         );
