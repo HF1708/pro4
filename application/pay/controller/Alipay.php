@@ -8,6 +8,8 @@
 namespace app\pay\controller;
 use think\Controller;
 use \think\Loader;
+use \think\Db;
+
 class Alipay extends Controller
 {
     /**
@@ -17,6 +19,7 @@ class Alipay extends Controller
      * 作者：Qingtian Y
      * 时间：18-4-10
      */
+
     public function index(){
 //        Loader::import('alipaydemo.index', EXTEND_PATH);
 
@@ -31,5 +34,12 @@ class Alipay extends Controller
     }
     public function pagepay(){
         Loader::import('alipaydemo.pagepay.pagepay', EXTEND_PATH);
+    }
+    public function getOrderInfo(){
+        $hid=input('?get.hId')?input("hId"):"";
+        //数据库查询到对应id的酒店信息
+        $where=['hId'=>$hid];
+        $getnowhotel=db('store_shotel')->where($where)->select();
+        echo json_encode($getnowhotel);
     }
 }

@@ -1,15 +1,312 @@
-﻿-- drop database if exists travel;
--- create database travel DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;-- 
--- use travel;
--- 
+/*
+Navicat MySQL Data Transfer
 
-#地区表
+Source Server         : kjghkyu
+Source Server Version : 50148
+Source Host           : qdm181738524.my3w.com:3306
+Source Database       : qdm181738524_db
+
+Target Server Type    : MYSQL
+Target Server Version : 50148
+File Encoding         : 65001
+
+Date: 2018-04-13 09:17:29
+*/
+
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for attraction_att
+-- ----------------------------
+DROP TABLE IF EXISTS `attraction_att`;
+CREATE TABLE `attraction_att` (
+  `attId` int(11) NOT NULL AUTO_INCREMENT,
+  `attName` varchar(30) DEFAULT NULL,
+  `attInfo` varchar(200) DEFAULT NULL,
+  `fares` double(6,2) DEFAULT NULL,
+  `areaId` int(11) DEFAULT NULL,
+  `attImgId` int(11) DEFAULT NULL,
+  PRIMARY KEY (`attId`),
+  KEY `areaId` (`areaId`),
+  KEY `attImgId` (`attImgId`),
+  CONSTRAINT `attraction_att_ibfk_1` FOREIGN KEY (`areaId`) REFERENCES `hy_area` (`id`),
+  CONSTRAINT `attraction_att_ibfk_2` FOREIGN KEY (`attImgId`) REFERENCES `attraction_img` (`attImgId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of attraction_att
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for attraction_comment
+-- ----------------------------
+DROP TABLE IF EXISTS `attraction_comment`;
+CREATE TABLE `attraction_comment` (
+  `attCommentId` int(11) NOT NULL AUTO_INCREMENT,
+  `attCommentInfo` varchar(200) DEFAULT NULL,
+  `attCommentImg` varchar(100) DEFAULT NULL,
+  `attId` int(11) DEFAULT NULL,
+  PRIMARY KEY (`attCommentId`),
+  KEY `attId` (`attId`),
+  CONSTRAINT `attraction_comment_ibfk_1` FOREIGN KEY (`attId`) REFERENCES `attraction_att` (`attId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of attraction_comment
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for attraction_img
+-- ----------------------------
+DROP TABLE IF EXISTS `attraction_img`;
+CREATE TABLE `attraction_img` (
+  `attImgId` int(11) NOT NULL AUTO_INCREMENT,
+  `attImgSrc` varchar(100) DEFAULT NULL,
+  `attId` int(11) DEFAULT NULL,
+  PRIMARY KEY (`attImgId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of attraction_img
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for attraction_indent
+-- ----------------------------
+DROP TABLE IF EXISTS `attraction_indent`;
+CREATE TABLE `attraction_indent` (
+  `attIndId` int(11) NOT NULL AUTO_INCREMENT,
+  `attId` int(11) DEFAULT NULL,
+  `time` datetime DEFAULT NULL,
+  `total` double(6,2) DEFAULT NULL,
+  PRIMARY KEY (`attIndId`),
+  KEY `attId` (`attId`),
+  CONSTRAINT `attraction_indent_ibfk_1` FOREIGN KEY (`attId`) REFERENCES `attraction_att` (`attId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of attraction_indent
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for attraction_type
+-- ----------------------------
+DROP TABLE IF EXISTS `attraction_type`;
+CREATE TABLE `attraction_type` (
+  `attTypeId` int(11) NOT NULL AUTO_INCREMENT,
+  `typeName` varchar(30) DEFAULT NULL,
+  `attId` int(11) DEFAULT NULL,
+  PRIMARY KEY (`attTypeId`),
+  KEY `attId` (`attId`),
+  CONSTRAINT `attraction_type_ibfk_1` FOREIGN KEY (`attId`) REFERENCES `attraction_att` (`attId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of attraction_type
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for backstage_jurisdiction
+-- ----------------------------
+DROP TABLE IF EXISTS `backstage_jurisdiction`;
+CREATE TABLE `backstage_jurisdiction` (
+  `id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `name` varchar(5) DEFAULT NULL,
+  `fid` smallint(6) DEFAULT NULL,
+  `url` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of backstage_jurisdiction
+-- ----------------------------
+INSERT INTO `backstage_jurisdiction` VALUES ('1', '总权限', '0', 'index.php?c=Index&a=showIndex');
+INSERT INTO `backstage_jurisdiction` VALUES ('2', '系统管理', '1', 'index.php?c=Index&a=showIndex');
+INSERT INTO `backstage_jurisdiction` VALUES ('3', '商品管理', '1', 'index.php?c=Index&a=showIndex');
+INSERT INTO `backstage_jurisdiction` VALUES ('4', '订单管理', '1', 'index.php?c=Index&a=showIndex');
+INSERT INTO `backstage_jurisdiction` VALUES ('5', '用户管理', '2', 'index.php?c=UserMgt&a=showUserMgt');
+INSERT INTO `backstage_jurisdiction` VALUES ('6', '角色管理', '2', 'index.php?c=RoleM&a=showRoleM');
+INSERT INTO `backstage_jurisdiction` VALUES ('7', '商品录入', '3', 'index.php?c=GoodsInput&a=showGoodsInput');
+INSERT INTO `backstage_jurisdiction` VALUES ('8', '商品信息', '3', 'index.php?c=GoodsInfo&a=showGoodsInfo');
+INSERT INTO `backstage_jurisdiction` VALUES ('9', '未支付订单', '4', 'index.php?c=Order&a=showUnpaiyOrder');
+INSERT INTO `backstage_jurisdiction` VALUES ('10', '已支付订单', '4', 'index.php?c=Order&a=showPaidOrder');
+INSERT INTO `backstage_jurisdiction` VALUES ('11', '员工管理', '2', 'index.php?c=StaffMgt&a=showStaffMgt');
+INSERT INTO `backstage_jurisdiction` VALUES ('12', '报表统计', '1', 'index.php?c=Index&a=showIndex');
+INSERT INTO `backstage_jurisdiction` VALUES ('13', '用户统计', '12', 'index.php?c=Statement&a=showStatementUser');
+INSERT INTO `backstage_jurisdiction` VALUES ('14', '销售统计', '12', 'index.php?c=Statement&a=showStatementSell');
+
+-- ----------------------------
+-- Table structure for backstage_role
+-- ----------------------------
+DROP TABLE IF EXISTS `backstage_role`;
+CREATE TABLE `backstage_role` (
+  `id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `roleName` text,
+  `info` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of backstage_role
+-- ----------------------------
+INSERT INTO `backstage_role` VALUES ('1', '超级管理员', '系统管理员');
+INSERT INTO `backstage_role` VALUES ('2', '经理', '添加员工查看报表等');
+INSERT INTO `backstage_role` VALUES ('3', '客服', '客服人员');
+INSERT INTO `backstage_role` VALUES ('4', '普通业务员', '处理日常业务');
+
+-- ----------------------------
+-- Table structure for backstage_rolejurisdiction
+-- ----------------------------
+DROP TABLE IF EXISTS `backstage_rolejurisdiction`;
+CREATE TABLE `backstage_rolejurisdiction` (
+  `roleID` smallint(6) NOT NULL,
+  `jurisdictionID` smallint(6) NOT NULL,
+  PRIMARY KEY (`roleID`,`jurisdictionID`),
+  KEY `jurisdictionID` (`jurisdictionID`),
+  CONSTRAINT `backstage_rolejurisdiction_ibfk_1` FOREIGN KEY (`roleID`) REFERENCES `backstage_role` (`id`),
+  CONSTRAINT `backstage_rolejurisdiction_ibfk_2` FOREIGN KEY (`jurisdictionID`) REFERENCES `backstage_jurisdiction` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of backstage_rolejurisdiction
+-- ----------------------------
+INSERT INTO `backstage_rolejurisdiction` VALUES ('1', '2');
+INSERT INTO `backstage_rolejurisdiction` VALUES ('2', '2');
+INSERT INTO `backstage_rolejurisdiction` VALUES ('3', '2');
+INSERT INTO `backstage_rolejurisdiction` VALUES ('4', '2');
+INSERT INTO `backstage_rolejurisdiction` VALUES ('1', '3');
+INSERT INTO `backstage_rolejurisdiction` VALUES ('2', '3');
+INSERT INTO `backstage_rolejurisdiction` VALUES ('3', '3');
+INSERT INTO `backstage_rolejurisdiction` VALUES ('4', '3');
+INSERT INTO `backstage_rolejurisdiction` VALUES ('1', '4');
+INSERT INTO `backstage_rolejurisdiction` VALUES ('2', '4');
+INSERT INTO `backstage_rolejurisdiction` VALUES ('3', '4');
+INSERT INTO `backstage_rolejurisdiction` VALUES ('4', '4');
+INSERT INTO `backstage_rolejurisdiction` VALUES ('1', '5');
+INSERT INTO `backstage_rolejurisdiction` VALUES ('2', '5');
+INSERT INTO `backstage_rolejurisdiction` VALUES ('1', '6');
+INSERT INTO `backstage_rolejurisdiction` VALUES ('1', '7');
+INSERT INTO `backstage_rolejurisdiction` VALUES ('2', '7');
+INSERT INTO `backstage_rolejurisdiction` VALUES ('4', '7');
+INSERT INTO `backstage_rolejurisdiction` VALUES ('1', '8');
+INSERT INTO `backstage_rolejurisdiction` VALUES ('2', '8');
+INSERT INTO `backstage_rolejurisdiction` VALUES ('4', '8');
+INSERT INTO `backstage_rolejurisdiction` VALUES ('1', '9');
+INSERT INTO `backstage_rolejurisdiction` VALUES ('2', '9');
+INSERT INTO `backstage_rolejurisdiction` VALUES ('3', '9');
+INSERT INTO `backstage_rolejurisdiction` VALUES ('4', '9');
+INSERT INTO `backstage_rolejurisdiction` VALUES ('1', '10');
+INSERT INTO `backstage_rolejurisdiction` VALUES ('2', '10');
+INSERT INTO `backstage_rolejurisdiction` VALUES ('3', '10');
+INSERT INTO `backstage_rolejurisdiction` VALUES ('4', '10');
+INSERT INTO `backstage_rolejurisdiction` VALUES ('1', '11');
+INSERT INTO `backstage_rolejurisdiction` VALUES ('2', '11');
+INSERT INTO `backstage_rolejurisdiction` VALUES ('1', '13');
+INSERT INTO `backstage_rolejurisdiction` VALUES ('2', '13');
+INSERT INTO `backstage_rolejurisdiction` VALUES ('1', '14');
+INSERT INTO `backstage_rolejurisdiction` VALUES ('2', '14');
+
+-- ----------------------------
+-- Table structure for backstage_user
+-- ----------------------------
+DROP TABLE IF EXISTS `backstage_user`;
+CREATE TABLE `backstage_user` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_uid` char(8) DEFAULT NULL,
+  `user_password` char(32) DEFAULT NULL,
+  `user_name` char(10) DEFAULT NULL,
+  `roleID` smallint(6) DEFAULT NULL,
+  `userState` enum('F','T') DEFAULT 'T',
+  PRIMARY KEY (`user_id`),
+  KEY `roleID` (`roleID`),
+  KEY `sad` (`user_uid`,`user_password`) USING BTREE
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of backstage_user
+-- ----------------------------
+INSERT INTO `backstage_user` VALUES ('1', 'admin', '81dc9bdb52d04dc20036dbd8313ed055', '超级管理员', '1', 'T');
+INSERT INTO `backstage_user` VALUES ('3', 'hf170809', 'e10adc3949ba59abbe56e057f20f883e', '测试客服', null, 'T');
+INSERT INTO `backstage_user` VALUES ('5', 'asd', 'e10adc3949ba59abbe56e057f20f883e', 'asd', '4', 'T');
+
+-- ----------------------------
+-- Table structure for food_comment
+-- ----------------------------
+DROP TABLE IF EXISTS `food_comment`;
+CREATE TABLE `food_comment` (
+  `foodComID` int(11) NOT NULL AUTO_INCREMENT,
+  `foodId` int(11) DEFAULT NULL,
+  `foodComInfo` varchar(100) DEFAULT NULL,
+  `commentImg` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`foodComID`),
+  KEY `foodId` (`foodId`),
+  CONSTRAINT `food_comment_ibfk_1` FOREIGN KEY (`foodId`) REFERENCES `food_info` (`foodId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of food_comment
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for food_img
+-- ----------------------------
+DROP TABLE IF EXISTS `food_img`;
+CREATE TABLE `food_img` (
+  `foodImgId` int(11) NOT NULL AUTO_INCREMENT,
+  `imgSrc` varchar(100) DEFAULT NULL,
+  `foodId` int(11) DEFAULT NULL,
+  PRIMARY KEY (`foodImgId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of food_img
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for food_indent
+-- ----------------------------
+DROP TABLE IF EXISTS `food_indent`;
+CREATE TABLE `food_indent` (
+  `foodIndId` int(11) NOT NULL AUTO_INCREMENT,
+  `foodId` int(11) DEFAULT NULL,
+  `foodTotal` double(6,2) DEFAULT NULL,
+  PRIMARY KEY (`foodIndId`),
+  KEY `foodId` (`foodId`),
+  CONSTRAINT `food_indent_ibfk_1` FOREIGN KEY (`foodId`) REFERENCES `food_comment` (`foodId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of food_indent
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for food_info
+-- ----------------------------
+DROP TABLE IF EXISTS `food_info`;
+CREATE TABLE `food_info` (
+  `foodId` int(11) NOT NULL AUTO_INCREMENT,
+  `foodName` varchar(20) DEFAULT NULL,
+  `foodInfo` varchar(100) DEFAULT NULL,
+  `foodImgId` int(11) DEFAULT NULL,
+  `foodPrice` double(5,2) DEFAULT NULL,
+  `foodType` varchar(20) DEFAULT NULL,
+  `attId` int(11) DEFAULT NULL,
+  PRIMARY KEY (`foodId`),
+  KEY `foodImgId` (`foodImgId`),
+  KEY `attId` (`attId`),
+  CONSTRAINT `food_info_ibfk_1` FOREIGN KEY (`foodImgId`) REFERENCES `food_img` (`foodImgId`),
+  CONSTRAINT `food_info_ibfk_2` FOREIGN KEY (`attId`) REFERENCES `attraction_att` (`attId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of food_info
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for hy_area
 -- ----------------------------
--- DROP TABLE IF EXISTS `hy_area`;
-create table if not exists `hy_area` (
+DROP TABLE IF EXISTS `hy_area`;
+CREATE TABLE `hy_area` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `pid` int(11) DEFAULT NULL COMMENT '父id',
   `shortname` varchar(100) DEFAULT NULL COMMENT '简称',
@@ -24,485 +321,6 @@ create table if not exists `hy_area` (
   `lat` varchar(100) DEFAULT NULL COMMENT '纬度',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3750 DEFAULT CHARSET=utf8;
-
--- 普通用户表 
--- id 自增id
--- 用户id    
--- name 用户昵称
--- password 用户密码 
--- email 邮箱
--- phone 手机 
--- image 头像 
--- msg 简介 
-
-drop table if exists user_char_store ;
-drop table if exists user_char_service ;
-drop table if exists user_char_store_service ;
-drop table if exists user_chat ;
-drop table if exists user_user ;
-create table if not exists user_user
-(
-	user_id int primary key auto_increment ,
-	user_uid char(20) ,
-	user_name char(12) default'用户',
-	user_password char(32) ,
-	user_email VARCHAR(40) , 
-	user_phone char(11) , 
-	user_image varchar(100) ,
-	user_sex enum("男",'女') default'男' ,
-	user_birthday date default"1995-11-22",
-	user_time datetime ,
-	user_state enum("1","0") default'1',
-	user_msg varchar(100) 
-) ;
--- 添加账号的唯一索引
-ALTER TABLE `user_user` ADD UNIQUE INDEX `sda` (`user_uid`) USING BTREE ;
--- 添加账号密码的符合索引(联合索引)
-ALTER TABLE `user_user` ADD INDEX `sad` (`user_uid`,`user_password`) USING BTREE ;
--- 添加账号密码的符合索引(查询索引)/手机邮箱
--- ALTER TABLE `user_user` ADD INDEX `sad1` (`user_email`) USING BTREE ;
--- ALTER TABLE `user_user` ADD INDEX `sad2` (`user_phone`) USING BTREE ;
-insert into user_user( user_uid ,user_name ,user_password ,user_email ,user_phone ,user_image ,user_msg ,user_time,user_sex,user_state )values
-( 'test' , '测试用', md5('123456'), '', '15324488756', 'http://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg', 'test',now(),"男",0 ) ;
-insert into user_user( user_uid ,user_name ,user_password ,user_email ,user_phone ,user_image ,user_msg ,user_time,user_sex,user_state )values
-( 'tests' , '测试用', md5('123456'), '', '15324488756', 'http://i0.hdslb.com/bfs/face/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg', 'test',now(),"女",1  ) ;
-
-
--- 商家信息表
-
-drop table if exists store_info ;
-create table if not exists store_info
-(
-	store_id int primary key auto_increment,-- 自增ID
-	store_name char(12) , -- 商家名字
-	store_state enum('F','T','S') default 'F' , -- 商家状态 F 未审核； T审核通过； S 被锁定 
-	store_image varchar(100) ,
-	store_phone char(11),-- 商家绑定手机
-	store_apply_time  datetime, -- 申请时间
-	store_province_id INT,
-	store_city_id INT,
-	store_town_id INT,
-	store_address_detail varchar(50),
-	store_textarea text, 
-	foreign key(store_province_id) references `hy_area`(id), 
-	foreign key(store_province_id) references `hy_area`(id), 
-	foreign key(store_province_id) references `hy_area`(id) 
-) ;
--- 添加商店名字的唯一索引
-ALTER TABLE `store_info` ADD UNIQUE INDEX `sda` (`store_name`) USING BTREE ;
--- 添加商店手机id的唯一索引
-ALTER TABLE `store_info` ADD UNIQUE INDEX `sda2` (`store_phone`) USING BTREE ;
--- 添加商店名字的符合索引(查询索引)/手机邮箱
-ALTER TABLE `store_info` ADD INDEX `sad1` (`store_name`) USING BTREE ;
-INSERT INTO `qdm181738524_db`.`store_info`(`store_id`, `store_name`, `store_state`, `store_phone`, `store_apply_time`, `store_province_id`, `store_city_id`, `store_town_id`, `store_address_detail`, `store_textarea`) VALUES 
-(1, '13255917292', 'F', '13255917292', '2018-03-28 19:41:23', 1964, 1965, 1966, '13255917292', '似懂非懂斯蒂芬萨芬 ');
--- 商家 广告
--- id 自增id
--- name 广告名
--- link 广告链接
--- 广告商
-
-drop table if exists store_advert ;
-create table if not exists store_advert
-(
-	store_adv_id int primary key auto_increment ,
-	store_adv_name char(12) ,
-	store_adv_url  varchar(200),
-	store_adv_link varchar(50),
-	advert_textarea varchar(150),
-	store_id int, 
-	advert_state enum('F','T','S') default 'F' , -- 广告状态 F 未审核； T审核通过； S 被锁定
-foreign key(store_id) references `store_info`(store_id) 	
-) ; 
--- 添加账号的唯一索引/ 广告名
-ALTER TABLE `store_advert` ADD UNIQUE INDEX `sdaa` (`store_adv_name`) USING BTREE ;
-
-insert into store_advert(store_adv_name,store_adv_url,store_adv_link,store_id)values
-("广告1","http://p6gnb5g93.bkt.clouddn.com/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'1') ;
-insert into store_advert(store_adv_name,store_adv_url,store_adv_link,store_id)values
-("广告2","http://p6gnb5g93.bkt.clouddn.com/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'1') ;
-
-insert into store_advert(store_adv_name,store_adv_url,store_adv_link,store_id)values
-("广告3","http://p6gnb5g93.bkt.clouddn.com/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'1') ;
-insert into store_advert(store_adv_name,store_adv_url,store_adv_link,store_id)values
-("广告4","http://p6gnb5g93.bkt.clouddn.com/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'1') ;
-
-
-insert into store_advert(store_adv_name,store_adv_url,store_adv_link,store_id)values
-("广告5","http://p6gnb5g93.bkt.clouddn.com/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'1') ;
-insert into store_advert(store_adv_name,store_adv_url,store_adv_link,store_id)values
-("广告6","http://p6gnb5g93.bkt.clouddn.com/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg","www.baidu.com",'1') ;
-
-
-
--- 聊天记录表
--- （店家/用户）A/（店家/客服）B/（客服/用户）C/（店家/店家）D/（用户/用户）E/（客服/客服）F 聊天记录
--- id 自增id
--- 用户id
--- 店家id类型（店家/用户）A/（店家/客服）B/（客服/用户）C/（店家/店家）D/（用户/用户）E/（客服/客服）F 
--- 聊天
--- 聊天对象 F(店家->用户) T (用户->店家)
--- 聊天内容
--- 时间
-drop table if exists user_chat ;
-create table if not exists user_chat
-(
-	user_chat_id int primary key auto_increment ,
-	user_uid char(20) ,
-	user_chat_char_two_id char(20) ,
-	user_chat_type enum('A','B','C','D','E','F') default 'A' ,
-	user_chat_obj enum('F','T') default 'F' ,
-	user_chat_content varchar(100) ,
-	user_chat_time datetime ,
-	foreign key(user_uid) references user_user(user_uid) 
-	-- foreign key() references table() 
-) ;
-
-ALTER TABLE `user_chat` ADD INDEX `user_chat_1` (`user_uid`,`user_chat_char_two_id`) USING BTREE ;
-
--- -----------------------------------后台---------------------------------------------
--- 员工管理表
-drop table if exists backstage_user ;
-create table if not exists backstage_user
-(
-	user_id int primary key auto_increment ,
-	user_uid char(8) , -- 例：hf170809
-	user_password char(32) ,
-	user_name char(10)
-) ;
-
-=======
-INSERT into backstage_role (id,roleName,info) 
-VALUES(1,"超级管理员","系统管理员"),
-(2,"经理","添加员工查看报表等"),
-(3,"客服","客服人员"),
-(4,"普通业务员","处理日常业务");
-insert into backstage_user(user_uid,user_password,user_name,userState,roleID)
-VALUES("admin",MD5(1234),"超级管理员","T",1);
-insert into backstage_jurisdiction (id,name,fid,url) VALUES
-(1,"总权限",0,"index.php?c=Index&a=showIndex"),
-(2,"系统管理",1,"index.php?c=Index&a=showIndex"),
-(3,"商品管理",1,"index.php?c=Index&a=showIndex"),
-(4,"订单管理",1,"index.php?c=Index&a=showIndex"),
-(5,"用户管理",2,"index.php?c=UserMgt&a=showUserMgt"),
-(6,"角色管理",2,"index.php?c=RoleM&a=showRoleM"),
-(7,"商品录入",3,"index.php?c=GoodsInput&a=showGoodsInput"),
-(8,"商品信息",3,"index.php?c=GoodsInfo&a=showGoodsInfo"),
-(9,"未支付订单",4,"index.php?c=Order&a=showUnpaiyOrder"),
-(10,"已支付订单",4,"index.php?c=Order&a=showPaidOrder"),
-(11,"员工管理",2,"index.php?c=StaffMgt&a=showStaffMgt"),
-(12,"报表统计",1,"index.php?c=Index&a=showIndex"),
-(13,"用户统计",12,"index.php?c=Statement&a=showStatementUser"),
-(14,"销售统计",12,"index.php?c=Statement&a=showStatementSell")
-;
-create table if not exists backstage_rolejurisdiction(
-	roleID SMALLINT not null ,
-	jurisdictionID SMALLINT not null,
-	primary key(roleID,jurisdictionID),
-	foreign key(roleID) references backstage_role(id),
-	foreign key(jurisdictionID) references backstage_jurisdiction(id)	
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
-INSERT INTO backstage_rolejurisdiction(roleID,jurisdictionID) VALUES
-(1,2),
-(1,3),
-(1,4),
-(1,5),
-(1,6),
-(1,7),
-(1,8),
-(1,9),
-(1,10),
-(1,13),
-(1,14),
-(1,11),
-(2,2),
-(2,3),
-(2,4),
-(2,5),
-(2,7),
-(2,8),
-(2,9),
-(2,10),
-(2,11),
-(2,13),
-(2,14),
-(3,2),
-(3,3),
-(3,4),
-(3,9),
-(3,10),
-(4,2),
-(4,3),
-(4,4),
-(4,7),
-(4,8),
-(4,9),
-(4,10);
->>>>>>> yqt
-
--- 添加账号密码的符合索引(联合索引)
-ALTER TABLE `backstage_user` ADD INDEX `sad` (`user_uid`,`user_password`) USING BTREE ;
-
-insert into backstage_user(user_uid,user_password,user_name) values
-('hf170809',md5('123456'),"测试客服") ;
-
--- -----------------------------------邱萍--------------------------------------------
-
--- 酒店表
--- 酒店表
-create table if not exists store_shotel(
-	hId int not null auto_increment primary key,-- 酒店ID
-	hName varchar(50) not null , -- 酒店名字
-	hImg varchar(50),-- 封面 图片ID
-	hRoomNumber TINYINT,-- 酒店房间
-	hAddress varchar(50),-- 酒店地址 （待优化）
-	hPrice int, -- 价格
-	store_id int,
-	putaway enum("上架","下架"),
-	audit enum("1","0"),
-	foreign key(store_id) references store_info(store_id)  -- 酒店属于的商家ID
-) ;
-
-insert into store_shotel(hId,hName,hImg,hRoomNumber,hAddress,hPrice,store_id,	putaway,audit)values
-(9001,'厦门香格里拉大酒店','hotel1.jpg',20,'观音山国际商务区台东路168号',1009,'','上架','1'),
-(9002,'厦门海悦山庄酒店','hotel2.jpg',20,'思明区环岛南路3999号(紧邻环岛路,国家会计学院旁)',810,'','上架','1'),
-(9003,'厦门海景千禧大酒店','hotel3.jpg',20,'镇海路12号之8号 (近中山路商业步行街, 轮渡码头和和平码头)',790,'','上架','1'),
-(9004,'厦门瑞颐大酒店 ','hotel4.jpg',20,'思明区鹭江道12号(鼓浪屿对面,近轮渡码头, 中山路商业步行街)',879,'','下架','0'),
-(9005,'厦门五缘湾凯悦酒店','hotel5.jpg',20,'湖里区日圆二里5号',909,'','下架','0'),
-(9006,'厦门喜来登酒店','hotel6.jpg',20,' 思明区嘉禾路386-1号(近SM城市广场)',709,'','下架','0'),
-(9007,'厦门磐基皇冠假日酒店 ','hotel7.jpg',20,'思明区嘉禾路199号(近明发商业广场)',755,'','下架','0'),
-(9008,'厦门马哥孛罗东方大酒店','hotel8.jpg',20,' 思明区湖滨北建业路8号(近白鹭洲公园,筼筜湖畔)',709,'','下架','0');
-
-
-
--- 酒店图片表
-create table if not exists store_shotel_img(
-	id int not null auto_increment primary key,
-	path text,-- 路径
-	name text, -- 图片名 *（路径与图片名分离 有利于迁移）
-	hId int,-- 酒店ID
-	FOREIGN KEY (hId) REFERENCES store_shotel(hId)
-);
-
--- 酒店评论表
-create table if not exists store_hotelcomment(
-		hcId int not null auto_increment primary key,
-		hId int, -- 酒店ID
-		hcContent varchar (200),-- 评价内容
-		hcTime varchar (200),-- 评价图片 
-		userId int not null ,-- 用户ID 
-		commentTo  int DEFAULT 0, -- 回复
-		FOREIGN KEY (hId) REFERENCES store_shotel(hId),
-		FOREIGN KEY (userId) REFERENCES user_user(user_id)
-);
-
--- 订单表
-
-
-
-
-create table if not exists store_hotelorder(
-
-create table if not exists store_hotelorder(
-	hoId int not null auto_increment primary key,
-	huId int,-- 酒店ID
-	hoTime datetime,-- 下单订单时间
-	paytime datetime,-- 支付时间
-	orderstate enum("0","1","2"),-- 订单状态 0 未支付 ；1 已支付 ；2 失效；
-	user_id int,
-	FOREIGN KEY (huId) REFERENCES store_shotel(hId),
-	FOREIGN KEY (user_id) REFERENCES user_user(user_id)
-);
-
-INSERT INTO `qdm181738524_db`.`store_hotelorder`( `huId`, `hoTime`, `paytime`, `orderstate`, `user_id`) VALUES ( 9001, '2018-04-02 15:14:35', '0000-00-00 00:00:00', '0', 1);
-INSERT INTO `qdm181738524_db`.`store_hotelorder`( `huId`, `hoTime`, `paytime`, `orderstate`, `user_id`) VALUES ( 9001, '2018-04-02 15:14:35', '0000-00-00 00:00:00', '1', 1);INSERT INTO `qdm181738524_db`.`store_hotelorder`( `huId`, `hoTime`, `paytime`, `orderstate`, `user_id`) VALUES ( 9001, '2018-04-02 15:14:35', '0000-00-00 00:00:00', '0', 1);
-INSERT INTO `qdm181738524_db`.`store_hotelorder`( `huId`, `hoTime`, `paytime`, `orderstate`, `user_id`) VALUES ( 9001, '2018-04-02 15:14:35', '0000-00-00 00:00:00', '2', 1);
-
-
-
-#景点图片表
-CREATE TABLE
-IF NOT EXISTS attraction_img (
-	#图片ID
-	attImgId INT PRIMARY KEY auto_increment,
-	#图片src
-	attImgSrc VARCHAR (100),
-	#景点ID
-	attId INT
-)ENGINE = INNODB;
-
- #景点表
-#DROP TABLE attraction_att;
-CREATE TABLE
-IF NOT EXISTS attraction_att (
-	#景点ID
-	attId INT PRIMARY KEY auto_increment,
-	#景点名
-	attName VARCHAR (30),
-	#简介
-	attInfo text,
-  #票价
-  fares DOUBLE(6,2),
-	#地区id
-	areaId INT (11),
-	#酒店ID
-	
-	#景点图片ID
-	attImgId INT,
-	FOREIGN KEY (areaId) REFERENCES hy_area (id),
-	FOREIGN KEY (attImgId) REFERENCES attraction_img (attImgId)
-) ENGINE = INNODB;
-
-#景点评论表：（景点评论id、评论详情、评论图片、用户ID(外键)）；
-CREATE TABLE IF NOT EXISTS attraction_comment (
-	#评论ID
-	attCommentId INT PRIMARY KEY auto_increment,
-	#评论详情
-	attCommentInfo VARCHAR (200),
-	#评论图片
-	attCommentImg VARCHAR (100),
- #用户ID（外键）
-  #景点ID
-	attId INT,
-	FOREIGN KEY (attId) REFERENCES attraction_att (attId)
-) ENGINE = INNODB;
-
-#景点订单表
-CREATE TABLE
-IF NOT EXISTS attraction_indent(
-	attIndId INT PRIMARY KEY auto_increment,
-  #景点ID
-  attId INT,
-	#用户Id
-	userId int, --  用户ID
-	FOREIGN KEY (userId) REFERENCES user_user(user_id),
-  #时间
-  time DATETIME,
-  #总价
-  total DOUBLE(6,2),
-  FOREIGN KEY (attId) REFERENCES attraction_att (attId)
-)ENGINE = INNODB;
-
-#景点类型表
-CREATE TABLE
-IF NOT EXISTS attraction_type(
-	attTypeId INT PRIMARY KEY auto_increment,
-  typeName VARCHAR(30),
-  attId INT,
-	FOREIGN KEY (attId) REFERENCES attraction_att (attId)
-)ENGINE = INNODB;
-
-#美食图片表
-#（id、美食图（src）、美食ID、）
-CREATE TABLE
-IF not EXISTS food_img(
-	foodImgId INT PRIMARY KEY auto_increment,
-  imgSrc VARCHAR(100),
-  foodId INT
-
-)ENGINE = INNODB;
-
-
-#美食信息表
-#（ID,简介、美食图片（外键）、价格、类型、景点ID(外键)）；
-CREATE TABLE
-IF NOT EXISTS food_info(
-	foodId INT PRIMARY KEY auto_increment,
-  foodName VARCHAR(20),
-  foodInfo VARCHAR(100),
-  foodImgId INT,
-	foodPrice DOUBLE(5,2),
-  foodType  VARCHAR(20),
-  attId INT,
-	
-  FOREIGN KEY (foodImgId) REFERENCES food_img(foodImgId),
-	FOREIGN KEY (attId) REFERENCES attraction_att (attId)
-
-)ENGINE = INNODB;
-
-#美食评论表：（评论id、美食id、评论详情、评论图片、用户ID(外键)）；
-CREATE TABLE
-IF NOT EXISTS food_comment(
-	foodComID INT PRIMARY KEY auto_increment,
-	foodId INT,
-	foodComInfo VARCHAR(100),
-  commentImg VARCHAR(100),
-  #用户ID（外键）
-	userId int, --  用户ID
-	FOREIGN KEY (userId) REFERENCES user_user(user_id),
-  FOREIGN KEY (foodId) REFERENCES food_info (foodId)
-)ENGINE = INNODB;
-
-#美食订单表：（订单id、美食id、用户ID(外键)、总价）；
-CREATE TABLE
-if not EXISTS food_indent(
-	foodIndId INT PRIMARY KEY auto_increment,
-  foodId INT,
-  #总价
-  foodTotal DOUBLE(6,2),
-	userId int, --  用户ID
-	FOREIGN KEY (userId) REFERENCES user_user(user_id),
-  FOREIGN KEY (foodId) REFERENCES food_comment (foodId)
-
-)ENGINE = INNODB;
-
-
-
-
--- banner
-CREATE TABLE
-if not EXISTS  home_banner(
-	id INT auto_increment PRIMARY KEY,							-- banner图片id
-	path VARCHAR(32)																-- banner路径
-);
-
--- 游记
-CREATE TABLE
-if not EXISTS  user_story(
-	sid INT auto_increment PRIMARY KEY,              -- 游记id
-	title VARCHAR(32),															 -- 游记标题
-	userId int, --  用户ID
-	FOREIGN KEY (userId) REFERENCES user_user(user_id),	
- 	state enum("1","0");    -- 游记审核状态
-	content VARCHAR(500)   													 -- 游记内容
-	
-);
-INSERT INTO `qdm181738524_db`.`user_story` (`sid`, `title`, `userId`, `state`, `edittime`, `content`) VALUES ('1', 'dsfdsfsdafds', '1', '1', NULL, '&lt;p&gt;adsfdsfdf fddf&lt;img class=&quot;fr-fin&quot; data-fr-image-preview=&quot;false&quot; alt=&quot;Image title&quot; src=&quot;http://p6gnb5g93.bkt.clouddn.com/1.jpg&quot; width=&quot;300&quot;&gt;&lt;/p&gt;');
-
--- 游记图片表
-CREATE TABLE
-if not EXISTS  user_story_img(
-	id INT auto_increment PRIMARY KEY,							 -- 游记图片id
-	path text,																 -- 游记图片路径
-	sid INT,																				 -- 游记id（外键）
-	FOREIGN KEY(sid) REFERENCES user_story(sid)  				 -- 外键
-);
-
--- 游记评论表
-CREATE TABLE
-if not EXISTS  user_story_comment(
-	id INT auto_increment PRIMARY KEY,							 -- 游记评论id
-	review VARCHAR(150),															 -- 评论内容
-	time datetime,                                    -- 评论时间
-	sid INT,																				 -- 游记id（外键）
-	userId int,
-	FOREIGN KEY (userId) REFERENCES user_user(user_id),
-	FOREIGN KEY(sid) REFERENCES user_story(sid) 					 -- 外键
-);
-
-
--- 故事收藏表
-
-CREATE TABLE
-if not EXISTS  user_story_collect(
-	id INT auto_increment PRIMARY KEY,	
-	sid INT,
-	userId int,
-	FOREIGN KEY (userId) REFERENCES user_user(user_id),
-	FOREIGN KEY(sid) REFERENCES user_story(sid) 					 -- 外键
-);
-
-
 
 -- ----------------------------
 -- Records of hy_area
@@ -4257,3 +4075,406 @@ INSERT INTO `hy_area` VALUES ('3747', '3738', '路环岛', '路环岛', '中国,
 INSERT INTO `hy_area` VALUES ('3748', '3747', '圣方济各堂区', '圣方济各堂区', '中国,澳门特别行政区,路环岛,圣方济各堂区', '3', 'stfrancisxavier\'sparish', '00853', '999078', 'S', '113.559954', '22.123486');
 INSERT INTO `hy_area` VALUES ('3749', '0', '钓鱼岛', '钓鱼岛', '中国,钓鱼岛', '1', 'diaoyudao', '', '', 'D', '123.478088', '25.742385');
 
+-- ----------------------------
+-- Table structure for store_advert
+-- ----------------------------
+DROP TABLE IF EXISTS `store_advert`;
+CREATE TABLE `store_advert` (
+  `store_adv_id` int(11) NOT NULL AUTO_INCREMENT,
+  `store_adv_name` char(12) DEFAULT NULL,
+  `store_adv_url` varchar(200) DEFAULT NULL,
+  `store_adv_link` varchar(50) DEFAULT NULL,
+  `advert_textarea` varchar(150) DEFAULT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `advert_state` enum('F','T','S') DEFAULT 'F',
+  PRIMARY KEY (`store_adv_id`),
+  UNIQUE KEY `sdaa` (`store_adv_name`) USING BTREE,
+  KEY `store_id` (`store_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of store_advert
+-- ----------------------------
+INSERT INTO `store_advert` VALUES ('1', '广告1', 'http://p6gnb5g93.bkt.clouddn.com/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg', 'www.baidu.com', null, '1', 'T');
+INSERT INTO `store_advert` VALUES ('2', '广告2', 'http://p6gnb5g93.bkt.clouddn.com/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg', 'www.baidu.com', null, '1', 'F');
+INSERT INTO `store_advert` VALUES ('3', '广告3', 'http://p6gnb5g93.bkt.clouddn.com/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg', 'www.baidu.com', null, '1', 'F');
+INSERT INTO `store_advert` VALUES ('4', '广告4', 'http://p6gnb5g93.bkt.clouddn.com/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg', 'www.baidu.com', null, '1', 'F');
+INSERT INTO `store_advert` VALUES ('5', '广告5', 'http://p6gnb5g93.bkt.clouddn.com/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg', 'www.baidu.com', null, '1', 'F');
+INSERT INTO `store_advert` VALUES ('6', '广告6', 'http://p6gnb5g93.bkt.clouddn.com/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg', 'www.baidu.com', null, '1', 'F');
+
+-- ----------------------------
+-- Table structure for store_hotelcollect
+-- ----------------------------
+DROP TABLE IF EXISTS `store_hotelcollect`;
+CREATE TABLE `store_hotelcollect` (
+  `hscId` int(11) NOT NULL AUTO_INCREMENT,
+  `hId` int(11) DEFAULT NULL,
+  `hscTime` varchar(200) DEFAULT NULL,
+  `userId` int(11) NOT NULL,
+  `hsc_state` enum('1','0') DEFAULT NULL,
+  PRIMARY KEY (`hscId`),
+  KEY `hId` (`hId`),
+  KEY `userId` (`userId`)
+) ENGINE=MyISAM AUTO_INCREMENT=1002 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of store_hotelcollect
+-- ----------------------------
+INSERT INTO `store_hotelcollect` VALUES ('1000', '9001', '2018-04-01', '1001', '1');
+INSERT INTO `store_hotelcollect` VALUES ('1001', '0', '2018/04/09 18:06:27', '1001', '1');
+
+-- ----------------------------
+-- Table structure for store_hotelcomment
+-- ----------------------------
+DROP TABLE IF EXISTS `store_hotelcomment`;
+CREATE TABLE `store_hotelcomment` (
+  `hcId` int(11) NOT NULL AUTO_INCREMENT,
+  `hId` int(11) DEFAULT NULL,
+  `hcContent` varchar(200) DEFAULT NULL,
+  `hcTime` varchar(200) DEFAULT NULL,
+  `userId` int(11) NOT NULL,
+  `commentTo` int(11) DEFAULT '0',
+  PRIMARY KEY (`hcId`),
+  KEY `hId` (`hId`),
+  KEY `userId` (`userId`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of store_hotelcomment
+-- ----------------------------
+INSERT INTO `store_hotelcomment` VALUES ('1', '9001', '\"酒店不错\"', null, '0', '0');
+
+-- ----------------------------
+-- Table structure for store_hotelorder
+-- ----------------------------
+DROP TABLE IF EXISTS `store_hotelorder`;
+CREATE TABLE `store_hotelorder` (
+  `hoId` int(11) NOT NULL AUTO_INCREMENT,
+  `huId` int(11) DEFAULT NULL,
+  `hoTime` datetime DEFAULT NULL,
+  `paytime` datetime DEFAULT NULL,
+  `orderstate` enum('0','1','2') DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`hoId`),
+  KEY `huId` (`huId`),
+  KEY `user_id` (`user_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of store_hotelorder
+-- ----------------------------
+INSERT INTO `store_hotelorder` VALUES ('1', '9001', '2018-04-02 15:14:35', '0000-00-00 00:00:00', '0', '1');
+INSERT INTO `store_hotelorder` VALUES ('2', '9001', '2018-04-02 15:14:35', '0000-00-00 00:00:00', '1', '1');
+INSERT INTO `store_hotelorder` VALUES ('3', '9001', '2018-04-02 15:14:35', '0000-00-00 00:00:00', '0', '1');
+INSERT INTO `store_hotelorder` VALUES ('4', '9001', '2018-04-02 15:14:35', '0000-00-00 00:00:00', '2', '1');
+INSERT INTO `store_hotelorder` VALUES ('5', '9002', '2018-04-09 18:09:53', null, '0', '1001');
+INSERT INTO `store_hotelorder` VALUES ('6', '9001', '2018-04-12 16:06:09', null, '0', null);
+INSERT INTO `store_hotelorder` VALUES ('7', '9001', '2018-04-12 16:49:14', null, '0', '1001');
+INSERT INTO `store_hotelorder` VALUES ('8', '9001', '2018-04-12 16:52:53', null, '0', '1001');
+INSERT INTO `store_hotelorder` VALUES ('9', '9001', '2018-04-12 16:53:05', null, '0', '1001');
+INSERT INTO `store_hotelorder` VALUES ('10', '9002', '2018-04-12 17:02:33', null, '0', '0');
+INSERT INTO `store_hotelorder` VALUES ('11', '9002', '2018-04-12 17:02:42', null, '0', '0');
+INSERT INTO `store_hotelorder` VALUES ('12', '9002', '2018-04-12 17:36:06', null, '0', '0');
+INSERT INTO `store_hotelorder` VALUES ('13', '9004', '2018-04-12 22:47:49', null, '0', '0');
+INSERT INTO `store_hotelorder` VALUES ('14', '9002', '2018-04-12 23:23:24', null, '0', '0');
+INSERT INTO `store_hotelorder` VALUES ('15', '9002', '2018-04-12 23:23:41', null, '0', '0');
+INSERT INTO `store_hotelorder` VALUES ('16', '9002', '2018-04-13 09:09:15', null, '0', '0');
+
+-- ----------------------------
+-- Table structure for store_info
+-- ----------------------------
+DROP TABLE IF EXISTS `store_info`;
+CREATE TABLE `store_info` (
+  `store_id` int(11) NOT NULL AUTO_INCREMENT,
+  `store_name` char(12) DEFAULT NULL,
+  `store_state` enum('F','T','S') DEFAULT 'F',
+  `store_image` varchar(100) DEFAULT NULL,
+  `store_phone` char(11) DEFAULT NULL,
+  `store_apply_time` datetime DEFAULT NULL,
+  `store_province_id` int(11) DEFAULT NULL,
+  `store_city_id` int(11) DEFAULT NULL,
+  `store_town_id` int(11) DEFAULT NULL,
+  `store_address_detail` varchar(50) DEFAULT NULL,
+  `store_textarea` text,
+  PRIMARY KEY (`store_id`),
+  UNIQUE KEY `sda` (`store_name`) USING BTREE,
+  UNIQUE KEY `sda2` (`store_phone`) USING BTREE,
+  KEY `store_province_id` (`store_province_id`),
+  KEY `sad1` (`store_name`) USING BTREE
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of store_info
+-- ----------------------------
+INSERT INTO `store_info` VALUES ('1', '13255917292', 'F', null, '13255917292', '2018-03-28 19:41:23', '1964', '1965', '1966', '13255917292', '似懂非懂斯蒂芬萨芬 ');
+INSERT INTO `store_info` VALUES ('2', '出错出错错错错错所', 'F', null, '15648945613', '2018-04-08 16:39:45', null, null, null, null, null);
+INSERT INTO `store_info` VALUES ('3', 'dfsa', 'F', null, '15648951327', '2018-04-09 11:21:20', null, null, null, null, null);
+
+-- ----------------------------
+-- Table structure for store_shotel
+-- ----------------------------
+DROP TABLE IF EXISTS `store_shotel`;
+CREATE TABLE `store_shotel` (
+  `hId` int(11) NOT NULL AUTO_INCREMENT,
+  `hName` varchar(50) NOT NULL,
+  `hImg` varchar(50) DEFAULT NULL,
+  `hRoomNumber` tinyint(4) DEFAULT NULL,
+  `hAddress` varchar(50) DEFAULT NULL,
+  `hPrice` int(11) DEFAULT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `putaway` enum('上架','下架') DEFAULT NULL,
+  `audit` enum('1','0') DEFAULT NULL,
+  PRIMARY KEY (`hId`),
+  KEY `store_id` (`store_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=9009 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of store_shotel
+-- ----------------------------
+INSERT INTO `store_shotel` VALUES ('9001', '厦门香格里拉大酒店', 'hotel1.jpg', '20', '观音山国际商务区台东路168号', '1009', '0', '上架', '1');
+INSERT INTO `store_shotel` VALUES ('9002', '厦门海悦山庄酒店', 'hotel2.jpg', '20', '思明区环岛南路3999号(紧邻环岛路,国家会计学院旁)', '810', '0', '上架', '1');
+INSERT INTO `store_shotel` VALUES ('9003', '厦门海景千禧大酒店', 'hotel3.jpg', '20', '镇海路12号之8号 (近中山路商业步行街, 轮渡码头和和平码头)', '790', '0', '上架', '0');
+INSERT INTO `store_shotel` VALUES ('9004', '厦门瑞颐大酒店 ', 'hotel4.jpg', '20', '思明区鹭江道12号(鼓浪屿对面,近轮渡码头, 中山路商业步行街)', '879', '0', '下架', '0');
+INSERT INTO `store_shotel` VALUES ('9005', '厦门五缘湾凯悦酒店', 'hotel5.jpg', '20', '湖里区日圆二里5号', '909', '0', '下架', '0');
+INSERT INTO `store_shotel` VALUES ('9006', '厦门喜来登酒店', 'hotel6.jpg', '20', ' 思明区嘉禾路386-1号(近SM城市广场)', '709', '0', '下架', '1');
+INSERT INTO `store_shotel` VALUES ('9007', '厦门磐基皇冠假日酒店 ', 'hotel7.jpg', '20', '思明区嘉禾路199号(近明发商业广场)', '755', '0', '下架', '1');
+INSERT INTO `store_shotel` VALUES ('9008', '厦门马哥孛罗东方大酒店', 'hotel8.jpg', '20', ' 思明区湖滨北建业路8号(近白鹭洲公园,筼筜湖畔)', '709', '0', '下架', '1');
+
+-- ----------------------------
+-- Table structure for store_shotel_img
+-- ----------------------------
+DROP TABLE IF EXISTS `store_shotel_img`;
+CREATE TABLE `store_shotel_img` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `path` text,
+  `name` text,
+  `hId` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `hId` (`hId`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of store_shotel_img
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for user_char_stroe
+-- ----------------------------
+DROP TABLE IF EXISTS `user_char_stroe`;
+CREATE TABLE `user_char_stroe` (
+  `user_char_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_uid` int(11) DEFAULT NULL,
+  `user_char_char_two_id` int(11) DEFAULT NULL,
+  `user_char_Obj` char(1) DEFAULT 'F',
+  `user_char_content` varchar(100) DEFAULT NULL,
+  `user_char_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`user_char_id`),
+  KEY `user_uid` (`user_uid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of user_char_stroe
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for user_char_stroe_service
+-- ----------------------------
+DROP TABLE IF EXISTS `user_char_stroe_service`;
+CREATE TABLE `user_char_stroe_service` (
+  `user_char_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_uid` char(20) DEFAULT NULL,
+  `user_char_char_two_id` int(11) DEFAULT NULL,
+  `user_char_Obj` char(1) DEFAULT 'F',
+  `user_char_content` varchar(100) DEFAULT NULL,
+  `user_char_time` int(11) DEFAULT NULL,
+  PRIMARY KEY (`user_char_id`),
+  KEY `user_uid` (`user_uid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of user_char_stroe_service
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for user_chat
+-- ----------------------------
+DROP TABLE IF EXISTS `user_chat`;
+CREATE TABLE `user_chat` (
+  `user_chat_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_uid` char(20) DEFAULT NULL,
+  `user_chat_char_two_id` char(20) DEFAULT NULL,
+  `user_chat_type` enum('A','B','C','D','E','F') DEFAULT 'A',
+  `user_chat_obj` enum('F','T') DEFAULT 'F',
+  `user_chat_content` varchar(100) DEFAULT NULL,
+  `user_chat_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`user_chat_id`),
+  KEY `user_chat_1` (`user_uid`,`user_chat_char_two_id`) USING BTREE
+) ENGINE=MyISAM AUTO_INCREMENT=258 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of user_chat
+-- ----------------------------
+INSERT INTO `user_chat` VALUES ('1', 'user_2', 'store_1', 'A', 'F', 'sadf', '2018-04-08 22:33:31');
+INSERT INTO `user_chat` VALUES ('2', 'user_2', 'store_1', 'A', 'F', 'dsaf', '2018-04-08 22:52:50');
+
+
+-- ----------------------------
+-- Table structure for user_locations
+-- ----------------------------
+DROP TABLE IF EXISTS `user_locations`;
+CREATE TABLE `user_locations` (
+  `user_local_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_local_name` char(80) DEFAULT NULL,
+  `user_local_image` varchar(150) DEFAULT '/images/location.png',
+  `user_local_lng` decimal(10,7) DEFAULT NULL,
+  `user_local_lat` decimal(10,7) DEFAULT NULL,
+  PRIMARY KEY (`user_local_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of user_locations
+-- ----------------------------
+INSERT INTO `user_locations` VALUES ('1', '三坊七巷', '/images/location.png', '119.2965210', '26.0852620');
+INSERT INTO `user_locations` VALUES ('2', '福州国家森林公园', '/images/location.png', '119.2981700', '26.1515990');
+INSERT INTO `user_locations` VALUES ('3', '罗源湾海洋世界', '/images/location.png', '119.6057570', '26.4549190');
+INSERT INTO `user_locations` VALUES ('4', '石竹山', '/images/location.png', '119.1986870', '25.5969000');
+INSERT INTO `user_locations` VALUES ('5', '贵安新天地休闲旅游度假区', '/images/location.png', '119.4046390', '26.2388880');
+INSERT INTO `user_locations` VALUES ('6', '永泰天门山', '/images/location.png', '119.0186010', '25.8218330');
+INSERT INTO `user_locations` VALUES ('7', '旗山森林人家旅游区', '/images/location.png', '119.1231100', '25.9675130');
+
+-- ----------------------------
+-- Table structure for user_story
+-- ----------------------------
+DROP TABLE IF EXISTS `user_story`;
+CREATE TABLE `user_story` (
+  `sid` int(11) NOT NULL AUTO_INCREMENT ,
+  `title` varchar(32) DEFAULT NULL ,
+  `userId` int(11) DEFAULT NULL , 
+  `state` enum('1','0') DEFAULT NULL ,
+  `edittime` datetime DEFAULT NULL ,
+  `user_local_id` varchar(255) DEFAULT '1' ,  
+  `content` text,
+  PRIMARY KEY (`sid`),
+  KEY `userId` (`userId`),
+  KEY `user_local_id` (`user_local_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of user_story
+-- ----------------------------
+INSERT INTO `user_story` VALUES ('6', '三坊七巷', '1', '0', now(), 1, '&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp; &amp;nbsp;说起成都，你首先想到的是圆滚滚的大熊猫，还是熙来攘往的春熙路太古里，亦或是烫着火锅撸着串的惬意呢？慢，是成都人生活的关键字，而成都周边有这样一座小镇，这里书信慢，车马也很慢，却浓缩了最古老最地道的成都百态。\n&lt;br&gt;\n&lt;img class=&quot;fr-fin&quot; data-fr-image-preview=&quot;false&quot; alt=&quot;Image title&quot; src=&quot;http://p6gnb5g93.bkt.clouddn.com/791047871.jpg&quot; width=&quot;300&quot;&gt;&lt;img class=&quot;fr-fin&quot; data-fr-image-preview=&quot;false&quot; alt=&quot;Image title&quot; src=&quot;http://p6gnb5g93.bkt.clouddn.com/278487902.jpg&quot; width=&quot;300&quot;&gt;&lt;img class=&quot;fr-fin&quot; data-fr-image-preview=&quot;false&quot; alt=&quot;Image title&quot; src=&quot;http://p6gnb5g93.bkt.clouddn.com/3.jpg&quot; width=&quot;300&quot;&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;彭镇位于双流区的西北面，由成都市中心前往，不过一小时的车程。年轻人都往热闹的地方钻，所以这座小镇的街道上常见不着人，偶有老人悠闲地坐在自家门前晒太阳。彭镇是安静的，它比不得别的古镇那样吸引游客，少了许多人气，却多了不少人情味儿。这里的街道是充满回忆的石板路，房屋也是木门青瓦古旧的模样。彭镇也是浪漫的，你从当地人的生活细节中便可窥见。那些门户即便旧旧的，也被收拾得干净整洁，门框上去年的春联尚未更换，又新贴了岁月绵长四字。是啊，岁月就是这样绵长，它比我们更具有包容性，既能接受柴米油盐的地气儿，又能感悟诗和远方的文艺。\n&lt;br&gt;\n&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;百年的老茶馆，是彭镇最有趣儿的地方。茶馆里也多是当地老人，日子对于他们来说反正是闲适安逸的，何不聚在一起打打桥牌，抽根叶子烟。茶壶散发的热气，让老板养的猫咪觉得很暖，于是它便那样蜷缩在台子上沉沉睡去。一杯盖碗茶，凝聚的是成都人对于名利的淡泊之心。掀开茶盖，细嗅茶的气味，再慢慢品一口，真真儿的香。&lt;/p&gt;');
+INSERT INTO `user_story` VALUES ('7', '福州国家森林公园', '1', '0', now(), 2, '&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp; &amp;nbsp;说起成都，你首先想到的是圆滚滚的大熊猫，还是熙来攘往的春熙路太古里，亦或是烫着火锅撸着串的惬意呢？慢，是成都人生活的关键字，而成都周边有这样一座小镇，这里书信慢，车马也很慢，却浓缩了最古老最地道的成都百态。\n&lt;br&gt;\n&lt;img class=&quot;fr-fin&quot; data-fr-image-preview=&quot;false&quot; alt=&quot;Image title&quot; src=&quot;http://p6gnb5g93.bkt.clouddn.com/791047871.jpg&quot; width=&quot;300&quot;&gt;&lt;img class=&quot;fr-fin&quot; data-fr-image-preview=&quot;false&quot; alt=&quot;Image title&quot; src=&quot;http://p6gnb5g93.bkt.clouddn.com/278487902.jpg&quot; width=&quot;300&quot;&gt;&lt;img class=&quot;fr-fin&quot; data-fr-image-preview=&quot;false&quot; alt=&quot;Image title&quot; src=&quot;http://p6gnb5g93.bkt.clouddn.com/3.jpg&quot; width=&quot;300&quot;&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;彭镇位于双流区的西北面，由成都市中心前往，不过一小时的车程。年轻人都往热闹的地方钻，所以这座小镇的街道上常见不着人，偶有老人悠闲地坐在自家门前晒太阳。彭镇是安静的，它比不得别的古镇那样吸引游客，少了许多人气，却多了不少人情味儿。这里的街道是充满回忆的石板路，房屋也是木门青瓦古旧的模样。彭镇也是浪漫的，你从当地人的生活细节中便可窥见。那些门户即便旧旧的，也被收拾得干净整洁，门框上去年的春联尚未更换，又新贴了岁月绵长四字。是啊，岁月就是这样绵长，它比我们更具有包容性，既能接受柴米油盐的地气儿，又能感悟诗和远方的文艺。\n&lt;br&gt;\n&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;百年的老茶馆，是彭镇最有趣儿的地方。茶馆里也多是当地老人，日子对于他们来说反正是闲适安逸的，何不聚在一起打打桥牌，抽根叶子烟。茶壶散发的热气，让老板养的猫咪觉得很暖，于是它便那样蜷缩在台子上沉沉睡去。一杯盖碗茶，凝聚的是成都人对于名利的淡泊之心。掀开茶盖，细嗅茶的气味，再慢慢品一口，真真儿的香。&lt;/p&gt;');
+INSERT INTO `user_story` VALUES ('8', '罗源湾海洋世界', '1', '0', now(), 3, '&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp; &amp;nbsp;说起成都，你首先想到的是圆滚滚的大熊猫，还是熙来攘往的春熙路太古里，亦或是烫着火锅撸着串的惬意呢？慢，是成都人生活的关键字，而成都周边有这样一座小镇，这里书信慢，车马也很慢，却浓缩了最古老最地道的成都百态。\n&lt;br&gt;\n&lt;img class=&quot;fr-fin&quot; data-fr-image-preview=&quot;false&quot; alt=&quot;Image title&quot; src=&quot;http://p6gnb5g93.bkt.clouddn.com/791047871.jpg&quot; width=&quot;300&quot;&gt;&lt;img class=&quot;fr-fin&quot; data-fr-image-preview=&quot;false&quot; alt=&quot;Image title&quot; src=&quot;http://p6gnb5g93.bkt.clouddn.com/278487902.jpg&quot; width=&quot;300&quot;&gt;&lt;img class=&quot;fr-fin&quot; data-fr-image-preview=&quot;false&quot; alt=&quot;Image title&quot; src=&quot;http://p6gnb5g93.bkt.clouddn.com/3.jpg&quot; width=&quot;300&quot;&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;彭镇位于双流区的西北面，由成都市中心前往，不过一小时的车程。年轻人都往热闹的地方钻，所以这座小镇的街道上常见不着人，偶有老人悠闲地坐在自家门前晒太阳。彭镇是安静的，它比不得别的古镇那样吸引游客，少了许多人气，却多了不少人情味儿。这里的街道是充满回忆的石板路，房屋也是木门青瓦古旧的模样。彭镇也是浪漫的，你从当地人的生活细节中便可窥见。那些门户即便旧旧的，也被收拾得干净整洁，门框上去年的春联尚未更换，又新贴了岁月绵长四字。是啊，岁月就是这样绵长，它比我们更具有包容性，既能接受柴米油盐的地气儿，又能感悟诗和远方的文艺。\n&lt;br&gt;\n&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;百年的老茶馆，是彭镇最有趣儿的地方。茶馆里也多是当地老人，日子对于他们来说反正是闲适安逸的，何不聚在一起打打桥牌，抽根叶子烟。茶壶散发的热气，让老板养的猫咪觉得很暖，于是它便那样蜷缩在台子上沉沉睡去。一杯盖碗茶，凝聚的是成都人对于名利的淡泊之心。掀开茶盖，细嗅茶的气味，再慢慢品一口，真真儿的香。&lt;/p&gt;');
+INSERT INTO `user_story` VALUES ('9', '石竹山', '1', '0', now(), 4, '&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp; &amp;nbsp;说起成都，你首先想到的是圆滚滚的大熊猫，还是熙来攘往的春熙路太古里，亦或是烫着火锅撸着串的惬意呢？慢，是成都人生活的关键字，而成都周边有这样一座小镇，这里书信慢，车马也很慢，却浓缩了最古老最地道的成都百态。\n&lt;br&gt;\n&lt;img class=&quot;fr-fin&quot; data-fr-image-preview=&quot;false&quot; alt=&quot;Image title&quot; src=&quot;http://p6gnb5g93.bkt.clouddn.com/791047871.jpg&quot; width=&quot;300&quot;&gt;&lt;img class=&quot;fr-fin&quot; data-fr-image-preview=&quot;false&quot; alt=&quot;Image title&quot; src=&quot;http://p6gnb5g93.bkt.clouddn.com/278487902.jpg&quot; width=&quot;300&quot;&gt;&lt;img class=&quot;fr-fin&quot; data-fr-image-preview=&quot;false&quot; alt=&quot;Image title&quot; src=&quot;http://p6gnb5g93.bkt.clouddn.com/3.jpg&quot; width=&quot;300&quot;&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;彭镇位于双流区的西北面，由成都市中心前往，不过一小时的车程。年轻人都往热闹的地方钻，所以这座小镇的街道上常见不着人，偶有老人悠闲地坐在自家门前晒太阳。彭镇是安静的，它比不得别的古镇那样吸引游客，少了许多人气，却多了不少人情味儿。这里的街道是充满回忆的石板路，房屋也是木门青瓦古旧的模样。彭镇也是浪漫的，你从当地人的生活细节中便可窥见。那些门户即便旧旧的，也被收拾得干净整洁，门框上去年的春联尚未更换，又新贴了岁月绵长四字。是啊，岁月就是这样绵长，它比我们更具有包容性，既能接受柴米油盐的地气儿，又能感悟诗和远方的文艺。\n&lt;br&gt;\n&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;百年的老茶馆，是彭镇最有趣儿的地方。茶馆里也多是当地老人，日子对于他们来说反正是闲适安逸的，何不聚在一起打打桥牌，抽根叶子烟。茶壶散发的热气，让老板养的猫咪觉得很暖，于是它便那样蜷缩在台子上沉沉睡去。一杯盖碗茶，凝聚的是成都人对于名利的淡泊之心。掀开茶盖，细嗅茶的气味，再慢慢品一口，真真儿的香。&lt;/p&gt;');
+INSERT INTO `user_story` VALUES ('10', '贵安新天地休闲旅游度假区', '1', '0', now(), 5, '&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp; &amp;nbsp;说起成都，你首先想到的是圆滚滚的大熊猫，还是熙来攘往的春熙路太古里，亦或是烫着火锅撸着串的惬意呢？慢，是成都人生活的关键字，而成都周边有这样一座小镇，这里书信慢，车马也很慢，却浓缩了最古老最地道的成都百态。\n&lt;br&gt;\n&lt;img class=&quot;fr-fin&quot; data-fr-image-preview=&quot;false&quot; alt=&quot;Image title&quot; src=&quot;http://p6gnb5g93.bkt.clouddn.com/791047871.jpg&quot; width=&quot;300&quot;&gt;&lt;img class=&quot;fr-fin&quot; data-fr-image-preview=&quot;false&quot; alt=&quot;Image title&quot; src=&quot;http://p6gnb5g93.bkt.clouddn.com/278487902.jpg&quot; width=&quot;300&quot;&gt;&lt;img class=&quot;fr-fin&quot; data-fr-image-preview=&quot;false&quot; alt=&quot;Image title&quot; src=&quot;http://p6gnb5g93.bkt.clouddn.com/3.jpg&quot; width=&quot;300&quot;&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;彭镇位于双流区的西北面，由成都市中心前往，不过一小时的车程。年轻人都往热闹的地方钻，所以这座小镇的街道上常见不着人，偶有老人悠闲地坐在自家门前晒太阳。彭镇是安静的，它比不得别的古镇那样吸引游客，少了许多人气，却多了不少人情味儿。这里的街道是充满回忆的石板路，房屋也是木门青瓦古旧的模样。彭镇也是浪漫的，你从当地人的生活细节中便可窥见。那些门户即便旧旧的，也被收拾得干净整洁，门框上去年的春联尚未更换，又新贴了岁月绵长四字。是啊，岁月就是这样绵长，它比我们更具有包容性，既能接受柴米油盐的地气儿，又能感悟诗和远方的文艺。\n&lt;br&gt;\n&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;百年的老茶馆，是彭镇最有趣儿的地方。茶馆里也多是当地老人，日子对于他们来说反正是闲适安逸的，何不聚在一起打打桥牌，抽根叶子烟。茶壶散发的热气，让老板养的猫咪觉得很暖，于是它便那样蜷缩在台子上沉沉睡去。一杯盖碗茶，凝聚的是成都人对于名利的淡泊之心。掀开茶盖，细嗅茶的气味，再慢慢品一口，真真儿的香。&lt;/p&gt;');
+INSERT INTO `user_story` VALUES ('11', '永泰天门山', '1', '0', now(), 6, '&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp; &amp;nbsp;说起成都，你首先想到的是圆滚滚的大熊猫，还是熙来攘往的春熙路太古里，亦或是烫着火锅撸着串的惬意呢？慢，是成都人生活的关键字，而成都周边有这样一座小镇，这里书信慢，车马也很慢，却浓缩了最古老最地道的成都百态。\n&lt;br&gt;\n&lt;img class=&quot;fr-fin&quot; data-fr-image-preview=&quot;false&quot; alt=&quot;Image title&quot; src=&quot;http://p6gnb5g93.bkt.clouddn.com/791047871.jpg&quot; width=&quot;300&quot;&gt;&lt;img class=&quot;fr-fin&quot; data-fr-image-preview=&quot;false&quot; alt=&quot;Image title&quot; src=&quot;http://p6gnb5g93.bkt.clouddn.com/278487902.jpg&quot; width=&quot;300&quot;&gt;&lt;img class=&quot;fr-fin&quot; data-fr-image-preview=&quot;false&quot; alt=&quot;Image title&quot; src=&quot;http://p6gnb5g93.bkt.clouddn.com/3.jpg&quot; width=&quot;300&quot;&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;彭镇位于双流区的西北面，由成都市中心前往，不过一小时的车程。年轻人都往热闹的地方钻，所以这座小镇的街道上常见不着人，偶有老人悠闲地坐在自家门前晒太阳。彭镇是安静的，它比不得别的古镇那样吸引游客，少了许多人气，却多了不少人情味儿。这里的街道是充满回忆的石板路，房屋也是木门青瓦古旧的模样。彭镇也是浪漫的，你从当地人的生活细节中便可窥见。那些门户即便旧旧的，也被收拾得干净整洁，门框上去年的春联尚未更换，又新贴了岁月绵长四字。是啊，岁月就是这样绵长，它比我们更具有包容性，既能接受柴米油盐的地气儿，又能感悟诗和远方的文艺。\n&lt;br&gt;\n&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;百年的老茶馆，是彭镇最有趣儿的地方。茶馆里也多是当地老人，日子对于他们来说反正是闲适安逸的，何不聚在一起打打桥牌，抽根叶子烟。茶壶散发的热气，让老板养的猫咪觉得很暖，于是它便那样蜷缩在台子上沉沉睡去。一杯盖碗茶，凝聚的是成都人对于名利的淡泊之心。掀开茶盖，细嗅茶的气味，再慢慢品一口，真真儿的香。&lt;/p&gt;');
+INSERT INTO `user_story` VALUES ('12', '旗山森林人家旅游区', '1', '0', now(), 7, '&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp; &amp;nbsp;说起成都，你首先想到的是圆滚滚的大熊猫，还是熙来攘往的春熙路太古里，亦或是烫着火锅撸着串的惬意呢？慢，是成都人生活的关键字，而成都周边有这样一座小镇，这里书信慢，车马也很慢，却浓缩了最古老最地道的成都百态。\n&lt;br&gt;\n&lt;img class=&quot;fr-fin&quot; data-fr-image-preview=&quot;false&quot; alt=&quot;Image title&quot; src=&quot;http://p6gnb5g93.bkt.clouddn.com/791047871.jpg&quot; width=&quot;300&quot;&gt;&lt;img class=&quot;fr-fin&quot; data-fr-image-preview=&quot;false&quot; alt=&quot;Image title&quot; src=&quot;http://p6gnb5g93.bkt.clouddn.com/278487902.jpg&quot; width=&quot;300&quot;&gt;&lt;img class=&quot;fr-fin&quot; data-fr-image-preview=&quot;false&quot; alt=&quot;Image title&quot; src=&quot;http://p6gnb5g93.bkt.clouddn.com/3.jpg&quot; width=&quot;300&quot;&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;彭镇位于双流区的西北面，由成都市中心前往，不过一小时的车程。年轻人都往热闹的地方钻，所以这座小镇的街道上常见不着人，偶有老人悠闲地坐在自家门前晒太阳。彭镇是安静的，它比不得别的古镇那样吸引游客，少了许多人气，却多了不少人情味儿。这里的街道是充满回忆的石板路，房屋也是木门青瓦古旧的模样。彭镇也是浪漫的，你从当地人的生活细节中便可窥见。那些门户即便旧旧的，也被收拾得干净整洁，门框上去年的春联尚未更换，又新贴了岁月绵长四字。是啊，岁月就是这样绵长，它比我们更具有包容性，既能接受柴米油盐的地气儿，又能感悟诗和远方的文艺。\n&lt;br&gt;\n&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;百年的老茶馆，是彭镇最有趣儿的地方。茶馆里也多是当地老人，日子对于他们来说反正是闲适安逸的，何不聚在一起打打桥牌，抽根叶子烟。茶壶散发的热气，让老板养的猫咪觉得很暖，于是它便那样蜷缩在台子上沉沉睡去。一杯盖碗茶，凝聚的是成都人对于名利的淡泊之心。掀开茶盖，细嗅茶的气味，再慢慢品一口，真真儿的香。&lt;/p&gt;');
+
+-- ----------------------------
+-- Table structure for user_story_collect
+-- ----------------------------
+DROP TABLE IF EXISTS `user_story_collect`;
+CREATE TABLE `user_story_collect` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sid` int(11) DEFAULT NULL,
+  `userId` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `userId` (`userId`),
+  KEY `sid` (`sid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of user_story_collect
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for user_story_comment
+-- ----------------------------
+DROP TABLE IF EXISTS `user_story_comment`;
+CREATE TABLE `user_story_comment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `review` varchar(150) DEFAULT NULL,
+  `time` datetime DEFAULT NULL,
+  `sid` int(11) DEFAULT NULL,
+  `userId` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `userId` (`userId`),
+  KEY `sid` (`sid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of user_story_comment
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for user_story_copy
+-- ----------------------------
+DROP TABLE IF EXISTS `user_story_copy`;
+CREATE TABLE `user_story_copy` (
+  `sid` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(32) DEFAULT NULL,
+  `userId` int(11) DEFAULT NULL,
+  `state` enum('1','0') DEFAULT NULL,
+  `edittime` datetime DEFAULT NULL,
+  `user_local_id` varchar(255) DEFAULT '1',
+  `content` text,
+  PRIMARY KEY (`sid`),
+  KEY `userId` (`userId`),
+  KEY `user_local_id` (`user_local_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of user_story_copy
+-- ----------------------------
+INSERT INTO `user_story_copy` VALUES ('1', 'dsfdsfsdafds', '1', '1', '2018-04-08 09:32:31', null, '&lt;p&gt;adsfdsfdf fddf&lt;img class=&quot;fr-fin&quot; data-fr-image-preview=&quot;false&quot; alt=&quot;Image title&quot; src=&quot;http://p6gnb5g93.bkt.clouddn.com/1.jpg&quot; width=&quot;300&quot;&gt;&lt;/p&gt;');
+INSERT INTO `user_story_copy` VALUES ('5', '成都丨在车马慢的彭镇，来一碗百年盖碗茶', '1', '0', '0000-00-00 00:00:00', null, '&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp; &amp;nbsp;说起成都，你首先想到的是圆滚滚的大熊猫，还是熙来攘往的春熙路太古里，亦或是烫着火锅撸着串的惬意呢？慢，是成都人生活的关键字，而成都周边有这样一座小镇，这里书信慢，车马也很慢，却浓缩了最古老最地道的成都百态。\n&lt;br&gt;\n&lt;img class=&quot;fr-fin&quot; data-fr-image-preview=&quot;false&quot; alt=&quot;Image title&quot; src=&quot;http://p6gnb5g93.bkt.clouddn.com/791047871.jpg&quot; width=&quot;300&quot;&gt;&lt;img class=&quot;fr-fin&quot; data-fr-image-preview=&quot;false&quot; alt=&quot;Image title&quot; src=&quot;http://p6gnb5g93.bkt.clouddn.com/278487902.jpg&quot; width=&quot;300&quot;&gt;&lt;img class=&quot;fr-fin&quot; data-fr-image-preview=&quot;false&quot; alt=&quot;Image title&quot; src=&quot;http://p6gnb5g93.bkt.clouddn.com/3.jpg&quot; width=&quot;300&quot;&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;彭镇位于双流区的西北面，由成都市中心前往，不过一小时的车程。年轻人都往热闹的地方钻，所以这座小镇的街道上常见不着人，偶有老人悠闲地坐在自家门前晒太阳。彭镇是安静的，它比不得别的古镇那样吸引游客，少了许多人气，却多了不少人情味儿。这里的街道是充满回忆的石板路，房屋也是木门青瓦古旧的模样。彭镇也是浪漫的，你从当地人的生活细节中便可窥见。那些门户即便旧旧的，也被收拾得干净整洁，门框上去年的春联尚未更换，又新贴了岁月绵长四字。是啊，岁月就是这样绵长，它比我们更具有包容性，既能接受柴米油盐的地气儿，又能感悟诗和远方的文艺。\n&lt;br&gt;\n&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;百年的老茶馆，是彭镇最有趣儿的地方。茶馆里也多是当地老人，日子对于他们来说反正是闲适安逸的，何不聚在一起打打桥牌，抽根叶子烟。茶壶散发的热气，让老板养的猫咪觉得很暖，于是它便那样蜷缩在台子上沉沉睡去。一杯盖碗茶，凝聚的是成都人对于名利的淡泊之心。掀开茶盖，细嗅茶的气味，再慢慢品一口，真真儿的香。&lt;/p&gt;');
+INSERT INTO `user_story_copy` VALUES ('17', '7887878', '1', null, null, null, '&lt;p&gt;&lt;br&gt;&lt;/p&gt;');
+INSERT INTO `user_story_copy` VALUES ('18', '神秘力量', '1', null, null, null, '&lt;p&gt;6666666&lt;/p&gt;');
+INSERT INTO `user_story_copy` VALUES ('16', '佛挡杀佛', '1', '0', '0000-00-00 00:00:00', null, 'undefined');
+
+-- ----------------------------
+-- Table structure for user_story_img
+-- ----------------------------
+DROP TABLE IF EXISTS `user_story_img`;
+CREATE TABLE `user_story_img` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `path` text,
+  `sid` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `sid` (`sid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of user_story_img
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for user_user
+-- ----------------------------
+DROP TABLE IF EXISTS `user_user`;
+CREATE TABLE `user_user` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_uid` char(20) DEFAULT NULL,
+  `user_name` char(12) DEFAULT '用户',
+  `user_password` char(32) DEFAULT NULL,
+  `user_email` varchar(40) DEFAULT NULL,
+  `user_phone` char(11) DEFAULT NULL,
+  `user_image` varchar(100) DEFAULT NULL,
+  `user_time` int(11) DEFAULT NULL,
+  `user_sex` enum('男','女') DEFAULT '男',
+  `user_state` enum('1','0') DEFAULT NULL,
+  `user_msg` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of user_user
+-- ----------------------------
+INSERT INTO `user_user` VALUES ('1', 'test', '测试用', 'e10adc3949ba59abbe56e057f20f883e', '33333@qq.com', '15324488756', 'http://p6gnb5g93.bkt.clouddn.com/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg', '2018', '女', '1', '溜溜先');
+INSERT INTO `user_user` VALUES ('2', 'tests', '测试用', 'e10adc3949ba59abbe56e057f20f883e', '', '15324488756', 'http://p6gnb5g93.bkt.clouddn.com/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg', '2018', '女', '0', '7878787');
+INSERT INTO `user_user` VALUES ('11', 'yuyu', '邱萍', '123', '23232QQ.COM', '1323232323', '3', null, '男', null, null);
+INSERT INTO `user_user` VALUES ('7', 'testsafds', '用户', 'e10adc3949ba59abbe56e057f20f883e', null, '15648915632', null, '1523243869', '男', '1', null);
+INSERT INTO `user_user` VALUES ('8', 'testsfew', '用户', 'e10adc3949ba59abbe56e057f20f883e', null, '15648951324', null, '1523243998', '男', '1', null);
+INSERT INTO `user_user` VALUES ('9', '', '喂喂喂', '3232', '78', '0', '更好', '2147483647', '', null, null);
+INSERT INTO `user_user` VALUES ('10', null, '手机用户18756070', null, null, '18756070310', 'http://p6gnb5g93.bkt.clouddn.com/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg', '1523353617', '男', '1', null);
+INSERT INTO `user_user` VALUES ('12', null, '手机用户18649796', null, null, '18649796773', 'http://p6gnb5g93.bkt.clouddn.com/184259d34cf7b25692ffa080f2c2a66505ebab08.jpg', '1523523403', '男', '1', null);

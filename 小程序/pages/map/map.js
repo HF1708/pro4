@@ -48,30 +48,69 @@ Component({
   ready:function(){
     var that = this ;
     this.mapCtx = wx.createMapContext('myMap',this) ;
-    // 获取信息的对应参数
-    var data = {
-      name: this.properties.setName
-    } ;
-
-    // 获取对应经纬度信息
-    wx.request({
-      url: 'https://www.qqy.fun/data/Data/getLL' , //仅为示例，并非真实的接口地址
-      data: data , 
-      method:"POST" ,
-      dataType:"json" ,
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
+    wx.getStorage({
+      //获取数据的key
+      key: 'user',
       success: function (res) {
-        that.setData({
-          markers: res.data
+        var user = JSON.parse(res.data)[0] ;
+        var user_id = (user.user_id) ;
+        // 获取信息的对应参数
+        var data = {
+          name: that.properties.setName ,
+          user_id: user_id
+        };
+
+        /**
+         * 获取用户位置信息
+         */
+        wx.getLocation({
+          // type: 'wgs84',
+          type: 'GCJ02',
+          success: function (res) {
+            var latitude = res.latitude;
+            var longitude = res.longitude;
+            var speed = res.speed;
+            var accuracy = res.accuracy;
+            var markers = {
+              id: "0",
+              latitude: res.latitude,
+              longitude: res.longitude
+            };
+            that.setData({
+              latitude: res.latitude,
+              longitude: res.longitude
+            });
+            // 获取对应经纬度信息
+            wx.request({
+              url: 'https://www.qqy.fun/data/Data/getLL', //仅为示例，并非真实的接口地址
+              data: data,
+              method: "POST",
+              dataType: "json",
+              header: {
+                'content-type': 'application/json' // 默认值
+              },
+              success: function (res) {
+                // that.data.markers.push(res.data);
+                var mark = that.data.markers ;
+                mark = mark.concat(res.data) ;
+                that.setData({
+                  markers: mark
+                });
+                that.mapCtx.includePoints({
+                  padding: [10],
+                  points: that.data.markers
+                });
+              }
+            });
+
+          }
         }) ;
-        that.mapCtx.includePoints({
-          padding: [10],
-          points: that.data.markers
-        });
+
+
       }
     }) ;
+    console.log("asdfs2131651f3");
+    
     /**
      * 获取用户位置信息
      */
@@ -83,9 +122,16 @@ Component({
         var longitude = res.longitude ;
         var speed = res.speed ;
         var accuracy = res.accuracy ;
-        that.setData({
+        var markers = {
+          id: "0" ,
           latitude : res.latitude ,
           longitude: res.longitude
+        } ;
+        that.data.markers.push(markers) ;
+        that.setData({
+          latitude : res.latitude ,
+          longitude: res.longitude 
+
         }) ;
       }
     }) 

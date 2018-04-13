@@ -419,7 +419,30 @@ class Login extends Controller
         $that->returnJson("loginMsg","DATA_SUCCESS","",10000) ;
 
     }
-
+    /**
+     * 功能描述：判断是否登录
+     * 参数：
+     * QQUser：
+     * 返回：
+     * 作者：qingtian Y
+     * 时间：18-4-13
+     */
+    function islogin(){
+        $user=session::get('loginData');
+        if(empty($user)){
+            $arr['code']=1008;
+            $arr['msg']="未登录";
+            $arr['data']=[];
+            echo json_encode($arr);
+            exit();
+        }else{
+            $arr['code']=1000;
+            $arr['msg']="已登陆";
+            $arr['data']=[];
+            echo json_encode($arr);
+            exit();
+        }
+    }
 }
 
 

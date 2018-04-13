@@ -25,5 +25,21 @@ class Notes extends  Controller
         $notes=json_encode($getnotes);
         echo $notes;
     }
+    /**
+     * 功能描述：小程序获取游记详情
+     * 参数：无
+     * 返回：游记详情
+     * 作者：min H
+     * 时间：18-4-11
+     */
+    public function getItem(){
+        $sid=input('?get.sid')?input('get.sid'):"";
+        $where=[
+            'sid'=>$sid
+        ];
+        $getitem=db('user_story a')->join('user_user b','a.userId=b.user_id')->where($where)->select();
+        $item=json_encode($getitem);
+        echo $item;
+    }
 
 }
