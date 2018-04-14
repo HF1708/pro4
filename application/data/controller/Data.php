@@ -78,7 +78,45 @@ class Data extends Controller
 
         return $res ;
     }
-
+    /**
+     * 功能描述：获取信息（酒店）
+     * 参数：
+     * QQUser：
+     * 返回：推荐数据
+     * 作者：yonjin L
+     * 时间：18-4-12
+     */
+    function getHotel()
+    {
+        $field = [
+            'hId' => "id" ,
+            'hName'=>'name' ,
+            'hName' => "msg" ,
+            'hImg' => "src"
+        ] ;
+        $data = Db("store_shotel")->field($field)->limit(10)->select() ;
+        echo json_encode($data) ;
+    }
+    /**
+     * 功能描述：获取信息（游记）
+     * 参数：
+     * QQUser：
+     * 返回：推荐数据
+     * 作者：yonjin L
+     * 时间：18-4-14
+     */
+    function getTrvaels()
+    {
+        $field = [
+            'sid' => "id" ,
+            'title'=>'name' ,
+            'title'=>'msg' ,
+            'content' => "src"
+        ] ;
+        $data = Db("user_story")->field($field)->order('id desc,edittime')->limit(10)->select() ;
+        echo json_encode($data) ;
+//        echo json_encode("dsadas") ;
+    }
 
 
 }

@@ -1,6 +1,8 @@
 // pages/qy/qy.js
-var qy = require("../../utils/qy");
-const app = getApp();
+
+var qy = require("../../utils/qy") ;
+var WxParse = require('../../wxParse/wxParse.js') ;
+const app = getApp() ;
 Page({
 
   /**
@@ -15,17 +17,42 @@ Page({
    */
   onLoad: function (options) {
     var that = this ;
-    console.log(qy.init) ;
     var $data = [] ;
-    for(var i = 0; i < qy.init.length-1;i++)
-    {
-      $data[i]=(qy.init[i]) ;
-    }
+    console.log(qy.init) ;
+    $data=qy.init ;
     that.setData({
       qy: $data
     }) ;
-
-
+    wx.request({
+      url: 'https://www.qqy.fun/data/Data/getHotel',
+      success:function(res)
+      {
+        that.putData(res.data,"酒店") ;
+      }
+    }) ;
+    // 获取游记
+    wx.request({
+      url: 'https://www.qqy.fun/data/Data/getTrvaels',
+      success: function (res) {
+        console.log(res.data) ;
+        var re = [];
+        for (var i = 0; i < res.data.length; i++) {
+          re[i] = WxParse.wxParse('article', 'md', res.data[i].src, that, 5);
+          re[i].name = res.data[i].msg ;
+        }
+        var put_data = [] ;
+        for (var i = 0; i < that.data.qy.length; i++) {
+          if (that.data.qy[i].name == "游记") {
+            that.data.qy[i].sub = re ;
+            put_data = that.data.qy ;
+          }
+        } ;
+        that.setData({
+          qy: put_data
+        });
+        console.log(that.data.qy) ;
+      }
+    })
   },
 
   /**
@@ -37,22 +64,72 @@ Page({
      * 时间：18-4-11
    */
   more:function(){
-    console.log("加载更多") ;
-    var that = this;
-    var $data = that.data.qy;
-    for (var i = $data.length; i < qy.init.length; i++) {
-      $data[i] = (qy.init[i]);
-    }
-    that.setData({
-      qy: $data
-    }) ;
+    // console.log("加载更多") ;
+    // var that = this;
+    // var $data = that.data.qy;
+    // for (var i = $data.length; i < qy.init.length; i++) {
+    //   $data[i] = (qy.init[i]);
+    // }
+    // that.setData({
+    //   qy: $data ,
+    //   test:[]
+    // }) ;
   } ,
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+    var that = this ;
+    // 获取酒店信息
+    // wx.request({
+    //   url: 'https://www.qqy.fun/data/Data/getHotel',
+    //   success:function(res)
+    //   {
+    //     that.putData(res.data,"酒店") ;
+    //   }
+    // }) ;
+    // // 获取游记
+    // wx.request({
+    //   url: 'https://www.qqy.fun/data/Data/getTrvaels',
+    //   success: function (res) {
+    //     // console.log(res.data[0].src) ;
+    //     var re = [] ;
+    //     for( var i = 0;i < res.data.length;i++ )
+    //     {
+    //       re[i] = WxParse.wxParse('article', 'md', res.data[i].src, that, 5);
+    //     }
+    //     for (var i = 0; i < that.data.qy.length; i++) {
+    //       if (that.data.qy[i].name == "游记") {
+    //         that.data.qy[i].sub = re ;
+    //         putdata = that.data.qy ;
+    //       }
+    //     }
+        
+    //     console.log(re) ;
+
+    //   }
+    // })
   },
+  /**
+   * 替换数据
+   */
+  putData:function(data,flag)
+  {
+    var that = this ;
+    var putdata = [] ;
+    for (var i = 0; i < that.data.qy.length;i++ )
+    {
+      if (that.data.qy[i].name == flag )
+      { 
+        that.data.qy[i].sub = data ;
+        putdata = that.data.qy ;
+      }
+    }
+    that.setData({
+      qy: putdata
+    }) ;
+    
+  } ,
 
   /**
    * 生命周期函数--监听页面显示

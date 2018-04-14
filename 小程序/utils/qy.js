@@ -41,6 +41,7 @@ var qy = [
     "name": "酒店",
     "msg": "HOTEL",
     "url": "pages/hoteil/hoteil",
+    "opentype": "tarbar",
     "sub": [
       {
         "name": "台北凯撒大饭店",

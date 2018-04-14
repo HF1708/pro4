@@ -11,16 +11,14 @@
 
 <dialog id='dialog' setName="旅游" ></dialog>
 
-
 <!-- 内容 推荐-->
-<view class="page_content" wx:for="{{qy}}" wx:for-index="idx" wx:for-item="itemName"  >
-    
+<view class="page_content" wx:for="{{qy}}" wx:for-index="idx" wx:for-item="itemName"  wx:if="{{itemName.name!='游记'}}"  >
     <view class="weui-flex">
         <view class="weui-flex__item">
           <view class="placeholder">
             <view class="section__title">
               <text class="page__title">{{itemName.name}} </text>
-              <text class="page__con">{{itemName.msg}}</text>
+              <text class="page__con">{{itemName.name}}</text>
             </view>
           </view>
         </view>
@@ -36,6 +34,43 @@
               <view class="bc_1">
                 <image src="{{item.src}}" mode='widthFix' ></image>
                 <view class="bc_2 bc_msg ">{{item.msg}}</view>
+            <navigator url="{{itemName.url}}?id={{i}}" open-type="switchTab"  >
+                <view class="bc_1">
+                  <image src="{{item.src}}" mode='widthFix' ></image>
+                <view class="bc_2 bc_msg ">{{item.name}}</view>
+              </view>
+            </navigator>
+            </view>
+        </view>
+    </scroll-view>
+  </view>
+  <!--end 可移动区域 -->
+</view>
+
+<!-- 内容 推荐-->
+<view class="page_content" wx:for="{{qy}}" wx:for-index="idx" wx:for-item="itemName"  wx:if="{{itemName.name=='游记'}}"  >
+    <view class="weui-flex">
+        <view class="weui-flex__item">
+          <view class="placeholder">
+            <view class="section__title">
+              <text class="page__title">{{itemName.name}} </text>
+              <text class="page__con">{{itemName.name}}</text>
+            </view>
+          </view>
+        </view>
+        <view class="weui-flex__item page_all">
+            <navigator class="placeholder" open-type="switchTab" url="{{itemName.url}}" >全部</navigator>
+        </view>
+    </view>
+  <!-- 可移动区域 -->
+  <view class="section section_gap">
+    <scroll-view scroll-x="true" class="bc" style="width:{{100|Int}}% ;overflow:hidden;white-space:nowrap; " >
+        <view class="img">
+            <view  style="overflow:visible ;display: inline-block ; "  wx:for="{{itemName.sub}}" wx:for-index="i" wx:for-item="item" >
+            <navigator url="{{itemName.url}}?id={{i}}" open-type="switchTab"  >
+                <view class="bc_1">
+                  <image src="{{item.imageUrls[0]}}" mode='widthFix' ></image>
+                <view class="bc_2 bc_msg ">{{item.name}}</view>
               </view>
               
             </view>
@@ -44,6 +79,8 @@
   </view>
   <!--end 可移动区域 -->
 </view>
+<!--end 内容 -->
+
 <!--end 内容 -->
 
 <view bindtap="more" class="more" >加载更多...</view>
