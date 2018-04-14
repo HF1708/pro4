@@ -109,7 +109,6 @@ Component({
 
       }
     }) ;
-    console.log("asdfs2131651f3");
     
     /**
      * 获取用户位置信息

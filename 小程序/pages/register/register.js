@@ -127,7 +127,6 @@ Page({
               })
 
             }else{
-        
               _this.setData(
                 { popErrorMsg: "登录失败！" }
               );

@@ -41,7 +41,7 @@ var qy = [
   {
     "name": "酒店",
     "msg": "HOTEL",
-    "url": "../hotel/hotel",
+    "url": "../hoteil/hoteil",
     "opentype": "tarbar",
     "sub": [
       {
