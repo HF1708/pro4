@@ -15,16 +15,13 @@ class Alipay extends Controller
     /**
      * 功能描述：支付宝支付
      * 参数：
-     * 返回：验证码
+     * 返回：
      * 作者：Qingtian Y
      * 时间：18-4-10
      */
-
     public function index(){
 //        Loader::import('alipaydemo.index', EXTEND_PATH);
-
        return $this->fetch();
-
     }
     public function notify_url(){
         Loader::import('alipaydemo.notify_url', EXTEND_PATH);
@@ -35,11 +32,51 @@ class Alipay extends Controller
     public function pagepay(){
         Loader::import('alipaydemo.pagepay.pagepay', EXTEND_PATH);
     }
+    /**
+     * 功能描述：获取订单信息
+     * 参数：
+     * 返回：
+     * 作者：Qingtian Y
+     * 时间：18-4-10
+     */
     public function getOrderInfo(){
         $hid=input('?get.hId')?input("hId"):"";
         //数据库查询到对应id的酒店信息
         $where=['hId'=>$hid];
         $getnowhotel=db('store_shotel')->where($where)->select();
         echo json_encode($getnowhotel);
+    }
+    /**
+     * 功能描述：获取订单是否支付
+     * 参数：
+     * 返回：
+     * 作者：Qingtian Y
+     * 时间：18-4-10
+     */
+    public function ispay(){
+        $WIDout_trade_no=input('?get.WIDout_trade_no')?input("WIDout_trade_no"):"";
+        $where=["hoId"=>$WIDout_trade_no];
+        $re=db("store_hotelorder")->where($where)->select();
+        if(!empty($re)){
+            if($re[0]['orderstate']=="1"){
+                $arr['code']=1000;
+                $arr['msg']="支付成功";
+                $arr['data']=[];
+                echo json_encode($arr);
+                exit();
+            }else{
+                $arr['code']=1001;
+                $arr['msg']="支付失败 ";
+                $arr['data']=[];
+                echo json_encode($arr);
+                exit();
+            }
+        }else{
+            $arr['code']=1001;
+            $arr['msg']="支付失败 ";
+            $arr['data']=[];
+            echo json_encode($arr);
+            exit();
+        }
     }
 }
