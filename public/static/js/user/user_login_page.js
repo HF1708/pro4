@@ -131,8 +131,8 @@ var app = new Vue({
                     }
                     else if( res.code == 10002 )
                     {
-                        that.code_msg_user_show = true ;
-                        that.code_msg_user = res.msg ;
+                        that.code_msg_user_show = true;
+                        that.code_msg_user = res.msg;
                     }
                     else if( res.code == 10003 )
                     {

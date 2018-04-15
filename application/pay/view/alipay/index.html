@@ -123,16 +123,35 @@
                 <dt></dt>
                 <dd id="btn-dd">
                         <span class="new-btn-login-sp">
-                            <button class="btn btn-primary" type="submit" style="text-align:center;">付 款</button>
+                            <button class="btn btn-primary" type="submit" style="text-align:center;" onclick="pay()">付 款</button>
                         </span>
                     <span class="note-help">如果您点击“付款”按钮，即表示您同意该次的执行操作。</span>
                 </dd>
             </dl>
         </div>
     </form>
-
+    <!--模态框-->
+    <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">付款</h4>
+                </div>
+                <div class="modal-body">
+                    <p> 付款成功？</p>
+                </div>
+                <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">否</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="ispay()" >是</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 </div>
-
+<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">支付失败请重新支付</span>
+</button>2
 </body>
 <script language="javascript">
     window.onload=function () {
@@ -209,6 +228,22 @@
             var r = window.location.search.substr(1).match(reg);  //匹配目标参数
             if (r != null) return unescape(r[2]); return null; //返回参数值
         }
+    }
+    function pay() {
+        setTimeout(function () {
+            $('#myModal').modal('show') ;
+        },1000)
+    }
+    function ispay() {
+        var WIDout_trade_no=document.getElementById("WIDout_trade_no").value;
+        $.ajax("{:url('pay/alipay/ispay')}"+"?WIDout_trade_no="+WIDout_trade_no,function (res) {
+            var msg=JSON.parse(res);
+            if(msg.code==1000){
+                window.history.go(-1);
+            }else {
+
+            }
+        })
     }
 
 </script>
