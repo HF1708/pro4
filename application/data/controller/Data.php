@@ -119,6 +119,39 @@ class Data extends Controller
     }
 
 
+    /**
+     * 功能描述：搜索（游记）
+     * 参数：
+     * QQUser：
+     * 返回：推荐数据
+     * 作者：yonjin L
+     * 时间：18-4-14
+     */
+    function search()
+    {
+        $that = new \user() ;
+
+        $id = $that->getData('search',"loginMsg","DARA_TYPE_ERROR") ;
+
+        $field = [
+            'hId' => "id" ,
+            'hName'=>'name' ,
+            "concat('/pages/hoteil/hoteil?id=',hId)" => 'url'
+        ] ;
+        $data = Db("store_shotel")->field($field)->where('hName','like','%'.$id.'%')->limit(10)->select() ;
+        $res['shotel'] = $data ;
+        $field2 = [
+            'sid' => "id" ,
+            'title'=>'name' ,
+            "concat('/pages/notes/notes?id=',sid)" => 'url'
+        ] ;
+        $data2 = Db("user_story")->field($field2)->where('title','like','%'.$id.'%')->order('id desc,edittime')->limit(10)->select() ;
+        $res['story'] = $data2 ;
+        echo json_encode($res) ;
+
+    }
+
+
 }
 
 

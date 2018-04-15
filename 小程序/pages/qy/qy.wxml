@@ -10,9 +10,8 @@
 
 
 <dialog id='dialog' setName="旅游" ></dialog>
-
 <!-- 内容 推荐-->
-<view class="page_content" wx:for="{{qy}}" wx:for-index="idx" wx:for-item="itemName"  wx:if="{{itemName.name!='游记'}}"  >
+<view class="page_content" wx:for="{{qy}}" wx:for-index="idx" wx:for-item="itemName"  wx:if="{{itemName.name!='游记'&&itemName.sub.length>0}}"  >
     <view class="weui-flex">
         <view class="weui-flex__item">
           <view class="placeholder">
@@ -45,7 +44,7 @@
 </view>
 
 <!-- 内容 推荐-->
-<view class="page_content" wx:for="{{qy}}" wx:for-index="idx" wx:for-item="itemName"  wx:if="{{itemName.name=='游记'}}"  >
+<view class="page_content" wx:for="{{qy}}" wx:for-index="idx" wx:for-item="itemName"  wx:if="{{itemName.name=='游记'&&itemName.sub.length>0}}"  >
     <view class="weui-flex">
         <view class="weui-flex__item">
           <view class="placeholder">
