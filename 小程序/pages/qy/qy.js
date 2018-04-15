@@ -31,28 +31,28 @@ Page({
       }
     }) ;
     // 获取游记
-    wx.request({
-      url: 'https://www.qqy.fun/data/Data/getTrvaels',
-      success: function (res) {
-        console.log(res.data) ;
-        var re = [];
-        for (var i = 0; i < res.data.length; i++) {
-          re[i] = WxParse.wxParse('article', 'md', res.data[i].src, that, 5);
-          re[i].name = res.data[i].msg ;
-        }
-        var put_data = [] ;
-        for (var i = 0; i < that.data.qy.length; i++) {
-          if (that.data.qy[i].name == "游记") {
-            that.data.qy[i].sub = re ;
-            put_data = that.data.qy ;
-          }
-        } ;
-        that.setData({
-          qy: put_data
-        });
-        console.log(that.data.qy) ;
-      }
-    })
+    // wx.request({
+    //   url: 'https://www.qqy.fun/data/Data/getTrvaels',
+    //   success: function (res) {
+    //     console.log(res.data) ;
+    //     var re = [];
+    //     for (var i = 0; i < res.data.length; i++) {
+    //       re[i] = WxParse.wxParse('article', 'md', res.data[i].src, that, 5);
+    //       re[i].name = res.data[i].msg ;
+    //     }
+    //     var put_data = [] ;
+    //     for (var i = 0; i < that.data.qy.length; i++) {
+    //       if (that.data.qy[i].name == "游记") {
+    //         that.data.qy[i].sub = re ;
+    //         put_data = that.data.qy ;
+    //       }
+    //     } ;
+    //     that.setData({
+    //       qy: put_data
+    //     });
+    //     console.log(that.data.qy) ;
+    //   }
+    // })
   },
 
   /**
@@ -65,15 +65,30 @@ Page({
    */
   more:function(){
     // console.log("加载更多") ;
-    // var that = this;
-    // var $data = that.data.qy;
-    // for (var i = $data.length; i < qy.init.length; i++) {
-    //   $data[i] = (qy.init[i]);
-    // }
-    // that.setData({
-    //   qy: $data ,
-    //   test:[]
-    // }) ;
+    var that = this;
+    // 获取游记
+    wx.request({
+      url: 'https://www.qqy.fun/data/Data/getTrvaels',
+      success: function (res) {
+        console.log(res.data);
+        var re = [];
+        for (var i = 0; i < res.data.length; i++) {
+          re[i] = WxParse.wxParse('article', 'md', res.data[i].src, that, 5);
+          re[i].name = res.data[i].msg;
+        }
+        var put_data = [];
+        for (var i = 0; i < that.data.qy.length; i++) {
+          if (that.data.qy[i].name == "游记") {
+            that.data.qy[i].sub = re;
+            put_data = that.data.qy;
+          }
+        };
+        that.setData({
+          qy: put_data
+        });
+        console.log(that.data.qy);
+      }
+    })
   } ,
   /**
    * 生命周期函数--监听页面初次渲染完成

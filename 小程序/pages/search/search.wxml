@@ -2,8 +2,14 @@
 <!-- 搜索 -->
 
 <view style="background-color:#ddd177 ;padding:20rpx 0;" >
-  <input type="text" confirm-type="search" class="searchs" bindinput="search" ></input>
+  <input type="text" focus='text' confirm-type="search" class="searchs" bindinput="search" ></input>
   <navigator class="back" open-type="navigateBack" >取消</navigator>
+</view>
+<view wx:for="{{search}}" wx:for-index="idx" wx:for-item="item" >
+  <navigator wx:for="{{item}}" wx:for-index="i" wx:for-item="ite" 
+  open-type='reLaunch'
+  url="{{ite.url}}"
+   >{{ite.name}}</navigator>
 </view>
 
 <!--end 搜索 -->

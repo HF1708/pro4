@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    search:[]
   },
 
   /**
@@ -15,8 +15,23 @@ Page({
   
   },
   search: function (event){
-   
-    console.log(event.detail.value) ;
+   var that = this ;
+    var data = {
+      "search" : event.detail.value
+    } ;
+    wx.request({
+      url: 'https://www.qqy.fun/data/Data/search',
+      method:"POST" ,
+      data:data ,
+      success:function(res)
+      {
+        that.setData({
+          search: res.data
+        }) ;
+        console.log(res.data) ;
+      }
+    })
+
   } ,
 
   /**
