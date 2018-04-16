@@ -18,7 +18,6 @@ Page({
   onLoad: function (options) {
     var that = this ;
     var $data = [] ;
-    console.log(qy.init) ;
     $data=qy.init ;
     that.setData({
       qy: $data
@@ -34,7 +33,6 @@ Page({
     // wx.request({
     //   url: 'https://www.qqy.fun/data/Data/getTrvaels',
     //   success: function (res) {
-    //     console.log(res.data) ;
     //     var re = [];
     //     for (var i = 0; i < res.data.length; i++) {
     //       re[i] = WxParse.wxParse('article', 'md', res.data[i].src, that, 5);
@@ -50,7 +48,6 @@ Page({
     //     that.setData({
     //       qy: put_data
     //     });
-    //     console.log(that.data.qy) ;
     //   }
     // })
   },
@@ -64,13 +61,11 @@ Page({
      * 时间：18-4-11
    */
   more:function(){
-    // console.log("加载更多") ;
     var that = this;
     // 获取游记
     wx.request({
       url: 'https://www.qqy.fun/data/Data/getTrvaels',
       success: function (res) {
-        console.log(res.data);
         var re = [];
         for (var i = 0; i < res.data.length; i++) {
           re[i] = WxParse.wxParse('article', 'md', res.data[i].src, that, 5);
@@ -86,7 +81,6 @@ Page({
         that.setData({
           qy: put_data
         });
-        console.log(that.data.qy);
       }
     })
   } ,
@@ -107,7 +101,6 @@ Page({
     // wx.request({
     //   url: 'https://www.qqy.fun/data/Data/getTrvaels',
     //   success: function (res) {
-    //     // console.log(res.data[0].src) ;
     //     var re = [] ;
     //     for( var i = 0;i < res.data.length;i++ )
     //     {
@@ -120,7 +113,6 @@ Page({
     //       }
     //     }
         
-    //     console.log(re) ;
 
     //   }
     // })

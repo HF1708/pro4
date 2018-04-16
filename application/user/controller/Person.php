@@ -34,6 +34,12 @@ class Person extends Controller
         }
         return $res;
     }
+    public function map()
+    {
+        $res = $this->fetch() ;
+        return $res ;
+    }
+
     //获取个人简介
     /**
      * 功能描述：获取用户简介信息

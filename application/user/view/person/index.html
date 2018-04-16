@@ -7,6 +7,7 @@
     <link href="__CSS__/person.css" rel='stylesheet' type='text/css' />
     <meta charset="UTF-8">
     <title>个人中心页</title>
+    <title>自适应显示多个点标记</title>
 </head>
 <body>
 <!--导航页-->
@@ -35,8 +36,11 @@
         </div>
     </div>
 </div>
-<div>点亮地图区</div>
+
 <div class="container">
+    <div class="row">
+        <iframe src="{:url('user/person/map')}" style="height:343px;width:100% ;">s</iframe>
+    </div>
     <div class="row">
         <div class="col-lg-3 left_style text-center">
             <div >
@@ -229,5 +233,6 @@
 
 </script>
 <script src="__JS__/user/person.js"></script>
-<script type="text/javascript" src="__JS__/user/user_login.js"></script>
+<script type="text/javascript" src="__JS__/user/user_login.js"></script>>
+<script type="text/javascript" src="__JS__/user/person_map.js"></script>
 </html>
