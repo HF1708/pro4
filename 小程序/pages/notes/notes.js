@@ -1,4 +1,4 @@
-
+var WxParse = require('../../wxParse/wxParse.js');
 Page({
     /**
    * 页面的初始数据
@@ -27,7 +27,19 @@ Page({
           dataType: 'json',
           header: { 'content-type': 'application/x-www-form-urlencoded' },
           success: function (res) {
-            console.log(res.data);
+            var re = [];
+            for (var i = 0; i < res.data.length; i++) {
+              re[i] = WxParse.wxParse('article', 'md', res.data[i].src, that, 5);
+              re[i].name = res.data[i].msg;
+            }
+            var put_data = [];
+            // for (var i = 0; i < that.data.qy.length; i++) {
+            //   if (that.data.qy[i].name == "游记") {
+            //     that.data.qy[i].sub = re;
+            //     put_data = that.data.qy;
+            //   }
+            // };
+            console.log(re);
             that.setData({
               notes:res.data  //设置数据
             })
