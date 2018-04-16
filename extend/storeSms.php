@@ -26,7 +26,7 @@ class StoreSms
             if (empty(Session::get('send_code')) or $send_code != Session::get('send_code')) {
                 exit('请求超时，请刷新页面后重试');
             }
-            $post_data = "account=C41481585&password=22bd6db439a7291538936366583d6fa3&mobile=" . $mobile . "&content=" . rawurlencode("您的验证码是：" . $mobile_code . "。请不要把验证码泄露给其他人。");
+            $post_data = "account=C04379329&password=2c0fb86fa2aa9edf8b7b9a9198d2f495&mobile=" . $mobile . "&content=" . rawurlencode("您的验证码是：" . $mobile_code . "。请不要把验证码泄露给其他人。");
 //用户名是登录用户中心->验证码短信->产品总览->APIID
 //查看密码请登录用户中心->验证码短信->产品总览->APIKEY
             $gets = $this->xml_to_array($this->Post($post_data, $target));
