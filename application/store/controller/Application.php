@@ -14,7 +14,7 @@ class Application extends Controller
      *  作者:qingtian Y
      *  时间：18-3-26
      **/
-    public function storeEnter()
+    public function storeenter()
     {
 //        根据IP定位用户所在地区设置默认地址
         //消除手机号记录
@@ -34,7 +34,7 @@ class Application extends Controller
         $re=db("hy_area")->where($where)->select();
         $re=json_encode($re);
         $this->assign("city",$re);
-        return $this->fetch("Application/storeEnter");
+        return $this->fetch("application/storeenter");
     }
     /**
      *  *  功能描述：查询城市
