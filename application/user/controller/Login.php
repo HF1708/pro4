@@ -337,7 +337,7 @@ class Login extends Controller
                 }
                 $data = [
                     "name" =>  $res['store_name'] ,
-                    "image" =>  $image,
+                    "image" =>  $image ,
                     "state" => 'store'
                 ] ;
             }

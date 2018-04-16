@@ -28,7 +28,6 @@ Page({
         that.setData({
           search: res.data
         }) ;
-        console.log(res.data) ;
       }
     })
 
