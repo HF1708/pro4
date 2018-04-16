@@ -93,7 +93,7 @@ Page({
           console.log(e.detail.value);
           var data = e.detail.value
           wx.request({
-            url: 'http://www.qqy.fun/data/changeuser/changeUser',
+            url: 'http://www.qqy.fun/data/Changeuser/changeUser',
             data: data,
             method: "POST",
             header: {

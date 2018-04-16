@@ -9,7 +9,7 @@
 namespace app\data\controller;
 use think\Controller;
 use think\Request;
-class changeUser extends Controller
+class ChangeUser extends Controller
 {
     public function changeUser(){
         $nickName=input("?post.userName")?input("post.userName"):"";
