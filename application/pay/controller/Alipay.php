@@ -26,12 +26,27 @@ class Alipay extends Controller
     public function notify_url(){
         Loader::import('alipaydemo.notify_url', EXTEND_PATH);
     }
+    /**
+     * 功能描述：付款成功后跳转至
+     * 参数：
+     * 返回：
+     * 作者：Qingtian Y
+     * 时间：18-4-10
+     */
     public function return_url(){
         Loader::import('alipaydemo.return_url', EXTEND_PATH);
     }
+    /**
+     * 功能描述：链接至阿里付款
+     * 参数：
+     * 返回：
+     * 作者：Qingtian Y
+     * 时间：18-4-10
+     */
     public function pagepay(){
         Loader::import('alipaydemo.pagepay.pagepay', EXTEND_PATH);
     }
+
     /**
      * 功能描述：获取订单信息
      * 参数：
@@ -78,5 +93,15 @@ class Alipay extends Controller
             echo json_encode($arr);
             exit();
         }
+    }
+    /**
+     * 功能描述：退款
+     * 参数：
+     * 返回：
+     * 作者：Qingtian Y
+     * 时间：18-4-10
+     */
+    public function refund(){
+        Loader::import('alipaydemo.pagepay.refund', EXTEND_PATH);
     }
 }

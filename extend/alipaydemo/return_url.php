@@ -49,12 +49,18 @@ if($result) {//验证成功
     $re=db("store_hotelorder")->where("hoId",$out_trade_no)->update($data);
     if($re){
         echo "<script>   window.opener=null;
-    window.close();</script>";
+        window.close();</script>";
     }else{
-        echo "<script>   window.opener=null;
-    window.close();</script>";
+        //这里应该尝试再次修改数据库 或者给用户退款
+        $data=["alipaytransactionID"=>$trade_no,"orderstate"=>1];
+        $re=db("store_hotelorder")->where("hoId",$out_trade_no)->update($data);
+        if($re){
+            echo "<script>   window.opener=null;
+            window.close();</script>";
+        }else{
+             echo "付款失败 请拿支付宝交易号联系管理员<br />支付宝交易号：".$trade_no;
+        }
     }
-
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
 else {
