@@ -1,20 +1,7 @@
 $(function(){
     $('#edit').editable({inlineMode: false, alwaysBlank: true})
 });
-$("#upload").change(function () {
-    var fil = this.files;
-    for (var i = 0; i < fil.length; i++) {
-        reads(fil[i]);
-    }
-});
-function reads(fil){
-    var reader = new FileReader();
-    reader.readAsDataURL(fil);
-    reader.onload = function()
-    {
-        document.getElementById("photo").innerHTML += "<img src='"+reader.result+"'>";
-    };
-}
+
 /**********写游记***********/
 $("#publish").click(function() {
     var title = $("#title").val();
