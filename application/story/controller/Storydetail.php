@@ -51,9 +51,8 @@ class Storydetail extends Controller
      *  时间：18-3-30
      **/
     public function getNotes(){
-//        $id=input('?post.id')?input('id'):"";
-//        $where=['userId'=>$id];
-        $where=['sid'=>1];
+        $sid=Session::get('sid');
+        $where=['userId'=>$sid];
         $getnotes=db('user_story')->where($where)->select();
 //        $this->assign('getnotes',$getnotes);
         echo json_encode($getnotes);

@@ -90,9 +90,9 @@
 						<h2><span> </span>&nbsp;&nbsp;&nbsp;&nbsp;遊記Notes &nbsp;<span> </span></h2>
 						<a @click="publishNotes()" class="news-btn" href="#"><i></i>写遊記</a>
 						<!----- recent-news ----->
-						<div v-for="value in notes" class="recent-news">
+						<div  class="recent-news">
 							{volist name="notes" id="vo"}
-							<div :sid='value.sid' class="recent-news-grid" style="cursor:pointer" @click=storydetail()>
+							<div :sid='{$vo.sid}' class="recent-news-grid" style="cursor:pointer" @click=storydetail()>
 								<div class="recent-news-grid-left">
 									<a href=""><img src="__STATIC__/images/d1.jpg" title="name" /></a>
 								</div>
@@ -105,32 +105,33 @@
 								<div class="clearfix"> </div>
 							</div>
 							{/volist}
-							<div class="recent-news-grid">
-								<div class="recent-news-grid-left">
-									<a href="#"><img src="__STATIC__/images/d2.jpg" title="name" /></a>
-								</div>
-								<div class="recent-news-grid-right">
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque aliquam at lectus sed imperdiet. Vestibulum scelerisque fermentum lorem vitae condimentum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed ultricies dapibus nibh, in vehicula tortor aliquam id. Nunc id laoreet sem, ac bibendum lectus.</p>
-									<p>Cras hendrerit lectus non enim vulputate, eget ornare lectus tincidunt. Quisque at est cursus lectus aliquet sagittis sed id lacus. Vivamus eu adipiscing enim</p>
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-							<div class="recent-news-grid">
-								<div class="recent-news-grid-left">
-									<a href="#"><img src="__STATIC__/images/d3.jpg" title="name" /></a>
-								</div>
-								<div class="recent-news-grid-right">
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque aliquam at lectus sed imperdiet. Vestibulum scelerisque fermentum lorem vitae condimentum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed ultricies dapibus nibh, in vehicula tortor aliquam id. Nunc id laoreet sem, ac bibendum lectus.</p>
-									<p>Cras hendrerit lectus non enim vulputate, eget ornare lectus tincidunt. Quisque at est cursus lectus aliquet sagittis sed id lacus. Vivamus eu adipiscing enim</p>
-								</div>
-								<div class="clearfix"> </div>
-							</div>
+							<!--<div class="recent-news-grid">-->
+								<!--<div class="recent-news-grid-left">-->
+									<!--<a href="#"><img src="__STATIC__/images/d2.jpg" title="name" /></a>-->
+								<!--</div>-->
+								<!--<div class="recent-news-grid-right">-->
+									<!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque aliquam at lectus sed imperdiet. Vestibulum scelerisque fermentum lorem vitae condimentum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed ultricies dapibus nibh, in vehicula tortor aliquam id. Nunc id laoreet sem, ac bibendum lectus.</p>-->
+									<!--<p>Cras hendrerit lectus non enim vulputate, eget ornare lectus tincidunt. Quisque at est cursus lectus aliquet sagittis sed id lacus. Vivamus eu adipiscing enim</p>-->
+								<!--</div>-->
+								<!--<div class="clearfix"> </div>-->
+							<!--</div>-->
+							<!--<div class="recent-news-grid">-->
+								<!--<div class="recent-news-grid-left">-->
+									<!--<a href="#"><img src="__STATIC__/images/d3.jpg" title="name" /></a>-->
+								<!--</div>-->
+								<!--<div class="recent-news-grid-right">-->
+									<!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque aliquam at lectus sed imperdiet. Vestibulum scelerisque fermentum lorem vitae condimentum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed ultricies dapibus nibh, in vehicula tortor aliquam id. Nunc id laoreet sem, ac bibendum lectus.</p>-->
+									<!--<p>Cras hendrerit lectus non enim vulputate, eget ornare lectus tincidunt. Quisque at est cursus lectus aliquet sagittis sed id lacus. Vivamus eu adipiscing enim</p>-->
+								<!--</div>-->
+								<!--<div class="clearfix"> </div>-->
+							<!--</div>-->
 							<div class="clearfix"> </div>
-							<a class="news-btn" href="#">View all News</a>
 						</div>
 						<!----- recent-news ----->
 					</div>
-						{$page}
+						<div style="margin-left:13%">
+							{$page}
+						</div>
 					</div>
 				<!----- fearuted-diesh ----->
 				<div class="fearuted-diesh">
