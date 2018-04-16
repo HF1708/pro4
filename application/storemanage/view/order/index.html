@@ -90,7 +90,7 @@
                 });
             }else if(layEvent === 'refund'){ //退款
                 layer.confirm('确定退款吗', function(index){
-                    $.post("{:url('storemanage/Order/refund')}",{"hoId":obj.data.hoId},function (res) {
+                    $.post("{:url('storemanage/Order/refund')}",{"WIDTRout_trade_no":obj.data.hoId,"WIDTRrefund_reason":"商家操作退款","WIDTRrefund_amount":obj.data.hPrice},function (res) {
                         var msg=JSON.parse(res);
                         if(msg.code==10000){
                             layer.alert('操作成功');

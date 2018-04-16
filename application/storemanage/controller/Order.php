@@ -9,6 +9,7 @@
 namespace app\storemanage\controller;
 use think\Controller;
 use think\Db;
+use \think\Loader;
 
 class Order  extends Controller
 {
@@ -106,7 +107,12 @@ class Order  extends Controller
      *  时间：18-4-2
      **/
     public function refund(){
-        $hotelID=input("?post.hoId")?input("post.hoId"):"";
+//        $hotelID=input("?post.WIDTRout_trade_no")?input("post.WIDTRout_trade_no"):"";
+//        $hotelID = trim(input("?post.WIDTRout_trade_no")?input("post.WIDTRout_trade_no"):"");
+//        echo $hotelID;
+        Loader::import('alipaydemo.pagepay.refund', EXTEND_PATH);
+
+
         $re=db('store_hotelorder')->where('hoId',$hotelID)->setField('orderstate', '2');
         if($re==1){
             $returnJson = [
