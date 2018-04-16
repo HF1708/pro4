@@ -11,6 +11,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     src: url('../fonts/aleo_regular_macroman/Aleo-Regular-webfont.eot');
     src: url('../fonts/aleo_regular_macroman/Aleo-Regular-webfont.eot?#iefix') format('embedded-opentype'),
          url('../fonts/aleo_regular_macroman/Aleo-Regular-webfont.woff') format('woff'),
+         /*url('../fonts/aleo_regular_macroman/Aleo-Regular-webfont.woff') format('woff'),*/
+		 url('http://p6gnb5g93.bkt.clouddn.com/Aleo-Regular-webfont.woff') format('woff'),
          url('../fonts/aleo_regular_macroman/Aleo-Regular-webfont.ttf') format('truetype'),
          url('../fonts/aleo_regular_macroman/Aleo-Regular-webfont.svg#aleoregular') format('svg');
     font-weight: normal;
@@ -33,6 +35,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     src: url('../fonts/aleo_bold_macroman/Aleo-bold-webfont.eot');
     src: url('../fonts/aleo_bold_macroman/Aleo-bold-webfont.eot?#iefix') format('embedded-opentype'),
          url('../fonts/aleo_bold_macroman/Aleo-bold-webfont.woff') format('woff'),
+		 /*url('http://p6gnb5g93.bkt.clouddn.com/Aleo-Light-webfont.woff') format('woff'),*/
          url('../fonts/aleo_bold_macroman/Aleo-bold-webfont.ttf') format('truetype'),
          url('../fonts/aleo_bold_macroman/Aleo-bold-webfont.svg#aleolight') format('svg');
     font-weight: normal;
@@ -45,6 +48,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     src: url('../fonts/wcmanonegrabta_bold_macroman/WCManoNegraBoldBta-webfont.eot');
     src: url('../fonts/wcmanonegrabta_bold_macroman/WCManoNegraBoldBta-webfont.eot?#iefix') format('embedded-opentype'),
          url('../fonts/wcmanonegrabta_bold_macroman/WCManoNegraBoldBta-webfont.woff') format('woff'),
+		 url('../fonts/aleo_bold_macroman/Aleo-bold-webfont.woff') format('woff'),
+		 /*url('http://p6gnb5g93.bkt.clouddn.com/Aleo-Light-webfont.woff') format('woff'),*/
          url('../fonts/wcmanonegrabta_bold_macroman/WCManoNegraBoldBta-webfont.ttf') format('truetype'),
          url('../fonts/wcmanonegrabta_bold_macroman/WCManoNegraBoldBta-webfont.svg#wc_mano_negra_btabold') format('svg');
     font-weight: normal;
@@ -56,6 +61,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     src: url('../fonts/wcmanonegrabta_regular_macroman/WCManoNegraBta-webfont.eot');
     src: url('../fonts/wcmanonegrabta_regular_macroman/WCManoNegraBta-webfont.eot?#iefix') format('embedded-opentype'),
          url('../fonts/wcmanonegrabta_regular_macroman/WCManoNegraBta-webfont.woff') format('woff'),
+		 /*url('http://p6gnb5g93.bkt.clouddn.com/Aleo-Light-webfont.woff') format('woff'),*/
          url('../fonts/wcmanonegrabta_regular_macroman/WCManoNegraBta-webfont.ttf') format('truetype'),
          url('../fonts/wcmanonegrabta_regular_macroman/WCManoNegraBta-webfont.svg#wc_mano_negra_btaregular') format('svg');
     font-weight: normal;
