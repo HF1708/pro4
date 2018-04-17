@@ -17,6 +17,17 @@ class Story extends Controller
         $getnotes=db('user_story')->paginate(3);
         // 获取分页显示
         $page = $getnotes->render();
+        // 获取富文本第一张图为缩略图
+//        $content = $getnotes[0]['content'];//接收编辑器name的参数
+//        if (preg_match_all("/(src)=([\"|']?)([^ \"'>]+\.(gif|jpg|jpeg|bmp|png))\\2/i", $content, $matches)) {
+//            $str=$matches[3][0];
+//            preg_match('/\/Uploads\/images/', $str);
+//            $str1=substr($str,7);//第一张图路径
+//            echo "<img src='$str1' alt=''>";return;
+//        }else{
+//            echo "<img src='1.jpg' alt=''>";return;//编辑器中没有图片时用默认图片
+//        }
+
         $this->assign('notes',$getnotes);
         $this->assign('page',$page);
         return $this->fetch();

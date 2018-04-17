@@ -2,7 +2,7 @@
 $(function () {
     $.post(getNotesUrl,function (res) {
         $notes=JSON.parse(res);
-        // console.log($notes[0]['content']);
+        console.log($notes[0]);
         $con=$notes[0]['content'];
         $content=escape2Html($con);
         console.log($content);
