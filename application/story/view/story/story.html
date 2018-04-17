@@ -92,7 +92,7 @@
 						<!----- recent-news ----->
 						<div  class="recent-news">
 							{volist name="notes" id="vo"}
-							<div :sid='{$vo.sid}' class="recent-news-grid" style="cursor:pointer" @click=storydetail()>
+							<div :sid='{$vo.sid}' class="recent-news-grid" style="cursor:pointer" @click=storydetail($event)>
 								<div class="recent-news-grid-left">
 									<a href=""><img src="__STATIC__/images/d1.jpg" title="name" /></a>
 								</div>

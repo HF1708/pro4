@@ -5,7 +5,7 @@
 }
 
 .header {
-  height: 400rpx;
+  /* height: 400rpx; */
 }
 
 .toolbar {
@@ -23,12 +23,13 @@
   width: 40rpx;
   height: 40rpx;
   margin: 10rpx 20rpx;
+  
 }
 
 .title {
   height: 120rpx;
   position: absolute;
-  top: 280rpx;
+  top: 15rpx;
 }
 
 .title .avatar {
@@ -52,11 +53,24 @@
 .desc .item {
   height: 50%;
   padding: 12rpx 0;
+  color:#ddd177;
+  overflow: hidden;
+  text-overflow: ellipsis; 
+  white-space: nowrap;
 }
-
+.time{
+  color:#E5E7ED;
+  font-size: 24rpx;
+}
 .content {
-  padding: 10rpx;
-  border-bottom: 1px solid #E5E7ED;
+  margin-top:100rpx;
+  margin-left:20rpx;
+  width:90%; 
+  background-color:#fff;
+  padding:10rpx 20rpx 0;
+  color:#5c5c5c;
+  word-break:break-word;
+
 }
 
 .content .text {

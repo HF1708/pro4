@@ -32,14 +32,15 @@ var story=new Vue({
             })
         },
         /**
-         *  *  功能描述：写遊記（判断用户是否已登录）
+         *  *  功能描述：打开游记详情
          *  参数：无
          *  返回：无
          *  作者:min H
          *  时间：18-3-30
          **/
-        storydetail:function(){
-            $sid=$('.recent-news-grid').attr('sid');
+        storydetail:function(event){
+            $sid=$(event.currentTarget).attr('sid');
+            // console.log($sid);
             $.post(setstory,{'sid':$sid},function(){
                 window.open(storydetailUrl);
             })

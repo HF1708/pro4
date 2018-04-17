@@ -15,8 +15,10 @@ class Storydetail extends Controller
     public function storyDetail()
     {
         $sid=Session::get('sid');
+//        $sid=input('post.sid')?input('sid'):"";
         $where=['sid'=>$sid];
         $getnotes=db('user_story')->where($where)->select();
+//        echo $sid;
         $title=$getnotes[0]['title'];
         $userId=$getnotes[0]['userId'];
         $time=$getnotes[0]['edittime'];
@@ -52,7 +54,7 @@ class Storydetail extends Controller
      **/
     public function getNotes(){
         $sid=Session::get('sid');
-        $where=['userId'=>$sid];
+        $where=['sid'=>$sid];
         $getnotes=db('user_story')->where($where)->select();
 //        $this->assign('getnotes',$getnotes);
         echo json_encode($getnotes);

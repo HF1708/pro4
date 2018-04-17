@@ -1,10 +1,12 @@
+var qy = require("../../utils/qy");
 var WxParse = require('../../wxParse/wxParse.js');
+const app = getApp();
 Page({
     /**
    * 页面的初始数据
    */
     data: {
-        
+      qy: []
     },
     /**
    * 生命周期函数--监听页面加载
@@ -29,16 +31,16 @@ Page({
           success: function (res) {
             var re = [];
             for (var i = 0; i < res.data.length; i++) {
-              re[i] = WxParse.wxParse('article', 'md', res.data[i].src, that, 5);
-              re[i].name = res.data[i].msg;
+              re[i] = WxParse.wxParse('article', 'md', res.data[i].content, that, 5);
+              re[i].name = res.data[i].title;
             }
             var put_data = [];
-            // for (var i = 0; i < that.data.qy.length; i++) {
-            //   if (that.data.qy[i].name == "游记") {
-            //     that.data.qy[i].sub = re;
-            //     put_data = that.data.qy;
-            //   }
-            // };
+            for (var i = 0; i < that.data.qy.length; i++) {
+              if (that.data.qy[i].name == "游记") {
+                that.data.qy[i].sub = re;
+                put_data = that.data.qy;
+              }
+            };
             console.log(re);
             that.setData({
               notes:res.data  //设置数据
