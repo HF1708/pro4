@@ -44,14 +44,12 @@ class Changemsg extends Controller
         $user_name=input('?post.uName')?input('post.uName'):"";
         $user_uid=input('?post.uid')?input('post.uid'):"";
         $user_sex=input('?post.sex')?input('post.sex'):"";
-        $user_birthday=input('?post.uBirth')?input('post.uBirth'):"";
         $user_email=input('?post.uEmail')?input('post.uEmail'):"";
         $user_msg=input('?post.uIntro')?input('post.uIntro'):"";
         $user_phone=input('?post.uPhone')?input('post.uPhone'):"";
         $data=[
             'user_name'=>$user_name,
             'user_sex'=>$user_sex,
-            'user_birthday'=>$user_birthday,
             'user_email'=>$user_email,
             'user_msg'=>$user_msg,
             'user_phone'=>$user_phone

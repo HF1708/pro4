@@ -10,6 +10,7 @@ namespace app\user\controller;
 use think\Controller;
 use think\Session;
 use think\Request;
+use think\Paginator;
 
 
 class Person extends Controller
@@ -25,10 +26,17 @@ class Person extends Controller
         }
         else{
             //获取用户信息
-            $user_uid=$result['user_uid'];
-            $where=['user_uid'=>$user_uid];
+            $user_id=$result['user_id'];
+            $where=['user_id'=>$user_id];
             $res = Db('user_user')->where($where)->find() ;
 
+
+            //获取当前用户的游记
+            $getnotes=db('user_story')->where('userId',$user_id)->paginate(3);
+            // 获取分页显示
+            $page = $getnotes->render();
+            $this->assign('notes',$getnotes);
+            $this->assign('page',$page);
             //用户有登录将登录用户信息传入
             $res=$this->fetch('index',$res);
         }

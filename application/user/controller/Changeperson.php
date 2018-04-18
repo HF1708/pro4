@@ -17,7 +17,7 @@ class Changeperson extends Controller
         $result=unserialize(Session::get('loginData'));
         if(empty($result)){
             //错误页面的默认跳转页面是返回前一页，通常不需要设置
-            $this->error('非法进入');
+            $this->error('非法进入','user/login/index');
         }
         else{
             //获取用户信息
