@@ -113,21 +113,21 @@ class Order  extends Controller
         Loader::import('alipaydemo.pagepay.refund', EXTEND_PATH);
 
 
-        $re=db('store_hotelorder')->where('hoId',$hotelID)->setField('orderstate', '2');
-        if($re==1){
-            $returnJson = [
-                'code' => 10000 ,
-                'msg' => "操作成功" ,
-                'data' => []
-            ] ;
-            echo json_encode($returnJson);
-        }else{
-            $returnJson = [
-                'code' => 10001,
-                'msg' => "操作失败" ,
-                'data' => []
-            ] ;
-            echo json_encode($returnJson);
-        }
+//        $re=db('store_hotelorder')->where('hoId',$hotelID)->setField('orderstate', '2');
+//        if($re==1){
+//            $returnJson = [
+//                'code' => 10000 ,
+//                'msg' => "操作成功" ,
+//                'data' => []
+//            ] ;
+//            echo json_encode($returnJson);
+//        }else{
+//            $returnJson = [
+//                'code' => 10001,
+//                'msg' => "操作失败" ,
+//                'data' => []
+//            ] ;
+//            echo json_encode($returnJson);
+//        }
     }
 }

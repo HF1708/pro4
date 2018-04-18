@@ -165,9 +165,9 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 </div>
-<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">支付失败请重新支付</span>
-</button>
+<!--<button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
+    <!--<span aria-hidden="true">支付失败请重新支付</span>-->
+<!--</button>-->
 </body>
 <script language="javascript">
     window.onload=function () {
@@ -252,7 +252,7 @@
     }
     function ispay() {
         var WIDout_trade_no=document.getElementById("WIDout_trade_no").value;
-        $.ajax("{:url('pay/alipay/ispay')}"+"?WIDout_trade_no="+WIDout_trade_no,function (res) {
+        $.get("{:url('pay/alipay/ispay')}"+"?WIDout_trade_no="+WIDout_trade_no,function (res) {
             var msg=JSON.parse(res);
             if(msg.code==1000){
                 window.history.go(-1);
